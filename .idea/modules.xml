@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/calipology.iml" filepath="$PROJECT_DIR$/.idea/calipology.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/bsc.iml" filepath="$PROJECT_DIR$/.idea/bsc.iml" />
     </modules>
   </component>
 </project>
