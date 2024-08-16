@@ -375,3 +375,81 @@ require get_template_directory() . '/inc/customizer.php';
  * Block Patterns.
  */
 require get_template_directory() . '/inc/block-patterns.php';
+
+
+add_action( 'generate_rewrite_rules', 'register_vehicle_rewrite_rules' );
+function register_vehicle_rewrite_rules( $wp_rewrite ) {
+	$new_rules = array(
+		'vehicle/([^/]+)/?$' => 'index.php?make=' . $wp_rewrite->preg_index( 1 ),
+		'vehicle/([^/]+)/([^/]+)/?$' => 'index.php?post_type=vehicle&make=' . $wp_rewrite->preg_index( 1 ) . '&vehicle=' . $wp_rewrite->preg_index( 2 ),
+		'vehicle/([^/]+)/([^/]+)/page/(\d{1,})/?$' => 'index.php?post_type=vehicle&make=' . $wp_rewrite->preg_index( 1 ) . '&paged=' . $wp_rewrite->preg_index( 3 ),
+		'vehicle/([^/]+)/([^/]+)/([^/]+)/?$' => 'index.php?post_type=vehicle&make=' . $wp_rewrite->preg_index( 2 ) . '&vehicle=' . $wp_rewrite->preg_index( 3 ),
+	);
+
+	$wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
+}
+
+// A hacky way of adding support for flexible custom permalinks
+// There is one case in which the rewrite rules from register_kb_rewrite_rules() fail:
+// When you visit the archive page for a child section(for example: http://example.com/vehicle/category/child-category)
+// The deal is that in this situation, the URL is parsed as a Knowledgebase post with slug "child-category" from the "category" section
+function fix_vehicle_subcategory_query($query) {
+	if ( isset( $query['post_type'] ) && 'vehicle' == $query['post_type'] ) {
+		if ( isset( $query['vehicle'] ) && $query['vehicle'] && isset( $query['make'] ) && $query['make'] ) {
+			$query_old = $query;
+			// Check if this is a paginated result(like search results)
+			if ( 'page' == $query['make'] ) {
+				$query['paged'] = $query['name'];
+				unset( $query['make'], $query['name'], $query['vehicle'] );
+			}
+			// See if we have results or not
+			$_query = new WP_Query( $query );
+			if ( ! $_query->posts ) {
+				$query = array( 'make' => $query['vehicle'] );
+				if ( isset( $query_old['make'] ) && 'page' == $query_old['make'] ) {
+					$query['paged'] = $query_old['name'];
+				}
+			}
+		}
+	}
+
+	return $query;
+}
+add_filter( 'request', 'fix_vehicle_subcategory_query', 10 );
+
+function vehicle_article_permalink( $article_id, $section_id = false, $leavename = false, $only_permalink = false ) {
+	$taxonomy = 'make';
+	$article = get_post( $article_id );
+
+	$return = '<a href="';
+	$permalink = ( $section_id ) ? trailingslashit( get_term_link( intval( $section_id ), 'make' ) ) : home_url( '/vehicle/' );
+	$permalink .= trailingslashit( ( $leavename ? "%$article->post_type%" : $article->post_name ) );
+	$return .= $permalink . '/" >' . get_the_title( $article->ID ) . '</a>';
+	return ( $only_permalink ) ? $permalink : $return;
+}
+
+function filter_vehicle_post_link( $permalink, $post, $leavename ) {
+	if ( get_post_type( $post->ID ) == 'vehicle' ) {
+		$terms = wp_get_post_terms( $post->ID, 'make' );
+		$term = ( $terms ) ? $terms[0]->term_id : false;
+		$permalink = vehicle_article_permalink( $post->ID, $term, $leavename, true );
+	}
+	return $permalink;
+}
+add_filter( 'post_type_link', 'filter_vehicle_post_link', 100, 3 );
+
+function filter_vehicle_section_terms_link( $termlink, $term, $taxonomy = false ) {
+	if ( $taxonomy == 'make' ) {
+		$section_ancestors = get_ancestors( $term->term_id, $taxonomy );
+		krsort( $section_ancestors );
+		$termlink =  home_url( '/vehicle/' );
+		foreach ( $section_ancestors as $ancestor ) {
+			$section_ancestor = get_term( $ancestor, $taxonomy );
+			$termlink .= $section_ancestor->slug . '/';
+		}
+		$termlink .= trailingslashit( $term->slug );
+	}
+
+	return $termlink;
+}
+add_filter( 'term_link', 'filter_vehicle_section_terms_link', 100, 3 );
