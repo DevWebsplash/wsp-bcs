@@ -84,19 +84,6 @@
     top: 0;
     right: 0;
     left: 0;
-    &:before {
-      position: absolute;
-      content: '';
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(180deg, rgba(9, 14, 23, 0.20) 0%, #101929 50.74%, #0F1A2D 100%);
-      z-index: 1;
-    }
-    img {
-      opacity: .3;
-    }
   }
   .section-heading {
     text-align: center;
@@ -188,20 +175,107 @@
 
 //banner
 .s-banner-1 {
-
+  background-color: $dark-blue;
+  clip-path: polygon(-70px -50%, 200% -50%, 200% calc(100% + 50%), -70px calc(100% + 50%));
 }
 
 .s-banner-2 {
 
 }
 
-.s-banner-3 {
-
-}
-
 //services
-.s-services {
-
+.s-services-1 {
+  background: #EFEFEF;
+  &__head {
+    position: relative;
+    padding: 120px 0 210px;
+    .section-bg {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .section-heading {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px 100px;
+      .title {
+        color: $white;
+      }
+      .subtitle {
+        color: #EEE;
+        font-size: 18px;
+        line-height: 150%;
+      }
+      .small-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 20px 15px;
+        .small-title {
+          color: $white;
+          font-size: 24px;
+          line-height: 120%;
+          text-transform: uppercase;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .services-list {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 30px;
+    position: relative;
+    margin-top: -170px;
+    padding-bottom: 170px;
+    .service-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 8px;
+      background: $white;
+      box-shadow: 3px 13px 25px 0 rgba(0, 0, 0, 0.10);
+      text-align: center;
+      padding: 20px;
+      .img {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: 16px;
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .title {
+        color: $black;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 140%;
+        margin-bottom: 21px;
+      }
+      .desc {
+        color: #444;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 150%;
+        margin-bottom: 29px;
+      }
+      .btn {
+        margin-top: auto;
+      }
+    }
+  }
 }
 
 //products
@@ -216,10 +290,5 @@
 
 //testimonials
 .s-testimonials {
-
-}
-
-//
-.s-popularity {
 
 }

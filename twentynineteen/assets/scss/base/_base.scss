@@ -41,6 +41,11 @@
   .main-container {
     position: relative;
     z-index: 2;
+    &--wide {
+      @media (min-width: 1400px) {
+        max-width: 1378px;
+      }
+    }
   }
 }
 
@@ -48,13 +53,13 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% auto;
-  &__red {
+  &--red {
     background-image: url("../images/icons/decor-line-red.svg");
   }
-  &__white {
+  &--white {
     background-image: url("../images/icons/decor-line-white.svg");
   }
-  &__big {
+  &--big {
     width: 140px;
     height: 7px;
     @media (min-width: $lg) {
@@ -62,7 +67,7 @@
       height: 9px;
     }
   }
-  &__small {
+  &--small {
     width: 140px;
     height: 7px;
   }

@@ -63,3 +63,30 @@
   }
 }
 
+.btn-4 {
+  height: 48px;
+  color: $main-red;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.09px;
+  border-radius: 5px;
+  border: 2px solid $main-red;
+  padding: 0 16px;
+  .icon {
+    width: 24px;
+    margin-right: -10px;
+    svg {
+      fill: $main-red;
+    }
+  }
+  &:hover {
+    color: $white;
+    background-color: $main-red;
+    .icon {
+      svg {
+        fill: $white;
+      }
+    }
+  }
+}
+
