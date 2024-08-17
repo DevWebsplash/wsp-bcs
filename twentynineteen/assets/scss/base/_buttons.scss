@@ -1,0 +1,65 @@
+@import "variables";
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: none;
+  border-radius: 0;
+  text-align: center;
+  transition: $main-transition;
+  text-decoration: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  .icon {
+    svg {
+      display: block;
+      width: 100%;
+      transition: $main-transition;
+    }
+  }
+}
+
+.btn-1 {
+
+}
+
+.btn-2 {
+  height: 48px;
+  color: $main-red;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.36px;
+  border-radius: 8px;
+  border: 2px solid $main-red;
+  padding: 0 24px;
+  &:hover {
+    color: $white;
+    background-color: $main-red;
+  }
+}
+
+.btn-3 {
+  height: 40px;
+  color: $white;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.09px;
+  border-radius: 5px;
+  background-color: $main-red;
+  border: 2px solid $main-red;
+  padding: 0 16px;
+  .icon {
+    width: 24px;
+    margin-right: -10px;
+    svg {
+      fill: $white;
+    }
+  }
+  &:hover {
+    background-color: transparent;
+  }
+}
+

@@ -1,0 +1,98 @@
+@import "../../base/variables";
+
+.form {
+  .SumoSelect {
+    display: block;
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #000000;
+    font-weight: 400;
+    background-color: transparent;
+    border-bottom: 1px solid #777771;
+    @media (min-width: $lg) {
+      &:hover>.CaptionCont {
+        box-shadow: none;
+        border-bottom-color: #777771;
+      }
+    }
+    &:focus>.CaptionCont {
+      box-shadow: none;
+    }
+    &.open {
+      box-shadow: none;
+      >.CaptionCont {
+        box-shadow: none;
+        >label {
+          >i {
+            transform: rotate(180deg);
+          }
+        }
+      }
+      >.optWrapper {
+        top: 40px;
+      }
+    }
+    >.CaptionCont {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      border: none;
+      background-color: transparent;
+      //border-bottom: 1px solid $color-white;
+      border-radius: 0;
+      padding: 0;
+      cursor: pointer;
+      >span {
+        padding-right: 25px;
+        cursor: pointer;
+      }
+      >label {
+        width: 20px;
+        cursor: pointer;
+        i {
+          //background: url('../images/icons/chevron-down.svg') no-repeat center;
+          background-size: 100% auto;
+          width: 20px;
+          height: 20px;
+          opacity: 1;
+          transition: $main-transition;
+        }
+      }
+    }
+    >.optWrapper {
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      .options {
+        border-radius: 0;
+        max-height: 195px;
+        background-color: #E6E6E6;
+        padding: 10px 0;
+        li.opt {
+          color: #777771;
+          padding: 5px 8px;
+          line-height: 35px;
+          border-bottom: none;
+          background-color: transparent;
+          transition: $main-transition;
+          cursor: pointer;
+          &:first-child {
+            display: none;
+          }
+          @media (min-width: $lg) {
+            &:hover {
+              background-color: #DDDDDD;
+              color: #000000;
+            }
+          }
+          &.selected {
+            background-color: #17A8E3;
+            //color: $color8;
+          }
+        }
+      }
+    }
+  }
+}

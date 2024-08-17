@@ -1,7 +1,7 @@
 <?php get_header();
 /* Template Name: New page Template */
 ?>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/bcs.min.css">
 <!-- HTML Content here  -->
 
 

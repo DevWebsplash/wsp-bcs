@@ -1,0 +1,225 @@
+@import "../base/variables";
+
+//vehicles
+.s-vehicles {
+  &__head {
+    background-color: #0F1A2D;
+    padding: 38px 0;
+    .section-heading {
+      text-align: center;
+      margin-bottom: 30px;
+      .title {
+        color: $white;
+        margin-bottom: 7px;
+      }
+      .subtitle {
+        color: $white;
+        font-size: 18px;
+        line-height: 150%;
+      }
+    }
+    .vehicles-search {
+      max-width: 980px;
+      border-radius: 8px;
+      background-color: $white;
+      margin: 0 auto;
+      padding: 15px 23px;
+    }
+  }
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 50px;
+    padding: 87px 0;
+    .vehicle-card {
+      .img {
+        display: block;
+        position: relative;
+        border-radius: 6px 6px 0 0;
+        background-color: #EDECEC;
+        overflow: hidden;
+        padding-bottom: 70%;
+        margin-bottom: 22px;
+        img {
+          position: absolute;
+          width: 100%;
+          height: auto;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+      .brand {
+        color: #444;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 20px;
+        margin-bottom: 8px;
+      }
+      .model {
+        color: #000;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 20px;
+        margin-bottom: 8px;
+      }
+      .info {
+        color: #444;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 24px;
+        margin-bottom: 22px;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}
+
+//specialists reviews
+.s-specialists-reviews {
+  background-color: $dark-blue;
+  padding: 90px 0 105px;
+  .section-bg {
+    top: 0;
+    right: 0;
+    left: 0;
+    &:before {
+      position: absolute;
+      content: '';
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(180deg, rgba(9, 14, 23, 0.20) 0%, #101929 50.74%, #0F1A2D 100%);
+      z-index: 1;
+    }
+    img {
+      opacity: .3;
+    }
+  }
+  .section-heading {
+    text-align: center;
+    margin-bottom: 50px;
+    .small-title {
+      color: #F8F5F5;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 120%;
+      margin-bottom: 25px;
+    }
+    .line-decor {
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 40px;
+    }
+    .title {
+      color: $white;
+      margin-bottom: 25px;
+    }
+    .subtitle {
+      color: #EEE;
+      font-size: 24px;
+      line-height: 1.5;
+    }
+  }
+  .sr-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 30px;
+    border-radius: 8px;
+    border: 1px solid #5F5B5A;
+    background-color: #091322;
+    padding: 50px 42px;
+    margin-bottom: 35px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &:nth-child(even) {
+      .sr-item__img {
+        order: 2;
+      }
+      .sr-item__content {
+        order: 1;
+      }
+    }
+    &__img {
+      position: relative;
+      border-radius: 8px 0 0 8px;
+      padding-bottom: 60%;
+      overflow: hidden;
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    &__content {
+      align-self: center;
+      .title {
+        color: $white;
+        margin-bottom: 15px;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 15px;
+        .tag {
+          height: 28px;
+          color: $white;
+          font-size: 16px;
+          line-height: 28px;
+          border-radius: 3px;
+          background: #384573;
+          padding: 0 10px;
+        }
+      }
+      .desc {
+        color: #aaa;
+        font-size: 20px;
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+    }
+  }
+}
+
+//banner
+.s-banner-1 {
+
+}
+
+.s-banner-2 {
+
+}
+
+.s-banner-3 {
+
+}
+
+//services
+.s-services {
+
+}
+
+//products
+.s-products {
+  &.style-1 {
+
+  }
+  &.style-2 {
+
+  }
+}
+
+//testimonials
+.s-testimonials {
+
+}
+
+//
+.s-popularity {
+
+}

@@ -1,0 +1,39 @@
+// Background & Colors
+$white: #fff;
+$black: #000;
+$main-red: #9C0003;
+$dark-blue: #0F1A2D;
+
+// Fonts
+$font-jakarta-text: 'PlusJakarta Text', sans-serif;
+$font-jakarta-display: 'PlusJakarta Display', sans-serif;
+
+
+// Media Queries Breakpoints
+$xs: 0;
+$sm: 480px;
+$md: 768px;
+$lg: 992px;
+
+
+// Transition
+$main-transition: all .3s ease-out;
+
+// Text overflow
+@mixin text-overflow($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/*.tag-example {
+  @include text-overflow(3);
+}*/
+
+/*img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}*/
