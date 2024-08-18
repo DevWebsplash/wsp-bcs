@@ -23,7 +23,19 @@
 }
 
 .btn-1 {
-
+  height: 48px;
+  color: $white;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.36px;
+  border-radius: 8px;
+  background-color: $main-red;
+  border: 2px solid $main-red;
+  padding: 0 32px;
+  &:hover {
+    color: $main-red;
+    background-color: transparent;
+  }
 }
 
 .btn-2 {
@@ -82,6 +94,56 @@
   &:hover {
     color: $white;
     background-color: $main-red;
+    .icon {
+      svg {
+        fill: $white;
+      }
+    }
+  }
+}
+
+.btn-5 {
+  height: 48px;
+  color: $white;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.09px;
+  border-radius: 5px;
+  background-color: $main-red;
+  border: 2px solid $main-red;
+  padding: 0 32px;
+  .icon {
+    width: 24px;
+    margin-right: -10px;
+    svg {
+      fill: $white;
+    }
+  }
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.btn-6 {
+  height: 48px;
+  color: $main-red;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.09px;
+  border-radius: 5px;
+  border: 2px solid $white;
+  background-color: $white;
+  padding: 0 32px;
+  .icon {
+    width: 24px;
+    margin-right: -10px;
+    svg {
+      fill: $main-red;
+    }
+  }
+  &:hover {
+    color: $white;
+    background-color: transparent;
     .icon {
       svg {
         fill: $white;

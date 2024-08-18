@@ -176,11 +176,126 @@
 //banner
 .s-banner-1 {
   background-color: $dark-blue;
-  clip-path: polygon(-70px -50%, 200% -50%, 200% calc(100% + 50%), -70px calc(100% + 50%));
+  padding: 65px 0;
+  &__img {
+    position: absolute;
+    top: -25px;
+    bottom: -25px;
+    left: 0;
+    width: calc(50% + 55px);
+    filter: drop-shadow(0px 13px 22.2px rgba(0, 0, 0, 0.25));
+    z-index: 1;
+    .img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 85px) 100%, 0 100%);
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  &__content {
+    padding-left: calc(50% + 100px);
+    .section-heading {
+      margin-bottom: 25px;
+      .title {
+        color: $white;
+      }
+    }
+    .list {
+      margin-bottom: 40px;
+      li {
+        color: $white;
+        font-size: 22px;
+        line-height: 150%;
+        margin-bottom: 15px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
 }
 
 .s-banner-2 {
-
+  background-color: #840E0F;
+  padding: 60px 0;
+  .section-bg {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+  &__left {
+    .small-title {
+      color: $white;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 150%;
+      margin-bottom: 30px;
+    }
+    .line-decor {
+      margin-bottom: 30px;
+    }
+    .title {
+      max-width: 550px;
+      color: $white;
+      margin: 0;
+    }
+  }
+  &__right {
+    .numbers {
+      display: flex;
+      gap: 18px 60px;
+      margin-bottom: 30px;
+      .item {
+        color: $white;
+        .title {
+          display: flex;
+          align-items: center;
+          color: $white;
+          font-size: 50px;
+          font-weight: 700;
+          line-height: 120%;
+          margin-bottom: 3px;
+          .icon {
+            width: 35px;
+            img {
+              width: 100%;
+            }
+          }
+        }
+        .desc {
+          color: $white;
+          font-size: 20px;
+          line-height: 150%;
+        }
+      }
+    }
+    .text {
+      color: $white;
+      font-size: 20px;
+      line-height: 150%;
+      margin-bottom: 35px;
+    }
+  }
 }
 
 //services
@@ -280,11 +395,94 @@
 
 //products
 .s-products {
+  padding: 120px 0;
   &.style-1 {
-
+    .section-heading {
+      text-align: center;
+      margin-bottom: 45px;
+      .small-title {
+        color: #444;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 120%;
+        margin-bottom: 25px;
+      }
+      .line-decor {
+        margin: 0 auto 45px;
+      }
+      .title {
+        margin-bottom: 9px;
+      }
+      .subtitle {
+        color: rgba(44, 45, 54, 0.80);
+        font-size: 20px;
+        line-height: 150%;
+      }
+    }
   }
   &.style-2 {
 
+  }
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 45px 60px;
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      &__img {
+        flex-shrink: 0;
+        display: block;
+        position: relative;
+        border-radius: 8px 8px 0 0;
+        background-color: #E1E8ED;
+        overflow: hidden;
+        padding-bottom: 85%;
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      &__content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        border-radius: 0 0 8px 8px;
+        border: 1px solid #E1E8ED;
+        border-top: none;
+        background-color: $white;
+        padding: 7px 15px 25px;
+        .title {
+          color: $black;
+          font-size: 20px;
+          font-weight: 700;
+          line-height: 150%;
+          margin-bottom: 9px;
+        }
+        .years {
+          color: #444;
+          font-size: 18px;
+          line-height: 150%;
+          margin-bottom: 16px;
+        }
+        .btn-group {
+          margin-top: auto;
+          .btn {
+            width: 100%;
+            margin-bottom: 10px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  .section-btn {
+    text-align: center;
+    margin-top: 45px;
   }
 }
 

@@ -4,10 +4,6 @@
   position: relative;
   width: 100%;
   background-color: #FAFAFA;
-  button {
-    background: none;
-    border: none;
-  }
   img {
     display: block;
     max-width: 100%;
@@ -15,6 +11,14 @@
     &::selection {
       background: transparent;
     }
+  }
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    color: #2C2D36;
   }
   .h2 {
     font-size: 38px;
