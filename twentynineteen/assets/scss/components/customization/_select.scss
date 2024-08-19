@@ -1,20 +1,18 @@
 @import "../../base/variables";
 
-.form {
+.custom-select {
   .SumoSelect {
     display: block;
-    height: 40px;
+    height: 44px;
     width: 100%;
     font-size: 16px;
     line-height: 1.25;
-    color: #000000;
+    color: rgba(24, 24, 24, 0.70);
     font-weight: 400;
     background-color: transparent;
-    border-bottom: 1px solid #777771;
     @media (min-width: $lg) {
       &:hover>.CaptionCont {
         box-shadow: none;
-        border-bottom-color: #777771;
       }
     }
     &:focus>.CaptionCont {
@@ -24,74 +22,110 @@
       box-shadow: none;
       >.CaptionCont {
         box-shadow: none;
-        >label {
-          >i {
-            transform: rotate(180deg);
-          }
-        }
+        //>label {
+        //  >i {
+        //    transform: rotate(180deg);
+        //  }
+        //}
+      }
+      .search-txt {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        line-height: 44px;
+        margin: 0;
+        color: #181818;
+        padding: 0 16px;
+        border: none;
+        border-radius: 0;
       }
       >.optWrapper {
-        top: 40px;
+        top: 44px;
       }
     }
     >.CaptionCont {
       display: flex;
       align-items: center;
-      height: 40px;
+      height: 44px;
+      font-family: $font-lato;
       border: none;
-      background-color: transparent;
+      background-color: #ECECEC;
       //border-bottom: 1px solid $color-white;
-      border-radius: 0;
-      padding: 0;
+      border-radius: 8px;
+      padding: 0 16px;
       cursor: pointer;
       >span {
         padding-right: 25px;
         cursor: pointer;
       }
       >label {
-        width: 20px;
+        right: 16px;
+        width: 16px;
         cursor: pointer;
+        margin: 0;
         i {
-          //background: url('../images/icons/chevron-down.svg') no-repeat center;
+          background: url('../images/icons/chevron-down.svg') no-repeat center;
           background-size: 100% auto;
-          width: 20px;
-          height: 20px;
+          width: 16px;
+          height: 16px;
           opacity: 1;
-          transition: $main-transition;
         }
       }
     }
     >.optWrapper {
       border: none;
-      box-shadow: none;
-      border-radius: 0;
+      box-shadow: 0 0 10px 0 rgba(132, 132, 132, 0.15);
+      border-radius: 4px;
+      &.isFloating {
+        position: absolute;
+        top: 44px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        bottom: auto;
+        margin: 0;
+        max-height: none;
+      }
       .options {
-        border-radius: 0;
-        max-height: 195px;
-        background-color: #E6E6E6;
-        padding: 10px 0;
+        border-radius: 4px;
+        max-height: 288px;
+        background-color: $white;
+        box-shadow: none;
+        padding: 0;
         li.opt {
-          color: #777771;
-          padding: 5px 8px;
-          line-height: 35px;
+          height: 48px;
+          color: #181818;
+          line-height: 48px;
           border-bottom: none;
           background-color: transparent;
           transition: $main-transition;
+          padding: 0 16px;
+          border-radius: 0;
           cursor: pointer;
           &:first-child {
             display: none;
           }
           @media (min-width: $lg) {
             &:hover {
-              background-color: #DDDDDD;
-              color: #000000;
+              background-color: #ECECEC;
+              color: $red;
             }
           }
           &.selected {
-            background-color: #17A8E3;
-            //color: $color8;
+            background-color: #ECECEC;
+            color: $red;
+          }
+          label {
+            font-weight: 400;
+            margin: 0;
           }
         }
+      }
+      .no-match {
+        font-family: $font-lato;
+        padding: 13px 16px;
       }
     }
   }

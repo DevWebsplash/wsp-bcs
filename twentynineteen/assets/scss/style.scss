@@ -1,8 +1,10 @@
 // --------------------------------------------------
 // base
+@import 'base/fonts';
 @import 'base/base';
 @import 'base/buttons';
 @import 'base/typography';
+@import 'base/form';
 
 // --------------------------------------------------
 // components
@@ -16,3 +18,4 @@
 @import 'layout/header';
 @import 'layout/main';
 @import 'layout/footer';
+

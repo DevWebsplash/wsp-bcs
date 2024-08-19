@@ -4,35 +4,13 @@
   position: relative;
   width: 100%;
   background-color: #FAFAFA;
+  //overflow-x: hidden;
   img {
     display: block;
     max-width: 100%;
     height: auto;
     &::selection {
       background: transparent;
-    }
-  }
-  .h1,
-  .h2,
-  .h3,
-  .h4,
-  .h5,
-  .h6 {
-    color: #2C2D36;
-  }
-  .h2 {
-    font-size: 38px;
-    line-height: 1.2;
-    @media (min-width: $lg) {
-      font-size: 45px;
-    }
-  }
-  .h3 {
-    font-size: 24px;
-    line-height: 1.29;
-    @media (min-width: $lg) {
-      font-size: 32px;
-      line-height: 1.2;
     }
   }
   .section-bg {
@@ -42,16 +20,37 @@
       width: 100%;
     }
   }
-  .main-container {
-    position: relative;
-    z-index: 2;
-    &--wide {
-      @media (min-width: 1400px) {
-        max-width: 1378px;
-      }
+}
+
+
+
+// Containers
+.cn {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  z-index: 2;
+  @media (min-width: $sm) {
+    max-width: 540px;
+  }
+  @media (min-width: $md) {
+    max-width: 720px;
+  }
+  @media (min-width: $lg) {
+    max-width: 960px;
+  }
+  @media (min-width: $xl) {
+    max-width: 1270px;
+  }
+  &--wide {
+    @media (min-width: 1400px) {
+      max-width: 1380px;
     }
   }
 }
+
 
 .line-decor {
   background-position: center;

@@ -49,19 +49,55 @@
   <!--VEHICLES-->
   <section class="s-vehicles ms-section">
     <div class="s-vehicles__head">
-      <div class="main-container">
+      <div class="cn">
         <div class="section-heading">
           <h1 class="title h2">Find Your Vehicle</h1>
           <div class="subtitle">Select your vehicle make, model, and trim to get personalized recommendations.</div>
         </div>
         <div class="vehicles-search">
           <form>
-            <button class="btn btn-1">Search</button>
+            <div class="form-row">
+              <div class="custom-select">
+                <select>
+                  <option value="">Select Make</option>
+                  <option value="">Abarth</option>
+                  <option value="">Aixam</option>
+                  <option value="">Alfa Romeo</option>
+                  <option value="">Asia</option>
+                  <option value="">Aston Martin</option>
+                  <option value="">Audi</option>
+                  <option value="">Austin</option>
+                  <option value="">Bentley</option>
+                </select>
+              </div>
+              <div class="custom-select">
+                <select>
+                  <option value="">Select Model</option>
+                  <option value="">Aston Martin</option>
+                  <option value="">Audi</option>
+                  <option value="">Austin</option>
+                  <option value="">Bentley</option>
+                </select>
+              </div>
+              <div class="custom-select">
+                <select>
+                  <option value="">Select Trim</option>
+                  <option value="">Asia</option>
+                  <option value="">Aston Martin</option>
+                  <option value="">Audi</option>
+                  <option value="">Austin</option>
+                  <option value="">Bentley</option>
+                </select>
+              </div>
+              <div class="btn-group">
+                <button type="submit" class="btn btn-1">Search</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
     </div>
-    <div class="main-container">
+    <div class="cn">
       <div class="s-vehicles__list">
         <div class="vehicle-card">
           <a href="#" class="img"><img src="images/img-01.png" loading="lazy" alt=""></a>
@@ -112,7 +148,7 @@
   <!--SPECIALIST REVIEWS-->
   <section class="s-specialists-reviews ms-section">
     <div class="section-bg"><img src="images/bg-01.png" loading="lazy" alt=""></div>
-    <div class="main-container main-container--wide">
+    <div class="cn cn--wide">
       <div class="section-heading">
         <div class="small-title">DISCOVER</div>
         <div class="line-decor line-decor--red line-decor--big"></div>
@@ -186,10 +222,10 @@
   </section>
 
   <!--SERVICES-->
-  <section class="s-services-1 ms-section">
-    <div class="s-services-1__head">
+  <section class="s-services-main ms-section">
+    <div class="s-services-main__head">
       <div class="section-bg"><img src="images/bg-02.png" loading="lazy" alt=""></div>
-      <div class="main-container">
+      <div class="cn">
         <div class="section-heading">
           <h2 class="title h2">Brake Caliper Refurbishment Services</h2>
           <div class="subtitle">With years of experience, our company specializes in refurbishing brake calipers for cars. We have a team of skilled professionals dedicated to providing high-quality services to customers worldwide.</div>
@@ -198,10 +234,9 @@
             <div class="line-decor line-decor--white line-decor--small"></div>
           </div>
         </div>
-
       </div>
     </div>
-    <div class="main-container">
+    <div class="cn">
       <div class="services-list">
         <div class="service-item">
           <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
@@ -249,7 +284,7 @@
   <!--BANNER-->
   <section class="s-banner-1 ms-section">
     <div class="s-banner-1__img"><div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div></div>
-    <div class="main-container">
+    <div class="cn">
       <div class="s-banner-1__content">
         <div class="section-heading">
           <h2 class="title h2">Engineering & ReManufacture</h2>
@@ -271,15 +306,15 @@
   </section>
 
   <!--PRODUCTS-->
-  <section class="s-products style-1 ms-section">
-    <div class="main-container">
+  <section class="s-products-main ms-section">
+    <div class="cn">
       <div class="section-heading">
         <div class="small-title">DISCOVER</div>
         <div class="line-decor line-decor--red line-decor--big"></div>
         <h2 class="title h2">Brake Caliper Products</h2>
         <div class="subtitle">Browse our selection of high-quality brake calipers.</div>
       </div>
-      <div class="s-products__list">
+      <div class="products-list">
         <div class="product-card">
           <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
           <div class="product-card__content">
@@ -346,18 +381,133 @@
   </section>
 
   <!--TESTIMONIALS-->
-  <section class="s-testimonials ms-section">
-    <div class="main-container">
-      <section class="b-popularity ms-section">
+  <section class="s-testimonials-main ms-section">
+    <div class="s-testimonials-main__head">
+      <div class="section-bg"><img src="images/bg-04.png" loading="lazy" alt=""></div>
+      <div class="cn">
+        <div class="section-heading">
+          <h2 class="title h2">Brake Caliper Reviews</h2>
+          <div class="subtitle">Below are all of the places on the web where we have a presence and where people are able to review us.</div>
+        </div>
+        <div class="small-title-wrap">
+          <div class="small-title">OUR REVIEWS</div>
+          <div class="line-decor line-decor--white line-decor--big"></div>
+        </div>
+      </div>
+    </div>
 
-      </section>
+    <div class="cn">
+      <div class="swiper testimonials-slider">
+        <div class="swiper-arrows">
+          <div class="swiper-button-prev btn btn-7">
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
+                <path d="M20.6436 9.92715L14.5207 16.0633L20.6436 22.1995L18.7586 24.0845L10.7374 16.0633L18.7586 8.04218L20.6436 9.92715Z"/>
+              </svg>
+            </span>
+            <span>Previous</span>
+          </div>
+          <div class="swiper-button-next btn btn-7">
+            <span>Next</span>
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
+                <path d="M12.3906 22.2001L18.5134 16.0639L12.3906 9.92769L14.2756 8.04272L22.2967 16.0639L14.2756 24.085L12.3906 22.2001Z"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="item">
+              <div class="top-line">
+                <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                <div class="ratting"><img src="images/icons/stars.svg" loading="lazy" alt=""></div>
+              </div>
+              <div class="name">Floyd Miles</div>
+              <div class="title">Porsche 911 Brembo brake caliper painting in Leeds</div>
+              <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim sit aliqua dolor do amet sint. Velit officia consequat duis enim sit aliqua dolor do amet sint. Velit officia consequat duis enim.</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="item">
+              <div class="top-line">
+                <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                <div class="ratting"><img src="images/icons/stars.svg" loading="lazy" alt=""></div>
+              </div>
+              <div class="name">Floyd Miles</div>
+              <div class="title">Porsche 911 Brembo brake</div>
+              <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim.</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="item">
+              <div class="top-line">
+                <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                <div class="ratting"><img src="images/icons/stars.svg" loading="lazy" alt=""></div>
+              </div>
+              <div class="name">Floyd Miles</div>
+              <div class="title">Porsche 911 Brembo brake caliper painting in Leeds</div>
+              <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim.</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="item">
+              <div class="top-line">
+                <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                <div class="ratting"><img src="images/icons/stars.svg" loading="lazy" alt=""></div>
+              </div>
+              <div class="name">Floyd Miles</div>
+              <div class="title">Porsche 911 Brembo brake caliper painting in Leeds</div>
+              <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim.</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="item">
+              <div class="top-line">
+                <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                <div class="ratting"><img src="images/icons/stars.svg" loading="lazy" alt=""></div>
+              </div>
+              <div class="name">Floyd Miles</div>
+              <div class="title">Porsche 911 Brembo brake</div>
+              <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim.</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="item">
+              <div class="top-line">
+                <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                <div class="ratting"><img src="images/icons/stars.svg" loading="lazy" alt=""></div>
+              </div>
+              <div class="name">Floyd Miles</div>
+              <div class="title">Porsche 911 Brembo brake caliper painting in Leeds</div>
+              <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim.</div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+      <div class="b-popularity ms-section">
+        <div class="item">
+          <div class="img"><img src="images/logo-trustpilot.png" loading="lazy" alt=""></div>
+          <div class="text"><span>4.9</span> (294 reviews)</div>
+        </div>
+        <div class="item">
+          <div class="img"><img src="images/logo-google.png" loading="lazy" alt=""></div>
+          <div class="text"><span>4.4</span> (265 reviews)</div>
+        </div>
+        <div class="item">
+          <div class="img"><img src="images/logo-facebook.png" loading="lazy" alt=""></div>
+          <div class="text"><span>50.000</span> followers</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!--BANNER-->
   <section class="s-banner-2 ms-section">
     <div class="section-bg"><img src="images/bg-03.png" loading="lazy" alt=""></div>
-    <div class="main-container">
+    <div class="cn">
       <div class="s-banner-2__inner">
         <div class="s-banner-2__left">
           <div class="small-title">EXPERIENCED</div>
