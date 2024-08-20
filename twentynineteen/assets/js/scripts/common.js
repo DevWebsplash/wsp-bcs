@@ -1,6 +1,11 @@
 jQuery(function($) {
     'use strict';
 
+    //accordeon
+    $('.acc-head').on('click', function () {
+        $(this).closest('.acc-item').toggleClass('active').find('.acc-body').slideToggle(300);
+    });
+
     //select
     $('.custom-select select').SumoSelect({
         search: true,

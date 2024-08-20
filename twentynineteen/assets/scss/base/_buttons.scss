@@ -186,3 +186,81 @@
   }
 }
 
+.btn-8 {
+  height: 40px;
+  color: $orange;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.09px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 2px solid $orange;
+  padding: 0 16px;
+  .icon {
+    svg {
+      fill: $orange;
+    }
+  }
+  &:hover {
+    color: $white;
+    background-color: $orange;
+    .icon {
+      svg {
+        fill: $white;
+      }
+    }
+  }
+}
+
+.btn-9 {
+  height: 48px;
+  color: $white;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.36px;
+  border-radius: 8px;
+  border: 2px solid $red;
+  background-color: $red;
+  padding: 0 16px;
+  .icon {
+    margin: 0 10px 0 0!important;
+    svg {
+      fill: $white;
+    }
+  }
+  &:hover {
+    color: $red;
+    background-color: transparent;
+    .icon {
+      svg {
+        fill: $red;
+      }
+    }
+  }
+}
+
+.btn-10 {
+  height: 48px;
+  color: rgba(#133240,.5);
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.107px;
+  border-radius: 5px;
+  border: 2px solid rgba(#133240,.5);
+  background-color: transparent;
+  padding: 0 16px;
+  .icon {
+    svg {
+      fill: rgba(#aaaaaa,.5);
+    }
+  }
+  &:hover {
+    color: $orange;
+    border-color: $orange;
+    .icon {
+      svg {
+        fill: $orange;
+      }
+    }
+  }
+}

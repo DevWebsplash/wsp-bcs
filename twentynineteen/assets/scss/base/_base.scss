@@ -44,7 +44,12 @@
   @media (min-width: $xl) {
     max-width: 1270px;
   }
-  &--wide {
+  &--small {
+    @media (min-width: $xl) {
+      max-width: 1050px;
+    }
+  }
+  &--big {
     @media (min-width: 1400px) {
       max-width: 1380px;
     }
