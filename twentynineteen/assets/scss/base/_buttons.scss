@@ -4,41 +4,32 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   position: relative;
+  height: 44px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.36px;
   border: none;
-  border-radius: 0;
+  border-radius: 6px;
   text-align: center;
   transition: $main-transition;
   text-decoration: none;
   background: none;
-  padding: 0;
+  padding: 0 24px;
   cursor: pointer;
   .icon {
-    width: 24px;
-    &:first-child {
-      margin-left: -10px;
-    }
-    &:last-child {
-      margin-right: -10px;
-    }
     svg {
       display: block;
-      width: 100%;
       transition: $main-transition;
     }
   }
 }
 
 .btn-1 {
-  height: 48px;
   color: $white;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.36px;
-  border-radius: 8px;
   background-color: $red;
   border: 2px solid $red;
-  padding: 0 32px;
   .icon {
     svg {
       fill: $white;
@@ -51,14 +42,9 @@
 }
 
 .btn-2 {
-  height: 48px;
   color: $red;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 0.36px;
-  border-radius: 8px;
+  font-weight: 700;
   border: 2px solid $red;
-  padding: 0 24px;
   .icon {
     svg {
       fill: $red;
@@ -67,19 +53,18 @@
   &:hover {
     color: $white;
     background-color: $red;
+    .icon {
+      svg {
+        fill: $white;
+      }
+    }
   }
 }
 
 .btn-3 {
-  height: 40px;
   color: $white;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.09px;
-  border-radius: 5px;
   background-color: $red;
   border: 2px solid $red;
-  padding: 0 16px;
   .icon {
     svg {
       fill: $white;
@@ -91,85 +76,8 @@
 }
 
 .btn-4 {
-  height: 48px;
-  color: $red;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.09px;
-  border-radius: 5px;
-  border: 2px solid $red;
-  padding: 0 16px;
-  .icon {
-    svg {
-      fill: $red;
-    }
-  }
-  &:hover {
-    color: $white;
-    background-color: $red;
-    .icon {
-      svg {
-        fill: $white;
-      }
-    }
-  }
-}
-
-.btn-5 {
-  height: 48px;
-  color: $white;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.09px;
-  border-radius: 5px;
-  background-color: $red;
-  border: 2px solid $red;
-  padding: 0 32px;
-  .icon {
-    svg {
-      fill: $white;
-    }
-  }
-  &:hover {
-    background-color: transparent;
-  }
-}
-
-.btn-6 {
-  height: 48px;
-  color: $red;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.09px;
-  border-radius: 5px;
-  border: 2px solid $white;
-  background-color: $white;
-  padding: 0 32px;
-  .icon {
-    svg {
-      fill: $red;
-    }
-  }
-  &:hover {
-    color: $white;
-    background-color: transparent;
-    .icon {
-      svg {
-        fill: $white;
-      }
-    }
-  }
-}
-
-.btn-7 {
-  height: 48px;
   color: #2C0D0D;
-  font-size: 21px;
-  font-weight: 600;
-  letter-spacing: 0.107px;
-  border-radius: 5px;
   background-color: rgba($white,.5);
-  padding: 0 16px;
   .icon {
     svg {
       fill: #5D171B;
@@ -186,24 +94,18 @@
   }
 }
 
-.btn-8 {
-  height: 40px;
-  color: $orange;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.09px;
-  border-radius: 5px;
-  background-color: transparent;
-  border: 2px solid $orange;
-  padding: 0 16px;
+.btn-5 {
+  color: $red;
+  border: 2px solid $white;
+  background-color: $white;
   .icon {
     svg {
-      fill: $orange;
+      fill: $red;
     }
   }
   &:hover {
     color: $white;
-    background-color: $orange;
+    background-color: transparent;
     .icon {
       svg {
         fill: $white;
@@ -212,18 +114,11 @@
   }
 }
 
-.btn-9 {
-  height: 48px;
+.btn-6 {
   color: $white;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.36px;
-  border-radius: 8px;
   border: 2px solid $red;
   background-color: $red;
-  padding: 0 16px;
   .icon {
-    margin: 0 10px 0 0!important;
     svg {
       fill: $white;
     }
@@ -239,27 +134,21 @@
   }
 }
 
-.btn-10 {
-  height: 48px;
+.btn-7 {
   color: rgba(#133240,.5);
-  font-size: 21px;
-  font-weight: 600;
-  letter-spacing: 0.107px;
-  border-radius: 5px;
   border: 2px solid rgba(#133240,.5);
   background-color: transparent;
-  padding: 0 16px;
   .icon {
     svg {
-      fill: rgba(#aaaaaa,.5);
+      fill: #aaaaaa;
     }
   }
   &:hover {
-    color: $orange;
-    border-color: $orange;
+    color: $red;
+    border-color: $red;
     .icon {
       svg {
-        fill: $orange;
+        fill: $red;
       }
     }
   }
