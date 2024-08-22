@@ -358,6 +358,8 @@ function twentynineteen_scripts() {
 
 	wp_enqueue_style( 'twentynineteen-print-style', get_template_directory_uri() . '/print.css', array(), wp_get_theme()->get( 'Version' ), 'print' );
 
+	wp_enqueue_script( 'acf_theme_script' . '-scripts', get_template_directory_uri() . '/assets/js/bcs.min.js', array( 'jquery' ), '1.0.0', true );
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -388,7 +390,7 @@ add_action( 'wp_print_footer_scripts', 'twentynineteen_skip_link_focus_fix' );
 function twentynineteen_editor_customizer_styles() {
 
 	wp_enqueue_style( 'twentynineteen-editor-customizer-styles', get_theme_file_uri( '/style-editor-customizer.css' ), false, '1.1', 'all' );
-
+	wp_enqueue_style( 'bcs' . '-styles', get_template_directory_uri() . '/assets/css/' . 'bcs' .'.min.css', array(), '1.0.0', 'all' );
 	if ( 'custom' === get_theme_mod( 'primary_color' ) ) {
 		// Include color patterns.
 		require_once get_parent_theme_file_path( '/inc/color-patterns.php' );
