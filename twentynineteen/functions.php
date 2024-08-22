@@ -10,10 +10,7 @@
  */
 
 add_action( 'generate_rewrite_rules', 'register_vehicle_rewrite_rules' );
-add_action('admin_init', 'flush_rewrite_rules');
 function register_vehicle_rewrite_rules( $wp_rewrite ) {
-	global $wp_rewrite;
-	$wp_rewrite->flush_rules();
 	$new_rules = array(
 		'vehicle/([^/]+)/?$' => 'index.php?make=' . $wp_rewrite->preg_index( 1 ),
 		'vehicle/([^/]+)/([^/]+)/?$' => 'index.php?post_type=vehicle&make=' . $wp_rewrite->preg_index( 1 ) . '&vehicle=' . $wp_rewrite->preg_index( 2 ),
