@@ -52,7 +52,6 @@
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
-
-<script src="<?php echo get_template_directory_uri(); ?>/assets/js/bcs.min.js"></script>
+<!--<script src="--><?php //echo get_template_directory_uri(); ?><!--/assets/js/bcs.min.js" defer></script>-->
 </body>
 </html>

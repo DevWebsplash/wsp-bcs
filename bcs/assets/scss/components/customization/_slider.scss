@@ -1,0 +1,43 @@
+@import "../../base/variables";
+
+.swiper-arrows {
+  display: flex;
+  gap: 10px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  span {
+    &::selection {
+      background: transparent;
+    }
+  }
+  &.swiper-button-disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+}
+
+.swiper-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 40px;
+  @media (min-width: $lg) {
+    margin-top: 70px;
+  }
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #D8D4CB;
+    transition: $main-transition;
+    cursor: pointer;
+    &:hover {
+      background-color: #949189;
+    }
+    &.swiper-pagination-bullet-active {
+      background-color: #949189;
+    }
+  }
+}

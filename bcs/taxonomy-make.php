@@ -1,5 +1,4 @@
 <?php get_header();
-/* Template Name: Vehicle Template */
 ?>
 
 <!-- HTML Content here  -->
