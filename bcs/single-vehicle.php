@@ -166,30 +166,7 @@ get_header();
     </div>
   </section>
 
-  <!--OVERVIEW variant 5-->
-  <section class="s-overview s-overview--variant-5 ms-section">
-    <div class="cn">
-      <div class="inner-content">
-        <div class="inner-content__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-04.jpg" loading="lazy" alt=""></div>
-        <div class="inner-content__text">
-          <div class="section-heading">
-            <h2 class="title h1">Overview</h2>
-            <h3 class="subtitle h2">Fiat Doblo Trim: 2016 to 2020 1.3D Multijet Platform / Chassis</h3>
-          </div>
-          <div class="text">The 2016 <u>Fiat Doblo</u> SWB (LOW) is a front wheel drive 2 Door Van that was released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo is regarded as a van built in Italy with prices from a dealer as a used car starting at $12,400.
-            The Fiat Doblo is a front wheel drive 2 door with 2 seats</div>
-          <a href="#" class="btn btn-2">
-            <span>Read more</span>
-            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!--VIDEO variant 1-->
   <section class="s-video s-video--variant-1 ms-section">
