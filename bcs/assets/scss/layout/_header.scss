@@ -1,5 +1,283 @@
 @import "../base/variables";
 
 .header {
+  position: relative;
+  background-color: $white;
+  border-bottom: 1px solid #F3F4F6;
+  z-index: 15;
+  @media (min-width: $lg) {
+    border-bottom: none;
+  }
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 75px;
+    @media (min-width: $lg) {
+      justify-content: space-between;
+      height: auto;
+    }
+  }
+  &__logo {
+    flex-shrink: 0;
+    width: 163px;
+    margin-right: auto;
+    @media (min-width: $lg) {
+      margin-right: 0;
+    }
+    @media (min-width: $xl) {
+      width: 209px;
+    }
+    a {
+      display: block;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  &__nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: -50vw;
+    right: -50vw;
+    height: calc(100vh - 75px - 1px);
+    background-color: #FBFBFB;
+    padding: 10px 0 0;
+    @media (min-width: $lg) {
+      display: block;
+      position: static;
+      height: auto;
+      background-color: transparent;
+      padding: 0;
+    }
+    .cn {
+      @media (min-width: $lg) {
+        max-width: none;
+        width: auto;
+        margin: 0;
+        padding: 0;
+      }
+    }
+    ul {
+      list-style: none;
+    }
+    .main-menu {
+      @media (min-width: $lg) {
+        display: flex;
+        gap: 24px;
+      }
+      @media (min-width: $xl) {
+        gap: 45px;
+      }
+      >li {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        @media (min-width: $lg) {
+          display: block;
+          &:has(.icon) {
+            >a {
+              padding-right: 24px;
+            }
+          }
+          &:hover {
+            >a {
+              color: $red;
+            }
+            .icon {
+              svg {
+                fill: $red;
+                transform: rotate(180deg);
+              }
+            }
+            >ul {
+              opacity: 1;
+              visibility: visible;
+              transform: none;
+            }
+          }
+        }
+        &.active {
+          >a {
+            color: $red;
+          }
+          .icon {
+            svg {
+              fill: $red;
+              transform: rotate(180deg);
+            }
+          }
+        }
+        .icon {
+          width: 24px;
+          @media (min-width: $lg) {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 24px;
+            margin-top: -12px;
+            pointer-events: none;
+          }
+          svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            fill: #2D3648;
+            transition: $main-transition;
+          }
+        }
+        &:after {
+          position: absolute;
+          content: '';
+          top: 100%;
+          left: -50vw;
+          right: -50vw;
+          height: 1px;
+          background-color: #ECECEC;
+          @media (min-width: $lg) {
+            display: none;
+          }
+        }
+        &:last-child {
+          &:after {
+            display: none;
+          }
+        }
+        >a {
+          color: $dark-blue;
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 58px;
+          @media (min-width: $lg) {
+            font-family: $font-lato;
+            color: $black;
+            font-size: 16px;
+            line-height: 85px;
+          }
+        }
+        >ul {
+          display: none;
+          width: calc(100% + 100vw);
+          background-color: #F2F2F2;
+          padding: 23px 0;
+          margin-left: -50vw;
+          margin-right: -50vw;
+          @media (min-width: $lg) {
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            width: auto;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 0 10px 0 rgba(132, 132, 132, .15);
+            transition: $main-transition;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(30px);
+            padding: 20px;
+            margin: 0;
+          }
+          >li {
+            width: 100%;
+            margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            @media (min-width: $sm) {
+              max-width: 510px;
+            }
+            @media (min-width: $md) {
+              max-width: 690px;
+            }
+            @media (min-width: $lg) {
+              width: auto;
+              max-width: none;
+              margin-bottom: 13px;
+              margin-left: 0;
+              margin-right: 0;
+            }
+            &:last-child {
+              margin-bottom: 0;
+            }
+            >a {
+              color: $dark-blue-2;
+              font-size: 16px;
+              white-space: nowrap;
+              &:hover {
+                color: $red;
+              }
+            }
+          }
+        }
+      }
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+  &__action {
+    .btn {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+  }
+}
 
+
+.toggle-menu {
+  display: flex;
+  position: relative;
+  width: 30px;
+  height: 21px;
+  @media (min-width: $lg) {
+    display: none;
+  }
+  &.active {
+    &:before,
+    &:after {
+      top: 9px;
+      opacity: 0;
+      transition-delay: 0s;
+    }
+    span {
+      transition-delay: .3s;
+      &:first-child {
+        transform: rotate(-45deg);
+      }
+      &:last-child {
+        transform: rotate(45deg);
+      }
+    }
+  }
+  &:before,
+  &:after {
+    position: absolute;
+    content: '';
+    left: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 3px;
+    background-color: $dark-blue-2;
+    transition: $main-transition;
+    transition-delay: .3s;
+  }
+  &:before {
+    top: 0;
+  }
+  &:after {
+    top: 18px;
+  }
+  span {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 100%;
+    height: 3px;
+    border-radius: 3px;
+    background-color: $dark-blue-2;
+    transition: $main-transition;
+  }
 }
