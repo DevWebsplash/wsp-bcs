@@ -11,6 +11,10 @@ body {
   background-color: #FAFAFA;
 }
 
+a {
+  transition: $main-transition;
+}
+
 .article-field {
   &:after {
     content: '';
