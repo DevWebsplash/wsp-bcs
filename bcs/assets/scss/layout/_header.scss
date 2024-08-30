@@ -1,7 +1,10 @@
 @import "../base/variables";
 
 .header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
   background-color: $white;
   border-bottom: 1px solid #F3F4F6;
   z-index: 15;
@@ -37,11 +40,11 @@
   }
   &__nav {
     display: none;
-    position: absolute;
-    top: calc(100% + 1px);
-    left: -50vw;
-    right: -50vw;
-    height: calc(100vh - 75px - 1px);
+    position: fixed;
+    top: 76px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: #FBFBFB;
     padding: 10px 0 0;
     @media (min-width: $lg) {

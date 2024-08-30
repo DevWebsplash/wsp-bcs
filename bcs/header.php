@@ -40,11 +40,12 @@ if (
   )) {
   $header = 'header--dark';
 } ?>
-<header class="header <?php echo $header; ?>">
-  <div class="cn cn--lg">
-
-  </div>
-</header>
 
 <div class="page-wrapper">
-<!--  <main class="content"  data-scroll-section>-->
+  <header class="header">
+    <div class="cn">
+
+    </div>
+  </header>
+
+  <main class="content">

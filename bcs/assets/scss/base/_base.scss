@@ -9,6 +9,32 @@ body ::selection {
   background: #000;
 }
 
+html.overflow-hidden body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  //overflow-y: clip;
+}
+
+.content {
+  flex: 1 0 auto;
+  padding-top: 75px;
+  @media (min-width: $lg) {
+    padding-top: 85px;
+  }
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
 button {
   background: none;
   border: none;
