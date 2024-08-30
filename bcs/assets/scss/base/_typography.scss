@@ -1,37 +1,18 @@
 @import "variables";
 
-
-.ms-section {
+body {
+  min-height: 100%;
+  min-width: 360px;
   font-family: $font-mulish;
   color: $black;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.5;
-  h1, .h1,
-  h2, .h2,
-  h3, .h3,
-  h4, .h4,
-  h5, .h5,
-  h6, .h6 {
-    font-family: $font-lato;
-    font-weight: 700;
-    color: #2C2D36;
-  }
-  h1, .h1 {
-    font-size: 38px;
-    line-height: 1.2;
-    @media (min-width: $lg) {
-      font-size: 45px;
-    }
-  }
-  h2, .h2 {
-    font-size: 24px;
-    line-height: 1.29;
-    @media (min-width: $lg) {
-      font-size: 32px;
-      line-height: 1.2;
-    }
-  }
+  background-color: #FAFAFA;
+}
+
+a {
+  transition: $main-transition;
 }
 
 .article-field {
@@ -196,6 +177,32 @@
     @media (min-width: $md) {
       margin-left: 30px!important;
     }
+  }
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: $font-lato;
+  font-weight: 700;
+  color: #2C2D36;
+}
+h1, .h1 {
+  font-size: 38px;
+  line-height: 1.2;
+  @media (min-width: $lg) {
+    font-size: 45px;
+  }
+}
+h2, .h2 {
+  font-size: 24px;
+  line-height: 1.29;
+  @media (min-width: $lg) {
+    font-size: 32px;
+    line-height: 1.2;
   }
 }
 

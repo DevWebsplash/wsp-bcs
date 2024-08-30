@@ -9,25 +9,13 @@
 ?>
 
 
+  </main>
 
-
-<footer class="footer bg-white">
-  <div class="cn cn--lg">
-
-    <div class="footer-main">
-      <ul class="footer__nav">
-        FOOOTER
-      </ul>
-      <div class="footer__links">
-
-      </div>
-    </div>
-
-    <div class="footer-bottom">
+  <footer class="footer">
+    <div class="cn">
 
     </div>
-  </div>
-</footer>
+  </footer>
 </div>
 
 
