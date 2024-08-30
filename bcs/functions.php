@@ -49,7 +49,7 @@ function register_make_taxonomy() {
 		'hierarchical' => true,
 	);
 
-	register_taxonomy('make', 'vehicle', $args);
+	register_taxonomy('make',  array( 'portfolio', 'product', 'vehicle' ), $args);
 }
 add_action('init', 'register_make_taxonomy');
 
