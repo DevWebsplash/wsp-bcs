@@ -15,7 +15,13 @@ require_once 'functions/func-style.php';
 //require_once 'functions/func-ajax.php';
 
 //require_once 'functions/func-plugin-bootload.php';
-
+add_action( 'after_setup_theme', 'woocommerce_support' );
+function woocommerce_support() {
+	add_theme_support( 'woocommerce' );
+}
+if (class_exists('Woocommerce')){
+	add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+}
 
 // Register Custom Post Type vehicle
 function register_vehicle_cpt() {
