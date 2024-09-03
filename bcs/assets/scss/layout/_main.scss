@@ -2,7 +2,7 @@
 
 // VEHICLES--------------------------------------------------
 
-//vehicles search
+//vehicles
 .s-vehicles {
   &__head {
     position: relative;
@@ -27,36 +27,6 @@
       }
       .subtitle {
         color: $white;
-      }
-    }
-    .vehicles-search {
-      @media (min-width: $lg) {
-        max-width: 980px;
-        border-radius: 8px;
-        background-color: $white;
-        margin: 0 auto;
-        padding: 15px 23px;
-      }
-      .form-row {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 30px 15px;
-        @media (min-width: $lg) {
-          grid-template-columns: repeat(3,220px) auto;
-          align-items: center;
-        }
-        @media (min-width: $xl) {
-          grid-template-columns: repeat(3,250px) auto;
-        }
-      }
-      .btn-group {
-        margin: 5px 0 0 0;
-        @media (min-width: $lg) {
-          margin: 0 0 0 15px;
-        }
-        .btn {
-          width: 100%;
-        }
       }
     }
   }
@@ -130,6 +100,73 @@
       .btn {
         width: 100%;
       }
+    }
+  }
+}
+
+.s-vehicles-simple {
+  padding: 52px 0;
+  @media (min-width: $lg) {
+    padding: 225px 0 145px;
+  }
+  .section-bg {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+    @media (min-width: $lg) {
+      margin-bottom: 30px;
+    }
+    .title {
+      color: $white;
+      margin-bottom: 9px;
+      @media (min-width: $lg) {
+        margin-bottom: 7px;
+      }
+    }
+    .subtitle {
+      color: $white;
+    }
+  }
+}
+
+.vehicles-search {
+  @media (min-width: $lg) {
+    max-width: 980px;
+    border-radius: 8px;
+    background-color: $white;
+    margin: 0 auto;
+    padding: 15px 23px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px 15px;
+    @media (min-width: $lg) {
+      grid-template-columns: repeat(3,220px) auto;
+      align-items: center;
+    }
+    @media (min-width: $xl) {
+      grid-template-columns: repeat(3,250px) auto;
+    }
+  }
+  .btn-group {
+    margin: 5px 0 0 0;
+    @media (min-width: $lg) {
+      margin: 0 0 0 15px;
+    }
+    .btn {
+      width: 100%;
     }
   }
 }
@@ -269,6 +306,11 @@
   padding: 0 0 40px;
   @media (min-width: $lg) {
     padding: 65px 0;
+  }
+  +.s-services-main {
+    @media (min-width: $lg) {
+      padding-top: 120px;
+    }
   }
   &__img {
     margin-bottom: 45px;
@@ -830,11 +872,19 @@
       @media (min-width: $lg) {
         padding: 24px 0;
       }
+      >* {
+        &:last-child {
+          margin-bottom: 0!important;
+        }
+      }
       .section-heading {
         margin-bottom: 30px;
         .title {
           font-weight: 800;
           margin-bottom: 7px;
+          &:last-child {
+            margin-bottom: 0;
+          }
         }
         .subtitle {
           font-weight: 600;
@@ -949,6 +999,9 @@
         }
       }
       &__text {
+        @media (min-width: $lg) {
+          padding: 90px 0;
+        }
         .text {
           color: #444;
           .title {
@@ -1173,7 +1226,7 @@
 
 //video
 .s-video {
-  background-color: $creamy;
+  //background-color: $creamy;
   padding: 30px 0;
   @media (min-width: $lg) {
     padding: 60px 0;
@@ -1284,12 +1337,40 @@
 
 //split
 .s-split {
-  padding: 30px 0;
+  padding: 60px 0;
   @media (min-width: $lg) {
-    padding: 60px 0;
+    padding: 120px 0;
   }
   .section-heading {
-
+    &:not(.section-heading--simple) {
+      text-align: center;
+      margin-bottom: 45px;
+      @media (min-width: $lg) {
+        margin-bottom: 55px;
+      }
+      .title {
+        margin-bottom: 3px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      .subtitle {
+        color: rgba(44, 45, 54, 0.80);
+        font-size: 18px;
+        @media (min-width: $lg) {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+  &__list {
+    +.section-btn {
+      text-align: center;
+      margin-top: 30px;
+      @media (min-width: $lg) {
+        margin-top: 55px;
+      }
+    }
   }
   .split-item {
     margin-bottom: 50px;
@@ -1712,3 +1793,6 @@
     }
   }
 }
+
+
+// PORTFOLIO--------------------------------------------------
