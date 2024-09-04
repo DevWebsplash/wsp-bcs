@@ -27,7 +27,7 @@ const paths = {
         src: [
             'js/libs/*.js',
             'js/scripts/common.js',
-            'js/scripts/search.js'
+            // 'js/scripts/search.js'
         ],
         dest: 'js'
     },

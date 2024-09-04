@@ -16,6 +16,10 @@
     opacity: .5;
     pointer-events: none;
   }
+  &.swiper-button-lock {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 .swiper-pagination {

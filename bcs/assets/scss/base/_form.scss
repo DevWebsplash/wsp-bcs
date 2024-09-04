@@ -79,4 +79,29 @@ select::-ms-expand {
   display: none;
 }
 
+.form-group {
+  margin-bottom: 15px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &.btn-group {
+    padding-top: 15px;
+  }
+  .input {
+    height: 50px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 8px;
+    background: #EEE;
+    padding: 0 15px;
+    &::placeholder {
+      color: #5C5C5C;
+    }
+  }
+  .btn {
+    height: 50px;
+    min-width: 140px;
+  }
+}
+
 

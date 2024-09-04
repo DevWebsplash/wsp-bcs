@@ -153,3 +153,18 @@
     }
   }
 }
+
+.btn-8 {
+  color: $white;
+  background-color: #7A1116;
+  border: 2px solid #7A1116;
+  .icon {
+    svg {
+      fill: $white;
+    }
+  }
+  &:hover {
+    color: #7A1116;
+    background-color: transparent;
+  }
+}
