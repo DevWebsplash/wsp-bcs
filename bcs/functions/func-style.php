@@ -10,7 +10,7 @@
 /**
  * Enqueue theme styles.
  */
-function gulp_wp_theme_styles() {
+function wp_theme_styles() {
 
 	/**
 	 * Set a script handle prefix based on theme name.
@@ -18,8 +18,9 @@ function gulp_wp_theme_styles() {
 	 */
 	$theme_handle_prefix = 'bcs';
 
-	wp_enqueue_style( $theme_handle_prefix . '-styles', get_template_directory_uri() . '/assets/css/' . $theme_handle_prefix .'.min.css', array(), '1.0.0', 'all' );
+	wp_enqueue_style( $theme_handle_prefix . '-styles', get_template_directory_uri() . '/assets/css/' . $theme_handle_prefix .'.min.css', array(), '2.0.0', 'all' );
+	wp_enqueue_style( 'woocommerce-custom', get_template_directory_uri() . '/assets/css/woocommerce-custom.min.css', array(), '1.0.0', 'all' );
 }
-add_action( 'wp_enqueue_scripts', 'gulp_wp_theme_styles' );
+add_action( 'wp_enqueue_scripts', 'wp_theme_styles' );
 
 

@@ -13,11 +13,12 @@ import connect from 'gulp-connect-php';
 import browserSync from 'browser-sync';
 import plumber from 'gulp-plumber';
 
-const themePrefix = 'hello-audience';
+const themePrefix = 'bcs';
 
 // Paths and files
 const paths = {
     styles: {
+        src: 'scss/**/*.scss',
         woo: 'scss/woocommerce.scss',  // SCSS Woo
         theme: 'scss/style.scss',    // SCSS Theme
         dest: 'css'
@@ -99,8 +100,8 @@ export function watch() {
         });
     });
 
-    gulp.watch(paths.styles.woo, cssWoo);
-    gulp.watch(paths.styles.theme, cssTheme);
+    gulp.watch(paths.styles.src, cssWoo);
+    gulp.watch(paths.styles.src, cssTheme);
     gulp.watch(paths.scripts.src, js);
     gulp.watch(paths.php).on('change', browserSync.reload);
     gulp.watch(paths.html).on('change', browserSync.reload);
