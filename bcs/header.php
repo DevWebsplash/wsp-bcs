@@ -17,10 +17,10 @@
   <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 
-  <link rel="stylesheet" href="https://use.typekit.net/cqe6xsw.css">
+<!--  <link rel="stylesheet" href="https://use.typekit.net/cqe6xsw.css">-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">-->
   <?php wp_head(); ?>
 <!--  <link rel="stylesheet" href="--><?php //echo get_template_directory_uri();?><!--/assets/css/aliciajdiamonds.min.css">-->
 
@@ -28,18 +28,18 @@
 
 <body <?php body_class(); ?>>
 <?php
-$header = 'header--white';
-if (
-    is_product()  ||
-    is_cart()     ||
-    is_checkout() ||
-    is_page_template( array(
-        'templates/how-it-works.php',
-        'templates/gallery-single.php'
-    )
-  )) {
-  $header = 'header--dark';
-} ?>
+//$header = 'header--white';
+//if (
+//    is_product()  ||
+//    is_cart()     ||
+//    is_checkout() ||
+//    is_page_template( array(
+//        'templates/how-it-works.php',
+//        'templates/gallery-single.php'
+//    )
+//  )) {
+//  $header = 'header--dark';
+//} ?>
 
 <div class="page-wrapper">
   <header class="header">
