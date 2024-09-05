@@ -28,6 +28,7 @@ jQuery(function($) {
     const stickyCallback = () => {
         let topOffset = ($(window).height())/2;
         let bottomOffset = $(document).height() - ($(window).height())*2;
+
         if ($(window).scrollTop() > topOffset && $(window).scrollTop() < bottomOffset) {
             $('.sticky-callback').addClass('visible');
         } else {
@@ -41,6 +42,29 @@ jQuery(function($) {
     btnCallback.on('click', function() {
         $(this).toggleClass('active');
         $('.sticky-callback .form').toggleClass('visible');
+    });
+
+    //overflow text
+    $('.overflow-text-cn').each(function() {
+        let th = $(this);
+        let btn = th.find('.btn');
+        let textHeight = th.find('.overflow-text').height();
+        let innerTextHeight = th.find('.text').height();
+
+        if (textHeight >= innerTextHeight) {
+            th.find('.overflow-text').css('height', innerTextHeight + 'px');
+            btn.hide();
+        }
+
+        btn.on('click', function () {
+            $(this).toggleClass('active');
+
+            if ($(this).hasClass('active')) {
+                th.find('.overflow-text').css('height', innerTextHeight + 'px');
+            } else {
+                th.find('.overflow-text').css('height', textHeight + 'px');
+            }
+        });
     });
 
     //slider
