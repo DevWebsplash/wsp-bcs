@@ -11,6 +11,10 @@ body {
   background-color: #FAFAFA;
 }
 
+strong, b {
+  font-weight: 700;
+}
+
 a {
   transition: $main-transition;
 }
@@ -233,7 +237,7 @@ h2, .h2 {
 .decorated-title {
   margin-bottom: 20px;
   @media (min-width: $lg) {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
   }
   &:last-child {
     margin-bottom: 0;
@@ -247,8 +251,7 @@ h2, .h2 {
     text-transform: uppercase;
     margin-bottom: 20px;
     @media (min-width: $lg) {
-      font-size: 24px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
     &--white {
       color: $white;
