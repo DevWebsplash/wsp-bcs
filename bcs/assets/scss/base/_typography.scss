@@ -26,7 +26,7 @@ a {
     clear: both;
   }
   > * {
-    margin: 0 0 1em;
+    margin: 0 0 1.5em;
     &:last-child {
       margin-bottom: 0;
     }
@@ -35,12 +35,9 @@ a {
     }
   }
   h1,h2,h3,h4,h5,h6 {
+    font-weight: 800;
     margin-top: 32px;
     margin-bottom: 24px;
-    @media (min-width: $lg) {
-      margin-top: 50px;
-      margin-bottom: 30px;
-    }
   }
   > iframe {
     width: 100%;
@@ -49,6 +46,7 @@ a {
     max-height: calc(56.3vw - 30px);
   }
   a {
+    color: $dark-blue-2;
     text-decoration: underline;
     @media (min-width: $lg) {
       &:hover {
@@ -82,19 +80,21 @@ a {
     }
   }
   ul {
+    list-style: none;
     li {
       position: relative;
       padding-left: 12px;
       &:before {
         position: absolute;
         content: "";
-        top: 8px;
+        top: .75em;
         left: 0;
         width: 5px;
         height: 5px;
         border-radius: 50%;
-        background: $black;
+        background: $dark-blue;
         vertical-align: middle;
+        transform: translateY(-50%);
       }
       ul {
         padding-left: 10px;
@@ -126,11 +126,11 @@ a {
       left: 0;
       bottom: 0;
       width: 5px;
-      background-color: $black;
+      background-color: $dark-blue;
     }
   }
   b, strong {
-    font-weight: 600;
+    font-weight: 800;
   }
   table {
     width: 100%;
@@ -138,17 +138,17 @@ a {
   }
   td,
   th {
-    border: 1px solid $black;
+    border: 1px solid $dark-blue;
     padding: 10px;
   }
   tr:nth-child(even) {
-    background-color: lighten($black,70%);
+    background-color: lighten($dark-blue,70%);
   }
   th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: lighten($black,30%);
+    background-color: lighten($dark-blue,30%);
     color: #fff;
   }
   .alignleft,
@@ -206,6 +206,38 @@ h2, .h2 {
   line-height: 1.29;
   @media (min-width: $lg) {
     font-size: 32px;
+    line-height: 1.2;
+  }
+}
+h3, .h3 {
+  font-size: 22px;
+  line-height: 1.29;
+  @media (min-width: $lg) {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+}
+h4, .h4 {
+  font-size: 20px;
+  line-height: 1.29;
+  @media (min-width: $lg) {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+}
+h5, .h5 {
+  font-size: 18px;
+  line-height: 1.29;
+  @media (min-width: $lg) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}
+h6, .h6 {
+  font-size: 16px;
+  line-height: 1.29;
+  @media (min-width: $lg) {
+    font-size: 18px;
     line-height: 1.2;
   }
 }

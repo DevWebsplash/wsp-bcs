@@ -2712,3 +2712,11 @@
   }
 }
 
+//text article
+.s-text-article {
+  padding: 60px 0;
+  @media (min-width: $lg) {
+    padding: 70px 0 100px;
+  }
+}
+
