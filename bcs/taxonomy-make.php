@@ -115,6 +115,7 @@
     </div>
 
     <div class="s-specialists-reviews__list">
+
       <div class="sr-item">
         <div class="sr-item__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
         <div class="sr-item__content">
@@ -135,6 +136,7 @@
           </a>
         </div>
       </div>
+
       <div class="sr-item">
         <div class="sr-item__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
         <div class="sr-item__content">
@@ -155,6 +157,7 @@
           </a>
         </div>
       </div>
+
       <div class="sr-item">
         <div class="sr-item__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
         <div class="sr-item__content">
@@ -175,6 +178,7 @@
           </a>
         </div>
       </div>
+
     </div>
   </div>
 </section>
