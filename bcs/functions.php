@@ -48,7 +48,7 @@ function register_make_taxonomy() {
 
 	$args = array(
 		'label' => 'Make',
-		'rewrite' => array( 'with_front' => false,'hierarchical' => true),
+		'rewrite' => array('slug' => 'make', 'hierarchical' => true),
 		'hierarchical' => true,
 	);
 
@@ -91,6 +91,7 @@ function vehicle_permalink_structure($post_link, $post) {
 			$post_link = str_replace('%make%', 'no-make', $post_link);
 		}
 	}
+
 	return $post_link;
 }
 add_filter('post_type_link', 'vehicle_permalink_structure', 10, 2);
@@ -101,36 +102,3 @@ function flush_vehicle_rewrite_rules() {
 	flush_rewrite_rules();
 }
 add_action('init', 'flush_vehicle_rewrite_rules', 20);
-function custom_rewrite_rules() {
-	// Register custom rewrite rules for each post type
-
-	add_rewrite_rule('^product/make/(.+)/?', 'index.php?post_type=product&make=$matches[1]', 'top');
-	add_rewrite_rule('^vehicle/make/(.+)/?', 'index.php?post_type=vehicle&make=$matches[1]', 'top');
-	add_rewrite_rule('^portfolio/make/(.+)/?', 'index.php?post_type=portfolio&make=$matches[1]', 'top');
-}
-add_action('init', 'custom_rewrite_rules');
-function custom_query_vars($query_vars) {
-	$query_vars[] = 'make';
-	return $query_vars;
-}
-add_filter('query_vars', 'custom_query_vars');
-
-function custom_pre_get_posts($query) {
-	if (!is_admin() && $query->is_main_query()) {
-		if ($query->get('post_type') && $query->get('make')) {
-			$taxonomy = 'make';
-			$term = get_term_by('slug', $query->get('make'), $taxonomy);
-			if ($term) {
-				$query->set('tax_query', array(
-					array(
-						'taxonomy' => $taxonomy,
-						'field'    => 'slug',
-						'terms'    => $term->slug,
-					),
-				));
-			}
-		}
-	}
-}
-add_action('pre_get_posts', 'custom_pre_get_posts');
-
