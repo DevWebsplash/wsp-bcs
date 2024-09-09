@@ -2654,5 +2654,61 @@
       font-size: 20px;
     }
   }
+  .partners-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 45px;
+    @media (min-width: $lg) {
+      gap: 30px 40px;
+    }
+  }
+}
+
+.cooperation-slider {
+  .swiper-slide {
+    height: auto;
+  }
+  .swiper-pagination {
+    margin-top: 40px;
+  }
+  .item {
+    color: #133240;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 2px solid #E7EAEC;
+    background: $white;
+    padding: 15px;
+    @media (min-width: $lg) {
+      padding: 16px 32px 32px;
+    }
+    .img {
+      position: relative;
+      padding-bottom: 30%;
+      overflow: hidden;
+      margin-bottom: 20px;
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .subtitle {
+      color: $gray;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .title {
+      color: $black;
+      font-family: $font-lato;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 120%;
+      margin-bottom: 12px;
+    }
+  }
 }
 
