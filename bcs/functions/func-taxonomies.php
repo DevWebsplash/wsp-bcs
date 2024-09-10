@@ -16,7 +16,8 @@ function register_vehicle_cpt() {
 		'label' => 'Vehicle',
 		'public' => true,
 		'rewrite' => array('slug' => 'vehicle/%make%', 'with_front' => false),  // Custom permalink structure
-		'has_archive' => true,
+
+		'has_archive' => 'vehicle',
 		'supports' => array('title', 'editor', 'custom-fields'),
 	);
 
@@ -61,15 +62,16 @@ function register_make_taxonomy() {
 }
 add_action('init', 'register_make_taxonomy');
 
-
+// Custom rewrite rules for vehicle
 function custom_vehicle_rewrite_rules() {
-	// Custom rewrite rules to match the desired permalink structure
+	// Add rewrite rule for single vehicle posts
 	add_rewrite_rule(
 		'^vehicle/([^/]+)/([^/]+)/([^/]+)/?$',
 		'index.php?post_type=vehicle&make=$matches[1]&vehicle=$matches[3]',
 		'top'
 	);
 
+	// Add rewrite rule for make taxonomy archives
 	add_rewrite_rule(
 		'^vehicle/([^/]+)/([^/]+)/?$',
 		'index.php?make=$matches[2]',
@@ -78,6 +80,7 @@ function custom_vehicle_rewrite_rules() {
 }
 add_action('init', 'custom_vehicle_rewrite_rules');
 
+// Adjust the vehicle post type permalinks
 function vehicle_permalink_structure($post_link, $post) {
 	if ('vehicle' === get_post_type($post)) {
 		$terms = get_the_terms($post->ID, 'make');
@@ -97,7 +100,7 @@ function vehicle_permalink_structure($post_link, $post) {
 			$make = $parent_term ? $parent_term->slug : 'no-make';
 			$child = $child_term ? $child_term->slug : 'no-model';
 
-			// Update the structure to include the vehicle prefix
+			// Update permalink structure
 			$post_link = str_replace('%make%', "$make/$child", $post_link);
 		} else {
 			$post_link = str_replace('%make%', 'no-make', $post_link);
@@ -108,12 +111,10 @@ function vehicle_permalink_structure($post_link, $post) {
 }
 add_filter('post_type_link', 'vehicle_permalink_structure', 10, 2);
 
-
+// Flush rewrite rules after registration
 function flush_vehicle_rewrite_rules() {
 	register_vehicle_cpt();
-	register_portfolio_cpt();
 	register_make_taxonomy();
 	flush_rewrite_rules(); // Ensure that WordPress updates the rewrite rules
 }
 add_action('init', 'flush_vehicle_rewrite_rules', 20);
-
