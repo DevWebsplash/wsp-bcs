@@ -2,6 +2,7 @@
 /* Template Name: Vehicle Template */
 ?>
 
+
 <section class="s-vehicles ms-section">
     <div class="s-vehicles__head">
         <div class="cn">
