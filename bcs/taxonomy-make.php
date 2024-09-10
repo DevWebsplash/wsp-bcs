@@ -14,35 +14,28 @@
         <form>
           <div class="form-row">
             <div class="custom-select">
-              <select>
-                <option value="">Select Make</option>
-                <option value="">Abarth</option>
-                <option value="">Aixam</option>
-                <option value="">Alfa Romeo</option>
-                <option value="">Asia</option>
-                <option value="">Aston Martin</option>
-                <option value="">Audi</option>
-                <option value="">Austin</option>
-                <option value="">Bentley</option>
+	            <?php $queried_object = get_queried_object () ;?>
+
+              <select class="custom-select">
+                  <option value="" >Select Make</option>
+                  <?php $terms = get_terms( 'make', array( 'parent' => 0 ) );
+	              foreach ($terms as $term) {
+		              ?>
+                      <option data-make="<?php echo $term->term_id; ?>" value="<?php echo $term->slug; ?>"><?php echo $term->name; ?></option>
+	              <?php } ?>
               </select>
             </div>
             <div class="custom-select">
               <select>
-                <option value="">Select Model</option>
-                <option value="">Aston Martin</option>
-                <option value="">Audi</option>
-                <option value="">Austin</option>
-                <option value="">Bentley</option>
+                  <option value="" >Select Model</option>
+
               </select>
             </div>
             <div class="custom-select">
               <select>
-                <option value="">Select Trim</option>
-                <option value="">Asia</option>
-                <option value="">Aston Martin</option>
-                <option value="">Audi</option>
-                <option value="">Austin</option>
-                <option value="">Bentley</option>
+                <option>Select Trim</option>
+                <option data-trim="" value="">Asia</option>
+
               </select>
             </div>
             <div class="btn-group">
@@ -55,48 +48,46 @@
   </div>
   <div class="cn">
     <div class="s-vehicles__list">
-      <div class="vehicle-card">
-        <a href="template.html" class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-01.png" loading="lazy" alt=""></a>
-        <div class="brand">Fiat</div>
-        <div class="model">Doblo</div>
-        <div class="info">2016 to 2020 1.3 D</div>
-        <a href="template.html" class="btn btn-2">View</a>
-      </div>
-      <div class="vehicle-card">
-        <a href="template.html" class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-01.png" loading="lazy" alt=""></a>
-        <div class="brand">Fiat</div>
-        <div class="model">Doblo</div>
-        <div class="info">2016 to 2020 1.3 D</div>
-        <a href="template.html" class="btn btn-2">View</a>
-      </div>
-      <div class="vehicle-card">
-        <a href="template.html" class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-01.png" loading="lazy" alt=""></a>
-        <div class="brand">Fiat</div>
-        <div class="model">Doblo</div>
-        <div class="info">2016 to 2020 1.3 D</div>
-        <a href="template.html" class="btn btn-2">View</a>
-      </div>
-      <div class="vehicle-card">
-        <a href="template.html" class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-01.png" loading="lazy" alt=""></a>
-        <div class="brand">Fiat</div>
-        <div class="model">Doblo</div>
-        <div class="info">2016 to 2020 1.3 D</div>
-        <a href="template.html" class="btn btn-2">View</a>
-      </div>
-      <div class="vehicle-card">
-        <a href="template.html" class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-01.png" loading="lazy" alt=""></a>
-        <div class="brand">Fiat</div>
-        <div class="model">Doblo</div>
-        <div class="info">2016 to 2020 1.3 D</div>
-        <a href="template.html" class="btn btn-2">View</a>
-      </div>
-      <div class="vehicle-card">
-        <a href="template.html" class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-01.png" loading="lazy" alt=""></a>
-        <div class="brand">Fiat</div>
-        <div class="model">Doblo</div>
-        <div class="info">2016 to 2020 1.3 D</div>
-        <a href="template.html" class="btn btn-2">View</a>
-      </div>
+        <?php $args = array (
+        'post_type' => 'vehicle',
+        'tax_query' => array (
+        array (
+        'taxonomy' => $queried_object->taxonomy,
+        'field' => 'slug',
+        'terms' => $queried_object->slug,
+        ),
+        ),
+        ) ;
+        $query = new WP_Query ($args) ;?>
+	    <?php
+	    // The Query.
+	    $the_query = new WP_Query( $args );
+
+	    // The Loop.
+	    if ( $the_query->have_posts() ) {
+
+		    while ( $the_query->have_posts() ) {
+			    $the_query->the_post();?>
+                <div class="vehicle-card">
+                    <a href="<?php the_permalink();?>" class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-01.png" loading="lazy" alt=""></a>
+	                <?php
+	                $terms = wp_get_object_terms($post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC') );
+	                if ( !empty( $terms ) ) :
+		                $project = array();
+		                foreach ( $terms as $term ) {
+			                $project[] = $term->name;
+		                } ?>
+                        <div class="brand"><?php echo $project[0];?></div>
+                        <div class="model"><?php echo $project[1];?></div>
+	                <?php endif;
+	                ?>
+                    <div class="info"><?php echo get_the_title();?></div>
+                    <a href="<?php the_permalink();?>" class="btn btn-2">View</a>
+                </div>
+		    <?php }
+	    }
+	    wp_reset_postdata();
+	    ?>
     </div>
   </div>
 </section>

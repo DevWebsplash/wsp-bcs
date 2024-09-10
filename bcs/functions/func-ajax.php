@@ -1,50 +1,76 @@
-<?php function aj_load_more_scripts() {
+<?php
+function js_variables ()
+  {
+    global $wp_query;
 
-  global $wp_query;
-
-// In most cases it is already included on the page and this line can be removed
-  wp_enqueue_script( 'jquery' );
-
-// register our main script but do not enqueue it yet
-  wp_register_script( 'ts_loadmore', get_template_directory_uri() . '/assets/js/ts_loadmore.js', array( 'jquery' ) );
-
-// now the most interesting part
-// we have to pass parameters to myloadmore.js script but we can get the parameters values only in PHP
-// you can define variables directly in your HTML but I decided that the most proper way is wp_localize_script()
-  wp_localize_script( 'ts_loadmore', 'ts_loadmore_params', array(
-      'ajaxurl'      => site_url() . '/wp-admin/admin-ajax.php', // WordPress AJAX
-      'posts'        => json_encode( $wp_query->query_vars ), // everything about your loop is here
-      'current_page' => get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1,
-      'max_page'     => $wp_query->max_num_pages
-  ) );
-
-  wp_enqueue_script( 'ts_loadmore' );
+    $variables = array(
+      'ajax_url' => admin_url ('admin-ajax.php'),
+//      'posts'        => json_encode( $wp_query->query_vars ), // everything about your loop is here
+      'current_page' => get_query_var ('paged') ? get_query_var ('paged') : 1,
+      'max_page' => $wp_query->max_num_pages
+    );
+    echo '<script type="text/javascript">window.wp_data = ' . json_encode ($variables) . ';</script>';
 }
 
-add_action( 'wp_enqueue_scripts', 'ts_load_more_scripts' );
+  add_action ('wp_head', 'js_variables');
+add_action ('wp_ajax_model_fetch', 'model_fetch');
+add_action ('wp_ajax_nopriv_model_fetch', 'model_fetch');
+function model_fetch () {
+	$result = array();
+                  $models = get_terms( 'make', array(  'child_of' => $_POST[ 'make' ] ) );
+                  foreach ( $models as $model ) {
+
+	                  ?>
+                          <option data-model="<?php echo $model->term_id; ?>" value="<?php echo $model->slug; ?>" ><?php echo $model->name; ?></option>
+	                  <?php
+	                  $result[] = [
+		                  'slug' => $model->slug,
+		                  'id' => $model->term_id,
+		                  'label' => $model->name,
+	                  ];
+                  }
+	echo json_encode ($result);
+	die();
+	}
 
 
-function aj_loadmore_ajax_handler() {
 
-  // prepare our arguments for the query
-  $args                = json_decode( stripslashes( $_POST['query'] ), true );
-  $args['paged']       = $_POST['page'] + 1; // we need next page to be loaded
-  $args['post_status'] = 'publish';
-  $PozCat              = get_category( get_query_var( 'cat' ) );
-  // it is always better to use WP_Query but not here
-  query_posts( $args );
+add_action ('wp_ajax_trim_fetch', 'trim_fetch');
+add_action ('wp_ajax_nopriv_trim_fetch', 'trim_fetch');
+function trim_fetch () {
+	$result = array();
+	$the_query = new WP_Query(
+		array(
+			'posts_per_page' => -1,
+			'post_type' => 'vehicle',
+			'post_status' => 'publish',
+			'tax_query' => array (
+				array (
+					'taxonomy' => 'make',
+					'field' => 'term_id',
+					'terms' => $_POST[ 'model' ],
+				),
+			),
+		)
+	);
 
-//  query_posts('cat=' . $PozCat->cat_ID);
-  if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
+	if ($the_query->have_posts ()) :
+		while ($the_query->have_posts ()): $the_query->the_post ();
+			$post = get_post(get_the_ID ());
+			$slug = $post->post_name;
+			$result[] = [
+				'id' => get_the_ID (),
+				'label' => get_the_title (),
+				'link' => get_the_permalink (),
+			];
+			?>
+		<?php endwhile;
+		wp_reset_postdata ();
+	endif;
 
-  <?php
-  endwhile;
-  endif;
-
-  die; // here we exit the script and even no wp_reset_query() required!
+	echo json_encode ($result);
+	die();
 }
 
 
-add_action( 'wp_ajax_loadmore', 'ts_loadmore_ajax_handler' ); // wp_ajax_{action}
-add_action( 'wp_ajax_nopriv_loadmore', 'ts_loadmore_ajax_handler' ); // wp_ajax_nopriv_{action}
