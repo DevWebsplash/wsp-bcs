@@ -39,7 +39,7 @@ function register_make_taxonomy() {
 
 	$args = array(
 		'label' => 'Make',
-		'rewrite' => array('slug' => 'vehicles', 'hierarchical' => true),
+		'rewrite' => array('slug' => 'vehicle', 'hierarchical' => true),
 		'hierarchical' => true,
 	);
 
