@@ -147,7 +147,7 @@
         <div class="small-title small-title--white">DISCOVER</div>
         <div class="line-decor line-decor--red"></div>
       </div>
-      <h2 class="title h1">Brake Caliper Specialists Reviews</h2>
+      <h2 class="title h1">Brake Caliper Specialists Portfolio</h2>
       <div class="subtitle">Browse through our showcase of projects</div>
     </div>
 
