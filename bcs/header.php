@@ -81,7 +81,7 @@
                 </ul>
               </li>
               <li><a href="/staging/">Portfolio</a></li>
-              <li><a href="/staging/vehicles/">Vehicles</a></li>
+              <li><a href="/staging/vehicle/">Vehicles</a></li>
               <li>
                 <a href="#">About us</a>
                 <span class="icon">
