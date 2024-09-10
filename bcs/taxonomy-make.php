@@ -11,12 +11,12 @@
         <div class="subtitle">Select your vehicle make, model, and trim to get personalized recommendations.</div>
       </div>
       <div class="vehicles-search">
-        <form>
+
           <div class="form-row">
             <div class="custom-select">
 	            <?php $queried_object = get_queried_object () ;?>
 
-                <select class="custom-select">
+                <select data-make>
                     <option value="">Select Make</option>
 			            <?php
 			            // Get the parent terms of the 'make' taxonomy
@@ -47,8 +47,8 @@
                 </select>
             </div>
               <div class="custom-select">
-                  <!-- Second Select: Model -->
-                  <select>
+
+                  <select data-model>
                       <option value="">Select Model</option>
 					          <?php
 					          // Check if there is a current term and if it's a child term
@@ -78,14 +78,14 @@
                   </select>
               </div>
             <div class="custom-select">
-              <select>
+              <select data-trim>
                 <option>Select Trim</option>
                 <option data-trim="" value="">Asia</option>
 
               </select>
             </div>
             <div class="btn-group">
-              <button type="submit" class="btn btn-1">Search</button>
+              <a href="" class="btn btn-1">Search</a>
             </div>
           </div>
         </form>

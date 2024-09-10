@@ -12,7 +12,7 @@ require_once 'functions/func-admin.php';
 require_once 'functions/func-menu.php';
 require_once 'functions/func-script.php';
 require_once 'functions/func-style.php';
-//require_once 'functions/func-ajax.php';
+require_once 'functions/func-ajax.php';
 
 require_once 'functions/func-taxonomies.php';
 require_once 'functions/func-woo.php';
