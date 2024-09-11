@@ -18,121 +18,105 @@ function ajax_fetch ()
     jQuery(function($) {
       'use strict';
       console.log('!!!! Ready !!!!');
-      let pageUrl = window.location.origin + '/staging/vehicle/';
+      const pageUrl = `${window.location.origin}/staging/vehicle/`;
+
+
       // Initialize SumoSelect
-      // $('.custom-select select').SumoSelect({
-      //   search: true,
-      //   searchText: 'Enter here...',
-      //   forceCustomRendering: true
-      // });
+      $('.custom-select select').SumoSelect({
+        search: true,
+        searchText: 'Enter here...',
+        forceCustomRendering: true
+      });
+
+      // Function to extract URL segments and set selects
+      const setSelectsFromUrl = () => {
+        const pathArray = window.location.pathname.split('/');
+        const vehicleIndex = pathArray.indexOf('vehicle');
+        if (vehicleIndex !== -1 && pathArray.length > vehicleIndex + 1) {
+          const [make, model] = [pathArray[vehicleIndex + 1], pathArray[vehicleIndex + 2] || null];
+          if (make) {
+            const makeSelect = $('select[data-make]');
+            makeSelect.val(make).trigger('change');
+            // if (makeSelect[0].sumo) {
+            //   makeSelect[0].sumo.reload(); // Reload SumoSelect for make
+            // }
+            if (model) {
+              const modelSelect = $('select[data-model]');
+              modelSelect.val(model).trigger('change');
+              // if (modelSelect[0].sumo) {
+              //   modelSelect[0].sumo.reload(); // Reload SumoSelect for model
+              // }
+            }
+          }
+        }
+      };
+
+
 
       // Disable model and trim selects initially
-      $('select[data-model], select[data-trim]').prop('disabled', true);
+      const modelSelect = $('select[data-model]').prop('disabled', true);
+      const trimSelect = $('select[data-trim]').prop('disabled', true);
+      const searchButton = $('.vehicles-search .btn-group .btn.btn-1');
 
-      // Handle make change
-      $('select[data-make]').on('change', function() {
-        var makeSlug = $(this).val();
-        var makeId = $(this).find(':selected').data('make');
-        var modelSelect = $('select[data-model]');
-        var trimSelect = $('select[data-trim]');
-        var searchButton = $('.vehicles-search .btn-group .btn.btn-1');
+      const updateSelects = (select, options) => {
+        select.empty().append('<option value="">Select</option>').prop('disabled', false);
+        $.each(options, (index, option) => {
+          select.append(`<option data-id="${option.id}" value="${option.slug}">${option.label}</option>`);
+        });
+        select[0].sumo.reload();
+      };
+
+      const handleMakeChange = function() {
+        const makeId = $(this).find(':selected').data('make');
+        const makeSlug = $(this).val();
 
         if (!makeId) {
-          // Disable model and trim selects if no make is chosen
           modelSelect.prop('disabled', true).empty().append('<option value="">Select Model</option>');
           trimSelect.prop('disabled', true).empty().append('<option value="">Select Trim</option>');
-          modelSelect[0].sumo.reload();
-          trimSelect[0].sumo.reload();
-            searchButton.attr('href', pageUrl);
+          searchButton.attr('href', pageUrl);
           return;
         }
 
-        // Reset model and trim selects
-        modelSelect.empty().append('<option value="">Select Model</option>');
-        trimSelect.empty().append('<option value="">Select Trim</option>');
-        trimSelect.prop('disabled', true);
-        modelSelect[0].sumo.reload();
-        trimSelect[0].sumo.reload();
-
-        // Update search button URL
-        searchButton.attr('href', pageUrl + makeSlug + '/');
-
-        $.ajax({
-          url: window.wp_data.ajax_url,
-          type: 'post',
-          data: {
-            action: 'model_fetch',
-            make: makeId
-          },
-          success: function(response) {
-            var models = JSON.parse(response);
-            modelSelect.prop('disabled', false);
-            $.each(models, function(index, model) {
-              modelSelect.append('<option data-model="' + model.id + '" value="' + model.slug + '">' + model.label + '</option>');
-            });
-            modelSelect[0].sumo.reload();
-          }
+        searchButton.attr('href', `${pageUrl}${makeSlug}/`);
+        $.post(window.wp_data.ajax_url, { action: 'model_fetch', make: makeId }, (response) => {
+          const models = JSON.parse(response);
+          updateSelects(modelSelect, models);
         });
-      });
+      };
 
-      // Handle model change
-      $('select[data-model]').on('change', function() {
-        var modelSlug = $(this).val();
-        var modelId = $(this).find(':selected').data('model');
-        var trimSelect = $('select[data-trim]');
-        var makeSlug = $('select[data-make]').val();
-        var searchButton = $('.vehicles-search .btn-group .btn.btn-1');
+      const handleModelChange = function() {
+        const modelId = $(this).find(':selected').data('model');
+        const modelSlug = $(this).val();
+        const makeSlug = $('select[data-make]').val();
 
         if (!modelId) {
-          // Disable trim select if no model is chosen
           trimSelect.prop('disabled', true).empty().append('<option value="">Select Trim</option>');
-          trimSelect[0].sumo.reload();
-            searchButton.attr('href', pageUrl + makeSlug + '/');
+          searchButton.attr('href', `${pageUrl}${makeSlug}/`);
           return;
         }
 
-        // Reset trim select
-        trimSelect.empty().append('<option value="">Select Trim</option>');
-        trimSelect[0].sumo.reload();
-
-        // Update search button URL
-        searchButton.attr('href', pageUrl + makeSlug + '/' + modelSlug + '/');
-
-        $.ajax({
-          url: window.wp_data.ajax_url,
-          type: 'post',
-          data: {
-            action: 'trim_fetch',
-            model: modelId
-          },
-          success: function(response) {
-            var trims = JSON.parse(response);
-            trimSelect.prop('disabled', false);
-            $.each(trims, function(index, trim) {
-                    trimSelect.append('<option data-link="' + trim.link + '" data-trim="' + trim.id + '" value="' + trim.label + '">' + trim.label + '</option>');
-            });
-            trimSelect[0].sumo.reload();
-          }
+        searchButton.attr('href', `${pageUrl}${makeSlug}/${modelSlug}/`);
+        $.post(window.wp_data.ajax_url, { action: 'trim_fetch', model: modelId }, (response) => {
+          const trims = JSON.parse(response);
+          updateSelects(trimSelect, trims);
         });
-      });
+      };
 
-      // Handle trim change
-      $('select[data-trim]').on('change', function() {
-          var trimLink = $(this).find(':selected').data('link');
-          var makeSlug = $('select[data-make]').find(':selected').val();
-          var modelSlug = $('select[data-model]').find(':selected').val();
-          var searchButton = $('.vehicles-search .btn-group .btn.btn-1');
+      const handleTrimChange = function() {
+        const trimLink = $(this).find(':selected').data('link');
+        const makeSlug = $('select[data-make]').val();
+        const modelSlug = $('select[data-model]').val();
 
-          if (!trimLink) {
-              // Update search button URL without trim
-              searchButton.attr('href', pageUrl + makeSlug + '/' + modelSlug + '/');
-              return;
-          }
+        searchButton.attr('href', trimLink || `${pageUrl}${makeSlug}/${modelSlug}/`);
+      };
 
-          // Update search button URL with trim
-          searchButton.attr('href', trimLink);
-      });
+      // Event bindings
+      $('select[data-make]').on('change', handleMakeChange);
+      $('select[data-model]').on('change', handleModelChange);
+      $('select[data-trim]').on('change', handleTrimChange);
 
+      // Call the function to set selects from URL
+      setSelectsFromUrl();
     });
   </script>
 <?php }
