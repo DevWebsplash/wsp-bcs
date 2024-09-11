@@ -18,8 +18,8 @@
 
 
 <!--  <link rel="stylesheet" href="https://use.typekit.net/cqe6xsw.css">-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>-->
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">-->
 <!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">-->
   <?php wp_head(); ?>
 <!--  <link rel="stylesheet" href="--><?php //echo get_template_directory_uri();?><!--/assets/css/aliciajdiamonds.min.css">-->
