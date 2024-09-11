@@ -58,6 +58,9 @@ function ajax_fetch ()
       const trimSelect = $('select[data-trim]').prop('disabled', true);
       const searchButton = $('.vehicles-search .btn-group .btn.btn-1');
 
+
+
+
       const updateSelects = (select, options) => {
         select.empty().append('<option value="">Select</option>').prop('disabled', false);
         $.each(options, (index, option) => {
