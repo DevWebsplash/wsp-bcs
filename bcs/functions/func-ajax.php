@@ -31,7 +31,7 @@ jQuery(function ($) {
     }
 
     window.addEventListener('popstate', function(event) {
-      if (isVehiclePage)) {
+      if (isVehiclePage) {
         window.location.reload();
       }
     });
@@ -107,7 +107,7 @@ jQuery(function ($) {
 
 
     searchButton.attr('href', `${baseUrl}${makeSlug}/`);
-    if (isVehiclePage)) {
+    if (isVehiclePage) {
       window.history.pushState({}, '', `${baseUrl}${makeSlug}/`);
     }
 
@@ -135,7 +135,7 @@ jQuery(function ($) {
     }
 
     searchButton.attr('href', `${baseUrl}${makeSlug}/${modelSlug}/`);
-    if (isVehiclePage)) {
+    if (isVehiclePage) {
         window.history.pushState({}, '', `${baseUrl}${makeSlug}/${modelSlug}/`);
     }
 
@@ -156,7 +156,7 @@ jQuery(function ($) {
     const modelSlug = modelSelect.val();
 
     searchButton.attr('href', trimLink || `${baseUrl}${makeSlug}/${modelSlug}/`);
-    if (isVehiclePage)) {
+    if (isVehiclePage) {
         window.history.pushState({}, '', trimLink || `${baseUrl}${makeSlug}/${modelSlug}/`);
     }
     updateSelectStates();
