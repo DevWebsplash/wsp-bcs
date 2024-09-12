@@ -52,7 +52,6 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
                 <div class="inner-content">
 									<?php $image_repeater = get_sub_field( 'left_side_image_preview_image' ); ?>
                     <div class="inner-content__img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
-
                                                          alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
                     <div class="empty"></div>
                     <div class="inner-content__text">
