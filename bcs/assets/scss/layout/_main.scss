@@ -1135,6 +1135,7 @@
         grid-template-columns: 1.3fr 1fr;
         gap: 50px;
       }
+
       &__img {
         position: relative;
         padding-bottom: 60%;
@@ -1144,6 +1145,62 @@
         }
       }
       &__text {
+        .text {
+          color: $gray;
+          .title {
+            color: $black;
+          }
+          ul {
+            li {
+              span {
+                color: $black;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &--variant-2 {
+    border: 1px solid #D8D8D8;
+    border-left: none;
+    border-right: none;
+    background-color: #F5F5F5;
+    padding-bottom: 35px;
+    @media (min-width: $lg) {
+      min-height: 460px;
+      padding-bottom: 0;
+    }
+    .cn {
+      position: static;
+    }
+    .inner-content {
+      @media (min-width: $lg) {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 50px;
+        min-height: 460px;
+      }
+      &__img {
+        position: relative;
+        padding-bottom: 60%;
+        margin-left: -15px;
+        margin-right: -15px;
+        @media (min-width: $lg) {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: calc(50% + 60px);
+          padding: 0;
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+      &__text {
+        @media (min-width: $lg) {
+          padding: 90px 0;
+        }
         .text {
           color: $gray;
           .title {
@@ -1215,62 +1272,6 @@
             .icon {
               img {
                 width: 100%;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  &--variant-2 {
-    border: 1px solid #D8D8D8;
-    border-left: none;
-    border-right: none;
-    background-color: #F5F5F5;
-    padding-bottom: 35px;
-    @media (min-width: $lg) {
-      min-height: 460px;
-      padding-bottom: 0;
-    }
-    .cn {
-      position: static;
-    }
-    .inner-content {
-      @media (min-width: $lg) {
-        display: grid;
-        grid-template-columns: 1.3fr 1fr;
-        gap: 50px;
-        min-height: 460px;
-      }
-      &__img {
-        position: relative;
-        padding-bottom: 60%;
-        margin-left: -15px;
-        margin-right: -15px;
-        @media (min-width: $lg) {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: calc(50% + 60px);
-          padding: 0;
-          margin-left: 0;
-          margin-right: 0;
-        }
-      }
-      &__text {
-        @media (min-width: $lg) {
-          padding: 90px 0;
-        }
-        .text {
-          color: $gray;
-          .title {
-            color: $black;
-          }
-          ul {
-            li {
-              span {
-                color: $black;
               }
             }
           }
@@ -1906,6 +1907,16 @@
       border-radius: 50%;
       overflow: hidden;
       margin-bottom: 16px;
+      &--full {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        padding-bottom: 40%;
+        margin-bottom: 20px;
+        @media (min-width: $lg) {
+          padding-bottom: 30%;
+        }
+      }
       img {
         position: absolute;
         width: 100%;
@@ -2717,6 +2728,53 @@
   padding: 60px 0;
   @media (min-width: $lg) {
     padding: 70px 0 100px;
+  }
+}
+
+
+//comparison
+.s-comparison {
+  background-color: $white;
+  padding: 30px 0;
+  @media (min-width: $lg) {
+    padding: 60px 0;
+  }
+  .inner-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    @media (min-width: $sm) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: $lg) {
+      gap: 40px;
+    }
+    .col {
+      .title {
+        margin-bottom: 15px;
+        @media (min-width: $lg) {
+          margin-bottom: 20px;
+        }
+      }
+      .img {
+        position: relative;
+        padding-bottom: 75%;
+        overflow: hidden;
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+  .section-btn {
+    text-align: center;
+    margin-top: 30px;
+    @media (min-width: $lg) {
+      margin-top: 35px;
+    }
   }
 }
 
