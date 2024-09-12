@@ -762,7 +762,6 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 										<?php endif; ?>
 
                     </div>
-
                     <div class="b-cta">
                         <div class="title h1">Still have questions?</div>
                         <div class="subtitle">Contact us for further assistance.</div>
@@ -912,7 +911,56 @@ endif; ?>
                 </div>
             </div>
         </section>
+        <!--OVERVIEW variant 1-->
+        <section class="s-overview s-overview--variant-1 ms-section">
+            <div class="cn">
+                <div class="section-heading">
+                    <h2 class="title h1">Overview</h2>
+                </div>
+                <div class="inner-content">
+                    <div class="inner-content__text">
+                        <div class="text">The 2016 <u>Fiat Doblo</u> SWB (LOW) is a front wheel drive 2 Door Van that was released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo is regarded as a van built in Italy with prices from a dealer as a used car starting at $12,400.
+                            The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel Turbo 4 Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at 1500 rpm) via a 6 Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of diesel in the combined city and highway cycle while putting out 143g of CO2. It has a 0L fuel tank.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!--COMPARISON-->
+        <section class="s-comparison ms-section">
+            <div class="cn">
+                <div class="inner-content">
+                    <div class="col">
+                        <div class="title h2">Before</div>
+                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                    </div>
+                    <div class="col">
+                        <div class="title h2">After</div>
+                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                    </div>
+                </div>
+                <div class="section-btn">
+                    <a href="#" class="btn btn-8">Get a quote</a>
+                </div>
+            </div>
+        </section>
+
+        <!--TESTIMONIAL SINGLE-->
+        <section class="s-testimonial-single ms-section">
+            <div class="cn">
+                <div class="s-testimonial-single__inner">
+                    <div class="section-heading">
+                        <h2 class="title h1">Nottingham Sytner BMW Testimonial</h2>
+                    </div>
+                    <div class="t-item">
+                        <div class="img img--full"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                        <div class="name">Floyd Miles</div>
+                        <div class="title">BMW M5 4.4 Full Brake Caliper Refurb and Painting Service</div>
+                        <div class="text">Dear Richard. I wanted to write to you to express out thanks for your teams hard work in making uor customer very happy with his new brake calipers. Your companies professionalism was exemplary and I would without doubt recommend your service to anyone. We wish you every success.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!--TESTIMONIAL SINGLE-->
         <section class="s-testimonial-single ms-section">
             <div class="cn">
