@@ -7,1262 +7,561 @@ Template Post Type: Portfolio
 
 get_header();
 ?>
+    <!--HERO variant 2-->
+    <section class="s-hero s-hero--variant-2 ms-section">
+        <div class="cn cn--big">
+            <div class="inner-content">
+                <div class="inner-content__img">
+	                <?php $image_repeater = get_field( 'overview_image' ); ?>
+                    <img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                         loading="lazy"
+                         alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>">
+                </div>
+                <div class="empty"></div>
+                <div class="inner-content__text">
+                    <div class="section-heading">
+                        <h1 class="title h1"><?php echo get_the_title();?></h1>
+                    </div>
+                    <div class="info-1">
+                        <div class="item">
+                            <div class="icon"><img src="<?php echo get_template_directory_uri();?>/assets/images/icons/icon-07.svg" loading="lazy" alt=""></div>
+                            <div>
+                                <div class="title">Project Status</div>
+                                <div><?php echo get_field( 'overview_project_status' ); ?></div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="icon"><img src="<?php echo get_template_directory_uri();?>/assets/images/icons/icon-08.svg" loading="lazy" alt=""></div>
+                            <div>
+                                <div class="title">Location</div>
+                                <div><?php echo get_field( 'overview_location' ); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-2">
+                        <div class="block-title">Services offered:</div>
+	                    <?php if ( have_rows( 'services_offered' ) ): ?>
+		                    <?php while ( have_rows( 'services_offered' ) ) : the_row(); ?>
+                                <div class="item">
+	                                <?php $image_repeater = get_sub_field( 'icon' ); ?>
+                                    <div class="icon"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                                                           loading="lazy"
+                                                           alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
+                                    <div><?php echo get_sub_field( 'text' ); ?></div>
+                                </div>
+		                    <?php endwhile; ?>
+	                    <?php endif; ?>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 <?php
 // Check value exists.
-if ( have_rows( 'flixble_content_vehicle' ) ):
+if ( have_rows( 'flixble_content_portfolio' ) ):
 	$i = 0;
 	// Loop through rows.
-	while ( have_rows( 'flixble_content_vehicle' ) ) : the_row();
+	while ( have_rows( 'flixble_content_portfolio' ) ) : the_row();
 		$i ++;
 		// Case: Paragraph layout.
-		if ( get_row_layout() == 'technical_data' ):?>
-        <!--HERO variant 1-->
-        <section class="s-hero s-hero--variant-1 ms-section">
-            <div class="cn cn--big">
-                <div class="inner-content">
-									<?php $image_repeater = get_sub_field( 'technical_data_image' ); ?>
-                    <div class="inner-content__img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
-                                                         loading="lazy"
-                                                         alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
-                    <div class="inner-content__text">
+		if ( get_row_layout() == 'video' ):?>
+            <!--VIDEO variant 4-->
+            <section class="s-video s-video--variant-4 ms-section">
+                <div class="cn">
+                    <div class="inner-content">
+                        <div class="inner-content__text">
+                            <div class="section-heading">
+                                <h2 class="title h1"><?php echo get_sub_field( 'video_title' ); ?></h2>
+                            </div>
+                            <div class="text"><?php echo get_sub_field( 'video_description' ); ?></div>
+                        </div>
+                        <div class="inner-content__media">
+                            <div class="video">
+                                <iframe width="560" height="315"
+                                        src="https://www.youtube.com/embed/<?php echo get_sub_field( 'video' ); ?>"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+				<?php elseif ( get_row_layout() == 'steps' ): ?>
+            <!--STEPS-->
+            <section class="s-steps ms-section">
+                <div class="cn">
+                    <div class="section-heading">
+                        <h2 class="title h1"><?php echo get_sub_field( 'steps_title' ); ?></h2>
+                    </div>
+                    <div class="s-steps__list">
+	                    <?php $i=0; if ( have_rows( 'steps_repeater' ) ): ?>
+		                    <?php while ( have_rows( 'steps_repeater' ) ) : the_row(); $i++;?>
+                                <div class="s-steps__box">
+                                    <div class="block-title">
+                                        <h3 class="title h2">Step <?php echo $i;?></h3>
+                                        <div class="date"><?php echo get_sub_field( 'data' ); ?></div>
+                                    </div>
+	                                <?php if ( have_rows( 'images' ) ): ?>
+                                      <div class="images">
+				                                <?php while ( have_rows( 'images' ) ) : the_row(); ?>
+					                                <?php $image_repeater = get_sub_field( 'image' ); ?>
+                                            <div class="img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                                                                  loading="lazy"
+                                                                  alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>">
+                                            </div>
+				                                <?php endwhile; ?>
+
+                                      </div>
+	                                <?php endif; ?>
+                                    <div class="overflow-text-cn">
+                                        <div class="overflow-text">
+                                            <div class="text"><?php echo get_sub_field( 'text' ); ?></div>
+                                        </div>
+                                        <button class="btn btn-2">
+                <span class="text-cn">
+                  <span class="more-text">Show more</span>
+                  <span class="less-text">Show less</span>
+                </span>
+                                            <span class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                    <path d="M2.1433 0.331642L6.54205 4.72081L10.9408 0.331642L12.2921 1.68289L6.54205 7.43289L0.792053 1.68289L2.1433 0.331642Z"/>
+                  </svg>
+                </span>
+                                        </button>
+                                    </div>
+                                </div>
+		                    <?php endwhile; ?>
+	                    <?php endif; ?>
+
+                    </div>
+                </div>
+            </section>
+
+
+
+		<?php elseif ( get_row_layout() == 'overview' ): ?>
+            <!--OVERVIEW variant 1-->
+            <section class="s-overview s-overview--variant-1 ms-section">
+                <div class="cn">
+                    <div class="section-heading">
+                        <h2 class="title h1"><?php echo get_sub_field( 'overview_title' ); ?></h2>
+                    </div>
+                    <div class="inner-content">
+                        <div class="inner-content__text">
+                            <div class="text"><?php echo get_sub_field( 'overview_content' ); ?></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <?php elseif ( get_row_layout() == 'comparison' ): ?>
+            <!--COMPARISON-->
+            <section class="s-comparison ms-section">
+                <div class="cn">
+                    <div class="inner-content">
+                        <div class="col">
+                            <div class="title h2">Before</div>
+	                        <?php $image_repeater = get_sub_field( 'comparison_before' ); ?>
+                            <div class="img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                                                  loading="lazy"
+                                                  alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
+                        </div>
+                        <div class="col">
+                            <div class="title h2">After</div>
+	                        <?php $image_repeater = get_sub_field( 'comparison_after' ); ?>
+                            <div class="img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                                                  loading="lazy"
+                                                  alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
+                        </div>
+                    </div>	<?php
+	                $link = get_sub_field( 'comparison_button' );
+	                if ( $link ):
+		                $link_url    = $link['url'];
+		                $link_title  = $link['title'];
+		                $link_target = $link['target'] ? $link['target'] : '_self';
+		                ?>
+                        <div class="section-btn">
+                            <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-8"   target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+                        </div>
+	                <?php endif; ?>
+                </div>
+            </section>
+				<?php elseif ( get_row_layout() == 'testimonial' ): ?>
+            <!--TESTIMONIAL SINGLE-->
+            <section class="s-testimonial-single ms-section">
+                <div class="cn">
+                    <div class="s-testimonial-single__inner">
                         <div class="section-heading">
-                            <h1 class="title h1"><?php echo get_sub_field( 'technical_data_title' ); ?></h1>
-                            <h2 class="subtitle h2"><?php echo get_sub_field( 'technical_data_subtitle' ); ?></h2>
+                            <h2 class="title h1"><?php echo get_sub_field( 'testimonial_section_title' ); ?></h2>
                         </div>
-                        <div class="text">
-                            <div class="title"><?php echo get_sub_field( 'technical_data_list_title' ); ?></div>
-                            <ul>
-															<?php if ( have_rows( 'technical_data_list' ) ): ?>
-																<?php while ( have_rows( 'technical_data_list' ) ) : the_row(); ?>
-                                      <li><?php echo get_sub_field( 'technical_data_name' ); ?>
-                                          <span><?php echo get_sub_field( 'technical_data_specification' ); ?></span>
-                                      </li>
-																<?php endwhile; ?>
-															<?php endif; ?>
-                            </ul>
+                        <div class="t-item">
+	                        <?php $image_repeater = get_sub_field( 'testimonial_image' ); ?>
+                            <div class="img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                                                  loading="lazy"
+                                                  alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
+                            <div class="name"><?php echo get_sub_field( 'testimonial_name' ); ?></div>
+                            <div class="title"><?php echo get_sub_field( 'testimonial_title' ); ?></div>
+                            <div class="text"><?php echo get_sub_field( 'testimonial_text' ); ?></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'left_side_image_preview' ): ?>
-        <!--HERO variant 2-->
-        <section class="s-hero s-hero--variant-2 ms-section">
-            <div class="cn cn--big">
-                <div class="inner-content">
-									<?php $image_repeater = get_sub_field( 'left_side_image_preview_image' ); ?>
-                    <div class="inner-content__img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
-                                                         alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
-                    <div class="empty"></div>
-                    <div class="inner-content__text">
-                        <div class="section-heading">
-                            <h1 class="title h1"><?php echo get_sub_field( 'left_side_image_preview_title' ); ?></h1>
-                            <h2 class="subtitle h2"><?php echo get_sub_field( 'left_side_image_preview_subtitle' ); ?> </h2>
-                        </div>
-                        <div class="text">
-													<?php echo get_sub_field( 'left_side_image_preview_text' ); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
+        <?php elseif ( get_row_layout() == 'banner' ): ?>
 
-
-		<?php elseif ( get_row_layout() == 'right_side_image_preview' ): ?>
-        <!--HERO variant 3-->
-        <section class="s-hero s-hero--variant-3 ms-section">
-            <div class="cn cn--big">
-                <div class="inner-content">
-									<?php $image_repeater = get_sub_field( 'right_side_image_preview_image' ); ?>
-                    <div class="inner-content__img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
-                                                         loading="lazy"
-                                                         alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
-                    <div class="inner-content__text">
-                        <div class="section-heading">
-                            <h1 class="title h1"><?php echo get_sub_field( 'right_side_image_preview_title' ); ?></h1>
-                            <h2 class="subtitle h2"><?php echo get_sub_field( 'right_side_image_preview_subtitle' ); ?></h2>
+            <!--BANNER-->
+            <section class="s-banner-2 ms-section">
+                <div class="section-bg"><img src="<?php echo get_template_directory_uri();?>/assets/images/bg-06.jpg" loading="lazy" alt=""></div>
+                <div class="cn">
+                    <div class="s-banner-2__inner">
+                        <div class="s-banner-2__left">
+                            <div class="decorated-title decorated-title--column-left">
+                                <div class="small-title small-title--white">EXPERIENCED</div>
+                                <div class="line-decor line-decor--white"></div>
+                            </div>
+                            <h2 class="title h1">Refurbishing Brake Calipers for Cars Worldwide</h2>
                         </div>
-                        <div class="text">
-													<?php echo get_sub_field( 'right_side_image_preview_text' ); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'overview_without_image' ): ?>
-        <!--OVERVIEW variant 1-->
-        <section class="s-overview s-overview--variant-1 ms-section">
-            <div class="cn">
-                <div class="section-heading">
-                    <h2 class="title h1"><?php echo get_sub_field( 'overview_without_image_title' ); ?></h2>
-                </div>
-                <div class="inner-content">
-                    <div class="inner-content__text">
-                        <div class="text"><?php echo get_sub_field( 'overview_without_image_text' ); ?></div>
-											<?php
-											$link = get_sub_field( 'overview_without_image_button' );
-											if ( $link ):
-												$link_url    = $link['url'];
-												$link_title  = $link['title'];
-												$link_target = $link['target'] ? $link['target'] : '_self';
-												?>
-											<?php endif; ?>
-                        <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-2"
-                           target="<?php echo esc_attr( $link_target ); ?>">
-                            <span><?php echo esc_html( $link_title ); ?></span>
-                            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'overview_left_side_image' ): ?>
-        <!--OVERVIEW variant 2-->
-        <section class="s-overview s-overview--variant-2 ms-section">
-            <div class="cn">
-                <div class="section-heading">
-                    <h2 class="title h1"><?php echo get_sub_field( 'overview_left_side_image_title' ); ?></h2>
-                </div>
-                <div class="inner-content">
-									<?php $image_repeater = get_sub_field( 'overview_left_side_image' ); ?>
-                    <div class="inner-content__img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
-                                                         loading="lazy"
-                                                         alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
-                    <div class="inner-content__text">
-                        <div class="text"><?php echo get_sub_field( 'overview_left_side_image_text' ); ?></div>
-											<?php
-											$link = get_sub_field( 'overview_left_side_image_link' );
-											if ( $link ):
-												$link_url    = $link['url'];
-												$link_title  = $link['title'];
-												$link_target = $link['target'] ? $link['target'] : '_self';
-												?>
-											<?php endif; ?>
-                        <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-2"
-                           target="<?php echo esc_attr( $link_target ); ?>">
-                            <span><?php echo esc_html( $link_title ); ?></span>
-                            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'overview_right_side_image' ): ?>
-        <!--OVERVIEW variant 3-->
-        <section class="s-overview s-overview--variant-3 ms-section">
-            <div class="cn">
-                <div class="section-heading">
-                    <h2 class="title h1"><?php echo get_sub_field( 'overview_right_side_image_title' ); ?></h2>
-                </div>
-                <div class="inner-content">
-									<?php $image_repeater = get_sub_field( 'overview_right_side_image' ); ?>
-                    <div class="inner-content__img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
-                                                         loading="lazy"
-                                                         alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
-                    <div class="inner-content__text">
-                        <div class="text"><?php echo get_sub_field( 'overview_right_side_image_text' ); ?></div>
-											<?php
-											$link = get_sub_field( 'overview_right_side_image_link' );
-											if ( $link ):
-												$link_url    = $link['url'];
-												$link_title  = $link['title'];
-												$link_target = $link['target'] ? $link['target'] : '_self';
-												?>
-											<?php endif; ?>
-                        <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-2"
-                           target="<?php echo esc_attr( $link_target ); ?>">
-                            <span><?php echo esc_html( $link_title ); ?></span>
-                            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'overview_full_width_image' ): ?>
-        <!--OVERVIEW variant 4-->
-        <section class="s-overview s-overview--variant-4 ms-section">
-            <div class="cn cn--small">
-                <div class="section-heading">
-                    <h2 class="title h1"><?php echo get_sub_field( 'overview_full_width_image_title' ); ?></h2>
-                </div>
-                <div class="inner-content">
-									<?php $image_repeater = get_sub_field( 'overview_full_width_image' ); ?>
-                    <div class="inner-content__img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
-                                                         loading="lazy"
-                                                         alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"
-                                                         loading="lazy"></div>
-
-                    <div class="inner-content__text">
-                        <div class="text"><?php echo get_sub_field( 'overview_full_width_image_text' ); ?></div>
-											<?php
-											$link = get_sub_field( 'overview_full_width_image_link' );
-											if ( $link ):
-												$link_url    = $link['url'];
-												$link_title  = $link['title'];
-												$link_target = $link['target'] ? $link['target'] : '_self';
-												?>
-											<?php endif; ?>
-                        <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-6"
-                           target="<?php echo esc_attr( $link_target ); ?>">
-            <span class="icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 17.002C21.9996 18.3696 21.5321 19.696 20.675 20.7616C19.8179 21.8273 18.6226 22.5683 17.287 22.862L16.649 20.948C17.2332 20.8518 17.7888 20.6271 18.2758 20.2903C18.7627 19.9534 19.1689 19.5128 19.465 19H17C16.4696 19 15.9609 18.7893 15.5858 18.4142C15.2107 18.0391 15 17.5304 15 17V13C15 12.4696 15.2107 11.9609 15.5858 11.5858C15.9609 11.2107 16.4696 11 17 11H19.938C19.694 9.0669 18.7529 7.28927 17.2914 6.00068C15.8299 4.71208 13.9484 4.00108 12 4.00108C10.0516 4.00108 8.17007 4.71208 6.70857 6.00068C5.24708 7.28927 4.30603 9.0669 4.062 11H7C7.53043 11 8.03914 11.2107 8.41421 11.5858C8.78929 11.9609 9 12.4696 9 13V17C9 17.5304 8.78929 18.0391 8.41421 18.4142C8.03914 18.7893 7.53043 19 7 19H4C3.46957 19 2.96086 18.7893 2.58579 18.4142C2.21071 18.0391 2 17.5304 2 17V12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12V17.002Z"/>
-              </svg>
-            </span>
-                            <span><?php echo esc_html( $link_title ); ?></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'video_right_side' ): ?>
-        <!--VIDEO variant 1-->
-        <section class="s-video s-video--variant-1 ms-section">
-            <div class="cn">
-                <div class="inner-content">
-                    <div class="inner-content__text">
-                        <div class="section-heading">
-                            <h2 class="title h1"><?php echo get_sub_field( 'video_right_side_title' ); ?></h2>
-                        </div>
-                        <div class="text"><?php echo get_sub_field( 'video_right_side_text' ); ?></div>
-                    </div>
-                    <div class="inner-content__media">
-                        <!--<div class="img"><img src="images/img-04.jpg" loading="lazy" alt=""></div>-->
-                        <div class="video">
-                            <iframe width="560" height="315"
-                                    src="https://www.youtube.com/embed/<?php echo get_sub_field( 'video_right_side_video' ); ?>"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="s-banner-2__right">
+                            <div class="form">
+                                <h3 class="title h2"><?php echo get_sub_field( 'banner_title' ); ?></h3>
+                                <div class="subtitle"><?php echo get_sub_field( 'banner_description' ); ?></div>
+                                <form>
+                                    <div class="form-group">
+                                        <input type="email" class="input" placeholder="Email">
+                                    </div>
+                                    <div class="form-group btn-group">
+                                        <button type="submit" class="btn btn-8">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'video_left_side' ): ?>
-        <!--VIDEO variant 2-->
-        <section class="s-video s-video--variant-2 ms-section">
-            <div class="cn">
-                <div class="inner-content">
-                    <div class="inner-content__text">
-                        <div class="section-heading">
-                            <h2 class="title h1"><?php echo get_sub_field( 'video_left_side_title' ); ?></h2>
-                        </div>
-                        <div class="text"><?php echo get_sub_field( 'video_left_side_text' ); ?></div>
-                    </div>
-                    <div class="inner-content__media">
-                        <div class="video">
-                            <iframe width="560" height="315"
-                                    src="https://www.youtube.com/embed/<?php echo get_sub_field( 'video_left_side_video' ); ?>"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'video_full_width' ): ?>
-        <!--VIDEO variant 3-->
-        <section class="s-video s-video--variant-3 ms-section">
-            <div class="cn cn--small">
-                <div class="inner-content">
-                    <div class="inner-content__text">
-                        <div class="section-heading">
-                            <h2 class="title h1"><?php echo get_sub_field( 'video_full_width_title' ); ?></h2>
-                        </div>
-                        <div class="text"><?php echo get_sub_field( 'video_full_width_text' ); ?></div>
-                    </div>
-                    <div class="inner-content__media">
-                        <div class="video">
-                            <iframe width="560" height="315"
-                                    src="https://www.youtube.com/embed/<?php echo get_sub_field( 'video_full_width_video' ); ?>"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'portfolio' ): ?>
-        <!--SPLIT-->
-        <section class="s-split ms-section">
-            <div class="cn">
-                <div class="section-heading section-heading--simple">
-                    <h2 class="title h1"><?php echo get_sub_field( 'portfolio_title' ); ?></h2>
-                    <div class="subtitle"><?php echo get_sub_field( 'portfolio_subtitle' ); ?></div>
-                </div>
-
-                <div class="s-split__list">
-									<?php
-									$featured_posts = get_sub_field( 'portfolio' );
-									if ( $featured_posts ): ?>
-										<?php foreach ( $featured_posts as $post ):
-											// Setup this post for WP functions (variable must be named $post).
-											setup_postdata( $post ); ?>
-                          <div class="split-item">
-                              <div class="split-item__img"><img
-                                          src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                          loading="lazy" alt=""></div>
-                              <div class="split-item__content">
-                                  <h3 class="title h2"><?php the_title(); ?></h3>
-                                  <div class="tags">
-                                      <div class="tag">Engineering services</div>
-                                      <div class="tag">Painting</div>
-                                      <div class="tag">2 piston</div>
-                                  </div>
-                                  <div class="desc">If you are looking for experienced and highly professional brake
-                                      caliper
-                                      painting and refurbishment then look no further than Bespoke Detailing Solutions.
-                                      We
-                                      specialise in all aspect of car detailing and care to make sure your vehicle is
-                                      looking its
-                                      best.
-                                  </div>
-                                  <a href="<?php the_permalink(); ?>" class="btn btn-2">
-                                      <span>Read more</span>
-                                      <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-              </span>
-                                  </a>
-                              </div>
-                          </div>
-										<?php endforeach; ?>
-
-										<?php
-										// Reset the global post object so that the rest of the page works correctly.
-										wp_reset_postdata(); ?>
-									<?php endif; ?>
-
-
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'services_with_Image' ): ?>
-        <!--THREE COLUMN variant 1-->
-        <section class="s-three-column s-three-column--variant-1 ms-section">
-            <div class="cn">
-                <div class="section-heading section-heading--simple">
-                    <h2 class="title h1"><?php echo get_sub_field( 'services_with_Image_title' ); ?></h2>
-                    <div class="subtitle"><?php echo get_sub_field( 'services_with_Image_subtitle' ); ?></div>
-                </div>
-                <div class="s-three-column__list">
-
-                    <div class="item">
-                        <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                              loading="lazy" alt=""></div>
-                        <h3 class="title">Brake Caliper Refurbishment Front and Rear Pair</h3>
-                        <div class="desc">Our team specializes in refurbishing brake calipers to restore their
-                            performance
-                            and appearance.
-                        </div>
-                        <a href="#" class="btn btn-2">
-                            <span>Read more</span>
-                            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
-                        </a>
+            </section>
+        <?php elseif ( get_row_layout() == 'related' ): ?>
+            <!--ARTICLES LIST-->
+            <section class="s-articles-list ms-section">
+                <div class="section-bg"><img src="<?php echo get_template_directory_uri();?>/assets/images/bg-07.jpg" loading="lazy" alt=""></div>
+                <div class="cn">
+                    <div class="section-heading">
+                        <h2 class="title h1"><?php echo get_sub_field( 'related_title' ); ?></h2>
+                        <div class="subtitle"><?php echo get_sub_field( 'related_subtitle' ); ?></div>
                     </div>
 
-                    <div class="item">
-                        <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                              loading="lazy" alt=""></div>
-                        <h3 class="title">Engineering and ReManufacture</h3>
-                        <div class="desc">We have incredible engineering capabilities at BCS. Aside from our on-site
-                            engineer with almost 40 years experience in manual turning, milling,
-                        </div>
-                        <a href="#" class="btn btn-2">
-                            <span>Read more</span>
-                            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                              loading="lazy" alt=""></div>
-                        <h3 class="title">Caliper Painting</h3>
-                        <div class="desc">With our High-End caliper painting service, we can provide all OEM colours for
-                            Brembo brake calipers.
-                        </div>
-                        <a href="#" class="btn btn-2">
-                            <span>Read more</span>
-                            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'services_without_image' ): ?>
-        <!--THREE COLUMN variant 2-->
-        <section class="s-three-column s-three-column--variant-2 ms-section">
-            <div class="cn">
-                <div class="section-heading section-heading--simple">
-                    <h2 class="title h1"><?php echo get_sub_field( 'services_without_image_title' ); ?></h2>
-                    <div class="subtitle"><?php echo get_sub_field( 'services_without_image_subtitle' ); ?></div>
-                </div>
-                <div class="s-three-column__list">
-                    <div class="item">
-                        <div class="img"><img
-                                    src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/icon-01.svg"
-                                    loading="lazy" alt=""></div>
-                        <h3 class="title">Customization</h3>
-                        <div class="desc">Our team specializes in refurbishing brake calipers to restore their
-                            performance
-                            and appearance.
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img"><img
-                                    src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/icon-02.svg"
-                                    loading="lazy" alt=""></div>
-                        <h3 class="title">Worldwide Shipping</h3>
-                        <div class="desc">We offer convenient worldwide shipping options to ensure your refurbished
-                            brake
-                            calipers reach you no matter where you are.
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img"><img
-                                    src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/icon-03.svg"
-                                    loading="lazy" alt=""></div>
-                        <h3 class="title">Product Customization</h3>
-                        <div class="desc">85% of jobs completed by our specializes within 24 hours</div>
-                    </div>
-                </div>
-
-
-                <div class="section-btn">
-									<?php
-									$link = get_sub_field( 'services_without_image_button' );
-									if ( $link ):
-										$link_url    = $link['url'];
-										$link_title  = $link['title'];
-										$link_target = $link['target'] ? $link['target'] : '_self';
-										?>
-									<?php endif; ?>
-                    <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-6"
-                       target="<?php echo esc_attr( $link_target ); ?>">
-          <span class="icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M22 17.002C21.9996 18.3696 21.5321 19.696 20.675 20.7616C19.8179 21.8273 18.6226 22.5683 17.287 22.862L16.649 20.948C17.2332 20.8518 17.7888 20.6271 18.2758 20.2903C18.7627 19.9534 19.1689 19.5128 19.465 19H17C16.4696 19 15.9609 18.7893 15.5858 18.4142C15.2107 18.0391 15 17.5304 15 17V13C15 12.4696 15.2107 11.9609 15.5858 11.5858C15.9609 11.2107 16.4696 11 17 11H19.938C19.694 9.0669 18.7529 7.28927 17.2914 6.00068C15.8299 4.71208 13.9484 4.00108 12 4.00108C10.0516 4.00108 8.17007 4.71208 6.70857 6.00068C5.24708 7.28927 4.30603 9.0669 4.062 11H7C7.53043 11 8.03914 11.2107 8.41421 11.5858C8.78929 11.9609 9 12.4696 9 13V17C9 17.5304 8.78929 18.0391 8.41421 18.4142C8.03914 18.7893 7.53043 19 7 19H4C3.46957 19 2.96086 18.7893 2.58579 18.4142C2.21071 18.0391 2 17.5304 2 17V12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12V17.002Z"/>
-            </svg>
-          </span>
-                        <span><?php echo esc_html( $link_title ); ?></span>
-                    </a>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'products' ): ?>
-        <!--PRODUCTS-->
-        <section class="s-products ms-section">
-            <div class="cn">
-                <div class="section-heading section-heading--simple">
-                    <h2 class="title h1"><?php echo get_sub_field( 'products_title' ); ?></h2>
-                    <div class="subtitle"><?php echo get_sub_field( 'products_subtitle' ); ?></div>
-                </div>
-                <div class="products-list">
-									<?php
-									$featured_posts = get_sub_field( 'products' );
-									if ( $featured_posts ): ?>
-
-										<?php foreach ( $featured_posts as $post ):
-
-											// Setup this post for WP functions (variable must be named $post).
-											setup_postdata( $post ); ?>
-                          <div class="product-card">
-                              <div class="product-card__img"><img
-                                          src="<?php echo get_template_directory_uri(); ?>/assets/images/img-03.jpg"
-                                          loading="lazy" alt=""></div>
-                              <div class="product-card__content">
-                                  <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
-                                  <div class="subtitle">2004-2011</div>
-                                  <div class="btn-group">
-                                      <a href="#" class="btn btn-2">From $6.95</a>
-                                      <a href="#" class="btn btn-2">From $6.95</a>
-                                  </div>
-                              </div>
-                          </div>
-										<?php endforeach; ?>
-
-										<?php
-										// Reset the global post object so that the rest of the page works correctly.
-										wp_reset_postdata(); ?>
-									<?php endif; ?>
-
-                </div>
-                <div class="section-btn">
-									<?php
-									$link = get_sub_field( 'products_button' );
-									if ( $link ):
-										$link_url    = $link['url'];
-										$link_title  = $link['title'];
-										$link_target = $link['target'] ? $link['target'] : '_self';
-										?>
-									<?php endif; ?>
-                    <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-1"
-                       target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'reviews' ): ?>
-        <!--TESTIMONIALS-->
-        <section class="s-testimonials ms-section">
-            <div class="cn">
-                <div class="section-heading section-heading--simple">
-                    <h2 class="title h1">Client reviews about Fiat Doblo 2016 </h2>
-                    <div class="subtitle">Below are all of the places on the web where we have a presence and where
-                        people
-                        are able to review us.
-                    </div>
-                </div>
-                <div class="swiper testimonials-slider">
-                    <div class="swiper-arrows">
-                        <div class="swiper-button-prev btn btn-7">
+                    <div class="swiper articles-slider">
+                        <div class="swiper-arrows">
+                            <div class="swiper-button-prev btn btn-4">
             <span class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
                 <path d="M7.37598 10.2383L2.98681 5.83951L7.37598 1.44076L6.02473 0.0895081L0.274727 5.83951L6.02473 11.5895L7.37598 10.2383Z"/>
               </svg>
             </span>
-                            <span>Previous</span>
-                        </div>
-                        <div class="swiper-button-next btn btn-7">
-                            <span>Next</span>
-                            <span class="icon">
+                                <span>Previous</span>
+                            </div>
+                            <div class="swiper-button-next btn btn-4">
+                                <span>Next</span>
+                                <span class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
                 <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
               </svg>
             </span>
-                        </div>
-                    </div>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="item">
-                                <div class="top-line">
-                                    <div class="img"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                                loading="lazy" alt=""></div>
-                                    <div class="ratting"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/stars.svg"
-                                                loading="lazy" alt=""></div>
-                                </div>
-                                <div class="name">Floyd Miles</div>
-                                <div class="title">Porsche 911 Brembo brake caliper painting in Leeds</div>
-                                <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-                                    sint.
-                                    Velit officia consequat duis enim sit aliqua dolor do amet sint. Velit officia
-                                    consequat
-                                    duis enim sit aliqua dolor do amet sint. Velit officia consequat duis enim.
-                                </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="item">
-                                <div class="top-line">
-                                    <div class="img"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                                loading="lazy" alt=""></div>
-                                    <div class="ratting"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/stars.svg"
-                                                loading="lazy" alt=""></div>
-                                </div>
-                                <div class="name">Floyd Miles</div>
-                                <div class="title">Porsche 911 Brembo brake</div>
-                                <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-                                    sint.
-                                    Velit officia consequat duis enim.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="item">
-                                <div class="top-line">
-                                    <div class="img"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                                loading="lazy" alt=""></div>
-                                    <div class="ratting"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/stars.svg"
-                                                loading="lazy" alt=""></div>
-                                </div>
-                                <div class="name">Floyd Miles</div>
-                                <div class="title">Porsche 911 Brembo brake caliper painting in Leeds</div>
-                                <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-                                    sint.
-                                    Velit officia consequat duis enim.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="item">
-                                <div class="top-line">
-                                    <div class="img"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                                loading="lazy" alt=""></div>
-                                    <div class="ratting"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/stars.svg"
-                                                loading="lazy" alt=""></div>
-                                </div>
-                                <div class="name">Floyd Miles</div>
-                                <div class="title">Porsche 911 Brembo brake caliper painting in Leeds</div>
-                                <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-                                    sint.
-                                    Velit officia consequat duis enim.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="item">
-                                <div class="top-line">
-                                    <div class="img"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                                loading="lazy" alt=""></div>
-                                    <div class="ratting"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/stars.svg"
-                                                loading="lazy" alt=""></div>
-                                </div>
-                                <div class="name">Floyd Miles</div>
-                                <div class="title">Porsche 911 Brembo brake</div>
-                                <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-                                    sint.
-                                    Velit officia consequat duis enim.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="item">
-                                <div class="top-line">
-                                    <div class="img"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                                loading="lazy" alt=""></div>
-                                    <div class="ratting"><img
-                                                src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/stars.svg"
-                                                loading="lazy" alt=""></div>
-                                </div>
-                                <div class="name">Floyd Miles</div>
-                                <div class="title">Porsche 911 Brembo brake caliper painting in Leeds</div>
-                                <div class="text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-                                    sint.
-                                    Velit officia consequat duis enim.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-
-                <div class="b-popularity ms-section">
-                    <div class="item">
-                        <div class="img"><img
-                                    src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-trustpilot.png"
-                                    loading="lazy" alt=""></div>
-                        <div class="text"><span>4.9</span> (294 reviews)</div>
-                    </div>
-                    <div class="item">
-                        <div class="img"><img
-                                    src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-google.png"
-                                    loading="lazy" alt=""></div>
-                        <div class="text"><span>4.4</span> (265 reviews)</div>
-                    </div>
-                    <div class="item">
-                        <div class="img"><img
-                                    src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-facebook.png"
-                                    loading="lazy" alt=""></div>
-                        <div class="text"><span>50.000</span> followers</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'trim_specifications' ): ?>
-        <!--KNOWLEDGE variant 1-->
-        <section class="s-knowledge s-knowledge--variant-1 ms-section">
-            <div class="cn">
-                <div class="acc">
-									<?php if ( have_rows( 'trim_specifications' ) ): ?>
-										<?php while ( have_rows( 'trim_specifications' ) ) : the_row(); ?>
-                          <div class="acc-item">
-                              <div class="acc-head"><?php echo get_sub_field( 'trim_specifications_title' ); ?></div>
-                              <div class="acc-body">
-                                  <div class="inner">
-                                      <div class="text">
-                                          <ul>
-																						<?php if ( have_rows( 'left_side_trim_specifications' ) ): ?>
-																							<?php while ( have_rows( 'left_side_trim_specifications' ) ) : the_row(); ?>
-                                                    <li>
-                                                        <span><?php echo get_sub_field( 'name' ); ?></span><span><?php echo get_sub_field( 'specification' ); ?></span>
-                                                    </li>
-																							<?php endwhile; ?>
-																						<?php endif; ?>
-                                          </ul>
-                                          <ul>
-																						<?php if ( have_rows( 'Right_side_trim_specifications' ) ): ?>
-																							<?php while ( have_rows( 'Right_side_trim_specifications' ) ) : the_row(); ?>
-                                                    <li>
-                                                        <span><?php echo get_sub_field( 'name' ); ?></span><span><?php echo get_sub_field( 'specification' ); ?></span>
-                                                    </li>
-																							<?php endwhile; ?>
-																						<?php endif; ?>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-										<?php endwhile; ?>
-									<?php endif; ?>
+                        <div class="swiper-wrapper">
 
 
-                </div>
-            </div>
-        </section>
-		<?php elseif ( get_row_layout() == 'faq' ): ?>
-        <!--KNOWLEDGE variant 3-->
-        <section class="s-knowledge s-knowledge--variant-3 ms-section">
-            <div class="cn">
-                <div class="section-heading section-heading--simple">
-                    <h2 class="title h1"><?php echo get_sub_field( 'faq_title' ); ?></h2>
-                    <div class="subtitle"><?php echo get_sub_field( 'faq_subtitle' ); ?></div>
-                </div>
-                <div class="acc">
-									<?php if ( have_rows( 'faq_repeater' ) ): ?>
-										<?php while ( have_rows( 'faq_repeater' ) ) : the_row(); ?>
-                          <div class="acc-item">
-                              <div class="acc-head"><?php echo get_sub_field( 'question' ); ?></div>
-                              <div class="acc-body">
-                                  <div class="inner">
-                                      <div class="text"><?php echo get_sub_field( 'answer' ); ?></div>
-                                  </div>
-                              </div>
-                          </div>
-										<?php endwhile; ?>
-									<?php endif; ?>
+                                <?php
+                                $post_ID =$post->ID;
+                            $make_tax =    get_sub_field( 'related_posts' );
+                            $portfolio_posts =  get_sub_field( 'posts' );
+                                // Push posts IDs to new array
+                                $identifiers = array();
+   if(($make_tax) & ($portfolio_posts))     {
+if($make_tax) {
+$args_1 = get_posts( array(
+  'post_type' => 'portfolio',
+  'post_count' => -1,
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'make',
+      'field' => 'term_id',
+      'terms' => $make_tax,
+    )
+  ),
+) );
+	foreach ( $args_1 as $post ) {
+        			array_push( $identifiers, $post->ID );
+	}
+}
+if($portfolio_posts) {
+// Second query, specific posts query
+$args_2 = get_posts( array(
+  'post_type' => 'portfolio',
+  'post_count' => -1,
+  'include' => $portfolio_posts,
+) );
+	foreach ( $args_2 as $post ) {
+		array_push( $identifiers, $post->ID );
+	}
+}
+   } else {
 
-                </div>
-                <div class="b-cta">
-                    <div class="title h1">Still have questions?</div>
-                    <div class="subtitle">Contact us for further assistance.</div>
-                    <a href="#" class="btn btn-6">
-          <span class="icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M22 17.002C21.9996 18.3696 21.5321 19.696 20.675 20.7616C19.8179 21.8273 18.6226 22.5683 17.287 22.862L16.649 20.948C17.2332 20.8518 17.7888 20.6271 18.2758 20.2903C18.7627 19.9534 19.1689 19.5128 19.465 19H17C16.4696 19 15.9609 18.7893 15.5858 18.4142C15.2107 18.0391 15 17.5304 15 17V13C15 12.4696 15.2107 11.9609 15.5858 11.5858C15.9609 11.2107 16.4696 11 17 11H19.938C19.694 9.0669 18.7529 7.28927 17.2914 6.00068C15.8299 4.71208 13.9484 4.00108 12 4.00108C10.0516 4.00108 8.17007 4.71208 6.70857 6.00068C5.24708 7.28927 4.30603 9.0669 4.062 11H7C7.53043 11 8.03914 11.2107 8.41421 11.5858C8.78929 11.9609 9 12.4696 9 13V17C9 17.5304 8.78929 18.0391 8.41421 18.4142C8.03914 18.7893 7.53043 19 7 19H4C3.46957 19 2.96086 18.7893 2.58579 18.4142C2.21071 18.0391 2 17.5304 2 17V12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12V17.002Z"/>
-            </svg>
-          </span>
-                        <span>Contact us</span>
-                    </a>
-                </div>
-            </div>
-        </section>
+   $terms = wp_get_object_terms($post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC') );
+    if ( !empty( $terms ) ) :
+	 $project = array();
+	    foreach ( $terms as $term ) {
+		$project[] = $term->term_id;
+	      }  endif;
+	   $args_3 = get_posts( array(
+		   'post_type' => 'portfolio',
+		   'post_count' => -1,
+		   'tax_query' => array(
+			   array(
+				   'taxonomy' => 'make',
+				   'field' => 'term_id',
+				   'terms' => $project[1],
+			   )
+		   ),
+	   ) );
+	   foreach ( $args_3 as $post ) {
+		   array_push( $identifiers, $post->ID );
+	   }
+   }
 
-		<?php endif;
+// New query
+$query = new WP_Query( array(
+  'post_type' => 'portfolio',
+  'post_status' => 'publish',
+  'post_count' => -1,
+  'post__in' => array_unique( $identifiers ),
+  'post__not_in' => $post_ID,
+) );
+
+if ( $query->have_posts() ) :
+
+  while ( $query->have_posts() ) :
+
+    $query->the_post();?>
+
+      <div class="swiper-slide">
+          <div class="article-card">
+              <div class="article-card__img">
+			              <?php $image_repeater = get_field( 'overview_image' ); ?>
+                  <?php if($image_repeater){?>
+                      <img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                           loading="lazy"
+                           alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>">
+                  <?php }?>
+               </div>
+              <div class="article-card__content">
+                  <div class="tags">
+	                  <?php
+	                  $terms = wp_get_object_terms($post->ID, 'portfolio-category', array('orderby' => 'term_id', 'order' => 'ASC') );
+	                  if ( !empty( $terms ) ) :
+
+		                  foreach ( $terms as $term ) { ?>
+                              <div class="tag"><?php echo$term->name;?></div>
+		                  <?php } ?>
+	                  <?php endif;
+	                  ?>
+                  </div>
+                  <h3 class="title"><?php echo get_the_title();?></h3>
+                  <div class="desc"><?php echo get_field( 'preview_description' );?></div>
+                  <a href="<?php the_permalink();?>" class="btn btn-3">
+                      <span>Read more</span>
+                      <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                      </svg>
+                    </span>
+                  </a>
+              </div>
+          </div>
+      </div>
+
+  <?php endwhile;
+
+endif; wp_reset_postdata();?>
+
+
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </section>
+		<?php elseif ( get_row_layout() == 'products' ): ?>
+         <?php
+	                    $post_ID =$post->ID;
+	                    $make_tax =    get_sub_field( 'products_category' );
+	                    $portfolio_posts =  get_sub_field( 'products' );
+	                    // Push posts IDs to new array
+	                    $identifiers = array();
+	                    if(($make_tax) & ($portfolio_posts))     {
+		                    if($make_tax) {
+			                    $args_1 = get_posts( array(
+				                    'post_type' => 'product',
+				                    'post_count' => -1,
+				                    'tax_query' => array(
+					                    array(
+						                    'taxonomy' => 'make',
+						                    'field' => 'term_id',
+						                    'terms' => $make_tax,
+					                    )
+				                    ),
+			                    ) );
+			                    foreach ( $args_1 as $post ) {
+				                    array_push( $identifiers, $post->ID );
+			                    }
+		                    }
+		                    if($portfolio_posts) {
+// Second query, specific posts query
+			                    $args_2 = get_posts( array(
+				                    'post_type' => 'product',
+				                    'post_count' => -1,
+				                    'include' => $portfolio_posts,
+			                    ) );
+			                    foreach ( $args_2 as $post ) {
+				                    array_push( $identifiers, $post->ID );
+			                    }
+		                    }
+	                    } else {
+
+		                    $terms = wp_get_object_terms($post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC') );
+		                    if ( !empty( $terms ) ) :
+			                    $project = array();
+			                    foreach ( $terms as $term ) {
+				                    $project[] = $term->term_id;
+			                    }  endif;
+		                    $args_3 = get_posts( array(
+			                    'post_type' => 'product',
+			                    'post_count' => -1,
+			                    'tax_query' => array(
+				                    array(
+					                    'taxonomy' => 'make',
+					                    'field' => 'term_id',
+					                    'terms' => $project[1],
+				                    )
+			                    ),
+		                    ) );
+		                    foreach ( $args_3 as $post ) {
+			                    array_push( $identifiers, $post->ID );
+		                    }
+	                    }
+
+	                    // New query
+	                    $query = new WP_Query( array(
+		                    'post_type' => 'product',
+		                    'post_status' => 'publish',
+		                    'post_count' => -1,
+		                    'post__in' => array_unique( $identifiers ),
+		                    'post__not_in' => $post_ID,
+	                    ) );
+
+	                    if ( $query->have_posts() ) :?>
+            <!--PRODUCTS-->
+            <section class="s-products ms-section">
+                <div class="cn">
+                    <div class="section-heading section-heading--simple">
+                        <h2 class="title h1"><?php echo get_sub_field( 'products_title' ); ?></h2>
+                        <div class="subtitle"><?php echo get_sub_field( 'products_subtitle' ); ?></div>
+                    </div>
+                    <div class="products-list">
+
+
+		                   <?php while ( $query->have_posts() ) :
+
+			                    $query->the_post();?>
+
+                                <div class="product-card">
+                                    <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
+                                    <div class="product-card__content">
+                                        <h3 class="title"><?php echo get_the_title();?></h3>
+                                        <div class="subtitle">2004-2011</div>
+                                        <div class="btn-group">
+                                            <a href="<?php the_permalink();?>" class="btn btn-2">From $6.95</a>
+                                            <a href="#" class="btn btn-2">From $6.95</a>
+                                        </div>
+                                    </div>
+                                </div>
+		                    <?php endwhile;?>
+
+
+
+
+
+                    </div>
+                    <div class="section-btn"><a href="#" class="btn btn-1">Show more</a></div>
+                </div>
+            </section>
+		                    <?php endif; wp_reset_postdata();?>
+		<?php elseif ( get_row_layout() == 'services' ): ?>
+            <!--SERVICES-->
+            <section class="s-services-main ms-section">
+                <div class="s-services-main__head">
+                    <div class="section-bg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-02.png" loading="lazy" alt=""></div>
+                    <div class="cn">
+                        <div class="section-heading">
+                            <h2 class="title h1">Brake Caliper Refurbishment Services</h2>
+                            <div class="subtitle">With years of experience, our company specializes in refurbishing brake calipers for cars. We have a team of skilled professionals dedicated to providing high-quality services to customers worldwide.</div>
+                            <div class="decorated-title decorated-title--row-left">
+                                <div class="small-title small-title--white">Our services</div>
+                                <div class="line-decor line-decor--white"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cn">
+                    <div class="services-list">
+                        <div class="service-item">
+                            <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
+                            <h3 class="title">Brake Caliper Refurbishment Un-Seize & Repair Service</h3>
+                            <div class="desc">Our team specializes in refurbishing brake calipers to restore their performance and appearance. If you don’t think you need a complete refurbishment.</div>
+                            <a href="#" class="btn btn-2">
+                                <span>Read more</span>
+                                <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                </svg>
+            </span>
+                            </a>
+                        </div>
+                        <div class="service-item">
+                            <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
+                            <h3 class="title">Engineering & ReManufacture and Coatings</h3>
+                            <div class="desc">We have incredible engineering capabilities at BCS. Aside from our on-site engineer with almost 40 years experience in manual turning, milling,</div>
+                            <a href="#" class="btn btn-2">
+                                <span>Read more</span>
+                                <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                </svg>
+            </span>
+                            </a>
+                        </div>
+                        <div class="service-item">
+                            <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
+                            <h3 class="title">High-End Brake Caliper Painting</h3>
+                            <div class="desc">With our High-End caliper painting service, we can provide all OEM colours for Brembo brake calipers. We can also replace logos.</div>
+                            <a href="#" class="btn btn-2">
+                                <span>Read more</span>
+                                <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                </svg>
+            </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+				<?php endif;
 		// End loop.
 	endwhile;
 // No value.
 else :
 	// Do something...
 endif; ?>
-    <!--HERO variant 2-->
-    <section class="s-hero s-hero--variant-2 ms-section">
-        <div class="cn cn--big">
-            <div class="inner-content">
-                <div class="inner-content__img"><img src="images/img-05.jpg" loading="lazy" alt=""></div>
-                <div class="empty"></div>
-                <div class="inner-content__text">
-                    <div class="section-heading">
-                        <h1 class="title h1">BMW M5 4.4 Full Brake Caliper Refurb and Painting Service</h1>
-                    </div>
-                    <div class="info-1">
-                        <div class="item">
-                            <div class="icon"><img src="images/icons/icon-07.svg" loading="lazy" alt=""></div>
-                            <div>
-                                <div class="title">Project Status</div>
-                                <div>Completed</div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="icon"><img src="images/icons/icon-08.svg" loading="lazy" alt=""></div>
-                            <div>
-                                <div class="title">Location</div>
-                                <div>London</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info-2">
-                        <div class="block-title">Services offered:</div>
-                        <div class="item">
-                            <div class="icon"><img src="images/icons/icon-09.svg" loading="lazy" alt=""></div>
-                            <div>Full Brake Caliper Refurbishment</div>
-                        </div>
-                        <div class="item">
-                            <div class="icon"><img src="images/icons/icon-10.svg" loading="lazy" alt=""></div>
-                            <div>High-End Brake Caliper Painting Service</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--VIDEO variant 4-->
-    <section class="s-video s-video--variant-4 ms-section">
-        <div class="cn">
-            <div class="inner-content">
-                <div class="inner-content__text">
-                    <div class="section-heading">
-                        <h2 class="title h1">Lorem ipsum dolor</h2>
-                    </div>
-                    <div class="text">Rhoncus morbi et augue nec, in id ullamcorper at sit. Condimentum sit nunc in eros
-                        scelerisque sed. Commodo in viverra nunc, ullamcorper ut. Non, amet, aliquet scelerisque nullam
-                        sagittis, pulvinar.
-                    </div>
-                </div>
-                <div class="inner-content__media">
-                    <div class="video">
-                        <iframe width="560" height="315"
-                                src="https://www.youtube.com/embed/e539mMixrD0?si=qaKrlVnATGrDFyFm"
-                                title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--STEPS-->
-    <section class="s-steps ms-section">
-        <div class="cn">
-            <div class="section-heading">
-                <h2 class="title h1">Work in progress</h2>
-            </div>
-            <div class="s-steps__list">
-                <div class="s-steps__box">
-                    <div class="block-title">
-                        <h3 class="title h2">Step 1</h3>
-                        <div class="date">Oct 12, 2023</div>
-                    </div>
-                    <div class="images">
-                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                    </div>
-                    <div class="overflow-text-cn">
-                        <div class="overflow-text">
-                            <div class="text">Th 2016 Fiat Doblo SWB (LOW) is a front wheel drive 2 Door Van that was
-                                released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo
-                                is regarded as a van built in Italy with prices from a dealer as a used car starting at
-                                $12,400.
-                                The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel
-                                Turbo 4 Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at
-                                1500 rpm) via a 6 Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of
-                                diesel in the combined city and highway cycle while putting out 143g of CO2. It has a 0L
-                                fuel tank.Th 2016 Fiat Doblo SWB (LOW) is a front wheel drive 2 Door Van that was
-                                released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo
-                                is regarded as a van built in Italy with prices from a dealer as a used car starting at
-                                $12,400.
-                                The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel
-                                Turbo 4 Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at
-                                1500 rpm) via a 6 Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of
-                                diesel in the combined city and highway cycle while putting out 143g of CO2. It has a 0L
-                                fuel tank.
-                            </div>
-                        </div>
-                        <button class="btn btn-2">
-                <span class="text-cn">
-                  <span class="more-text">Show more</span>
-                  <span class="less-text">Show less</span>
-                </span>
-                            <span class="icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
-                    <path d="M2.1433 0.331642L6.54205 4.72081L10.9408 0.331642L12.2921 1.68289L6.54205 7.43289L0.792053 1.68289L2.1433 0.331642Z"/>
-                  </svg>
-                </span>
-                        </button>
-                    </div>
-                </div>
-                <div class="s-steps__box">
-                    <div class="block-title">
-                        <h3 class="title h2">Step 2</h3>
-                        <div class="date">Oct 12, 2023</div>
-                    </div>
-                    <div class="images">
-                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                    </div>
-                    <div class="overflow-text-cn">
-                        <div class="overflow-text">
-                            <div class="text">Th 2016 Fiat Doblo SWB (LOW) is a front wheel drive 2 Door Van that was
-                                released to the Australian market on 11th January 2014 classified as a .
-                            </div>
-                        </div>
-                        <button class="btn btn-2">
-                <span class="text-cn">
-                  <span class="more-text">Show more</span>
-                  <span class="less-text">Show less</span>
-                </span>
-                            <span class="icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
-                    <path d="M2.1433 0.331642L6.54205 4.72081L10.9408 0.331642L12.2921 1.68289L6.54205 7.43289L0.792053 1.68289L2.1433 0.331642Z"/>
-                  </svg>
-                </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--OVERVIEW variant 1-->
-    <section class="s-overview s-overview--variant-1 ms-section">
-        <div class="cn">
-            <div class="section-heading">
-                <h2 class="title h1">Overview</h2>
-            </div>
-            <div class="inner-content">
-                <div class="inner-content__text">
-                    <div class="text">The 2016 <u>Fiat Doblo</u> SWB (LOW) is a front wheel drive 2 Door Van that was
-                        released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo is
-                        regarded as a van built in Italy with prices from a dealer as a used car starting at $12,400.
-                        The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel Turbo 4
-                        Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at 1500 rpm) via a 6
-                        Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of diesel in the combined city and
-                        highway cycle while putting out 143g of CO2. It has a 0L fuel tank.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--COMPARISON-->
-    <section class="s-comparison ms-section">
-        <div class="cn">
-            <div class="inner-content">
-                <div class="col">
-                    <div class="title h2">Before</div>
-                    <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                </div>
-                <div class="col">
-                    <div class="title h2">After</div>
-                    <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                </div>
-            </div>
-            <div class="section-btn">
-                <a href="#" class="btn btn-8">Get a quote</a>
-            </div>
-        </div>
-    </section>
-
-
-    <!--TESTIMONIAL SINGLE-->
-    <section class="s-testimonial-single ms-section">
-        <div class="cn">
-            <div class="s-testimonial-single__inner">
-                <div class="section-heading">
-                    <h2 class="title h1">Brake Caliper Refurb and Painting Service Clients Review</h2>
-                </div>
-                <div class="t-item">
-                    <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                    <div class="name">Floyd Miles</div>
-                    <div class="title">BMW M5 4.4 Full Brake Caliper Refurb and Painting Service</div>
-                    <div class="text">Dear Richard. I wanted to write to you to express out thanks for your teams hard
-                        work in making uor customer very happy with his new brake calipers. Your companies
-                        professionalism was exemplary and I would without doubt recommend your service to anyone. We
-                        wish you every success.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--BANNER-->
-    <section class="s-banner-2 ms-section">
-        <div class="section-bg"><img src="<?php echo get_template_directory_uri();?>/assets/images/bg-06.jpg" loading="lazy" alt=""></div>
-        <div class="cn">
-            <div class="s-banner-2__inner">
-                <div class="s-banner-2__left">
-                    <div class="decorated-title decorated-title--column-left">
-                        <div class="small-title small-title--white">EXPERIENCED</div>
-                        <div class="line-decor line-decor--white"></div>
-                    </div>
-                    <h2 class="title h1">Refurbishing Brake Calipers for Cars Worldwide</h2>
-                </div>
-                <div class="s-banner-2__right">
-                    <div class="form">
-                        <h3 class="title h2">Get a quote today</h3>
-                        <div class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                        <form>
-                            <div class="form-group">
-                                <input type="email" class="input" placeholder="Email">
-                            </div>
-                            <div class="form-group btn-group">
-                                <button type="submit" class="btn btn-8">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--ARTICLES LIST-->
-    <section class="s-articles-list ms-section">
-        <div class="section-bg"><img src="images/bg-07.jpg" loading="lazy" alt=""></div>
-        <div class="cn">
-            <div class="section-heading">
-                <h2 class="title h1">More related articles</h2>
-                <div class="subtitle">Browse our selection of high-quality brake calipers.</div>
-            </div>
-
-            <div class="swiper articles-slider">
-                <div class="swiper-arrows">
-                    <div class="swiper-button-prev btn btn-4">
-            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M7.37598 10.2383L2.98681 5.83951L7.37598 1.44076L6.02473 0.0895081L0.274727 5.83951L6.02473 11.5895L7.37598 10.2383Z"/>
-              </svg>
-            </span>
-                        <span>Previous</span>
-                    </div>
-                    <div class="swiper-button-next btn btn-4">
-                        <span>Next</span>
-                        <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
-                    </div>
-                </div>
-                <div class="swiper-wrapper">
-
-                    <div class="swiper-slide">
-                        <div class="article-card">
-                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                            <div class="article-card__content">
-                                <div class="tags">
-                                    <div class="tag">Engineering services</div>
-                                    <div class="tag">Painting</div>
-                                    <div class="tag">2 piston</div>
-                                </div>
-                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                <div class="desc">If you are looking for experienced and highly professional brake
-                                    caliper painting and refurbishment then look no further than Bespoke Detailing
-                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
-                                    vehicle is looking its best.
-                                </div>
-                                <a href="#" class="btn btn-3">
-                                    <span>Read more</span>
-                                    <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="article-card">
-                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                            <div class="article-card__content">
-                                <div class="tags">
-                                    <div class="tag">Engineering services</div>
-                                    <div class="tag">Painting</div>
-                                </div>
-                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                <div class="desc">If you are looking for experienced and highly professional brake
-                                    caliper painting and refurbishment then look no further than Bespoke Detailing
-                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
-                                    vehicle is looking its best.
-                                </div>
-                                <a href="#" class="btn btn-3">
-                                    <span>Read more</span>
-                                    <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="article-card">
-                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                            <div class="article-card__content">
-                                <div class="tags">
-                                    <div class="tag">Engineering services</div>
-                                    <div class="tag">Painting</div>
-                                    <div class="tag">2 piston</div>
-                                    <div class="tag">2 piston</div>
-                                </div>
-                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                <div class="desc">If you are looking for experienced and highly professional brake
-                                    caliper painting and refurbishment then look no further than Bespoke Detailing
-                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
-                                    vehicle is looking its best.
-                                </div>
-                                <a href="#" class="btn btn-3">
-                                    <span>Read more</span>
-                                    <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="article-card">
-                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                            <div class="article-card__content">
-                                <div class="tags">
-                                    <div class="tag">Engineering services</div>
-                                    <div class="tag">Painting</div>
-                                    <div class="tag">2 piston</div>
-                                </div>
-                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                <div class="desc">If you are looking for experienced and highly professional brake
-                                    caliper painting and refurbishment then look no further than Bespoke Detailing
-                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
-                                    vehicle is looking its best.
-                                </div>
-                                <a href="#" class="btn btn-3">
-                                    <span>Read more</span>
-                                    <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="article-card">
-                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                            <div class="article-card__content">
-                                <div class="tags">
-                                    <div class="tag">Engineering services</div>
-                                    <div class="tag">Painting</div>
-                                    <div class="tag">2 piston</div>
-                                </div>
-                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                <div class="desc">If you are looking for experienced and highly professional brake
-                                    caliper painting and refurbishment then look no further than Bespoke Detailing
-                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
-                                    vehicle is looking its best.
-                                </div>
-                                <a href="#" class="btn btn-3">
-                                    <span>Read more</span>
-                                    <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="article-card">
-                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                            <div class="article-card__content">
-                                <div class="tags">
-                                    <div class="tag">Engineering services</div>
-                                    <div class="tag">Painting</div>
-                                    <div class="tag">2 piston</div>
-                                    <div class="tag">2 piston</div>
-                                </div>
-                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                <div class="desc">If you are looking for experienced and highly professional brake
-                                    caliper painting and refurbishment then look no further than Bespoke Detailing
-                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
-                                    vehicle is looking its best.
-                                </div>
-                                <a href="#" class="btn btn-3">
-                                    <span>Read more</span>
-                                    <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-    </section>
-
-    <!--PRODUCTS-->
-    <section class="s-products ms-section">
-        <div class="cn">
-            <div class="section-heading section-heading--simple">
-                <h2 class="title h1">Products</h2>
-                <div class="subtitle">Browse our selection of high-quality brake calipers.</div>
-            </div>
-            <div class="products-list">
-                <div class="product-card">
-                    <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
-                    <div class="product-card__content">
-                        <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
-                        <div class="subtitle">2004-2011</div>
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-2">From $6.95</a>
-                            <a href="#" class="btn btn-2">From $6.95</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
-                    <div class="product-card__content">
-                        <h3 class="title">Alcon Prodrive 4 Pot Caliper Seal Kit</h3>
-                        <div class="subtitle">2004-2011</div>
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-2">From $6.95</a>
-                            <a href="#" class="btn btn-2">From $6.95</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
-                    <div class="product-card__content">
-                        <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
-                        <div class="subtitle">2004-2011</div>
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-2">From $6.95</a>
-                            <a href="#" class="btn btn-2">From $6.95</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="section-btn"><a href="#" class="btn btn-1">Show more</a></div>
-        </div>
-    </section>
-
     <!--STICKY CALLBACK-->
     <div class="sticky-callback">
         <div class="btn-callback">
