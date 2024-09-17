@@ -107,7 +107,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 												$link_title  = $link['title'];
 												$link_target = $link['target'] ? $link['target'] : '_self';
 												?>
-											<?php endif; ?>
+
                         <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-2"
                            target="<?php echo esc_attr( $link_target ); ?>">
                             <span><?php echo esc_html( $link_title ); ?></span>
@@ -117,6 +117,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
               </svg>
             </span>
                         </a>
+																						<?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -142,7 +143,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 												$link_title  = $link['title'];
 												$link_target = $link['target'] ? $link['target'] : '_self';
 												?>
-											<?php endif; ?>
+
                         <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-2"
                            target="<?php echo esc_attr( $link_target ); ?>">
                             <span><?php echo esc_html( $link_title ); ?></span>
@@ -152,6 +153,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
               </svg>
             </span>
                         </a>
+																						<?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -177,7 +179,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 												$link_title  = $link['title'];
 												$link_target = $link['target'] ? $link['target'] : '_self';
 												?>
-											<?php endif; ?>
+
                         <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-2"
                            target="<?php echo esc_attr( $link_target ); ?>">
                             <span><?php echo esc_html( $link_title ); ?></span>
@@ -187,6 +189,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
               </svg>
             </span>
                         </a>
+																						<?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -214,7 +217,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 												$link_title  = $link['title'];
 												$link_target = $link['target'] ? $link['target'] : '_self';
 												?>
-											<?php endif; ?>
+
                         <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-6"
                            target="<?php echo esc_attr( $link_target ); ?>">
             <span class="icon">
@@ -224,6 +227,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
             </span>
                             <span><?php echo esc_html( $link_title ); ?></span>
                         </a>
+																						<?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -466,7 +470,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 										$link_title  = $link['title'];
 										$link_target = $link['target'] ? $link['target'] : '_self';
 										?>
-									<?php endif; ?>
+
                     <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-6"
                        target="<?php echo esc_attr( $link_target ); ?>">
           <span class="icon">
@@ -476,6 +480,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
           </span>
                         <span><?php echo esc_html( $link_title ); ?></span>
                     </a>
+																		<?php endif; ?>
                 </div>
             </div>
         </section>
@@ -525,9 +530,10 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 										$link_title  = $link['title'];
 										$link_target = $link['target'] ? $link['target'] : '_self';
 										?>
-									<?php endif; ?>
+
                     <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-1"
                        target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+																		<?php endif; ?>
                 </div>
             </div>
         </section>

@@ -80,7 +80,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
                     <div class="inner-content__text">
                         <div class="section-heading">
                             <h1 class="title h1"><?php echo get_sub_field( 'right_side_image_preview_title' ); ?></h1>
-                            <h2 class="subtitle h2"><?php echo get_sub_field( 'right_side_image_preview_subtitle' ); ?> </h2>
+                            <h2 class="subtitle h2"><?php echo get_sub_field( 'right_side_image_preview_subtitle' ); ?></h2>
                         </div>
                         <div class="text">
 													<?php echo get_sub_field( 'right_side_image_preview_text' ); ?>
@@ -310,9 +310,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 									<?php
 									$featured_posts = get_sub_field( 'portfolio' );
 									if ( $featured_posts ): ?>
-
 										<?php foreach ( $featured_posts as $post ):
-
 											// Setup this post for WP functions (variable must be named $post).
 											setup_postdata( $post ); ?>
                           <div class="split-item">
@@ -739,42 +737,42 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
             </div>
         </section>
 		<?php elseif ( get_row_layout() == 'faq' ): ?>
-            <!--KNOWLEDGE variant 3-->
-            <section class="s-knowledge s-knowledge--variant-3 ms-section">
-                <div class="cn">
-                    <div class="section-heading section-heading--simple">
-                        <h2 class="title h1"><?php echo get_sub_field( 'faq_title' ); ?></h2>
-                        <div class="subtitle"><?php echo get_sub_field( 'faq_subtitle' ); ?></div>
-                    </div>
-                    <div class="acc">
-					<?php if ( have_rows( 'faq_repeater' ) ): ?>
-						<?php while ( have_rows( 'faq_repeater' ) ) : the_row(); ?>
-                        <div class="acc-item">
-                            <div class="acc-head"><?php echo get_sub_field( 'question' ); ?></div>
-                            <div class="acc-body">
-                                <div class="inner">
-                                    <div class="text"><?php echo get_sub_field( 'answer' ); ?></div>
-                                </div>
-                            </div>
-                        </div>
-											<?php endwhile; ?>
-										<?php endif; ?>
+        <!--KNOWLEDGE variant 3-->
+        <section class="s-knowledge s-knowledge--variant-3 ms-section">
+            <div class="cn">
+                <div class="section-heading section-heading--simple">
+                    <h2 class="title h1"><?php echo get_sub_field( 'faq_title' ); ?></h2>
+                    <div class="subtitle"><?php echo get_sub_field( 'faq_subtitle' ); ?></div>
+                </div>
+                <div class="acc">
+									<?php if ( have_rows( 'faq_repeater' ) ): ?>
+										<?php while ( have_rows( 'faq_repeater' ) ) : the_row(); ?>
+                          <div class="acc-item">
+                              <div class="acc-head"><?php echo get_sub_field( 'question' ); ?></div>
+                              <div class="acc-body">
+                                  <div class="inner">
+                                      <div class="text"><?php echo get_sub_field( 'answer' ); ?></div>
+                                  </div>
+                              </div>
+                          </div>
+										<?php endwhile; ?>
+									<?php endif; ?>
 
-                    </div>
-                    <div class="b-cta">
-                        <div class="title h1">Still have questions?</div>
-                        <div class="subtitle">Contact us for further assistance.</div>
-                        <a href="#" class="btn btn-6">
+                </div>
+                <div class="b-cta">
+                    <div class="title h1">Still have questions?</div>
+                    <div class="subtitle">Contact us for further assistance.</div>
+                    <a href="#" class="btn btn-6">
           <span class="icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M22 17.002C21.9996 18.3696 21.5321 19.696 20.675 20.7616C19.8179 21.8273 18.6226 22.5683 17.287 22.862L16.649 20.948C17.2332 20.8518 17.7888 20.6271 18.2758 20.2903C18.7627 19.9534 19.1689 19.5128 19.465 19H17C16.4696 19 15.9609 18.7893 15.5858 18.4142C15.2107 18.0391 15 17.5304 15 17V13C15 12.4696 15.2107 11.9609 15.5858 11.5858C15.9609 11.2107 16.4696 11 17 11H19.938C19.694 9.0669 18.7529 7.28927 17.2914 6.00068C15.8299 4.71208 13.9484 4.00108 12 4.00108C10.0516 4.00108 8.17007 4.71208 6.70857 6.00068C5.24708 7.28927 4.30603 9.0669 4.062 11H7C7.53043 11 8.03914 11.2107 8.41421 11.5858C8.78929 11.9609 9 12.4696 9 13V17C9 17.5304 8.78929 18.0391 8.41421 18.4142C8.03914 18.7893 7.53043 19 7 19H4C3.46957 19 2.96086 18.7893 2.58579 18.4142C2.21071 18.0391 2 17.5304 2 17V12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12V17.002Z"/>
             </svg>
           </span>
-                            <span>Contact us</span>
-                        </a>
-                    </div>
+                        <span>Contact us</span>
+                    </a>
                 </div>
-            </section>
+            </div>
+        </section>
 
 		<?php endif;
 		// End loop.
@@ -783,473 +781,519 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 else :
 	// Do something...
 endif; ?>
-        <!--HERO variant 2-->
-        <section class="s-hero s-hero--variant-2 ms-section">
-            <div class="cn cn--big">
-                <div class="inner-content">
-                    <div class="inner-content__img"><img src="images/img-05.jpg" loading="lazy" alt=""></div>
-                    <div class="empty"></div>
-                    <div class="inner-content__text">
-                        <div class="section-heading">
-                            <h1 class="title h1">BMW M5 4.4 Full Brake Caliper Refurb and Painting Service</h1>
-                        </div>
-                        <div class="info-1">
-                            <div class="item">
-                                <div class="icon"><img src="images/icons/icon-07.svg" loading="lazy" alt=""></div>
-                                <div>
-                                    <div class="title">Project Status</div>
-                                    <div>Completed</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="icon"><img src="images/icons/icon-08.svg" loading="lazy" alt=""></div>
-                                <div>
-                                    <div class="title">Location</div>
-                                    <div>London</div>
-                                </div>
+    <!--HERO variant 2-->
+    <section class="s-hero s-hero--variant-2 ms-section">
+        <div class="cn cn--big">
+            <div class="inner-content">
+                <div class="inner-content__img"><img src="images/img-05.jpg" loading="lazy" alt=""></div>
+                <div class="empty"></div>
+                <div class="inner-content__text">
+                    <div class="section-heading">
+                        <h1 class="title h1">BMW M5 4.4 Full Brake Caliper Refurb and Painting Service</h1>
+                    </div>
+                    <div class="info-1">
+                        <div class="item">
+                            <div class="icon"><img src="images/icons/icon-07.svg" loading="lazy" alt=""></div>
+                            <div>
+                                <div class="title">Project Status</div>
+                                <div>Completed</div>
                             </div>
                         </div>
-                        <div class="info-2">
-                            <div class="block-title">Services offered:</div>
-                            <div class="item">
-                                <div class="icon"><img src="images/icons/icon-09.svg" loading="lazy" alt=""></div>
-                                <div>Full Brake Caliper Refurbishment</div>
+                        <div class="item">
+                            <div class="icon"><img src="images/icons/icon-08.svg" loading="lazy" alt=""></div>
+                            <div>
+                                <div class="title">Location</div>
+                                <div>London</div>
                             </div>
-                            <div class="item">
-                                <div class="icon"><img src="images/icons/icon-10.svg" loading="lazy" alt=""></div>
-                                <div>High-End Brake Caliper Painting Service</div>
-                            </div>
+                        </div>
+                    </div>
+                    <div class="info-2">
+                        <div class="block-title">Services offered:</div>
+                        <div class="item">
+                            <div class="icon"><img src="images/icons/icon-09.svg" loading="lazy" alt=""></div>
+                            <div>Full Brake Caliper Refurbishment</div>
+                        </div>
+                        <div class="item">
+                            <div class="icon"><img src="images/icons/icon-10.svg" loading="lazy" alt=""></div>
+                            <div>High-End Brake Caliper Painting Service</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!--VIDEO variant 4-->
-        <section class="s-video s-video--variant-4 ms-section">
-            <div class="cn">
-                <div class="inner-content">
-                    <div class="inner-content__text">
-                        <div class="section-heading">
-                            <h2 class="title h1">Lorem ipsum dolor</h2>
-                        </div>
-                        <div class="text">Rhoncus morbi et augue nec, in id ullamcorper at sit. Condimentum sit nunc in eros scelerisque sed. Commodo in viverra nunc, ullamcorper ut. Non, amet, aliquet scelerisque nullam sagittis, pulvinar.</div>
+    <!--VIDEO variant 4-->
+    <section class="s-video s-video--variant-4 ms-section">
+        <div class="cn">
+            <div class="inner-content">
+                <div class="inner-content__text">
+                    <div class="section-heading">
+                        <h2 class="title h1">Lorem ipsum dolor</h2>
                     </div>
-                    <div class="inner-content__media">
-                        <div class="video">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/e539mMixrD0?si=qaKrlVnATGrDFyFm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
+                    <div class="text">Rhoncus morbi et augue nec, in id ullamcorper at sit. Condimentum sit nunc in eros
+                        scelerisque sed. Commodo in viverra nunc, ullamcorper ut. Non, amet, aliquet scelerisque nullam
+                        sagittis, pulvinar.
+                    </div>
+                </div>
+                <div class="inner-content__media">
+                    <div class="video">
+                        <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/e539mMixrD0?si=qaKrlVnATGrDFyFm"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!--STEPS-->
-        <section class="s-steps ms-section">
-            <div class="cn">
-                <div class="section-heading">
-                    <h2 class="title h1">Work in progress</h2>
-                </div>
-                <div class="s-steps__list">
-                    <div class="s-steps__box">
-                        <div class="block-title">
-                            <h3 class="title h2">Step 1</h3>
-                            <div class="date">Oct 12, 2023</div>
-                        </div>
-                        <div class="images">
-                            <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                            <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                            <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                        </div>
-                        <div class="overflow-text-cn">
-                            <div class="overflow-text">
-                                <div class="text">Th 2016 Fiat Doblo SWB (LOW) is a front wheel drive 2 Door Van that was released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo is regarded as a van built in Italy with prices from a dealer as a used car starting at $12,400.
-                                    The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel Turbo 4 Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at 1500 rpm) via a 6 Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of diesel in the combined city and highway cycle while putting out 143g of CO2. It has a 0L fuel tank.Th 2016 Fiat Doblo SWB (LOW) is a front wheel drive 2 Door Van that was released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo is regarded as a van built in Italy with prices from a dealer as a used car starting at $12,400.
-                                    The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel Turbo 4 Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at 1500 rpm) via a 6 Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of diesel in the combined city and highway cycle while putting out 143g of CO2. It has a 0L fuel tank.</div>
+    <!--STEPS-->
+    <section class="s-steps ms-section">
+        <div class="cn">
+            <div class="section-heading">
+                <h2 class="title h1">Work in progress</h2>
+            </div>
+            <div class="s-steps__list">
+                <div class="s-steps__box">
+                    <div class="block-title">
+                        <h3 class="title h2">Step 1</h3>
+                        <div class="date">Oct 12, 2023</div>
+                    </div>
+                    <div class="images">
+                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                    </div>
+                    <div class="overflow-text-cn">
+                        <div class="overflow-text">
+                            <div class="text">Th 2016 Fiat Doblo SWB (LOW) is a front wheel drive 2 Door Van that was
+                                released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo
+                                is regarded as a van built in Italy with prices from a dealer as a used car starting at
+                                $12,400.
+                                The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel
+                                Turbo 4 Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at
+                                1500 rpm) via a 6 Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of
+                                diesel in the combined city and highway cycle while putting out 143g of CO2. It has a 0L
+                                fuel tank.Th 2016 Fiat Doblo SWB (LOW) is a front wheel drive 2 Door Van that was
+                                released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo
+                                is regarded as a van built in Italy with prices from a dealer as a used car starting at
+                                $12,400.
+                                The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel
+                                Turbo 4 Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at
+                                1500 rpm) via a 6 Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of
+                                diesel in the combined city and highway cycle while putting out 143g of CO2. It has a 0L
+                                fuel tank.
                             </div>
-                            <button class="btn btn-2">
+                        </div>
+                        <button class="btn btn-2">
                 <span class="text-cn">
                   <span class="more-text">Show more</span>
                   <span class="less-text">Show less</span>
                 </span>
-                                <span class="icon">
+                            <span class="icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
                     <path d="M2.1433 0.331642L6.54205 4.72081L10.9408 0.331642L12.2921 1.68289L6.54205 7.43289L0.792053 1.68289L2.1433 0.331642Z"/>
                   </svg>
                 </span>
-                            </button>
-                        </div>
+                        </button>
                     </div>
-                    <div class="s-steps__box">
-                        <div class="block-title">
-                            <h3 class="title h2">Step 2</h3>
-                            <div class="date">Oct 12, 2023</div>
-                        </div>
-                        <div class="images">
-                            <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                            <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                            <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                        </div>
-                        <div class="overflow-text-cn">
-                            <div class="overflow-text">
-                                <div class="text">Th 2016 Fiat Doblo SWB (LOW) is a front wheel drive 2 Door Van that was released to the Australian market on 11th January 2014 classified as a .</div>
+                </div>
+                <div class="s-steps__box">
+                    <div class="block-title">
+                        <h3 class="title h2">Step 2</h3>
+                        <div class="date">Oct 12, 2023</div>
+                    </div>
+                    <div class="images">
+                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                    </div>
+                    <div class="overflow-text-cn">
+                        <div class="overflow-text">
+                            <div class="text">Th 2016 Fiat Doblo SWB (LOW) is a front wheel drive 2 Door Van that was
+                                released to the Australian market on 11th January 2014 classified as a .
                             </div>
-                            <button class="btn btn-2">
+                        </div>
+                        <button class="btn btn-2">
                 <span class="text-cn">
                   <span class="more-text">Show more</span>
                   <span class="less-text">Show less</span>
                 </span>
-                                <span class="icon">
+                            <span class="icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
                     <path d="M2.1433 0.331642L6.54205 4.72081L10.9408 0.331642L12.2921 1.68289L6.54205 7.43289L0.792053 1.68289L2.1433 0.331642Z"/>
                   </svg>
                 </span>
-                            </button>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
-        <!--OVERVIEW variant 1-->
-        <section class="s-overview s-overview--variant-1 ms-section">
-            <div class="cn">
+        </div>
+    </section>
+    <!--OVERVIEW variant 1-->
+    <section class="s-overview s-overview--variant-1 ms-section">
+        <div class="cn">
+            <div class="section-heading">
+                <h2 class="title h1">Overview</h2>
+            </div>
+            <div class="inner-content">
+                <div class="inner-content__text">
+                    <div class="text">The 2016 <u>Fiat Doblo</u> SWB (LOW) is a front wheel drive 2 Door Van that was
+                        released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo is
+                        regarded as a van built in Italy with prices from a dealer as a used car starting at $12,400.
+                        The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel Turbo 4
+                        Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at 1500 rpm) via a 6
+                        Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of diesel in the combined city and
+                        highway cycle while putting out 143g of CO2. It has a 0L fuel tank.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--COMPARISON-->
+    <section class="s-comparison ms-section">
+        <div class="cn">
+            <div class="inner-content">
+                <div class="col">
+                    <div class="title h2">Before</div>
+                    <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                </div>
+                <div class="col">
+                    <div class="title h2">After</div>
+                    <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                </div>
+            </div>
+            <div class="section-btn">
+                <a href="#" class="btn btn-8">Get a quote</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!--TESTIMONIAL SINGLE-->
+    <section class="s-testimonial-single ms-section">
+        <div class="cn">
+            <div class="s-testimonial-single__inner">
                 <div class="section-heading">
-                    <h2 class="title h1">Overview</h2>
+                    <h2 class="title h1">Brake Caliper Refurb and Painting Service Clients Review</h2>
                 </div>
-                <div class="inner-content">
-                    <div class="inner-content__text">
-                        <div class="text">The 2016 <u>Fiat Doblo</u> SWB (LOW) is a front wheel drive 2 Door Van that was released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo is regarded as a van built in Italy with prices from a dealer as a used car starting at $12,400.
-                            The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel Turbo 4 Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at 1500 rpm) via a 6 Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of diesel in the combined city and highway cycle while putting out 143g of CO2. It has a 0L fuel tank.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--COMPARISON-->
-        <section class="s-comparison ms-section">
-            <div class="cn">
-                <div class="inner-content">
-                    <div class="col">
-                        <div class="title h2">Before</div>
-                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                    </div>
-                    <div class="col">
-                        <div class="title h2">After</div>
-                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                    </div>
-                </div>
-                <div class="section-btn">
-                    <a href="#" class="btn btn-8">Get a quote</a>
-                </div>
-            </div>
-        </section>
-
-        <!--TESTIMONIAL SINGLE-->
-        <section class="s-testimonial-single ms-section">
-            <div class="cn">
-                <div class="s-testimonial-single__inner">
-                    <div class="section-heading">
-                        <h2 class="title h1">Nottingham Sytner BMW Testimonial</h2>
-                    </div>
-                    <div class="t-item">
-                        <div class="img img--full"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                        <div class="name">Floyd Miles</div>
-                        <div class="title">BMW M5 4.4 Full Brake Caliper Refurb and Painting Service</div>
-                        <div class="text">Dear Richard. I wanted to write to you to express out thanks for your teams hard work in making uor customer very happy with his new brake calipers. Your companies professionalism was exemplary and I would without doubt recommend your service to anyone. We wish you every success.</div>
+                <div class="t-item">
+                    <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                    <div class="name">Floyd Miles</div>
+                    <div class="title">BMW M5 4.4 Full Brake Caliper Refurb and Painting Service</div>
+                    <div class="text">Dear Richard. I wanted to write to you to express out thanks for your teams hard
+                        work in making uor customer very happy with his new brake calipers. Your companies
+                        professionalism was exemplary and I would without doubt recommend your service to anyone. We
+                        wish you every success.
                     </div>
                 </div>
             </div>
-        </section>
-        <!--TESTIMONIAL SINGLE-->
-        <section class="s-testimonial-single ms-section">
-            <div class="cn">
-                <div class="s-testimonial-single__inner">
-                    <div class="section-heading">
-                        <h2 class="title h1">Brake Caliper Refurb and Painting Service Clients Review</h2>
+        </div>
+    </section>
+
+    <!--BANNER-->
+    <section class="s-banner-2 ms-section">
+        <div class="section-bg"><img src="<?php echo get_template_directory_uri();?>/assets/images/bg-06.jpg" loading="lazy" alt=""></div>
+        <div class="cn">
+            <div class="s-banner-2__inner">
+                <div class="s-banner-2__left">
+                    <div class="decorated-title decorated-title--column-left">
+                        <div class="small-title small-title--white">EXPERIENCED</div>
+                        <div class="line-decor line-decor--white"></div>
                     </div>
-                    <div class="t-item">
-                        <div class="img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                        <div class="name">Floyd Miles</div>
-                        <div class="title">BMW M5 4.4 Full Brake Caliper Refurb and Painting Service</div>
-                        <div class="text">Dear Richard. I wanted to write to you to express out thanks for your teams hard work in making uor customer very happy with his new brake calipers. Your companies professionalism was exemplary and I would without doubt recommend your service to anyone. We wish you every success.</div>
+                    <h2 class="title h1">Refurbishing Brake Calipers for Cars Worldwide</h2>
+                </div>
+                <div class="s-banner-2__right">
+                    <div class="form">
+                        <h3 class="title h2">Get a quote today</h3>
+                        <div class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                        <form>
+                            <div class="form-group">
+                                <input type="email" class="input" placeholder="Email">
+                            </div>
+                            <div class="form-group btn-group">
+                                <button type="submit" class="btn btn-8">Submit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!--BANNER-->
-        <section class="s-banner-2 ms-section">
-            <div class="section-bg"><img src="images/bg-06.jpg" loading="lazy" alt=""></div>
-            <div class="cn">
-                <div class="s-banner-2__inner">
-                    <div class="s-banner-2__left">
-                        <div class="decorated-title decorated-title--column-left">
-                            <div class="small-title small-title--white">EXPERIENCED</div>
-                            <div class="line-decor line-decor--white"></div>
-                        </div>
-                        <h2 class="title h1">Refurbishing Brake Calipers for Cars Worldwide</h2>
-                    </div>
-                    <div class="s-banner-2__right">
-                        <div class="form">
-                            <h3 class="title h2">Get a quote today</h3>
-                            <div class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                            <form>
-                                <div class="form-group">
-                                    <input type="email" class="input" placeholder="Email">
-                                </div>
-                                <div class="form-group btn-group">
-                                    <button type="submit" class="btn btn-8">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    <!--ARTICLES LIST-->
+    <section class="s-articles-list ms-section">
+        <div class="section-bg"><img src="images/bg-07.jpg" loading="lazy" alt=""></div>
+        <div class="cn">
+            <div class="section-heading">
+                <h2 class="title h1">More related articles</h2>
+                <div class="subtitle">Browse our selection of high-quality brake calipers.</div>
             </div>
-        </section>
 
-        <!--ARTICLES LIST-->
-        <section class="s-articles-list ms-section">
-            <div class="section-bg"><img src="images/bg-07.jpg" loading="lazy" alt=""></div>
-            <div class="cn">
-                <div class="section-heading">
-                    <h2 class="title h1">More related articles</h2>
-                    <div class="subtitle">Browse our selection of high-quality brake calipers.</div>
-                </div>
-
-                <div class="swiper articles-slider">
-                    <div class="swiper-arrows">
-                        <div class="swiper-button-prev btn btn-4">
+            <div class="swiper articles-slider">
+                <div class="swiper-arrows">
+                    <div class="swiper-button-prev btn btn-4">
             <span class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
                 <path d="M7.37598 10.2383L2.98681 5.83951L7.37598 1.44076L6.02473 0.0895081L0.274727 5.83951L6.02473 11.5895L7.37598 10.2383Z"/>
               </svg>
             </span>
-                            <span>Previous</span>
-                        </div>
-                        <div class="swiper-button-next btn btn-4">
-                            <span>Next</span>
-                            <span class="icon">
+                        <span>Previous</span>
+                    </div>
+                    <div class="swiper-button-next btn btn-4">
+                        <span>Next</span>
+                        <span class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
                 <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
               </svg>
             </span>
-                        </div>
                     </div>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="article-card">
-                                <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                                <div class="article-card__content">
-                                    <div class="tags">
-                                        <div class="tag">Engineering services</div>
-                                        <div class="tag">Painting</div>
-                                        <div class="tag">2 piston</div>
-                                    </div>
-                                    <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                    <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-                                    <a href="#" class="btn btn-3">
-                                        <span>Read more</span>
-                                        <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="article-card">
-                                <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                                <div class="article-card__content">
-                                    <div class="tags">
-                                        <div class="tag">Engineering services</div>
-                                        <div class="tag">Painting</div>
-                                    </div>
-                                    <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                    <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-                                    <a href="#" class="btn btn-3">
-                                        <span>Read more</span>
-                                        <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="article-card">
-                                <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                                <div class="article-card__content">
-                                    <div class="tags">
-                                        <div class="tag">Engineering services</div>
-                                        <div class="tag">Painting</div>
-                                        <div class="tag">2 piston</div>
-                                        <div class="tag">2 piston</div>
-                                    </div>
-                                    <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                    <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-                                    <a href="#" class="btn btn-3">
-                                        <span>Read more</span>
-                                        <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="article-card">
-                                <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                                <div class="article-card__content">
-                                    <div class="tags">
-                                        <div class="tag">Engineering services</div>
-                                        <div class="tag">Painting</div>
-                                        <div class="tag">2 piston</div>
-                                    </div>
-                                    <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                    <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-                                    <a href="#" class="btn btn-3">
-                                        <span>Read more</span>
-                                        <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="article-card">
-                                <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                                <div class="article-card__content">
-                                    <div class="tags">
-                                        <div class="tag">Engineering services</div>
-                                        <div class="tag">Painting</div>
-                                        <div class="tag">2 piston</div>
-                                    </div>
-                                    <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                    <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-                                    <a href="#" class="btn btn-3">
-                                        <span>Read more</span>
-                                        <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="article-card">
-                                <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                                <div class="article-card__content">
-                                    <div class="tags">
-                                        <div class="tag">Engineering services</div>
-                                        <div class="tag">Painting</div>
-                                        <div class="tag">2 piston</div>
-                                        <div class="tag">2 piston</div>
-                                    </div>
-                                    <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
-                                    <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-                                    <a href="#" class="btn btn-3">
-                                        <span>Read more</span>
-                                        <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
                 </div>
-            </div>
-        </section>
+                <div class="swiper-wrapper">
 
-        <!--PRODUCTS-->
-        <section class="s-products ms-section">
-            <div class="cn">
-                <div class="section-heading section-heading--simple">
-                    <h2 class="title h1">Products</h2>
-                    <div class="subtitle">Browse our selection of high-quality brake calipers.</div>
-                </div>
-                <div class="products-list">
-                    <div class="product-card">
-                        <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
-                        <div class="product-card__content">
-                            <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
-                            <div class="subtitle">2004-2011</div>
-                            <div class="btn-group">
-                                <a href="#" class="btn btn-2">From $6.95</a>
-                                <a href="#" class="btn btn-2">From $6.95</a>
+                    <div class="swiper-slide">
+                        <div class="article-card">
+                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                            <div class="article-card__content">
+                                <div class="tags">
+                                    <div class="tag">Engineering services</div>
+                                    <div class="tag">Painting</div>
+                                    <div class="tag">2 piston</div>
+                                </div>
+                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
+                                <div class="desc">If you are looking for experienced and highly professional brake
+                                    caliper painting and refurbishment then look no further than Bespoke Detailing
+                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
+                                    vehicle is looking its best.
+                                </div>
+                                <a href="#" class="btn btn-3">
+                                    <span>Read more</span>
+                                    <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                      </svg>
+                    </span>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="product-card">
-                        <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
-                        <div class="product-card__content">
-                            <h3 class="title">Alcon Prodrive 4 Pot Caliper Seal Kit</h3>
-                            <div class="subtitle">2004-2011</div>
-                            <div class="btn-group">
-                                <a href="#" class="btn btn-2">From $6.95</a>
-                                <a href="#" class="btn btn-2">From $6.95</a>
+                    <div class="swiper-slide">
+                        <div class="article-card">
+                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                            <div class="article-card__content">
+                                <div class="tags">
+                                    <div class="tag">Engineering services</div>
+                                    <div class="tag">Painting</div>
+                                </div>
+                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
+                                <div class="desc">If you are looking for experienced and highly professional brake
+                                    caliper painting and refurbishment then look no further than Bespoke Detailing
+                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
+                                    vehicle is looking its best.
+                                </div>
+                                <a href="#" class="btn btn-3">
+                                    <span>Read more</span>
+                                    <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                      </svg>
+                    </span>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="product-card">
-                        <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
-                        <div class="product-card__content">
-                            <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
-                            <div class="subtitle">2004-2011</div>
-                            <div class="btn-group">
-                                <a href="#" class="btn btn-2">From $6.95</a>
-                                <a href="#" class="btn btn-2">From $6.95</a>
+                    <div class="swiper-slide">
+                        <div class="article-card">
+                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                            <div class="article-card__content">
+                                <div class="tags">
+                                    <div class="tag">Engineering services</div>
+                                    <div class="tag">Painting</div>
+                                    <div class="tag">2 piston</div>
+                                    <div class="tag">2 piston</div>
+                                </div>
+                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
+                                <div class="desc">If you are looking for experienced and highly professional brake
+                                    caliper painting and refurbishment then look no further than Bespoke Detailing
+                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
+                                    vehicle is looking its best.
+                                </div>
+                                <a href="#" class="btn btn-3">
+                                    <span>Read more</span>
+                                    <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                      </svg>
+                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="article-card">
+                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                            <div class="article-card__content">
+                                <div class="tags">
+                                    <div class="tag">Engineering services</div>
+                                    <div class="tag">Painting</div>
+                                    <div class="tag">2 piston</div>
+                                </div>
+                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
+                                <div class="desc">If you are looking for experienced and highly professional brake
+                                    caliper painting and refurbishment then look no further than Bespoke Detailing
+                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
+                                    vehicle is looking its best.
+                                </div>
+                                <a href="#" class="btn btn-3">
+                                    <span>Read more</span>
+                                    <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                      </svg>
+                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="article-card">
+                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                            <div class="article-card__content">
+                                <div class="tags">
+                                    <div class="tag">Engineering services</div>
+                                    <div class="tag">Painting</div>
+                                    <div class="tag">2 piston</div>
+                                </div>
+                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
+                                <div class="desc">If you are looking for experienced and highly professional brake
+                                    caliper painting and refurbishment then look no further than Bespoke Detailing
+                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
+                                    vehicle is looking its best.
+                                </div>
+                                <a href="#" class="btn btn-3">
+                                    <span>Read more</span>
+                                    <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                      </svg>
+                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="article-card">
+                            <div class="article-card__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
+                            <div class="article-card__content">
+                                <div class="tags">
+                                    <div class="tag">Engineering services</div>
+                                    <div class="tag">Painting</div>
+                                    <div class="tag">2 piston</div>
+                                    <div class="tag">2 piston</div>
+                                </div>
+                                <h3 class="title">Porsche 911 Brembo brake caliper painting in Leeds</h3>
+                                <div class="desc">If you are looking for experienced and highly professional brake
+                                    caliper painting and refurbishment then look no further than Bespoke Detailing
+                                    Solutions. We specialise in all aspect of car detailing and care to make sure your
+                                    vehicle is looking its best.
+                                </div>
+                                <a href="#" class="btn btn-3">
+                                    <span>Read more</span>
+                                    <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                      </svg>
+                    </span>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="section-btn"><a href="#" class="btn btn-1">Show more</a></div>
-            </div>
-        </section>
-
-        <!--STICKY CALLBACK-->
-        <div class="sticky-callback">
-            <div class="btn-callback">
-                <img src="images/icons/icon-11.svg" loading="lazy" alt="">
-                <img src="images/icons/close-01.svg" loading="lazy" alt="">
-            </div>
-
-            <div class="tooltip">Need A quick response? We’re here to help</div>
-
-            <div class="form">
-                <div class="form__head">
-                    <div class="icon"><img src="images/icons/icon-11.svg" loading="lazy" alt=""></div>
-                    <div>Get a callback</div>
-                </div>
-                <div class="form__body">
-                    <div class="text">Leave your contact information at this form and we’ll contact you to help you as soon as possible</div>
-                    <form>
-                        <div class="form-group">
-                            <input type="email" class="input" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" class="input" placeholder="Mobile Phone">
-                        </div>
-                        <div class="form-group btn-group">
-                            <button type="submit" class="btn btn-8">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
+    </section>
+
+    <!--PRODUCTS-->
+    <section class="s-products ms-section">
+        <div class="cn">
+            <div class="section-heading section-heading--simple">
+                <h2 class="title h1">Products</h2>
+                <div class="subtitle">Browse our selection of high-quality brake calipers.</div>
+            </div>
+            <div class="products-list">
+                <div class="product-card">
+                    <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
+                    <div class="product-card__content">
+                        <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
+                        <div class="subtitle">2004-2011</div>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-2">From $6.95</a>
+                            <a href="#" class="btn btn-2">From $6.95</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
+                    <div class="product-card__content">
+                        <h3 class="title">Alcon Prodrive 4 Pot Caliper Seal Kit</h3>
+                        <div class="subtitle">2004-2011</div>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-2">From $6.95</a>
+                            <a href="#" class="btn btn-2">From $6.95</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
+                    <div class="product-card__content">
+                        <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
+                        <div class="subtitle">2004-2011</div>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-2">From $6.95</a>
+                            <a href="#" class="btn btn-2">From $6.95</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-btn"><a href="#" class="btn btn-1">Show more</a></div>
+        </div>
+    </section>
+
+    <!--STICKY CALLBACK-->
+    <div class="sticky-callback">
+        <div class="btn-callback">
+            <img src="<?php echo get_template_directory_uri();?>/assets/images/icons/icon-11.svg" loading="lazy" alt="">
+            <img src="<?php echo get_template_directory_uri();?>/assets/images/icons/close-01.svg" loading="lazy" alt="">
+        </div>
+
+        <div class="tooltip">Need A quick response? We’re here to help</div>
+
+        <div class="form">
+            <div class="form__head">
+                <div class="icon"><img src="<?php echo get_template_directory_uri();?>/assets/images/icons/icon-11.svg" loading="lazy" alt=""></div>
+                <div>Get a callback</div>
+            </div>
+            <div class="form__body">
+                <div class="text">Leave your contact information at this form and we’ll contact you to help you as soon
+                    as possible
+                </div>
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="input" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="input" placeholder="Mobile Phone">
+                    </div>
+                    <div class="form-group btn-group">
+                        <button type="submit" class="btn btn-8">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 <?php
 get_footer();
