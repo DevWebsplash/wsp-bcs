@@ -147,74 +147,120 @@
         <div class="small-title small-title--white">DISCOVER</div>
         <div class="line-decor line-decor--red"></div>
       </div>
-      <h2 class="title h1">Brake Caliper Specialists Portfolio</h2>
-      <div class="subtitle">Browse through our showcase of projects</div>
+      <h2 class="title h1"><?php echo get_field('portfolio_title', 'option'); ?></h2>
+      <div class="subtitle"><?php echo get_field('portfolio_subtitle', 'option'); ?></div>
     </div>
 
     <div class="s-specialists-reviews__list">
 
-      <div class="sr-item">
-        <div class="sr-item__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
-        <div class="sr-item__content">
-          <h3 class="title h2">Fiat Doblo 2016 brake caliper painting in Leeds</h3>
-          <div class="tags">
-            <div class="tag">Engineering services</div>
-            <div class="tag">Painting</div>
-            <div class="tag">2 piston</div>
-          </div>
-          <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-          <a href="#" class="btn btn-3">
-            <span>Read more</span>
-            <span class="icon">
+
+	    <?php
+	    $post_ID =$post->ID;
+	    $make_tax =  get_field( 'portfolio_category' ,$queried_object );
+	    $portfolio_posts =  get_field( 'portfolio_posts' ,$queried_object );
+
+	    // Push posts IDs to new array
+	    $identifiers = array();
+	    if(($make_tax) || ($portfolio_posts))     {
+		    if($make_tax) {
+			    $args_1 = get_posts( array(
+				    'post_type' => 'portfolio',
+				    'post_count' => -1,
+				    'tax_query' => array(
+					    array(
+						    'taxonomy' => 'make',
+						    'field' => 'term_id',
+						    'terms' => $make_tax,
+					    )
+				    ),
+			    ) );
+			    foreach ( $args_1 as $post ) {
+				    array_push( $identifiers, $post->ID );
+			    }
+					    var_dump($identifiers);
+					    echo '</br> 1';
+		    }
+
+		    if($portfolio_posts) {
+// Second query, specific posts query
+			    $args_2 = get_posts( array(
+				    'post_type' => 'portfolio',
+				    'post_count' => -1,
+				    'include' => $portfolio_posts,
+			    ) );
+			    foreach ( $args_2 as $post ) {
+				    array_push( $identifiers, $post->ID );
+			    }
+					    var_dump($identifiers);
+					    echo '</br> 2';
+		    }
+	    } else {
+		    $args_3 = get_posts( array(
+			    'post_type' => 'portfolio',
+			    'post_count' => -1,
+			    'tax_query' => array(
+				    array(
+					    'taxonomy' => 'make',
+					    'field' => 'term_id',
+					    'terms' => $queried_object->term_id,
+				    )
+			    ),
+		    ) );
+		    foreach ( $args_3 as $post ) {
+			    array_push( $identifiers, $post->ID );
+		    }
+
+	    }
+
+		    echo '<br>';
+	    // New query
+	    $query = new WP_Query( array(
+		    'post_type' => 'portfolio',
+		    'post_status' => 'publish',
+		    'post_count' => -1,
+		    'post__in' => array_unique( $identifiers ),
+	    ) );
+
+	    if ( $query->have_posts() ) :
+
+		    while ( $query->have_posts() ) :
+
+			    $query->the_post();?>
+                <div class="sr-item">
+                    <div class="sr-item__img"><?php $image_repeater = get_field( 'overview_image' ); ?>
+	                    <?php if($image_repeater){?>
+                          <img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                               loading="lazy"
+                               alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>">
+	                    <?php }?></div>
+                    <div class="sr-item__content">
+                        <h3 class="title h2"><?php echo get_the_title();?></h3>
+                        <div class="tags">
+	                        <?php
+	                        $terms = wp_get_object_terms($post->ID, 'portfolio-category', array('orderby' => 'term_id', 'order' => 'ASC') );
+	                        if ( !empty( $terms ) ) :
+
+		                        foreach ( $terms as $term ) { ?>
+                                <div class="tag"><?php echo$term->name;?></div>
+		                        <?php } ?>
+	                        <?php endif;
+	                        ?>
+                        </div>
+                        <div class="desc"><?php echo get_field( 'preview_description' );?></div>
+                        <a href="<?php the_permalink();?>" class="btn btn-3">
+                            <span>Read more</span>
+                            <span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
                   <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
                 </svg>
               </span>
-          </a>
-        </div>
-      </div>
+                        </a>
+                    </div>
+                </div>
+		    <?php endwhile;
 
-      <div class="sr-item">
-        <div class="sr-item__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
-        <div class="sr-item__content">
-          <h3 class="title h2">Fiat Doblo 2016 brake caliper painting in Leeds</h3>
-          <div class="tags">
-            <div class="tag">Engineering services</div>
-            <div class="tag">Painting</div>
-            <div class="tag">2 piston</div>
-          </div>
-          <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-          <a href="#" class="btn btn-3">
-            <span>Read more</span>
-            <span class="icon">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-              </span>
-          </a>
-        </div>
-      </div>
+	    endif; wp_reset_postdata();?>
 
-      <div class="sr-item">
-        <div class="sr-item__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
-        <div class="sr-item__content">
-          <h3 class="title h2">Fiat Doblo 2016 brake caliper painting in Leeds</h3>
-          <div class="tags">
-            <div class="tag">Engineering services</div>
-            <div class="tag">Painting</div>
-            <div class="tag">2 piston</div>
-          </div>
-          <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-          <a href="#" class="btn btn-3">
-            <span>Read more</span>
-            <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-              </span>
-          </a>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -226,8 +272,8 @@
     <div class="section-bg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-02.png" loading="lazy" alt=""></div>
     <div class="cn">
       <div class="section-heading">
-        <h2 class="title h1">Brake Caliper Refurbishment Services</h2>
-        <div class="subtitle">With years of experience, our company specializes in refurbishing brake calipers for cars. We have a team of skilled professionals dedicated to providing high-quality services to customers worldwide.</div>
+        <h2 class="title h1"><?php echo get_field('services_title', 'option'); ?></h2>
+        <div class="subtitle"><?php echo get_field('services_subtitle', 'option'); ?></div>
         <div class="decorated-title decorated-title--row-left">
           <div class="small-title small-title--white">Our services</div>
           <div class="line-decor line-decor--white"></div>
@@ -312,8 +358,8 @@
         <div class="small-title small-title--gray">DISCOVER</div>
         <div class="line-decor line-decor--red"></div>
       </div>
-      <h2 class="title h1">Brake Caliper Products</h2>
-      <div class="subtitle">Browse our selection of high-quality brake calipers.</div>
+      <h2 class="title h1"><?php echo get_field('product_title', 'option'); ?></h2>
+      <div class="subtitle"><?php echo get_field('products_subtitle', 'option'); ?></div>
     </div>
     <div class="products-list">
       <div class="product-card">

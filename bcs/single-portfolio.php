@@ -277,7 +277,7 @@ if ( have_rows( 'flixble_content_portfolio' ) ):
                             $portfolio_posts =  get_sub_field( 'posts' );
                                 // Push posts IDs to new array
                                 $identifiers = array();
-   if(($make_tax) & ($portfolio_posts))     {
+   if(($make_tax) || ($portfolio_posts))     {
 if($make_tax) {
 $args_1 = get_posts( array(
   'post_type' => 'portfolio',
@@ -397,7 +397,7 @@ endif; wp_reset_postdata();?>
 	                    $portfolio_posts =  get_sub_field( 'products' );
 	                    // Push posts IDs to new array
 	                    $identifiers = array();
-	                    if(($make_tax) & ($portfolio_posts))     {
+	                    if(($make_tax) || ($portfolio_posts))     {
 		                    if($make_tax) {
 			                    $args_1 = get_posts( array(
 				                    'post_type' => 'product',
