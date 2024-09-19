@@ -269,8 +269,6 @@ if ( have_rows( 'flixble_content_portfolio' ) ):
                             </div>
                         </div>
                         <div class="swiper-wrapper">
-
-
                                 <?php
                                 $post_ID =$post->ID;
                             $make_tax =    get_sub_field( 'related_posts' );

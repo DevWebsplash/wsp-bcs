@@ -312,51 +312,113 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
                 </div>
 
                 <div class="s-split__list">
-									<?php
-									$featured_posts = get_sub_field( 'portfolio' );
-									if ( $featured_posts ): ?>
+	                <?php
+	                $post_ID =$post->ID;
+	                $make_tax =    get_sub_field( 'portfolio_category' );
+	                $portfolio_posts =  get_sub_field( 'portfolio_posts' );
+	                // Push posts IDs to new array
+	                $identifiers = array();
+	                if(($make_tax) || ($portfolio_posts))     {
+		                if($make_tax) {
+			                $args_1 = get_posts( array(
+				                'post_type' => 'portfolio',
+				                'post_count' => -1,
+				                'tax_query' => array(
+					                array(
+						                'taxonomy' => 'make',
+						                'field' => 'term_id',
+						                'terms' => $make_tax,
+					                )
+				                ),
+			                ) );
+			                foreach ( $args_1 as $post ) {
+				                array_push( $identifiers, $post->ID );
+			                }
+		                }
+		                if($portfolio_posts) {
+// Second query, specific posts query
+			                $args_2 = get_posts( array(
+				                'post_type' => 'portfolio',
+				                'post_count' => -1,
+				                'include' => $portfolio_posts,
+			                ) );
+			                foreach ( $args_2 as $post ) {
+				                array_push( $identifiers, $post->ID );
+			                }
+		                }
+	                } else {
 
-										<?php foreach ( $featured_posts as $post ):
+		                $terms = wp_get_object_terms($post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC') );
+		                if ( !empty( $terms ) ) :
+			                $project = array();
+			                foreach ( $terms as $term ) {
+				                $project[] = $term->term_id;
+			                }  endif;
+		                $args_3 = get_posts( array(
+			                'post_type' => 'portfolio',
+			                'post_count' => -1,
+			                'tax_query' => array(
+				                array(
+					                'taxonomy' => 'make',
+					                'field' => 'term_id',
+					                'terms' => $project[1],
+				                )
+			                ),
+		                ) );
+		                foreach ( $args_3 as $post ) {
+			                array_push( $identifiers, $post->ID );
+		                }
+	                }
 
-											// Setup this post for WP functions (variable must be named $post).
-											setup_postdata( $post ); ?>
-                          <div class="split-item">
-                              <div class="split-item__img"><img
-                                          src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg"
-                                          loading="lazy" alt=""></div>
-                              <div class="split-item__content">
-                                  <h3 class="title h2"><?php the_title(); ?></h3>
-                                  <div class="tags">
-                                      <div class="tag">Engineering services</div>
-                                      <div class="tag">Painting</div>
-                                      <div class="tag">2 piston</div>
-                                  </div>
-                                  <div class="desc">If you are looking for experienced and highly professional brake
-                                      caliper
-                                      painting and refurbishment then look no further than Bespoke Detailing Solutions.
-                                      We
-                                      specialise in all aspect of car detailing and care to make sure your vehicle is
-                                      looking its
-                                      best.
-                                  </div>
-                                  <a href="<?php the_permalink(); ?>" class="btn btn-2">
-                                      <span>Read more</span>
-                                      <span class="icon">
+	                // New query
+	                $query = new WP_Query( array(
+		                'post_type' => 'portfolio',
+		                'post_status' => 'publish',
+		                'post_count' => -1,
+		                'post__in' => array_unique( $identifiers ),
+	                ) );
+
+	                if ( $query->have_posts() ) :
+
+		                while ( $query->have_posts() ) :
+
+			                $query->the_post();?>
+                            <div class="split-item">
+                                <div class="split-item__img">
+                                  <?php $image_repeater = get_field( 'overview_image' ); ?>
+	                                <?php if($image_repeater){?>
+                                      <img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                                           loading="lazy"
+                                           alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>">
+	                                <?php }?>
+                                </div>
+                                <div class="split-item__content">
+                                    <h3 class="title h2"><?php the_title(); ?></h3>
+                                    <div class="tags">
+	                                    <?php
+	                                    $terms = wp_get_object_terms($post->ID, 'portfolio-category', array('orderby' => 'term_id', 'order' => 'ASC') );
+	                                    if ( !empty( $terms ) ) :
+
+		                                    foreach ( $terms as $term ) { ?>
+                                            <div class="tag"><?php echo$term->name;?></div>
+		                                    <?php } ?>
+	                                    <?php endif;
+	                                    ?>
+                                    </div>
+                                    <div class="desc"><?php echo get_field( 'preview_description' );?></div>
+                                    <a href="<?php the_permalink(); ?>" class="btn btn-2">
+                                        <span>Read more</span>
+                                        <span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
                   <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
                 </svg>
               </span>
-                                  </a>
-                              </div>
-                          </div>
-										<?php endforeach; ?>
+                                    </a>
+                                </div>
+                            </div>
+		                <?php endwhile;
 
-										<?php
-										// Reset the global post object so that the rest of the page works correctly.
-										wp_reset_postdata(); ?>
-									<?php endif; ?>
-
-
+	                endif; wp_reset_postdata();?>
                 </div>
             </div>
         </section>
