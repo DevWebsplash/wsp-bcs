@@ -15,7 +15,7 @@ if ( is_woocommerce() || is_cart() || is_checkout() || is_checkout_pay_page() ) 
 ?>
 	<div class="block-woocommerce" >
     <header>
-      <div class="cn cn--md">
+      <div class="cn">
         <h1 class="block__title"><?php the_title(); ?></h1>
       </div>
     </header>
@@ -25,12 +25,12 @@ if ( is_woocommerce() || is_cart() || is_checkout() || is_checkout_pay_page() ) 
 } else if ( is_account_page() ) {
   ?>
   <header class="woo-account-head">
-    <div class="cn cn--md">
+    <div class="cn">
       <h1 class="xl"><?php the_title(); ?></h1>
     </div>
   </header>
   <div class="block-woocommerce">
-    <div class="cn cn--lg">
+    <div class="cn">
       <?php the_content(); ?>
     </div>
   </div>
@@ -39,10 +39,12 @@ if ( is_woocommerce() || is_cart() || is_checkout() || is_checkout_pay_page() ) 
 } else {
 ?>
 	<article class="2" >
+      <div class="cn">
 		<header>
 			<h1><?php the_title(); ?></h1>
 		</header>
 		<?php the_content(); ?>
+      </div>
 	</article>
 <?php
 }
