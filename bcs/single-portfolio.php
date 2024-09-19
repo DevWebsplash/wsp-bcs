@@ -446,7 +446,6 @@ endif; wp_reset_postdata();?>
 			                    array_push( $identifiers, $post->ID );
 		                    }
 	                    }
-
 	                    // New query
 	                    $query = new WP_Query( array(
 		                    'post_type' => 'product',
