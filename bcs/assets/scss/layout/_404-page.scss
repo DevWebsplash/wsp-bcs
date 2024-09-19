@@ -1,0 +1,253 @@
+.error404 {
+  #loader-wrapper {
+    display: none!important;
+  }
+
+  main.content {
+    padding: 0;
+    //margin: 50px auto 0;
+    width: 100%;
+    @media (min-width: $lg) {
+      padding: 0;
+      //margin: 125px auto 0;
+    }
+  }
+
+  .head {
+    //max-width: 60%;
+    position: relative;
+    padding-top: 150px;
+    padding-bottom: 50px;
+    //background-color: lighten($blue, 10%);
+    background-color: rgba($dark-blue-2, 1);
+    text-align: center;
+    //border-bottom: 1px solid transparent;
+    box-shadow: 0 0 60px 20px rgba(lighten($dark-blue, 10%), 0.95);
+    .heading__title {
+      color: $light-gray;
+
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+
+      //background-color: $light-black;
+      z-index: -1;
+    }
+  }
+
+
+  .container404 {
+    position: relative;
+    height: 600px;
+    flex: 0 0 600px;
+
+    .cont_principal {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .cont_error {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 300px;
+      top: 20%;
+      padding-left: 20px;
+      padding-right: 30%;
+      @media (min-width: $sm) {
+        top: 50%;
+        margin-top: -150px;
+        padding-right: 60px;
+      }
+      @media (min-width: $xl) {
+        width: 1130px;
+        max-width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      & > h2 {
+        font-size: 100px;
+        color: $text-color;
+        position: relative;
+        left: -100%;
+        transition: all 0.5s;
+        @media (min-width: $sm) {
+          font-size: 150px;
+        }
+      }
+
+      & > p {
+        font-size: 18px;
+        letter-spacing: 5px;
+        color: $text-color;
+        position: relative;
+        left: 100vw;
+        top: 25%;
+
+        max-width: 60%;
+        transition: all 0.5s;
+        transition-delay: 0.5s;
+        @media (min-width: 480px) {
+          font-size: 24px;
+        }
+      }
+    }
+
+    .cont_aura_1 {
+      position: absolute;
+      width: 300px;
+      height: 120%;
+      top: 25px;
+      right: -340px;
+      background-color: lighten($red, 10%);
+      box-shadow: 0 0 40px 20px rgba(lighten($red, 25%), 0.4);
+      //filter: blur(10px);
+      opacity: 1;
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s;
+      @media (min-width: 1200px) and (orientation: landscape){
+        width: 400px;
+        top: -15px;
+      }
+    }
+
+    .cont_aura_2 {
+      position: absolute;
+      width: 100%;
+      height: 400px;
+      right: -20%;
+      bottom: -301px;
+      background-color: lighten($dark-blue, 10%);
+      box-shadow: 0 0 40px 10px rgba(lighten($dark-blue, 15%), 0.5), 0 0 20px 0 rgba(0, 0, 0, 0.2);
+      z-index: 5;
+      //filter: blur(10px);
+      opacity: 1;
+      transition: all 0.5s;
+      -webkit-transition: all 0.5s;
+
+    }
+
+    .cont_error_active {
+      & > .cont_error > h2 {
+        left: 0%;
+      }
+
+      & > .cont_error > p {
+        left: 0%;
+      }
+
+      & > .cont_aura_2 {
+        animation-name: animation_error_2;
+        animation-duration: 4s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        transform: rotate(-20deg);
+      }
+
+      & > .cont_aura_1 {
+        transform: rotate(20deg);
+        right: -170px;
+        animation-name: animation_error_1;
+        animation-duration: 4s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+    }
+
+    @-webkit-keyframes animation_error_1 {
+      from {
+        -webkit-transform: rotate(20deg);
+        transform: rotate(20deg);
+      }
+      to {
+        -webkit-transform: rotate(25deg);
+        transform: rotate(25deg);
+      }
+    }
+    @-o-keyframes animation_error_1 {
+      from {
+        -webkit-transform: rotate(20deg);
+        transform: rotate(20deg);
+      }
+      to {
+        -webkit-transform: rotate(25deg);
+        transform: rotate(25deg);
+      }
+
+    }
+    @-moz-keyframes animation_error_1 {
+      from {
+        -webkit-transform: rotate(20deg);
+        transform: rotate(20deg);
+      }
+      to {
+        -webkit-transform: rotate(25deg);
+        transform: rotate(25deg);
+      }
+
+    }
+    @keyframes animation_error_1 {
+      from {
+        -webkit-transform: rotate(20deg);
+        transform: rotate(20deg);
+      }
+      to {
+        -webkit-transform: rotate(25deg);
+        transform: rotate(25deg);
+      }
+    }
+
+
+    @-webkit-keyframes animation_error_2 {
+      from {
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+      }
+      to {
+        -webkit-transform: rotate(-20deg);
+        transform: rotate(-20deg);
+      }
+    }
+    @-o-keyframes animation_error_2 {
+      from {
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+      }
+      to {
+        -webkit-transform: rotate(-20deg);
+        transform: rotate(-20deg);
+      }
+    }
+  }
+
+  @-moz-keyframes animation_error_2 {
+    from {
+      -webkit-transform: rotate(-15deg);
+      transform: rotate(-15deg);
+    }
+    to {
+      -webkit-transform: rotate(-20deg);
+      transform: rotate(-20deg);
+    }
+  }
+  @keyframes animation_error_2 {
+    from {
+      -webkit-transform: rotate(-15deg);
+      transform: rotate(-15deg);
+    }
+    to {
+      -webkit-transform: rotate(-20deg);
+      transform: rotate(-20deg);
+    }
+  }
+}

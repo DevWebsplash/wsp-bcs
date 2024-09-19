@@ -16,17 +16,10 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
   <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
-
-<!--  <link rel="stylesheet" href="https://use.typekit.net/cqe6xsw.css">-->
-<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>-->
-<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">-->
-<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">-->
   <?php wp_head(); ?>
-<!--  <link rel="stylesheet" href="--><?php //echo get_template_directory_uri();?><!--/assets/css/aliciajdiamonds.min.css">-->
-
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> itemscope="itemscope" itemtype="https://schema.org/WebPage">
 <?php
 //$header = 'header--white';
 //if (
@@ -47,7 +40,7 @@
       <div class="header__inner">
         <div class="toggle-menu"><span></span><span></span></div>
         <div class="header__logo">
-          <a href="/staging/" title="Home page"><img src="<?php echo get_template_directory_uri();?>/assets/images/logo.png" loading="lazy" alt=""></a>
+          <a href="/staging/" title="Home page"><img src="<?php echo get_template_directory_uri();?>/assets/images/logo.png" loading="lazy" alt="Logo"></a>
         </div>
         <nav class="header__nav">
           <div class="cn">

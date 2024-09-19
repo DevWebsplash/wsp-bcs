@@ -1,5 +1,15 @@
 @import "../base/variables";
 
+body.logged-in {
+  //padding-top: 36px;
+  .header {
+    top: 36px;
+    &__nav {
+        top: 102px;
+    }
+  }
+}
+
 .header {
   position: fixed;
   top: 0;

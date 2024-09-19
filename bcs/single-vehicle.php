@@ -746,8 +746,8 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
             </div>
         </section>
 		<?php elseif ( get_row_layout() == 'faq' ): ?>
-            <!--KNOWLEDGE variant 3-->
-            <section class="s-knowledge s-knowledge--variant-3 ms-section">
+        <!--KNOWLEDGE variant 3-->
+        <section class="s-knowledge s-knowledge--variant-3 ms-section">
                 <div class="cn">
                     <div class="section-heading section-heading--simple">
                         <h2 class="title h1"><?php echo get_sub_field( 'faq_title' ); ?></h2>

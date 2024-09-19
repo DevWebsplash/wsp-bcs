@@ -3,7 +3,7 @@ function js_variables($wp_query) {
   $variables = array(
       'ajax_url' => admin_url ('admin-ajax.php'),
       'current_page' => get_query_var ('paged') ? get_query_var ('paged') : 1,
-      'max_page' => $wp_query->max_num_pages
+//      'max_page' => $wp_query->max_num_pages
   );
 
     $json = json_encode($variables);

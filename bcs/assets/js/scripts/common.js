@@ -118,4 +118,14 @@ jQuery(function($) {
             clickable: true,
         },
     });
+
+    /*
+    404 animation
+   */
+    if (document.body.classList.contains('error404')) {
+        console.log('!!!---- 404 ----!!!');
+        window.onload = function () {
+            document.querySelector('.cont_principal').className = "cont_principal cont_error_active";
+        }
+    }
 });
