@@ -64,3 +64,10 @@ function custom_sidebars() {
 }
 add_action( 'widgets_init', 'custom_sidebars' );
 
+function add_white_background_body_class($classes) {
+  if (is_page_template('templates/white-background.php')) {
+    $classes[] = 'white-background';
+  }
+  return $classes;
+}
+add_filter('body_class', 'add_white_background_body_class');

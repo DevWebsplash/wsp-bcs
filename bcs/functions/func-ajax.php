@@ -26,7 +26,7 @@ jQuery(function ($) {
 
   const isVehiclePage = window.location.pathname.includes('/vehicle/');
   document.addEventListener('DOMContentLoaded', function() {
-    if (!document.querySelector('.vehicles-search')) {
+    if (!document.querySelector('.vehicles-search') || !document.querySelector('.quote-form')) {
       return false;
     }
 
@@ -90,6 +90,12 @@ jQuery(function ($) {
   const handleMakeChange = async function () {
     const makeId = $(this).find(':selected').data('make');
     const makeSlug = $(this).val();
+    console.log($(this).find('option').length);
+    // if ($(this).find('option').length === 1) {
+    //   const response = await $.post(window.wp_data.ajax_url, { action: 'get_vehicle_makes' });
+    //   const makes = JSON.parse(response);
+    //   updateSelects(makeSelect, makes, 'make');
+    // }
 
     if (!makeId) {
       modelSelect.prop('disabled', true).empty().append('<option value="">Select Model</option>');
@@ -233,4 +239,101 @@ function trim_fetch() {
 add_action('wp_ajax_trim_fetch', 'trim_fetch');
 add_action('wp_ajax_nopriv_trim_fetch', 'trim_fetch');
 
+
+
+
+
+// Function to get "Make" options for dropdown
+function get_vehicle_makes() {
+  $makes = get_terms(array(
+      'taxonomy' => 'make',
+      'hide_empty' => false,
+      'parent' => 0, // Get only top-level "Make" terms
+  ));
+
+  if (!empty($makes)) {
+    foreach ($makes as $make) {
+      echo '<option value="' . esc_attr($make->term_id) . '">' . esc_html($make->name) . '</option>';
+    }
+  } else {
+    echo '<option value="">No Makes Available</option>';
+  }
+  wp_die();
+}
+add_action('wp_ajax_get_vehicle_makes', 'get_vehicle_makes');
+add_action('wp_ajax_nopriv_get_vehicle_makes', 'get_vehicle_makes');
+
+// Function to get child terms (Models and Trims) based on parent term
+function get_vehicle_models_or_trims() {
+  if (isset($_POST['parent_term_id'])) {
+    $parent_id = intval($_POST['parent_term_id']);
+
+    $terms = get_terms(array(
+        'taxonomy' => 'make',
+        'hide_empty' => false,
+        'parent' => $parent_id, // Get child terms based on parent (Make or Model)
+    ));
+
+    if (!empty($terms)) {
+      foreach ($terms as $term) {
+        echo '<option value="' . esc_attr($term->term_id) . '">' . esc_html($term->name) . '</option>';
+      }
+    } else {
+      echo '<option value="">No terms available</option>';
+    }
+  }
+  wp_die();
+}
+add_action('wp_ajax_get_vehicle_models_or_trims', 'get_vehicle_models_or_trims');
+add_action('wp_ajax_nopriv_get_vehicle_models_or_trims', 'get_vehicle_models_or_trims');
+
+// Function to handle AJAX request for fetching "Trim" posts based on selected "Make" and "Model" terms
+function get_vehicle_trims() {
+  if (isset($_POST['make_id']) && isset($_POST['model_id'])) {
+    $make_id = intval($_POST['make_id']);
+    $model_id = intval($_POST['model_id']);
+
+    // Query posts of type "trim" where the selected Make and Model are associated
+    $trims = new WP_Query(array(
+        'post_type' => 'trim', // Assuming your custom post type is "trim"
+        'tax_query' => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'make',
+                'field' => 'term_id',
+                'terms' => $make_id,
+            ),
+            array(
+                'taxonomy' => 'make', // Assuming both Make and Model are part of the "make" taxonomy
+                'field' => 'term_id',
+                'terms' => $model_id,
+            ),
+        ),
+    ));
+
+    if ($trims->have_posts()) {
+      while ($trims->have_posts()) {
+        $trims->the_post();
+        echo '<option value="' . get_the_ID() . '">' . get_the_title() . '</option>';
+      }
+    } else {
+      echo '<option value="">No trims available</option>';
+    }
+    wp_reset_postdata();
+  }
+
+  wp_die(); // End the AJAX request
+}
+add_action('wp_ajax_get_vehicle_trims', 'get_vehicle_trims');
+add_action('wp_ajax_nopriv_get_vehicle_trims', 'get_vehicle_trims');
+
+
+
+
+
+
+
 ?>
+
+
+

@@ -9,6 +9,9 @@ body {
   font-weight: 500;
   line-height: 1.5;
   background-color: #FAFAFA;
+  &.white-background {
+    background-color: $white;
+  }
 }
 
 strong, b {
@@ -263,6 +266,10 @@ h6, .h6 {
         font-size: 24px;
       }
     }
+  }
+  &--gaps-lg {
+    padding-top: 60px;
+    padding-bottom: 40px;
   }
 }
 

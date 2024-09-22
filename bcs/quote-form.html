@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div class="multi-step-form quote-form">
+  <!-- Sidebar for displaying steps -->
+  <div class="form-sidebar">
+    <ul class="form-steps">
+      <li class="step step-1 active">
+        <span class="step-number">1</span> Car Details
+      </li>
+      <li class="step step-2">
+        <span class="step-number">2</span> Services
+      </li>
+      <li class="step step-3">
+        <span class="step-number">3</span> Customer Details
+      </li>
+    </ul>
+  </div>
+
+  <div class="form-content">
+    <div class="form-row form-step form-step-1">
+      <h3>Step 1: Car Details</h3>
+      <h2 class="h2">Select your vehicle to get personalized services</h2>
+      <!-- Make Dropdown -->
+      <div class="custom-select custom-select--half">
+        <select data-make>
+          <option value="">Select Make</option>
+        </select>
+      </div>
+      <br>
+      <!-- Model Dropdown (Initially disabled) -->
+      <div class="custom-select custom-select--half" disabled>
+        <select data-model>
+          <option value="">Select Model</option>
+        </select>
+      </div>
+      <br>
+      <!-- Trim Dropdown (Initially disabled) -->
+      <div class="custom-select custom-select--full" disabled>
+        <select data-trim>
+          <option>Select Trim</option>
+        </select>
+      </div>
+      <br>
+      <div class="btn-wrapper">
+        <button type="button" class="next-btn" data-next-step="2">Next Step</button>
+      </div>
+    </div>
+
+
+    <!-- Step 2: Services -->
+    <div class="form-step form-step-2" style="display: none;">
+      <h2 class="h2">Step 2: Services</h2>
+      <h2 class="h2">What would you like doing with your brakes? *</h2>
+
+      [checkbox* brake_service use_label_element "Functional Refurbishment Only" "Painting Service Only" "Both"]
+      <br>
+      <h2 class="h2">Which brakes need painting? *</h2>
+      [select* brake_paint include_blank "Front Pair" "Rear Pair" "All 4" "Single Front" "Single Rear"]
+      <br>
+      <h2 class="h2">Which color palette do you need? *</h2>
+      [radio* color_palette use_label_element "BCS Stock Colours" "Premium Colours"]
+      <br>
+      <div class="btn-wrapper">
+        <button type="button" class="prev-btn" data-prev-step="1">Previous Step</button>
+        <button type="button" class="next-btn" data-next-step="3">Next Step</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Customer Details -->
+    <div class="form-step form-step-3" style="display: none;">
+      <h3>Step 3: Customer Details</h3>
+      <h2 class="h2">Leave your contact information in this form and we'll contact you to help you.</h2>
+      <label for="first-name">First Name *</label>
+      [text* first-name placeholder "First Name"]
+      <br>
+      <label for="last-name">Last Name *</label>
+      [text* last-name placeholder "Last Name"]
+      <br>
+      <label for="email">Email Address *</label>
+      [email* email placeholder "Email"]
+      <br>
+      <label for="phone">Mobile Phone *</label>
+      [tel* phone placeholder "Mobile Phone"]
+      <br>
+      <div class="btn-wrapper">
+        <button type="button" class="prev-btn" data-prev-step="2">Previous Step</button>
+        [submit "Complete Quote Request"]
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</body>
+</html>
