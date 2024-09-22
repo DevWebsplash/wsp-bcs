@@ -105,3 +105,252 @@ select::-ms-expand {
 }
 
 
+// FMP formidable form
+#form_getquote {
+  position: relative;
+  padding-left: 350px;
+  min-height: 35vw;
+  &:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 1px;
+    background: $light-gray;
+    transform: translate(-50%, 0);
+  }
+
+
+  .frm_rootline_group {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 248px;
+    height: 100%;
+    margin-top: 0;
+    padding-top: 60px;
+    padding-right: 30px;
+    border-right: 1px solid $light-gray;
+    &:before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: block;
+      width: 50vw;
+      height: 100%;
+      background: $background-color;
+    }
+
+  }
+
+  ul.frm_page_bar li {
+    display: flex;
+    gap: 20px;
+
+    //&:before {
+    //  content: "Step " counter(list-item) ": ";
+    //}
+    //::marker {
+    //  content: counter(list-item) ". ";
+    //}
+  }
+
+  .frm_rootline.frm_show_lines {
+    display: flex;
+    flex-direction: column;
+    gap: 57px;
+    &:before {
+      transform: rotate(-90deg);
+      width: 178px;
+      top:8px;
+    }
+    input {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      font-size: 14px;
+    }
+  }
+
+
+  .frm_section_heading h3 {
+    border-top: none;
+  }
+
+  .frm_form_field {
+
+
+  }
+  .frm_inside_container {
+    &.frm_label_float_top {
+      & > label {
+        padding-top: 0;
+      }
+    }
+    & > label {
+      padding-top: 16px;
+      left: 16px;
+      & + input:not([type="checkbox"], [type="radio"]) {
+        font-size: 14px;
+        font-weight: 400;
+        border-radius: 8px;
+        background: #ECECEC;
+        padding: 16px;
+        //&::placeholder {
+        //  color: #5C5C5C;
+        //}
+      }
+    }
+
+
+
+  }
+}
+
+/* Base styling for Contact Form 7 */
+.wpcf7-form,
+.wpcf7 {
+  //max-width: 600px;
+  //margin: 0 auto;
+  //padding: 20px;
+  //background: #f9f9f9;
+  //border: 1px solid #ddd;
+  //border-radius: 8px;
+  //p {
+  //  margin-bottom: 15px;
+  //}
+  //label {
+  //  display: block;
+  //  margin-bottom: 5px;
+  //  font-weight: bold;
+  //}
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"] {
+    display: inline-block;
+    width: 48%;
+  }
+
+  .wpcf7-submit,
+  .wpcf7-prev {
+    background-color: #b30b00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  .wpcf7-submit:hover,
+  .wpcf7-prev:hover {
+    background-color: #900900;
+  }
+  .wpcf7-response-output {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9;
+  }
+}
+.multi-step-form {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form-sidebar {
+  width: 25%;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-right: 1px solid #ddd;
+}
+
+.form-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-steps .step {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #333;
+}
+
+.form-steps .step .step-number {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: #ccc;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.form-steps .step.active .step-number {
+  background-color: #b30b00;
+}
+
+.form-steps .step.active {
+  color: #b30b00;
+}
+
+.form-content {
+  width: 75%;
+  padding: 20px;
+}
+
+button.next-btn, button.prev-btn {
+  background-color: #b30b00;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+button.next-btn:hover, button.prev-btn:hover {
+  background-color: #900900;
+}
+
+
+//[uacf7_step_start uacf7_step_start-901 "Step One"]
+//<label> Your name
+// [text* your-name] </label>
+//
+//<label> Your email
+// [email* your-email] </label>
+//                       [uacf7_step_end]
+//                       [uacf7_step_start uacf7_step_start-902 "Step Two"]
+//<label> Subject
+// [text* your-subject] </label>
+//
+//<label> Do you need an appointment?
+// [select* menu-663 include_blank "Yes" "No"] </label>
+//
+//                                               [uacf7_step_end]
+//                                               [uacf7_step_start uacf7_step_start-903 "Step Three"]
+//<label> Your message (optional)
+//[textarea your-message] </label>
+//
+//                          [submit "Submit"]
+//[uacf7_step_end]

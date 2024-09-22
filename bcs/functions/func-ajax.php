@@ -233,4 +233,123 @@ function trim_fetch() {
 add_action('wp_ajax_trim_fetch', 'trim_fetch');
 add_action('wp_ajax_nopriv_trim_fetch', 'trim_fetch');
 
+
+
+
+
+
+
+
+
+// Function to get all 'Make' terms
+// Function to generate the "Make" dropdown and handle AJAX for dynamic "Model" and "Trim"
+function vehicle_form_shortcode() {
+  ob_start(); // Buffer the output
+
+  // "Make" dropdown
+  echo '<h3>Step 1: Car Details</h3>';
+  echo '<label>Select Make *</label>';
+  echo '<select id="vehicle-make" name="vehicle_make">';
+  echo get_vehicle_make_options(); // Generates the options for "Make"
+  echo '</select><br>';
+
+  // "Model" dropdown (initially disabled)
+  echo '<label>Select Model *</label>';
+  echo '<select id="vehicle-model" name="vehicle_model" disabled>';
+  echo '<option value="">Select Model</option>';
+  echo '</select><br>';
+
+  // "Trim" dropdown (initially disabled)
+  echo '<label>Select Trim *</label>';
+  echo '<select id="vehicle-trim" name="vehicle_trim" disabled>';
+  echo '<option value="">Select Trim</option>';
+  echo '</select><br>';
+
+  // Include necessary JavaScript to handle AJAX calls
+  ?>
+  <script>
+    jQuery(document).ready(function($) {
+      // When "Make" is changed, load "Model" dropdown
+      $('#vehicle-make').on('change', function() {
+        var makeId = $(this).val();
+
+        // Clear and disable the "Model" and "Trim" dropdowns
+        $('#vehicle-model').html('<option value="">Select Model</option>').prop('disabled', true);
+        $('#vehicle-trim').html('<option value="">Select Trim</option>').prop('disabled', true);
+
+        if (makeId !== '') {
+          // AJAX request to get the models based on the selected make
+          $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+              action: 'get_vehicle_models_or_trims',
+              parent_term_id: makeId
+            },
+            success: function(response) {
+              $('#vehicle-model').html(response).prop('disabled', false); // Enable and populate model dropdown
+            }
+          });
+        }
+      });
+
+      // When "Model" is changed, load "Trim" dropdown
+      $('#vehicle-model').on('change', function() {
+        var modelId = $(this).val();
+
+        // Clear and disable the "Trim" dropdown
+        $('#vehicle-trim').html('<option value="">Select Trim</option>').prop('disabled', true);
+
+        if (modelId !== '') {
+          // AJAX request to get the trims based on the selected model
+          $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+              action: 'get_vehicle_models_or_trims',
+              parent_term_id: modelId
+            },
+            success: function(response) {
+              $('#vehicle-trim').html(response).prop('disabled', false); // Enable and populate trim dropdown
+            }
+          });
+        }
+      });
+    });
+  </script>
+  <?php
+
+  return ob_get_clean(); // Return the buffered output
+}
+add_shortcode('vehicle_form', 'vehicle_form_shortcode');
+
+// Function to handle AJAX requests for models and trims based on parent term
+function get_vehicle_models_or_trims() {
+  if (isset($_POST['parent_term_id'])) {
+    $parent_id = intval($_POST['parent_term_id']);
+
+    // Get child terms (Models or Trims) based on parent
+    $terms = get_terms(array(
+        'taxonomy' => 'make',
+        'hide_empty' => false,
+        'parent' => $parent_id,
+    ));
+
+    if (!empty($terms)) {
+      foreach ($terms as $term) {
+        echo '<option value="' . esc_attr($term->term_id) . '">' . esc_html($term->name) . '</option>';
+      }
+    } else {
+      echo '<option value="">No terms available</option>';
+    }
+  }
+
+  wp_die(); // Stop further execution
+}
+add_action('wp_ajax_get_vehicle_models_or_trims', 'get_vehicle_models_or_trims');
+add_action('wp_ajax_nopriv_get_vehicle_models_or_trims', 'get_vehicle_models_or_trims');
+
 ?>
+
+
+
