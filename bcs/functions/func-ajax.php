@@ -280,7 +280,7 @@ function vehicle_form_shortcode() {
         if (makeId !== '') {
           // AJAX request to get the models based on the selected make
           $.ajax({
-            url: ajaxurl,
+            url: window.wp_data.ajax_url,
             type: 'POST',
             data: {
               action: 'get_vehicle_models_or_trims',
@@ -303,7 +303,7 @@ function vehicle_form_shortcode() {
         if (modelId !== '') {
           // AJAX request to get the trims based on the selected model
           $.ajax({
-            url: ajaxurl,
+            url: window.wp_data.ajax_url,
             type: 'POST',
             data: {
               action: 'get_vehicle_models_or_trims',
@@ -348,7 +348,6 @@ function get_vehicle_models_or_trims() {
 }
 add_action('wp_ajax_get_vehicle_models_or_trims', 'get_vehicle_models_or_trims');
 add_action('wp_ajax_nopriv_get_vehicle_models_or_trims', 'get_vehicle_models_or_trims');
-
 ?>
 
 

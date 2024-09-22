@@ -13,6 +13,8 @@ get_header();
   <?php the_content(); ?>
 </div>
 
+
+
 <script>
   jQuery(document).ready(function($) {
     // Initially hide the brake painting and color palette fields
@@ -42,9 +44,7 @@ get_header();
       }
     });
   });
-</script>
 
-<script>
   jQuery(document).ready(function($) {
     // Function to update the active step in the sidebar
     function updateSidebarStep(step) {
@@ -74,9 +74,7 @@ get_header();
     // Initialize to step 1
     showStep(1);
   });
-</script>
 
-<script>
   jQuery(document).ready(function($) {
     // On change of the "Make" dropdown
     $('#vehicle-make').on('change', function() {
@@ -112,7 +110,7 @@ get_header();
       if (modelId !== '') {
         // AJAX request to get the trims based on the selected model
         $.ajax({
-          url: ajaxurl,
+          url: window.wp_data.ajax_url,
           type: 'POST',
           data: {
             action: 'get_vehicle_models_or_trims',
