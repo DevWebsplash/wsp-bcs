@@ -137,7 +137,71 @@
     </div>
   </div>
 </section>
+<?php
+$post_ID =$post->ID;
+$make_tax =  get_field( 'portfolio_category' ,$queried_object );
+$portfolio_posts =  get_field( 'portfolio_posts' ,$queried_object );
 
+// Push posts IDs to new array
+$identifiers = array();
+if(($make_tax) || ($portfolio_posts))     {
+	if($make_tax) {
+		$args_1 = get_posts( array(
+			'post_type' => 'portfolio',
+			'post_count' => -1,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'make',
+					'field' => 'term_id',
+					'terms' => $make_tax,
+				)
+			),
+		) );
+		foreach ( $args_1 as $post ) {
+			array_push( $identifiers, $post->ID );
+		}
+	}
+
+	if($portfolio_posts) {
+// Second query, specific posts query
+		$args_2 = get_posts( array(
+			'post_type' => 'portfolio',
+			'post_count' => -1,
+			'include' => $portfolio_posts,
+		) );
+		foreach ( $args_2 as $post ) {
+			array_push( $identifiers, $post->ID );
+		}
+
+	}
+} else {
+	$args_3 = get_posts( array(
+		'post_type' => 'portfolio',
+		'post_count' => -1,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'make',
+				'field' => 'term_id',
+				'terms' => $queried_object->term_id,
+			)
+		),
+	) );
+	foreach ( $args_3 as $post ) {
+		array_push( $identifiers, $post->ID );
+	}
+
+}
+
+if($identifiers){
+	// New query
+	$query = new WP_Query( array(
+		'post_type' => 'portfolio',
+		'post_status' => 'publish',
+		'post_count' => 9,
+		'post__in' => array_unique( $identifiers ),
+	) );
+
+	if ( $query->have_posts() ) :?>
 <!--SPECIALIST REVIEWS-->
 <section class="s-specialists-reviews ms-section">
   <div class="section-bg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-01.png" loading="lazy" alt=""></div>
@@ -152,79 +216,7 @@
     </div>
 
     <div class="s-specialists-reviews__list">
-
-
-	    <?php
-	    $post_ID =$post->ID;
-	    $make_tax =  get_field( 'portfolio_category' ,$queried_object );
-	    $portfolio_posts =  get_field( 'portfolio_posts' ,$queried_object );
-
-	    // Push posts IDs to new array
-	    $identifiers = array();
-	    if(($make_tax) || ($portfolio_posts))     {
-		    if($make_tax) {
-			    $args_1 = get_posts( array(
-				    'post_type' => 'portfolio',
-				    'post_count' => -1,
-				    'tax_query' => array(
-					    array(
-						    'taxonomy' => 'make',
-						    'field' => 'term_id',
-						    'terms' => $make_tax,
-					    )
-				    ),
-			    ) );
-			    foreach ( $args_1 as $post ) {
-				    array_push( $identifiers, $post->ID );
-			    }
-					    var_dump($identifiers);
-					    echo '</br> 1';
-		    }
-
-		    if($portfolio_posts) {
-// Second query, specific posts query
-			    $args_2 = get_posts( array(
-				    'post_type' => 'portfolio',
-				    'post_count' => -1,
-				    'include' => $portfolio_posts,
-			    ) );
-			    foreach ( $args_2 as $post ) {
-				    array_push( $identifiers, $post->ID );
-			    }
-					    var_dump($identifiers);
-					    echo '</br> 2';
-		    }
-	    } else {
-		    $args_3 = get_posts( array(
-			    'post_type' => 'portfolio',
-			    'post_count' => -1,
-			    'tax_query' => array(
-				    array(
-					    'taxonomy' => 'make',
-					    'field' => 'term_id',
-					    'terms' => $queried_object->term_id,
-				    )
-			    ),
-		    ) );
-		    foreach ( $args_3 as $post ) {
-			    array_push( $identifiers, $post->ID );
-		    }
-
-	    }
-
-		    echo '<br>';
-	    // New query
-	    $query = new WP_Query( array(
-		    'post_type' => 'portfolio',
-		    'post_status' => 'publish',
-		    'post_count' => -1,
-		    'post__in' => array_unique( $identifiers ),
-	    ) );
-
-	    if ( $query->have_posts() ) :
-
-		    while ( $query->have_posts() ) :
-
+		 <?php   while ( $query->have_posts() ) :
 			    $query->the_post();?>
                 <div class="sr-item">
                     <div class="sr-item__img"><?php $image_repeater = get_field( 'overview_image' ); ?>
@@ -257,15 +249,11 @@
                         </a>
                     </div>
                 </div>
-		    <?php endwhile;
-
-	    endif; wp_reset_postdata();?>
-
-
+		    <?php endwhile; ?>
     </div>
   </div>
 </section>
-
+<?php endif; wp_reset_postdata(); } ?>
 <!--SERVICES-->
 <section class="s-services-main ms-section">
   <div class="s-services-main__head">
