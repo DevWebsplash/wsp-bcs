@@ -14,7 +14,6 @@ get_header();
 </div>
 
 
-
 <script>
   jQuery(document).ready(function($) {
     // Initially hide the brake painting and color palette fields
@@ -71,57 +70,27 @@ get_header();
       showStep(prevStep);
     });
 
+    // Load the "Make" dropdown when the form is rendered
+    function loadVehicleMakes() {
+      $.ajax({
+        url: window.wp_data.ajax_url,
+        type: 'POST',
+        data: {
+          action: 'get_vehicle_makes' // Custom action to get the makes
+        },
+        success: function(response) {
+          $('select[data-make]').html(response); // Populate the "Make" dropdown
+          $('select[data-make]').sumo.reload(); // Reload the SumoSelect plugin
+        }
+      });
+    }
+
+    // Trigger the initial load of the makes after the form is rendered
+    loadVehicleMakes();
+
     // Initialize to step 1
     showStep(1);
   });
 
-  jQuery(document).ready(function($) {
-    // On change of the "Make" dropdown
-    $('#vehicle-make').on('change', function() {
-      var makeId = $(this).val();
-
-      // Clear and disable the "Model" and "Trim" dropdowns
-      $('#vehicle-model').html('<option value="">Select Model</option>').prop('disabled', true);
-      $('#vehicle-trim').html('<option value="">Select Trim</option>').prop('disabled', true);
-
-      if (makeId !== '') {
-        // AJAX request to get the models based on the selected make
-        $.ajax({
-          url: window.wp_data.ajax_url,  // WordPress AJAX handler
-          type: 'POST',
-          data: {
-            action: 'get_vehicle_models_or_trims',
-            parent_term_id: makeId
-          },
-          success: function(response) {
-            $('#vehicle-model').html(response).prop('disabled', false); // Enable and populate model dropdown
-          }
-        });
-      }
-    });
-
-    // On change of the "Model" dropdown
-    $('#vehicle-model').on('change', function() {
-      var modelId = $(this).val();
-
-      // Clear and disable the "Trim" dropdown
-      $('#vehicle-trim').html('<option value="">Select Trim</option>').prop('disabled', true);
-
-      if (modelId !== '') {
-        // AJAX request to get the trims based on the selected model
-        $.ajax({
-          url: window.wp_data.ajax_url,
-          type: 'POST',
-          data: {
-            action: 'get_vehicle_models_or_trims',
-            parent_term_id: modelId
-          },
-          success: function(response) {
-            $('#vehicle-trim').html(response).prop('disabled', false); // Enable and populate trim dropdown
-          }
-        });
-      }
-    });
-  });
 </script>
 <?php get_footer(); ?>
