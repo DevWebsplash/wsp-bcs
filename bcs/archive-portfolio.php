@@ -14,7 +14,7 @@ get_header();
 
     <!--VEHICLES-->
     <section class="s-vehicles-simple ms-section">
-        <div class="section-bg"><img src="images/bg-05.jpg" loading="lazy" alt=""></div>
+        <div class="section-bg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-05.jpg" loading="lazy" alt=""></div>
         <div class="cn">
             <div class="section-heading">
                 <h1 class="title h1">Find Your Vehicle</h1>
@@ -24,17 +24,22 @@ get_header();
                 <form>
                     <div class="form-row">
                         <div class="custom-select">
-                            <select>
-                                <option value="">Select Make</option>
-                                <option value="">Abarth</option>
-                                <option value="">Aixam</option>
-                                <option value="">Alfa Romeo</option>
-                                <option value="">Asia</option>
-                                <option value="">Aston Martin</option>
-                                <option value="">Audi</option>
-                                <option value="">Austin</option>
-                                <option value="">Bentley</option>
-                            </select>
+                            <div class="custom-select">
+
+                                <select data-make>
+                                    <option value="">Select Make</option>
+			                            <?php
+			                            // Get the parent terms of the 'make' taxonomy
+			                            $terms = get_terms('make', array('parent' => 0));
+			                            // Loop through parent terms and set active class if it matches current or parent
+			                            foreach ($terms as $term) {
+				                            ?>
+                                      <option data-make="<?php echo esc_attr($term->term_id); ?>" value="<?php echo esc_attr($term->slug); ?>">
+						                            <?php echo esc_html($term->name); ?>
+                                      </option>
+			                            <?php } ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="custom-select">
                             <select>
@@ -60,6 +65,16 @@ get_header();
                         </div>
                     </div>
                 </form>
+                <div class="cat_filter"> <?php
+	                // Get the parent terms of the 'make' taxonomy
+	                $terms = get_terms('portfolio_category');
+	                // Loop through parent terms and set active class if it matches current or parent
+	                foreach ($terms as $term) {
+		                ?>
+                      <div data-category="<?php echo esc_attr($term->term_id); ?>" value="<?php echo esc_attr($term->slug); ?>">
+				                <?php echo esc_html($term->name); ?>
+                      </div>
+	                <?php } ?></div>
             </div>
         </div>
     </section>
@@ -67,80 +82,45 @@ get_header();
     <!--SPLIT-->
     <section class="s-split ms-section">
         <div class="cn">
-            <div class="section-heading">
-                <div class="decorated-title decorated-title--column-center">
-                    <div class="small-title small-title--gray">DISCOVER</div>
-                    <div class="line-decor line-decor--red"></div>
-                </div>
-                <h2 class="title h1">Our Portfolio</h2>
-                <div class="subtitle">Browse our selection of high-quality brake calipers.</div>
-            </div>
+            <div class="s-vehicles__list">
+	            <?php
 
-            <div class="s-split__list">
-                <div class="split-item">
-                    <div class="split-item__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                    <div class="split-item__content">
-                        <h3 class="title h2">Fiat Doblo 2016 brake caliper painting in Leeds</h3>
-                        <div class="tags">
-                            <div class="tag">Engineering services</div>
-                            <div class="tag">Painting</div>
-                            <div class="tag">2 piston</div>
-                        </div>
-                        <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-                        <a href="portfolio-inner.html" class="btn btn-2">
-                            <span>Read more</span>
-                            <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-              </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="split-item">
-                    <div class="split-item__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                    <div class="split-item__content">
-                        <h3 class="title h2">Fiat Doblo 2016 brake caliper painting in Leeds</h3>
-                        <div class="tags">
-                            <div class="tag">Engineering services</div>
-                            <div class="tag">Painting</div>
-                            <div class="tag">2 piston</div>
-                        </div>
-                        <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-                        <a href="portfolio-inner.html" class="btn btn-2">
-                            <span>Read more</span>
-                            <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-              </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="split-item">
-                    <div class="split-item__img"><img src="images/img-02.jpg" loading="lazy" alt=""></div>
-                    <div class="split-item__content">
-                        <h3 class="title h2">Fiat Doblo 2016 brake caliper painting in Leeds</h3>
-                        <div class="tags">
-                            <div class="tag">Engineering services</div>
-                            <div class="tag">Painting</div>
-                            <div class="tag">2 piston</div>
-                        </div>
-                        <div class="desc">If you are looking for experienced and highly professional brake caliper painting and refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car detailing and care to make sure your vehicle is looking its best.</div>
-                        <a href="portfolio-inner.html" class="btn btn-2">
-                            <span>Read more</span>
-                            <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-              </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+		            // New query
+		            $query = new WP_Query( array(
+			            'post_type' => 'portfolio',
+			            'post_status' => 'publish',
+			            'post_count' => 9,
+		            ) );
 
-            <div class="section-btn">
-                <a href="#" class="btn btn-1">View all</a>
+		            if ( $query->have_posts() ) :?>
+									            <?php   while ( $query->have_posts() ) :
+										            $query->the_post();?>
+                                                    <div class="vehicle-card">
+                                                        <a href="<?php the_permalink();?>" class="img"><?php $image_repeater = get_field( 'overview_image' ); ?>
+	                                                        <?php if($image_repeater){?>
+                                                              <img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                                                                   loading="lazy"
+                                                                   alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>">
+	                                                        <?php }?></a>
+	                                                    <?php
+	                                                    $terms = wp_get_object_terms($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC') );
+	                                                    if ( !empty( $terms ) ) :
+
+		                                                    foreach ( $terms as $term ) { ?>
+                                                            <div class="tag"><?php echo$term->name;?></div>
+		                                                    <?php } ?>
+	                                                    <?php endif;
+	                                                    ?>
+                                                        <div class="model"><?php echo get_the_title();?></div>
+                                                        <div class="info"><?php echo get_field( 'preview_description' );?></div>
+                                                        <a href="<?php the_permalink();?>" class="btn btn-2">View</a>
+                                                    </div>
+									            <?php endwhile; ?>
+
+		            <?php endif; wp_reset_postdata();  ?>
+
+
+
             </div>
         </div>
     </section>

@@ -354,7 +354,7 @@ if ( have_rows( 'services_flexible_content' ) ):
                                     <div class="article-card__content">
                                         <div class="tags">
 																					<?php
-																					$terms = wp_get_object_terms($post->ID, 'portfolio-category', array('orderby' => 'term_id', 'order' => 'ASC') );
+																					$terms = wp_get_object_terms($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC') );
 																					if ( !empty( $terms ) ) :
 
 																						foreach ( $terms as $term ) { ?>

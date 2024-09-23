@@ -396,7 +396,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
                                     <h3 class="title h2"><?php the_title(); ?></h3>
                                     <div class="tags">
 	                                    <?php
-	                                    $terms = wp_get_object_terms($post->ID, 'portfolio-category', array('orderby' => 'term_id', 'order' => 'ASC') );
+	                                    $terms = wp_get_object_terms($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC') );
 	                                    if ( !empty( $terms ) ) :
 
 		                                    foreach ( $terms as $term ) { ?>
