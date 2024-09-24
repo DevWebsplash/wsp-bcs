@@ -281,6 +281,9 @@ if($identifiers){
               <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
                   <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
                 </svg>
+              <span class="cn_flex">
+                  <div class=""></div>
+              </span>
             </span>
         </a>
       </div>

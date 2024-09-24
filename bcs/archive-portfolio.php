@@ -84,14 +84,12 @@ get_header();
         <div class="cn">
             <div class="s-vehicles__list">
 	            <?php
-
 		            // New query
 		            $query = new WP_Query( array(
 			            'post_type' => 'portfolio',
 			            'post_status' => 'publish',
 			            'post_count' => 9,
 		            ) );
-
 		            if ( $query->have_posts() ) :?>
 									            <?php   while ( $query->have_posts() ) :
 										            $query->the_post();?>

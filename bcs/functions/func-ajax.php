@@ -217,29 +217,24 @@ function  return_post_html($portfolio) {
 			$portfolio->the_post();
 		$post_id = get_the_ID();
 		$permalink = get_permalink();
-		$home_url = get_home_url();
-		$claimed = get_field('claimed');
-		$hide_budget = get_field('hide_budget', 'option');
-		$post_types = get_the_terms($post->ID, 'listing-post-type');
+		$title = get_the_title();
+		$preview_description = get_field( 'preview_description' );
 
-
-		$return_html .= '<div class="sr-card"><a class="sr-card__overlay" href="' . $permalink . '"></a><div class="sr-card__img">';
-		if ($post_types) {
-			foreach ($post_types as $post_type) {
-				$category_color = get_field('category_collor', $post_type);
-				$post_type_name = $post_type->name;
-				$return_html .= '<a href="' . $home_url . '/search/?content_type=' . $post_type_name . '" class="tag" style="background: ' . $category_color . ';">' . $post_type_name . '</a>';
-			}
-		}
-
-		$return_html .= '</div></div></div>';
+ $image_repeater = get_field( 'overview_image' );
+		$return_html .= '<div class="vehicle-card"><a href="' . $permalink . '" class="img"><img src="'.esc_url( $image_repeater['url'] ).'" loading="lazy" alt="'.esc_attr( $image_repeater['alt'] ).'"</a>';
+	$terms = wp_get_object_terms($post_id, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC') );
+	if ( !empty( $terms ) ) :
+	foreach ( $terms as $term ) {
+	$return_html .= ' <div class="tag">'. $term->name .'</div>';
+	 }
+ endif;
+		$return_html .= '<div class="model">'. $title .'</div>';
+		$return_html .= '   <div class="info">'. $preview_description .'</div>';
+		$return_html .= ' <a href="' . $permalink . '" class="btn btn-2">View</a></div>';
 	endwhile;
 
 	return $return_html;
 }
-
-
-
 ?>
 
 
