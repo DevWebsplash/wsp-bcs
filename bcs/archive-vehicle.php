@@ -14,19 +14,19 @@
           <div class="custom-select">
             <select data-make>
               <option value="">Select Make</option>
-              <?php
-              // Get the parent terms of the 'make' taxonomy
-              $terms = get_terms ('make', array('parent' => 0));
-
-              // Loop through parent terms and set active class if it matches current or parent
-              foreach ($terms as $term) {
-
-                ?>
-                <option data-make="<?php echo esc_attr ($term->term_id); ?>"
-                        value="<?php echo esc_attr ($term->slug); ?>">
-                  <?php echo esc_html ($term->name); ?>
-                </option>
-              <?php } ?>
+<!--              --><?php
+//              // Get the parent terms of the 'make' taxonomy
+//              $terms = get_terms ('make', array('parent' => 0));
+//
+//              // Loop through parent terms and set active class if it matches current or parent
+//              foreach ($terms as $term) {
+//
+//                ?>
+<!--                <option data-make="--><?php //echo esc_attr ($term->term_id); ?><!--"-->
+<!--                        value="--><?php //echo esc_attr ($term->slug); ?><!--">-->
+<!--                  --><?php //echo esc_html ($term->name); ?>
+<!--                </option>-->
+<!--              --><?php //} ?>
             </select>
           </div>
           <div class="custom-select">
