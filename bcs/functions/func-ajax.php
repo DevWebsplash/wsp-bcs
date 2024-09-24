@@ -441,7 +441,7 @@ function  return_post_html($portfolio) {
 		$post_types = get_the_terms($post->ID, 'listing-post-type');
 
 
-		$return_html .= '<div class="sr-card"><a class="sr-card__overlay" href="' . $permalink . '"></a><div class="sr-card__img"><a href="' . $permalink . '"><img src="' . $imageUrl . '" alt="' . $imageAlt . '" loading="lazy"></a><div class="tags-list postType__tags-list">';
+		$return_html .= '<div class="sr-card"><a class="sr-card__overlay" href="' . $permalink . '"></a><div class="sr-card__img">';
 		if ($post_types) {
 			foreach ($post_types as $post_type) {
 				$category_color = get_field('category_collor', $post_type);
