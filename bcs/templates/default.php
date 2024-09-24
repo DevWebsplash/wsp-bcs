@@ -1,5 +1,5 @@
 <?php get_header();
-/* Template Name: Builder Template */
+/* Template Name: Flexible content Template */
 ?>
 
 <!--HERO variant 1-->
