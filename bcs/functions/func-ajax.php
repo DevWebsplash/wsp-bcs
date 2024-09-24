@@ -92,25 +92,7 @@ function get_vehicle_makes() {
       'parent' => 0, // Get only top-level "Make" terms
   ));
 
-//  if (is_wp_error($makes)) {
-//    wp_send_json_error('Error fetching makes');
-//  }
 
-//  $result = array();
-//  if (!empty($makes)) {
-//
-//  } else {
-//    wp_send_json_error('No Makes Available');
-//  }
-
-//  foreach ($makes as $make) {
-//    $result[] = array(
-//        'slug' => $make->slug,
-//        'id' => $make->term_id,
-//        'name' => $make->name,
-//        'label' => $make->name,
-//    );
-//  }
   $result = array_map(function($makes) {
     return [
         'slug' => $makes->slug,
