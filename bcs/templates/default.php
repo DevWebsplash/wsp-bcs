@@ -119,10 +119,10 @@
             <h2 class="title h1">Overview</h2>
         </div>
         <div class="inner-content">
-            <div class="inner-content__img"><img src="images/img-04.jpg" loading="lazy" alt=""></div>
-            <div class="inner-content__text">
-                <div class="text">The 2016 <u>Fiat Doblo</u> SWB (LOW) is a front wheel drive 2 Door Van that was released to the Australian market on 11th January 2014 classified as a . The Fiat Doblo is regarded as a van built in Italy with prices from a dealer as a used car starting at $12,400.
-                    The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel Turbo 4 Cylinder engine that has 77 kW of power (at 4000 rpm) and 290 Nm of torque (at 1500 rpm) via a 6 Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of diesel in the combined city and highway cycle while putting out 143g of CO2. It has a 0L fuel tank.</div>
+            <div class="inner-content__img"><img src="images/img-04.jpg" loading="lazy" alt=""></div>14 classified as a . The Fiat Doblo is regarded as a van built in Italy with prices from a dealer as a used car starting at $12,400.
+                    The Fiat Doblo is a front wheel drive 2 door with 2 seats, powered by a 1.6L Diesel Turbo 4 Cylinder engine that has 77 kW of power (at 4000 rpm)
+                    <div class="inner-content__text">
+                        <div class="text">The 2016 <u>Fiat Doblo</u> SWB (LOW) is a front wheel drive 2 Door Van that was released to the Australian market on 11th January 20and 290 Nm of torque (at 1500 rpm) via a 6 Speed Manual. Fiat claims the Doblo SWB (LOW) uses 5.5L/100km of diesel in the combined city and highway cycle while putting out 143g of CO2. It has a 0L fuel tank.</div>
                 <a href="#" class="btn btn-2">
                     <span>Read more</span>
                     <span class="icon">
