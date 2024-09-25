@@ -20,20 +20,6 @@
 </head>
 
 <body <?php body_class(); ?> itemscope="itemscope" itemtype="https://schema.org/WebPage">
-<?php
-//$header = 'header--white';
-//if (
-//    is_product()  ||
-//    is_cart()     ||
-//    is_checkout() ||
-//    is_page_template( array(
-//        'templates/how-it-works.php',
-//        'templates/gallery-single.php'
-//    )
-//  )) {
-//  $header = 'header--dark';
-//} ?>
-
 <div class="page-wrapper">
   <header class="header">
     <div class="cn">
@@ -73,7 +59,7 @@
                   <li><a href="#">Headline 3</a></li>
                 </ul>
               </li>
-              <li><a href="/staging/">Portfolio</a></li>
+              <li><a href="/staging/portfolio/">Portfolio</a></li>
               <li><a href="/staging/vehicle/">Vehicles</a></li>
               <li>
                 <a href="#">About us</a>

@@ -16,6 +16,28 @@ function js_variables($wp_query) {
 add_action ('wp_head', 'js_variables');
 
 
+// Function to get "Make" options for dropdown
+function get_vehicle_makes() {
+	$makes = get_terms(array(
+			'taxonomy' => 'make',
+			'hide_empty' => false,
+			'parent' => 0, // Get only top-level "Make" terms
+	));
+
+
+	$result = array_map(function($makes) {
+		return [
+				'slug' => $makes->slug,
+				'id' => $makes->term_id,
+				'label' => $makes->name,
+		];
+	}, $makes);
+//    wp_send_json_success($result);
+	echo json_encode($result);
+	wp_die();
+}
+add_action('wp_ajax_get_vehicle_makes', 'get_vehicle_makes');
+add_action('wp_ajax_nopriv_get_vehicle_makes', 'get_vehicle_makes');
 
 function model_fetch() {
   $make_id = intval($_POST['make']);
@@ -84,36 +106,50 @@ add_action('wp_ajax_trim_fetch', 'trim_fetch');
 add_action('wp_ajax_nopriv_trim_fetch', 'trim_fetch');
 
 
-// Function to get "Make" options for dropdown
-function get_vehicle_makes() {
-  $makes = get_terms(array(
-      'taxonomy' => 'make',
-      'hide_empty' => false,
-      'parent' => 0, // Get only top-level "Make" terms
-  ));
 
 
-  $result = array_map(function($makes) {
-    return [
-        'slug' => $makes->slug,
-        'id' => $makes->term_id,
-        'label' => $makes->name,
-    ];
-  }, $makes);
-//    wp_send_json_success($result);
-  echo json_encode($result);
-  wp_die();
-}
-add_action('wp_ajax_get_vehicle_makes', 'get_vehicle_makes');
-add_action('wp_ajax_nopriv_get_vehicle_makes', 'get_vehicle_makes');
+function ajax_fetch () { ?>
+	<script type="text/javascript" id="jax-fetch">
+		document.addEventListener('DOMContentLoaded', function() {
+			const filterItems = document.querySelectorAll('.portfolio-cat-filter div');
 
+			filterItems.forEach(item => {
+				item.addEventListener('click', function() {
+					const category = this.getAttribute('data-category');
+					const ajaxUrl = window.wp_data.ajax_url;
 
+					fetch(ajaxUrl, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+						},
+						body: new URLSearchParams({
+							action: 'get_portfolio',
+							category: category,
+							paged: 1
+						})
+					})
+					.then(response => response.json())
+					.then(data => {
+        if (data.success) {
+          document.querySelector('.portfolio__list').innerHTML = data.data.html;
+        } else {
+          console.error('Error:', data.data);
+        }
+					})
+					.catch(error => console.error('Error:', error));
+				});
+			});
+		});
+	</script>
+<?php }
+add_action ('wp_footer', 'ajax_fetch');
 
 // Function to handle AJAX request for fetching "Trim" posts based on selected "Make" and "Model" terms
 function get_portfolio() {
-	$make     = $_POST['make '] ? $_POST['make '] : '';
-	$paged    = $_POST['paged'] ? $_POST['paged'] : '';
-	$category = $_POST['category'] ? $_POST['category'] : '';
+  $make     = $_POST['make'] ? $_POST['make'] : '';
+  $paged    = $_POST['paged'] ? $_POST['paged'] : 1;
+  $category = $_POST['category'] ? $_POST['category'] : '';
 	$args     = array(
 		'post_type'      => 'portfolio',
 		'posts_per_page' => 9,
@@ -147,10 +183,9 @@ function get_portfolio() {
 	$return_html = '';
 	$return_pagination = '';
 
-	$i           = 0;
 	$portfolio    = new WP_Query( $args );
 
-	if ( $portfolio->have_posts() ):
+  if ($portfolio->have_posts()) {
 		$return_html = return_post_html($portfolio);
 
 
@@ -202,39 +237,50 @@ function get_portfolio() {
 
 		$return_html .= '<div class="btn-wrap"><div class="pagination" data-page="'. $paged .'"><ul>'. $return_pagination .'</ul></div></div><div class="count__posts visually-hidden" data-post-count="' . $p_count . '"></div></div>';
 
-	else :
-
+  } else {
 		// If no content, include the "No posts found" template.
 		$return_html .= '<h6 class="no-results">No results were found for your request</h6><div class="count__posts visually-hidden" data-post-count="0"></div></div>';
-	endif;
+  }
+
 	wp_reset_postdata();
+
+  // Return the HTML and pagination as JSON
+  wp_send_json_success(array('html' => $return_html));
 }
 add_action('wp_ajax_get_portfolio', 'get_portfolio');
 add_action('wp_ajax_nopriv_get_portfolio', 'get_portfolio');
 
-function  return_post_html($portfolio) {
-	while ($portfolio->have_posts()) :
-			$portfolio->the_post();
-		$post_id = get_the_ID();
-		$permalink = get_permalink();
-		$title = get_the_title();
-		$preview_description = get_field( 'preview_description' );
+function return_post_html($portfolio) {
+  $return_html = '';
+  while ($portfolio->have_posts()) {
+		$portfolio->the_post ();
+		$post_id = get_the_ID ();
+		$permalink = get_permalink ();
+		$title = get_the_title ();
+		$preview_description = get_field ('preview_description');
 
- $image_repeater = get_field( 'overview_image' );
-		$return_html .= '<div class="vehicle-card"><a href="' . $permalink . '" class="img"><img src="'.esc_url( $image_repeater['url'] ).'" loading="lazy" alt="'.esc_attr( $image_repeater['alt'] ).'"</a>';
-	$terms = wp_get_object_terms($post_id, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC') );
-	if ( !empty( $terms ) ) :
-	foreach ( $terms as $term ) {
-	$return_html .= ' <div class="tag">'. $term->name .'</div>';
-	 }
- endif;
-		$return_html .= '<div class="model">'. $title .'</div>';
-		$return_html .= '   <div class="info">'. $preview_description .'</div>';
-		$return_html .= ' <a href="' . $permalink . '" class="btn btn-2">View</a></div>';
-	endwhile;
+		$image_repeater = get_field ('overview_image');
+    $image_url = !empty($image_repeater['url']) ? esc_url($image_repeater['url']) : get_template_directory_uri() . '/assets/images/Portfolio_Placeholder.webp';
 
+    $return_html .= '<div class="portfolio__item">';
+    $return_html .= '<a href="' . $permalink . '" class="portfolio__image">';
+    $return_html .= '<img src="' . $image_url . '" loading="lazy" alt="' . esc_attr($image_repeater['alt'] ?? 'Placeholder Image') . '">';
+    $return_html .= '</a>';
+    $return_html .= '<div class="portfolio__content">';
+		$terms = wp_get_object_terms ($post_id, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
+    if (!empty($terms)) {
+			foreach ($terms as $term) {
+				$return_html .= ' <div class="tag">' . $term->name . '</div>';
+			}
+    }
+		$return_html .= '<div class="model">' . $title . '</div>';
+		$return_html .= '<div class="info">' . $preview_description . '</div>';
+    $return_html .= '<a href="' . $permalink . '" class="btn btn-2">View</a>';
+    $return_html .= '</div></div>';
+  }
 	return $return_html;
 }
+
 ?>
 
 

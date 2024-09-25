@@ -159,9 +159,9 @@ jQuery(function ($) {
   };
 
 
-  if (document.querySelector('.quote-form')) {
-    handleMakeChange.call(makeSelect[0]);
-  }
+  // if (document.querySelector('.quote-form')) {
+  // }
+  handleMakeChange.call(makeSelect[0]);
   makeSelect.on('change', debounce(handleMakeChange, 100));
   modelSelect.on('change', debounce(handleModelChange, 100));
   trimSelect.on('change', debounce(handleTrimChange, 100));

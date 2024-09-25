@@ -32,6 +32,23 @@ $md: 768px;
 $lg: 992px;
 $xl: 1270px;
 
+// _breakpoints.scss
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px
+);
+
+@mixin media-breakpoint-up($name) {
+  $breakpoint: map-get($breakpoints, $name);
+  @if $breakpoint {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
 
 // Transition
 $main-transition: all .3s ease-out;
