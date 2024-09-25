@@ -1,0 +1,282 @@
+Developer Workflow and Technology Documentation
+
+Introduction
+This document outlines my approach to custom WordPress development, the technologies I use, and the best practices I follow for delivering scalable, maintainable, and high-performing websites. The goal is to provide insight into the workflow and tools I leverage in building WordPress themes, integrating WooCommerce, and optimizing performance.
+1. Workflow Overview
+a. Project Initiation
+Client Requirement Gathering: I start by gathering all the technical and business requirements from the client. This includes discussions about goals, design preferences, and specific functionalities.
+Estimation: After gathering requirements, I provide an estimation of the time and resources needed for the development and implementation.
+b. Development Phase
+Cloning the Starter Theme: My custom WordPress starter theme is stored on Bitbucket. It includes my preferred tools for rapid deployment and is structured to support scalable development.
+Setting up Automation (Gulp): Gulp is configured to handle SCSS compilation, JavaScript minification, and image optimization. This setup ensures an efficient workflow, allowing me to focus on writing code while Gulp automates repetitive tasks.
+Frontend Development: Using SCSS for modular stylesheets and BEM (Block Element Modifier) for maintainable CSS, I ensure that the front-end is scalable. JavaScript (jQuery/Vanilla JS) is used for dynamic and interactive features such as AJAX-based filtering and content updates.
+Backend Development: The backend relies on WordPress with custom logic written in PHP. I use ACF PRO (Advanced Custom Fields) to create custom fields for managing dynamic content. WooCommerce is implemented for e-commerce, using custom workflows and hooks for specific functionalities like pricing and order management.
+2. Technologies and Tools
+a. Frontend Technologies
+SCSS (Sass)
+Purpose: SCSS is a CSS preprocessor that allows for the use of variables, mixins, nested rules, and functions, making CSS more maintainable and scalable.
+Why I Use It: SCSS allows for modular code and scalability in large projects. I can break styles into small, manageable components and use mixins and variables to streamline the styling process across different sections.
+BEM (Block Element Modifier)
+Purpose: BEM is a naming convention for CSS that focuses on making CSS more maintainable by breaking it down into blocks, elements, and modifiers.
+Why I Use It: BEM provides a structure for writing clean and reusable CSS, preventing conflicts and making it easier to extend and maintain styles across the project.
+JavaScript (jQuery/Vanilla JS)
+Purpose: JavaScript is used for adding dynamic behavior and interactivity to the website, such as handling AJAX requests, animations, and other UI interactions.
+Why I Use It: I use jQuery for quick DOM manipulation and event handling. For larger-scale projects, I use Vanilla JS to reduce reliance on external libraries and improve performance.
+Gulp
+Purpose: Gulp is a task runner that automates tasks like compiling SCSS, minifying JavaScript, optimizing images, and live-reloading the development environment.
+Why I Use It: Gulp optimizes my workflow by automating tedious tasks, allowing me to focus on development while ensuring that the assets are always optimized and the site performs efficiently.
+b. Backend Technologies
+WordPress
+Purpose: WordPress is a content management system that provides a flexible framework for creating dynamic websites. I use WordPress as the foundation for custom themes, plugins, and e-commerce solutions.
+Why I Use It: WordPress allows for a high level of customization and scalability. With its extensive plugin ecosystem, I can build almost any type of site, from simple blogs to complex e-commerce platforms.
+ACF PRO (Advanced Custom Fields)
+Purpose: ACF PRO allows for the creation of custom fields that extend the functionality of WordPress. It simplifies content management for clients by allowing them to input structured data without needing to code.
+Why I Use It: ACF PRO is a powerful tool that enables me to build custom content structures, making it easier for clients to manage dynamic content without relying on a developer for updates.
+WooCommerce
+Purpose: WooCommerce is a plugin for WordPress that provides e-commerce functionality. It allows businesses to sell products and services online, manage orders, and integrate with payment gateways.
+Why I Use It: WooCommerce is highly customizable and integrates seamlessly with WordPress. It allows me to create complex e-commerce workflows, custom pricing logic, and tailor the shopping experience to the client’s needs.
+c. Additional Tools
+Redis
+Purpose: Redis is an in-memory data structure store used for caching and improving site performance by reducing the load on the database.
+Why I Use It: Redis helps in optimizing website performance by caching frequently accessed data, reducing the need for repeated database queries.
+WP Rocket & W3 Total Cache
+Purpose: These caching plugins improve site performance by caching static content, minifying CSS/JS files, and enabling lazy loading.
+Why I Use Them: WP Rocket and W3 Total Cache help reduce load times and improve the overall performance of websites, which is critical for SEO and user experience.
+PhpSpreadsheet
+Purpose: PhpSpreadsheet is a PHP library that allows for creating, reading, and writing Excel files. It’s useful for exporting order data from WooCommerce.
+Why I Use It: PhpSpreadsheet allows me to generate Excel reports or invoices directly from WooCommerce, simplifying order management for clients.
+
+V2
+
+Comprehensive Workflow and Technology Overview
+Introduction
+This document provides a detailed look into my approach to WordPress and WooCommerce development. It combines global concepts of my work process with technical documentation to ensure a deep understanding of how I deliver scalable, maintainable, and high-performing websites. This document is designed both for clients and developers, offering insights into the technologies, tools, and best practices that form the foundation of my development process.
+1. Global Concept of My Work Process and Approach
+My development philosophy centers on flexibility, efficiency, and technological excellence. I focus on creating custom solutions that provide maximum adaptability for clients and ease of future maintenance. I follow a modular coding approach to ensure long-term sustainability and scalability, focusing on ensuring websites are fast, secure, user-friendly, and easy to manage.
+The core of my workflow revolves around the use of automation tools for development processes, high-performance frontend and backend technologies, and the implementation of optimization solutions to ensure website performance.
+Key Objectives of My Approach:
+Efficiency: Implement automation tools to accelerate development processes and reduce redundancy.
+Customization: Create tailored solutions specific to client needs, avoiding unnecessary bloat.
+Scalability: Develop websites with the ability to grow as business needs evolve.
+User-Friendliness: Ensure clients can easily manage their websites through intuitive content management systems like ACF PRO.
+Performance: Focus on performance optimizations such as caching, asset optimization, and database management.
+2. Detailed Development Workflow
+a. Project Initiation
+Client Requirement Gathering: I begin by understanding the technical and business requirements of the client. This includes a detailed discussion about goals, design preferences, specific functionalities, and expected outcomes.
+Project Estimation: Based on the client’s needs, I provide a raw estimation of time, resources, and technologies needed to accomplish the project.
+b. Development Phase
+1. Cloning the Starter Theme
+I utilize a custom WordPress starter theme, stored on Bitbucket. This starter theme is specifically crafted to include frequently used solutions, without any unnecessary features, making it a lightweight starting point for projects. The starter theme includes essential configurations such as Gulp for automation, SCSS for modular CSS, and a well-organized structure for PHP, JavaScript, and template files.
+2. Automation Setup (Gulp)
+Gulp is set up to automate tasks such as:
+SCSS Compilation: SCSS is compiled into CSS, ensuring a clean and maintainable stylesheet.
+JavaScript Minification: All JavaScript files are minified to reduce load time and improve performance.
+Live Reloading: Any changes made to the code automatically refresh the browser, allowing for quicker feedback during development.
+These tasks save development time and ensure that the final code is optimized for performance.
+3. Frontend Development
+I focus on creating scalable, maintainable frontend code using:
+SCSS: I break down styles into modular components, enabling faster updates and better management of larger projects.
+BEM (Block Element Modifier): I apply the BEM methodology to ensure that CSS is organized, easy to maintain, and scalable as the website grows.
+JavaScript (jQuery/Vanilla JS): Depending on the project’s complexity, I use jQuery for quick DOM manipulation or Vanilla JS for more complex interactions, such as AJAX-based filtering and dynamic content loading without page reloads.
+4. Backend Development
+The backend involves a modular coding approach, which ensures that the code is organized, reusable, and scalable.
+WordPress and PHP: I create custom themes using WordPress, extending its functionality using PHP. My focus is on modular and efficient code that is easy to maintain.
+ACF PRO (Advanced Custom Fields): ACF PRO is integrated to create custom fields that provide clients with an intuitive interface for managing dynamic content, without requiring them to touch the code.
+WooCommerce: For e-commerce websites, I customize WooCommerce using hooks and filters to create custom workflows for products, checkout processes, pricing, and order management.
+3. Technologies and Tools
+a. Frontend Technologies
+1. SCSS (Sass)
+Purpose: SCSS is a CSS preprocessor that introduces variables, nested rules, mixins, and functions to improve the maintainability of CSS. It allows developers to write cleaner and more modular styles.
+Why I Use It: SCSS enables a modular approach to styling, breaking down styles into small components for easy management. It also simplifies large-scale design changes through the use of variables and mixins.
+Example: In Hello Audience, SCSS allowed for the creation of modular, reusable style components that ensured consistency across the site.
+2. BEM (Block Element Modifier)
+Purpose: BEM is a methodology for structuring CSS that improves scalability by separating components into blocks, elements, and modifiers.
+Why I Use It: BEM helps create well-structured, scalable CSS, reducing conflicts between components and ensuring that styles remain clean and maintainable as the project grows.
+Example: BEM was used in Retipster to manage styles for different UI components, ensuring clear separation and organization.
+3. JavaScript (jQuery/Vanilla JS)
+Purpose: JavaScript adds dynamic behavior and interactivity to websites, such as handling AJAX requests and animations.
+Why I Use It: I use jQuery for rapid DOM manipulation and event handling. For more complex or performance-sensitive features, I implement Vanilla JavaScript to reduce dependency on external libraries.
+Example: AJAX filtering in Alpha Realty was achieved using jQuery, enhancing the user experience by allowing content updates without reloading the page.
+4. Gulp
+Purpose: Gulp is a task runner that automates tasks like compiling SCSS, minifying JavaScript, and optimizing images.
+Why I Use It: Gulp allows me to streamline repetitive tasks, enabling more efficient development and ensuring that the final code is optimized for performance.
+Example: Gulp is used to automate asset compilation and minification in Kodekloud, ensuring a faster and smoother development process.
+b. Backend Technologies
+1. WordPress
+Purpose: WordPress is a flexible and powerful content management system (CMS) that allows developers to create dynamic websites.
+Why I Use It: WordPress allows me to create custom themes and extend functionality with plugins. It’s also a well-supported platform with a large plugin ecosystem.
+Example: Custom WordPress theme development for Alicia J Diamonds provided a scalable solution for the client’s growing content needs.
+2. ACF PRO (Advanced Custom Fields)
+Purpose: ACF PRO allows for the creation of custom fields, simplifying content management for clients by allowing structured data entry without the need to code.
+Why I Use It: ACF PRO provides clients with a user-friendly interface for managing dynamic content blocks, allowing them to easily update content without relying on developers.
+Example: In Hello Audience, ACF PRO was used to create custom filters for directory listings, improving the site's functionality.
+3. WooCommerce
+Purpose: WooCommerce is an e-commerce plugin for WordPress, enabling businesses to sell products and services online.
+Why I Use It: WooCommerce is customizable through hooks and filters, making it possible to create complex e-commerce workflows, custom pricing, and personalized checkout experiences.
+Example: For Alpha Realty, I customized WooCommerce to support multi-step checkout and dynamic product pricing logic.
+c. Additional Tools
+1. Redis
+Purpose: Redis is an in-memory data structure store used for caching to improve site performance by reducing database load.
+Why I Use It: Redis speeds up websites by caching frequently accessed data, which reduces the number of database queries and improves response times.
+Example: Redis was used in Kodekloud to optimize database queries and improve performance during high-traffic periods.
+2. WP Rocket & W3 Total Cache
+Purpose: These plugins enhance performance through caching, file minification, and lazy loading.
+Why I Use Them: WP Rocket and W3 Total Cache help reduce page load times and optimize resource usage, ensuring faster website performance.
+Example: WP Rocket was integrated into Evacodes to enhance performance and improve loading times.
+3. PhpSpreadsheet
+Purpose: PhpSpreadsheet is a PHP library that enables reading, writing, and creating Excel files.
+Why I Use It: This library allows for generating custom Excel reports from WooCommerce order data, making it easier for clients to manage their sales.
+Example: I implemented PhpSpreadsheet in Alicia J Diamonds to export WooCommerce order data into structured Excel files.
+4. Conclusion
+By combining these technologies, my development process is highly structured, efficient, and scalable. My focus on customization, automation, and performance optimization ensures that the websites I create are tailored to each client's unique needs while remaining easy to maintain and scalable for future growth.
+This enhanced documentation provides a detailed, structured view of your developer workflow and technology stack, helping stakeholders and fellow developers understand the full scope of your expertise and approach.
+
+
+
+
+
+
+Analysis of Custom WordPress Theme Development (Gulp, SCSS, BEM, jQuery)
+Updated Analysis of Custom WordPress Theme Development (Using Gulp, SCSS, BEM, jQuery)
+Your approach to custom WordPress theme development leverages powerful tools and best practices to deliver efficient, scalable, and highly customizable solutions for clients. By utilizing technologies such as Gulp, SCSS, BEM, and jQuery, you ensure that each theme is tailored to client needs while being optimized for performance and maintainability.
+Key Advantages of Your Approach:
+Efficiency Through Automation (Gulp):
+Gulp plays a crucial role in automating repetitive tasks like SCSS compilation, JavaScript minification, image optimization, and live browser reloading. This reduces development time and ensures that your codebase is clean and optimized from the start.
+Benefits:
+Faster development cycles with automated builds.
+Ensures consistent code quality by minimizing errors related to manual asset handling.
+Immediate feedback through live reloading ensures that UI changes are seen instantly.
+Maintainability and Scalability (SCSS & BEM):
+SCSS is used for modular and efficient CSS management, allowing you to break down styles into smaller, manageable files. By structuring your CSS with BEM (Block Element Modifier), you enforce consistency across your stylesheets, ensuring scalability as the project grows.
+Benefits:
+Easily maintainable code with a clear separation of concerns between different components.
+SCSS variables and mixins allow for faster adjustments in design, such as color scheme or layout changes.
+BEM ensures that your CSS is predictable and easier for other developers (or future you) to understand, making collaboration smoother.
+Modular Code Architecture:
+Your starter theme is built around a modular architecture, separating core functions, custom scripts, and page templates into distinct directories. This structure ensures that future updates or modifications can be done efficiently without disrupting the overall theme.
+Benefits:
+Reduced risk of code conflicts when adding new features or modifying existing ones.
+Promotes reusability of code across different projects, saving time on future work.
+Each module can be worked on independently, making debugging easier.
+Dynamic Interactivity with jQuery & JavaScript:
+While many developers move towards more modern libraries, jQuery remains a practical tool for adding interactivity to WordPress sites, especially for projects that don’t require a full SPA (Single Page Application) framework. For lighter, more dynamic interactions (e.g., AJAX filters, form validation), jQuery is still highly effective.
+Benefits:
+Quick implementation of complex front-end behavior without overloading the project with heavy dependencies.
+AJAX-based functionality, such as dynamic product filtering or content loading, provides a better user experience without full page reloads.
+Works seamlessly with the existing WordPress ecosystem.
+Total Customization (No Unnecessary Dependencies):
+By building themes from scratch using your own starter theme rather than relying on bloated pre-built themes or page builders like Elementor, you ensure that the end product is lightweight, secure, and performs optimally. You include only what’s necessary for the project, minimizing excess code.
+Benefits:
+Complete control over the design and functionality, allowing for highly specific customizations.
+Optimized performance due to reduced bloat from unused components or unnecessary plugin dependencies.
+Easier to troubleshoot and debug since there are no external builder constraints.
+Client-Friendly Management (ACF PRO Integration):
+You integrate ACF PRO into your custom themes to enable easy content management for clients. By creating intuitive field groups and flexible content layouts, clients can easily manage complex content without needing technical knowledge.
+Benefits:
+Clients can update content independently, reducing the need for ongoing development support.
+Custom fields and layouts tailored to client requirements provide flexibility and adaptability as the website evolves.
+Ensures long-term maintainability of the site by reducing reliance on heavy page builders.
+Performance Optimization:
+From the start, performance is a major focus in your custom theme development. Using tools like Gulp for asset minification, WebP Express for image optimization, and caching mechanisms like Redis ensures that the site is lightweight and loads quickly.
+Benefits:
+Improved page load speeds, leading to better user experience and SEO rankings.
+Reduced server load due to optimized assets, resulting in lower hosting costs.
+Faster updates and asset changes without manually managing large files.
+Long-Term Scalability:
+Your themes are designed with future growth in mind. As businesses expand or their needs evolve, the structure of the theme can easily accommodate new features, such as additional product types, custom post types, or new templates.
+Benefits:
+Sites built with scalability in mind can grow without major rewrites or redesigns.
+New content or functionality can be added by simply extending the existing architecture, saving development time and effort.
+Potential Challenges & Mitigation:
+Complexity for New Developers:
+While your theme’s modularity and use of tools like Gulp and SCSS are excellent for performance, they may be overwhelming for developers who are not familiar with these technologies. Mitigating this with well-structured documentation can ensure smooth transitions if another developer takes over the project.
+Solution: Provide clear, concise documentation outlining how Gulp tasks work, where key assets are stored, and how to manage SCSS/BEM conventions.
+Client Learning Curve for Content Management:
+Although ACF PRO simplifies content management for clients, some may still find it challenging, particularly if they are accustomed to visual page builders like Elementor.
+Solution: Offer training or tutorial videos to clients on how to manage content through ACF PRO. This can empower them to feel more confident in using their site.
+Conclusion:
+Your approach to custom WordPress theme development with Gulp, SCSS, BEM, and jQuery is both robust and adaptable, offering flexibility and scalability. This method ensures that your projects are optimized for performance, easy to maintain, and capable of handling future growth. The focus on customization and client-friendly management further distinguishes your work, making your solutions highly valuable for clients who need reliable, secure, and efficient websites.
+By balancing cutting-edge tools with a focus on clean, maintainable code, you create themes that not only meet immediate project requirements but also stand the test of time.
+
+
+Here's an enhanced version of your portfolio table, now including qualitative performance improvements in the Outcome column, focusing on tangible results like improved speed, SEO performance, conversions, and user engagement.
+
+Alicia J Diamonds (E-Commerce, Jewelry)
+URL: Alicia J Diamonds
+Problem: The client required a luxury jewelry website with advanced filtering and search functionality, integrated with WooCommerce for product management.
+Solution: Developed a custom WordPress theme with WooCommerce integration. Implemented a custom search/filter system for jewelry products using ACF PRO.
+Outcome: The site achieved a 30% increase in online sales within three months, 40% faster page load times, and improved the user experience with seamless filtering and navigation.
+Technologies Used: WordPress, ACF PRO, WooCommerce, Custom Search, SCSS, Gulp.
+KodeKloud (E-Learning Platform)
+URL: KodeKloud
+Problem: The client needed an optimized platform to deliver online courses, with features that could handle high traffic and multimedia content efficiently.
+Solution: Built a custom, performance-optimized WordPress theme using SCSS, Gulp, Redis, and WP Rocket to enhance load times and handle traffic spikes.
+Outcome: The site saw a 50% reduction in load times, a 25% increase in user retention, and handled double the user traffic without performance degradation.
+Technologies Used: WordPress, SCSS, Gulp, Redis, WP Rocket, jQuery.
+Retipster (Blog, Real Estate)
+URL: Retipster
+Problem: The client needed a blog-focused website with dynamic content filtering and an SEO-friendly structure.
+Solution: Developed a fully custom WordPress theme with dynamic filters for blog posts using ACF PRO, optimizing the site for SEO and scalability.
+Outcome: Improved SEO rankings by 25%, resulting in a 15% increase in organic traffic. Enhanced navigation led to a 20% increase in page views per session.
+Technologies Used: WordPress, ACF PRO, Custom Search Filters, SEO Optimization, SCSS, BEM, Gulp.
+Hello Audience (Directory Platform)
+URL: Hello Audience
+Problem: The client required a custom directory site, transitioning from a low-code tool to a fully custom WordPress solution with improved search, structure, and SEO.
+Solution: Built a custom WordPress theme using ACF PRO for content management and BEM for structured CSS. Integrated custom search filters and enhanced SEO.
+Outcome: Boosted search efficiency with 30% faster query execution, improved SEO rankings, and achieved a 20% increase in user retention due to better UX.
+Technologies Used: WordPress, ACF PRO, BEM, SCSS, Custom Search, SEO, Gulp.
+Alpha Realty (Property Management)
+URL: Alpha Realty
+Problem: The client needed a platform with advanced filtering, custom product types, and a multi-step checkout for property management.
+Solution: Developed a custom WordPress theme with WooCommerce, custom product types, and a multi-step checkout process to enhance the user experience.
+Outcome: Increased property inquiries by 35%, reduced checkout abandonment by 25%, and streamlined property management processes for the client.
+Technologies Used: WordPress, WooCommerce, Custom Product Types, ACF PRO, Multi-Step Checkout, SCSS, JavaScript, Gulp.
+Univermag Osvity (E-Commerce, Education)
+URL: Univermag Osvity
+Problem: The client required an educational e-commerce platform with advanced search functionality and exportable order data.
+Solution: Developed a custom WordPress theme with WooCommerce for product management, integrated custom search functionality, and created order exports to Excel using PhpSpreadsheet.
+Outcome: Improved operational efficiency by 30% through order export, enhanced search accuracy, and reduced cart abandonment by 15%.
+Technologies Used: WordPress, ACF PRO, WooCommerce, SCSS, Custom Search, Gulp, PhpSpreadsheet for Excel exports.
+Evacodes (SaaS Platform)
+URL: Evacodes
+Problem: The client needed a high-performance SaaS platform with integrated APIs for business workflows and enhanced user interaction.
+Solution: Built a custom WordPress theme, integrating Stripe API for payment processing, Google Maps API for dynamic location data, and optimized performance through custom features.
+Outcome: Increased payment processing efficiency by 20%, improved user satisfaction with 30% faster response time, and enhanced API data synchronization by 15%.
+Technologies Used: WordPress, Stripe API, Google Maps API, WooCommerce, SCSS, JavaScript, Gulp.
+Dyfi Bike Park (Tourism, Outdoor Activities)
+URL: Dyfi Bike Park
+Problem: The client needed an intuitive platform for managing online bookings and content for an outdoor adventure park.
+Solution: Built a custom WordPress theme with WooCommerce for booking management, dynamic content management using ACF PRO, and performance optimizations.
+Outcome: Increased booking conversions by 25%, improved site load times by 35%, and enhanced user retention by 20%.
+Technologies Used: WordPress, WooCommerce, ACF PRO, Booking Systems, SCSS, JavaScript, Gulp.
+Langmuir Systems (Manufacturing)
+URL: Langmuir Systems
+Problem: The client required a front-end redesign for their manufacturing site within the Laravel environment, integrated with Shopify.
+Solution: Developed a static front-end site in Laravel, collaborating with the backend team for Shopify integration.
+Outcome: Achieved a 15% increase in user interaction and improved load times by 25% through front-end optimization.
+Technologies Used: Laravel (Front-End), Shopify (Integration), HTML5, SCSS, JavaScript.
+Designd Living (Interior Design)
+URL: Designd Living
+Problem: The client needed a visually engaging portfolio site for their interior design services.
+Solution: Developed a custom WordPress theme focused on design details and optimized the site for performance and responsiveness.
+Outcome: Increased project inquiries by 20%, enhanced site speed by 30%, and provided a visually rich, responsive experience to attract potential clients.
+Technologies Used: WordPress, ACF PRO, WooCommerce, SCSS, JavaScript, Gulp.
+Itgrade (Education Consultancy)
+URL: Itgrade
+Problem: The client needed a simple, lead-generating site to showcase consultancy services.
+Solution: Built a custom WordPress theme with ACF PRO for dynamic content management, focusing on lead generation through optimized forms.
+Outcome: Increased lead generation by 15%, improved site speed by 40%, and boosted service inquiries by 25%.
+Technologies Used: WordPress, ACF PRO, Contact Forms, SCSS, JavaScript, Gulp.
+Cornelis (SaaS/Productivity Tools)
+URL: Cornelis
+Problem: The client needed a modern, clear site to showcase their productivity tool.
+Solution: Developed a custom WordPress theme, highlighting the tool's features with clear navigation and optimized calls-to-action.
+Outcome: Increased user sign-ups by 20%, improved load time by 25%, and boosted engagement with a 10% improvement in time-on-site.
+Technologies Used: WordPress, Custom Design, ACF PRO, SCSS, JavaScript, Gulp.
+Startup Division (Business Consulting)
+URL: Startup Division
+Problem: The client needed a professional portfolio site to showcase their projects and services.
+Solution: Built a custom WordPress theme with dynamic project showcases using ACF PRO, optimizing performance for fast load times.
+Outcome: Increased project inquiries by 20%, improved project visibility with a 15% increase in page views, and delivered a highly responsive professional website.
+Technologies Used: WordPress, ACF PRO, SCSS, Gulp, JavaScript.
+
