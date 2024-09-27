@@ -575,6 +575,10 @@
     </div>
   </div>
 </section>
-
+<section class="ms-section">
+  <div class="cn">
+    <?php the_content(); ?>
+  </div>
+</section>
 
 <?php get_footer(); ?>
