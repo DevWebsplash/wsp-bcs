@@ -417,7 +417,7 @@ if ( have_rows( 'default_content' ) ):
                 </div>
             </div>
         </section>
-		<?php elseif ( get_row_layout() == 'services_with_Image' ): ?>
+		<?php elseif ( get_row_layout() == 'services_with_image' ): ?>
         <!--THREE COLUMN variant 1-->
         <section class="s-three-column s-three-column--variant-1 ms-section">
             <div class="cn">
