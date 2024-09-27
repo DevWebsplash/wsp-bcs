@@ -14,6 +14,8 @@ function gulp_wp_register_menus() {
 	register_nav_menus(
 		array(
 			'primary' => __( 'Primary' ),
+			'footer_first' => __( 'Footer first' ),
+			'footer_second' => __( 'Footer second' ),
 		)
 	);
 }
