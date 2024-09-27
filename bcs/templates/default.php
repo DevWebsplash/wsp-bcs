@@ -4,10 +4,10 @@
 
 <?php
 // Check value exists.
-if ( have_rows( 'flixble_content_vehicle' ) ):
+if ( have_rows( 'default_content' ) ):
 	$i = 0;
 	// Loop through rows.
-	while ( have_rows( 'flixble_content_vehicle' ) ) : the_row();
+	while ( have_rows( 'default_content' ) ) : the_row();
 		$i ++;
 		// Case: Paragraph layout.
 		if ( get_row_layout() == 'technical_data' ):?>
