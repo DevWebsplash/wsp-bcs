@@ -19,45 +19,39 @@
       <div class="subtitle">Select your vehicle make, model, and trim to get personalized recommendations</div>
     </div>
     <div class="vehicles-search">
-      <form>
-        <div class="form-row">
-          <div class="custom-select">
-            <select>
-              <option value="">Select Make</option>
-              <option value="">Abarth</option>
-              <option value="">Aixam</option>
-              <option value="">Alfa Romeo</option>
-              <option value="">Asia</option>
-              <option value="">Aston Martin</option>
-              <option value="">Audi</option>
-              <option value="">Austin</option>
-              <option value="">Bentley</option>
-            </select>
-          </div>
-          <div class="custom-select">
-            <select>
-              <option value="">Select Model</option>
-              <option value="">Aston Martin</option>
-              <option value="">Audi</option>
-              <option value="">Austin</option>
-              <option value="">Bentley</option>
-            </select>
-          </div>
-          <div class="custom-select">
-            <select>
-              <option value="">Select Trim</option>
-              <option value="">Asia</option>
-              <option value="">Aston Martin</option>
-              <option value="">Audi</option>
-              <option value="">Austin</option>
-              <option value="">Bentley</option>
-            </select>
-          </div>
-          <div class="btn-group">
-            <button type="submit" class="btn btn-1">Search</button>
-          </div>
+      <div class="form-row">
+        <div class="custom-select">
+          <select data-make>
+            <option value="">Select Make</option>
+            <!--              --><?php
+            //              // Get the parent terms of the 'make' taxonomy
+            //              $terms = get_terms ('make', array('parent' => 0));
+            //
+            //              // Loop through parent terms and set active class if it matches current or parent
+            //              foreach ($terms as $term) {
+            //
+            //                ?>
+            <!--                <option data-make="--><?php //echo esc_attr ($term->term_id); ?><!--"-->
+            <!--                        value="--><?php //echo esc_attr ($term->slug); ?><!--">-->
+            <!--                  --><?php //echo esc_html ($term->name); ?>
+            <!--                </option>-->
+            <!--              --><?php //} ?>
+          </select>
         </div>
-      </form>
+        <div class="custom-select">
+          <select data-model>
+            <option value="">Select Model</option>
+          </select>
+        </div>
+        <div class="custom-select">
+          <select data-trim>
+            <option>Select Trim</option>
+          </select>
+        </div>
+        <div class="btn-group">
+          <a href="/vehicle/" class="btn btn-1">Search</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
