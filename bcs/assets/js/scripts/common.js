@@ -16,6 +16,15 @@ jQuery(function($) {
         $(this).closest('.acc-item').toggleClass('active').find('.acc-body').slideToggle(300);
     });
 
+    // Toggles 'hover' class on '.form-item--label' when input is focused or has a value.
+    $('.form-item--label .wpcf7-form-control').on('focus blur', function (e) {
+        if (e.type === 'focus' || $(this).val().length > 0) {
+            $(this).closest('.form-item--label').addClass('hover');
+        } else {
+            $(this).closest('.form-item--label').removeClass('hover');
+        }
+    });
+
     //select
     $('.custom-select select').SumoSelect({
         search: true,

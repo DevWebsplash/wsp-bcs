@@ -15,6 +15,33 @@ function js_variables($wp_query) {
 }
 add_action ('wp_head', 'js_variables');
 
+// Function to render the vehicle search form
+function render_vehicle_search_form() {
+  ?>
+  <div class="vehicles-search">
+    <div class="form-row">
+      <div class="custom-select">
+        <select class="data-make">
+          <option value="">Select Make</option>
+        </select>
+      </div>
+      <div class="custom-select">
+        <select class="data-model">
+          <option value="">Select Model</option>
+        </select>
+      </div>
+      <div class="custom-select">
+        <select class="data-trim">
+          <option value="">Select Trim</option>
+        </select>
+      </div>
+      <div class="btn-group">
+        <a href="/vehicle/" class="btn btn-1">Search</a>
+      </div>
+    </div>
+  </div>
+  <?php
+}
 
 // Function to get "Make" options for dropdown
 function get_vehicle_makes() {
@@ -106,42 +133,41 @@ add_action('wp_ajax_trim_fetch', 'trim_fetch');
 add_action('wp_ajax_nopriv_trim_fetch', 'trim_fetch');
 
 
+function ajax_fetch ()
+{ ?>
+  <script type="text/javascript" id="jax-fetch">
+    document.addEventListener('DOMContentLoaded', function () {
+      const filterItems = document.querySelectorAll('.portfolio-cat-filter div');
 
+      filterItems.forEach(item => {
+        item.addEventListener('click', function () {
+          const category = this.getAttribute('data-category');
+          const ajaxUrl = window.wp_data.ajax_url;
 
-function ajax_fetch () { ?>
-	<script type="text/javascript" id="jax-fetch">
-		document.addEventListener('DOMContentLoaded', function() {
-			const filterItems = document.querySelectorAll('.portfolio-cat-filter div');
-
-			filterItems.forEach(item => {
-				item.addEventListener('click', function() {
-					const category = this.getAttribute('data-category');
-					const ajaxUrl = window.wp_data.ajax_url;
-
-					fetch(ajaxUrl, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-						},
-						body: new URLSearchParams({
-							action: 'get_portfolio',
-							category: category,
-							paged: 1
-						})
-					})
-					.then(response => response.json())
-					.then(data => {
-        if (data.success) {
-          document.querySelector('.portfolio__list').innerHTML = data.data.html;
-        } else {
-          console.error('Error:', data.data);
-        }
-					})
-					.catch(error => console.error('Error:', error));
-				});
-			});
-		});
-	</script>
+          fetch(ajaxUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            body: new URLSearchParams({
+              action: 'get_portfolio',
+              category: category,
+              paged: 1
+            })
+          })
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  document.querySelector('.portfolio__list').innerHTML = data.data.html;
+                } else {
+                  console.error('Error:', data.data);
+                }
+              })
+              .catch(error => console.error('Error:', error));
+        });
+      });
+    });
+  </script>
 <?php }
 add_action ('wp_footer', 'ajax_fetch');
 

@@ -16,9 +16,9 @@ jQuery(function ($) {
 
   const baseUrl = `${window.location.origin}/staging/vehicle/`;
 
-  const makeSelect = $('select[data-make]');
-  const modelSelect = $('select[data-model]').prop('disabled', true);
-  const trimSelect = $('select[data-trim]').prop('disabled', true);
+  const makeSelect = $('select.data-make');
+  const modelSelect = $('select.data-model').prop('disabled', true);
+  const trimSelect = $('select.data-trim').prop('disabled', true);
   const searchButton = $('.vehicles-search .btn-group .btn.btn-1');
 
   makeSelect.SumoSelect();
@@ -159,9 +159,11 @@ jQuery(function ($) {
   };
 
 
-  // if (document.querySelector('.quote-form')) {
-  // }
-  handleMakeChange.call(makeSelect[0]);
+
+  setTimeout(() => {
+    handleMakeChange.call(makeSelect[0]);
+  }, 100);
+
   makeSelect.on('change', debounce(handleMakeChange, 100));
   modelSelect.on('change', debounce(handleModelChange, 100));
   trimSelect.on('change', debounce(handleTrimChange, 100));

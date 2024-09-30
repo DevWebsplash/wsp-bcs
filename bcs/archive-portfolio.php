@@ -21,42 +21,7 @@ get_header ();
         <h1 class="title h1">Find Your Vehicle</h1>
         <div class="subtitle">Select your vehicle make, model, and trim to get personalized recommendations.</div>
       </div>
-      <div class="vehicles-search">
-        <div class="form-row">
-          <div class="custom-select">
-            <div class="custom-select">
-              <select data-make>
-                <option value="">Select Make</option>
-                <!--			                            --><?php
-                //			                            // Get the parent terms of the 'make' taxonomy
-                //			                            $terms = get_terms('make', array('parent' => 0));
-                //			                            // Loop through parent terms and set active class if it matches current or parent
-                //			                            foreach ($terms as $term) {
-                //				                            ?>
-                <!--                                      <option data-make="-->
-                <?php //echo esc_attr($term->term_id); ?><!--" value="--><?php //echo esc_attr($term->slug); ?><!--">-->
-                <!--						                            --><?php //echo esc_html($term->name); ?>
-                <!--                                      </option>-->
-                <!--			                            --><?php //} ?>
-              </select>
-            </div>
-          </div>
-          <div class="custom-select">
-            <select data-model>
-              <option value="">Select Model</option>
-            </select>
-          </div>
-          <div class="custom-select">
-            <select data-trim>
-              <option value="">Select Trim</option>
-
-            </select>
-          </div>
-          <div class="btn-group">
-            <a class="btn btn-1">Search</a>
-          </div>
-        </div>
-      </div>
+      <?php echo render_vehicle_search_form(); ?>
     </div>
   </section>
 

@@ -94,3 +94,11 @@
     }
   }
 }
+
+//.cfw-side-cart-open #cfw-side-cart {
+//  visibility: visible;
+//}
+body.cfw-side-cart-open #cfw-side-cart {
+  animation-name: cfw-side-cart-slide-in-ltr;
+  right: 0;
+}

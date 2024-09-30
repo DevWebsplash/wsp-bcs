@@ -11,6 +11,9 @@ body {
   background-color: #FAFAFA;
   &.white-background {
     background-color: $white;
+    .content {
+      display: flex;
+    }
   }
 }
 

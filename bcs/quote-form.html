@@ -10,84 +10,64 @@
   <!-- Sidebar for displaying steps -->
   <div class="form-sidebar">
     <ul class="form-steps">
-      <li class="step step-1 active">
-        <span class="step-number">1</span> Car Details
-      </li>
-      <li class="step step-2">
-        <span class="step-number">2</span> Services
-      </li>
-      <li class="step step-3">
-        <span class="step-number">3</span> Customer Details
-      </li>
+      <li class="step step-1 active"><div class="step-number">1</div><div class="step-content"><div class="step-label">Step 1</div><div class="step-title">Car Details</div></div></li>
+      <li class="step step-2"><div class="step-number">2</div><div class="step-content"><div class="step-label">Step 2</div><div class="step-title">Services</div></div></li>
+      <li class="step step-3"><div class="step-number">3</div><div class="step-content"><div class="step-label">Step 3</div><div class="step-title">Customer Details</div></div></li>
     </ul>
   </div>
 
   <div class="form-content">
-    <div class="form-row form-step form-step-1">
-      <h3>Step 1: Car Details</h3>
-      <h2 class="h2">Select your vehicle to get personalized services</h2>
+    <div class="form-row form-step form-step-1" data-step="1">
+      <h3 class="h3">Select your vehicle to get personalized services</h3>
       <!-- Make Dropdown -->
       <div class="custom-select custom-select--half">
-        <select data-make>
-          <option value="">Select Make</option>
-        </select>
+        [select* make class:data-make "Select Make"]
       </div>
       <br>
       <!-- Model Dropdown (Initially disabled) -->
-      <div class="custom-select custom-select--half" disabled>
-        <select data-model>
-          <option value="">Select Model</option>
-        </select>
+      <div class="custom-select custom-select--half">
+        [select* model class:data-model "Select Model"]
       </div>
       <br>
       <!-- Trim Dropdown (Initially disabled) -->
-      <div class="custom-select custom-select--full" disabled>
-        <select data-trim>
-          <option>Select Trim</option>
-        </select>
+      <div class="custom-select custom-select--full">
+        [select* trim class:data-trim "Select Trim"]
+      </div>
+      <div class="w100"><label for="other_vehicle_info">Other vehicle info</label>[text other_vehicle_info]
+<!--        <div class="form-item-detail">Please write down additional vehicle details</div>-->
       </div>
       <br>
       <div class="btn-wrapper">
-        <button type="button" class="next-btn" data-next-step="2">Next Step</button>
+        <button type="button" class="next-btn" data-next-step="2" disabled>Next Step</button>
       </div>
     </div>
-
-
     <!-- Step 2: Services -->
-    <div class="form-step form-step-2" style="display: none;">
-      <h2 class="h2">Step 2: Services</h2>
-      <h2 class="h2">What would you like doing with your brakes? *</h2>
-
-      [checkbox* brake_service use_label_element "Functional Refurbishment Only" "Painting Service Only" "Both"]
-      <br>
-      <h2 class="h2">Which brakes need painting? *</h2>
-      [select* brake_paint include_blank "Front Pair" "Rear Pair" "All 4" "Single Front" "Single Rear"]
-      <br>
-      <h2 class="h2">Which color palette do you need? *</h2>
-      [radio* color_palette use_label_element "BCS Stock Colours" "Premium Colours"]
-      <br>
+    <div class="form-row form-step form-step-2" data-step="2">
+      <div class="w100">
+        <h3 class="h3">What would you like doing with your brakes? *</h3>[radio brake_service use_label_element "Functional Refurbishment Only" "Painting Service Only" "Both"]
+      </div>
+      [group group-brake_paint class:w100 clear_on_hide]
+      <h3 class="h3">Which brakes need painting? *</h3>
+      <div class="custom-select custom-select--half brake-paint-field">[select* brake_paint include_blank "Front Pair" "Rear Pair" "All 4" "Single Front" "Single Rear"]</div>
+      [/group]
+      [group group-color_palette class:w100 clear_on_hide]
+      <h3 class="h3">Which color palette do you need? *</h3>
+      <div class="color-palette-field">[radio color_palette use_label_element default:1 "BCS Stock Colours" "Premium Colours" "Candy Colours" "Restore to original"]</div>
+      <div class="form-item form-item--half custom-color-field"><label for="custom_color">Which color do you prefer?</label>[text custom_color]</div>
+      [/group]
       <div class="btn-wrapper">
         <button type="button" class="prev-btn" data-prev-step="1">Previous Step</button>
-        <button type="button" class="next-btn" data-next-step="3">Next Step</button>
+        <button type="button" class="next-btn" data-next-step="3" disabled>Next Step</button>
       </div>
     </div>
 
     <!-- Step 3: Customer Details -->
-    <div class="form-step form-step-3" style="display: none;">
-      <h3>Step 3: Customer Details</h3>
-      <h2 class="h2">Leave your contact information in this form and we'll contact you to help you.</h2>
-      <label for="first-name">First Name *</label>
-      [text* first-name placeholder "First Name"]
-      <br>
-      <label for="last-name">Last Name *</label>
-      [text* last-name placeholder "Last Name"]
-      <br>
-      <label for="email">Email Address *</label>
-      [email* email placeholder "Email"]
-      <br>
-      <label for="phone">Mobile Phone *</label>
-      [tel* phone placeholder "Mobile Phone"]
-      <br>
+    <div class="form-row form-step form-step-3" data-step="3">
+      <h3 class="h3">Leave your contact information in this form and we'll contact you to help you.</h3>
+      <div class="form-item form-item--half form-item--label"><label for="first-name">First Name *</label>[text* first-name]</div>
+      <div class="form-item form-item--half form-item--label"><label for="last-name">Last Name *</label>[text* last-name]</div>
+      <div class="form-item form-item--half form-item--label"><label for="email">Email Address *</label>[email* email]</div>
+      <div class="form-item form-item--half form-item--label"><label for="phone">Mobile Phone *</label>[tel* phone]</div>
       <div class="btn-wrapper">
         <button type="button" class="prev-btn" data-prev-step="2">Previous Step</button>
         [submit "Complete Quote Request"]
