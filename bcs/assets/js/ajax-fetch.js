@@ -21,9 +21,7 @@ jQuery(function ($) {
   const trimSelect = $('select.data-trim').prop('disabled', true);
   const searchButton = $('.vehicles-search .btn-group .btn.btn-1');
 
-  makeSelect.SumoSelect();
-  modelSelect.SumoSelect();
-  trimSelect.SumoSelect();
+
 
   const debounce = (func, wait = 100) => {
     let timeout;
@@ -116,6 +114,9 @@ jQuery(function ($) {
     } catch (error) {
       console.error('Error fetching models:', error);
     }
+
+    // Save to localStorage
+    localStorage.setItem('makeSelect', makeSlug);
   };
 
   const handleModelChange = async function () {
@@ -144,6 +145,9 @@ jQuery(function ($) {
     } catch (error) {
       console.error('Error fetching trims:', error);
     }
+
+    // Save to localStorage
+    localStorage.setItem('modelSelect', modelSlug);
   };
 
   const handleTrimChange = function () {
@@ -156,13 +160,41 @@ jQuery(function ($) {
       window.history.pushState({}, '', trimLink || `${baseUrl}${makeSlug}/${modelSlug}/`);
     }
     updateSelectStates();
+
+    // Save to localStorage
+    localStorage.setItem('trimSelect', trimLink);
   };
 
+  const loadFromLocalStorage = () => {
+    const makeSlug = localStorage.getItem('makeSelect');
+    const modelSlug = localStorage.getItem('modelSelect');
+    const trimLink = localStorage.getItem('trimSelect');
+    console.log('Loading from localStorage:', makeSlug, modelSlug, trimLink);
 
+    if (makeSlug) {
+      makeSelect.val(makeSlug);
+      makeSelect[0].sumo.reload();
+      handleMakeChange.call(makeSelect[0]);
+    }
+    if (modelSlug) {
+      modelSelect.val(modelSlug);
+      modelSelect[0].sumo.reload();
+      handleModelChange.call(modelSelect[0]);
+    }
+    if (trimLink) {
+      trimSelect.val(trimLink);
+      trimSelect[0].sumo.reload();
+      handleTrimChange.call(trimSelect[0]);
+    }
+  };
 
-  setTimeout(() => {
-    handleMakeChange.call(makeSelect[0]);
-  }, 100);
+  if (localStorage.getItem('makeSelect') || localStorage.getItem('modelSelect') || localStorage.getItem('trimSelect')) {
+    loadFromLocalStorage();
+  } else {
+    setTimeout(() => {
+      handleMakeChange.call(makeSelect[0]);
+    }, 50);
+  }
 
   makeSelect.on('change', debounce(handleMakeChange, 100));
   modelSelect.on('change', debounce(handleModelChange, 100));
@@ -170,5 +202,9 @@ jQuery(function ($) {
 
   setModelFromUrl();
   updateSelectStates();
+  // loadFromLocalStorage();
 
+  makeSelect.SumoSelect();
+  modelSelect.SumoSelect();
+  trimSelect.SumoSelect();
 });

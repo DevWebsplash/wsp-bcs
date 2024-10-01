@@ -11,7 +11,7 @@
       </div>
       <?php echo render_vehicle_search_form(); ?>
     </div>
-  </div>D
+  </div>
 
   <div class="cn">
     <div class="s-vehicles__list">

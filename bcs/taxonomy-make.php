@@ -1,4 +1,5 @@
 <?php get_header();
+$queried_object = get_queried_object () ;
 ?>
 
 <!-- HTML Content here  -->
@@ -15,7 +16,7 @@
 <!---->
 <!--          <div class="form-row">-->
 <!--            <div class="custom-select">-->
-<!--	            --><?php //$queried_object = get_queried_object () ;?>
+<!--	            -->
 <!---->
 <!--                <select data-make>-->
 <!--                    <option value="">Select Make</option>-->
