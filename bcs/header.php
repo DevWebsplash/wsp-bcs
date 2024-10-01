@@ -26,7 +26,7 @@
       <div class="header__inner">
         <div class="toggle-menu"><span></span><span></span></div>
         <div class="header__logo">
-          <a href="/" title="Home page">  <?php $image_repeater = get_field ('header_logo', 'option'); ?>
+          <a href="/staging/" title="Home page">  <?php $image_repeater = get_field ('header_logo', 'option'); ?>
             <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
                  alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>" loading="lazy"></a>
         </div>
