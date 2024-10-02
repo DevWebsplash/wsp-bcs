@@ -70,10 +70,11 @@ get_header ();
         <div class="portfolio-filter-secondary">
           <div class="sort-select custom-select">
             <select placeholder="Sort By">
-              <option value="updated">Last updated</option>
-              <option value="verified">By name</option>
-              <option value="verified">By date</option>
-              <option value="newest">Newest</option>
+                <option value="newest">Newest</option>
+              <option value="increase">By name A-Z</option>
+              <option value="reduction">By name Z-A</option>
+              <option value="date">By date</option>
+
             </select>
           </div>
           <button class="btn btn-1 js-reset-filtering">Reset All</button>

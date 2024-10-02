@@ -202,54 +202,81 @@ add_action ('wp_footer', 'ajax_fetch');
 // Function to handle AJAX request for fetching "Trim" posts based on selected "Make" and "Model" terms
 function get_portfolio ()
 {
-  $make = $_POST[ 'make' ] ? $_POST[ 'make' ] : '';
-  $product_used = $_POST[ 'product_used' ] ? $_POST[ 'product_used' ] : '';
-  $city_state = $_POST[ 'city-state' ] ? $_POST[ 'city-state' ] : '';
-  $paged = $_POST[ 'paged' ] ? $_POST[ 'paged' ] : 1;
-  $category = $_POST[ 'category' ] ? $_POST[ 'category' ] : '';
-  $sort_by = $_POST[ 'sort_by' ] ? $_POST[ 'sort_by' ] : 'date';
-  $args = array(
-      'post_type' => 'portfolio',
-      'posts_per_page' => 9,
-      'post_status' => 'publish',
-      'paged' => $paged,
-      'meta_query' => array(
-          'relation' => 'AND',
+	$make = $_POST['make'] ? $_POST['make'] : '';
+	$product_used = $_POST['product_used'] ? $_POST['product_used'] : '';
+	$city_state = $_POST['city-state'] ? $_POST['city-state'] : '';
+	$paged = $_POST['paged'] ? $_POST['paged'] : 1;
+	$category = $_POST['category'] ? $_POST['category'] : '';
+	$sort_by = $_POST['sort_by'] ? $_POST['sort_by'] : 'newest';
 
-      ),
-      'tax_query' => array(
-          'relation' => 'AND',
+	switch ($sort_by) {
+		case 'newest':
+			$orderby = 'date';
+			$order = 'DESC';
+			break;
+		case 'increase':
+			$orderby = 'title';
+			$order = 'ASC';
+			break;
+		case 'reduction':
+			$orderby = 'title';
+			$order = 'DESC';
+			break;
+		case 'date':
+			$orderby = 'date';
+			$order = 'ASC';
+			break;
+		default:
+			$orderby = 'date';
+			$order = 'DESC';
+			break;
+	}
 
-      ),
-    'orderby'        => $sort_by,
-  );
-  if (!empty($make)) {
-    $args[ 'tax_query' ][] = array(
-        'taxonomy' => 'make',
-        'terms' => $make
-    );
-  }
-  if (!empty($category)) {
-    $args[ 'tax_query' ][] = array(
-        'taxonomy' => 'portfolio_category',
-        'terms' => $category
-    );
-  }
-  if (!empty($product_used)) {
-    $args[ 'tax_query' ][] = array(
-        'taxonomy' => 'product_used',
-        'terms' => $product_used
-    );
-  }
-  if (!empty($city_state)) {
-    $args[ 'tax_query' ][] = array(
-        'taxonomy' => 'state',
-        'terms' => $city_state
-    );
-  }
+	$args = array(
+		'post_type' => 'portfolio',
+		'posts_per_page' => 9,
+		'post_status' => 'publish',
+		'paged' => $paged,
+		'meta_query' => array(
+			'relation' => 'AND',
+		),
+		'tax_query' => array(
+			'relation' => 'AND',
+		),
+		'orderby' => $orderby,
+		'order' => $order,
+	);
+
+	if (!empty($make)) {
+		$args['tax_query'][] = array(
+			'taxonomy' => 'make',
+			'terms' => $make
+		);
+	}
+
+	if (!empty($category)) {
+		$args['tax_query'][] = array(
+			'taxonomy' => 'portfolio_category',
+			'terms' => $category
+		);
+	}
+
+	if (!empty($product_used)) {
+		$args['tax_query'][] = array(
+			'taxonomy' => 'product_used',
+			'terms' => $product_used
+		);
+	}
+
+	if (!empty($city_state)) {
+		$args['tax_query'][] = array(
+			'taxonomy' => 'state',
+			'terms' => $city_state
+		);
+	}
 
 
-  $return_html = '';
+	$return_html = '';
   $return_pagination = '';
 
   $portfolio = new WP_Query($args);
