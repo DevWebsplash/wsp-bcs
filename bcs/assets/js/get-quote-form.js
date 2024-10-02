@@ -54,6 +54,7 @@ jQuery(function ($) {
     const $currentStep = $(this).closest('.form-step');
     const step = $currentStep.data('step');
     console.log(`Field changed in step ${step}`);
+    console.log(`Field val ` + $(this).val());
     validateStep(step);
   });
 
@@ -62,7 +63,7 @@ jQuery(function ($) {
     const nextStep = $(this).data('next-step');
     const currentStep = nextStep - 1;
     console.log(`Next button clicked, current step: ${currentStep}, next step: ${nextStep}`);
-
+    validateStep(step);
     if (validateStep(currentStep)) {
       showStep(nextStep);
     }
