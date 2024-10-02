@@ -45,7 +45,7 @@ get_header ();
             <select name="product-used" id="" class="portfolio-cat__select">
               <option data-used="all" value="product_used">Products Used</option>
 	            <?php
-	            // Get the parent terms of the 'make' taxonomy
+	            // Get the parent terms of the 'product_used' taxonomy
 	            $terms = get_terms('product_used');
 	            // Loop through parent terms and set active class if it matches current or parent
 	            foreach ($terms as $term) { ?>
@@ -57,7 +57,7 @@ get_header ();
             <select name="city-state" id="" class="portfolio-cat__select">
               <option data-city-state="all" value="city_state">City & State</option>
 	            <?php
-	            // Get the parent terms of the 'make' taxonomy
+	            // Get the parent terms of the 'state' taxonomy
 	            $terms = get_terms('state');
 	            // Loop through parent terms and set active class if it matches current or parent
 	            foreach ($terms as $term) { ?>
@@ -71,10 +71,9 @@ get_header ();
           <div class="sort-select custom-select">
             <select placeholder="Sort By">
                 <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
               <option value="increase">By name A-Z</option>
               <option value="reduction">By name Z-A</option>
-              <option value="date">By date</option>
-
             </select>
           </div>
           <button class="btn btn-1 js-reset-filtering">Reset All</button>

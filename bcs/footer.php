@@ -9,6 +9,7 @@
 ?>
 </main>
 
+<?php if(!is_page_template(array('templates/get-quote.php'))) { ?>
 <footer class="footer">
     <div class="cn">
         <div class="footer__main">
@@ -64,6 +65,7 @@
         </div>
     </div>
 </footer>
+<?php } ?>
 </div>
 
 

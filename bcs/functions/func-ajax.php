@@ -222,7 +222,7 @@ function get_portfolio ()
 			$orderby = 'title';
 			$order = 'DESC';
 			break;
-		case 'date':
+        case 'oldest':
 			$orderby = 'date';
 			$order = 'ASC';
 			break;
@@ -241,7 +241,7 @@ function get_portfolio ()
 			'relation' => 'AND',
 		),
 		'tax_query' => array(
-			'relation' => 'AND',
+			'relation' => 'OR',
 		),
 		'orderby' => $orderby,
 		'order' => $order,
