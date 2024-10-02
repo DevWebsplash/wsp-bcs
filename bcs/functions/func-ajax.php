@@ -203,6 +203,8 @@ add_action ('wp_footer', 'ajax_fetch');
 function get_portfolio ()
 {
   $make = $_POST[ 'make' ] ? $_POST[ 'make' ] : '';
+  $product_used = $_POST[ 'product_used' ] ? $_POST[ 'product_used' ] : '';
+  $city_state = $_POST[ 'city-state' ] ? $_POST[ 'city-state' ] : '';
   $paged = $_POST[ 'paged' ] ? $_POST[ 'paged' ] : 1;
   $category = $_POST[ 'category' ] ? $_POST[ 'category' ] : '';
   $sort_by = $_POST[ 'sort_by' ] ? $_POST[ 'sort_by' ] : 'date';
@@ -231,6 +233,18 @@ function get_portfolio ()
     $args[ 'tax_query' ][] = array(
         'taxonomy' => 'portfolio_category',
         'terms' => $category
+    );
+  }
+  if (!empty($product_used)) {
+    $args[ 'tax_query' ][] = array(
+        'taxonomy' => 'product_used',
+        'terms' => $product_used
+    );
+  }
+  if (!empty($city_state)) {
+    $args[ 'tax_query' ][] = array(
+        'taxonomy' => 'state',
+        'terms' => $city_state
     );
   }
 

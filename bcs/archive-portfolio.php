@@ -44,15 +44,25 @@ get_header ();
           <div class="custom-select">
             <select name="product-used" id="" class="portfolio-cat__select">
               <option data-used="all" value="product_used">Products Used</option>
-              <option data-used="" value="product_used1">1</option>
-              <option data-used="" value="product_used2">1 Used</option>
+	            <?php
+	            // Get the parent terms of the 'make' taxonomy
+	            $terms = get_terms('product_used');
+	            // Loop through parent terms and set active class if it matches current or parent
+	            foreach ($terms as $term) { ?>
+                  <option data-used="<?php echo esc_attr($term->term_id); ?>" value="<?php echo esc_attr($term->slug); ?>"><?php echo esc_html($term->name); ?></option>
+	            <?php } ?>
             </select>
           </div>
           <div class="custom-select">
             <select name="city-state" id="" class="portfolio-cat__select">
               <option data-city-state="all" value="city_state">City & State</option>
-              <option data-city-state="" value="city_state1">1</option>
-              <option data-city-state="" value="city_state2">2</option>
+	            <?php
+	            // Get the parent terms of the 'make' taxonomy
+	            $terms = get_terms('state');
+	            // Loop through parent terms and set active class if it matches current or parent
+	            foreach ($terms as $term) { ?>
+                  <option data-city-state="<?php echo esc_attr($term->term_id); ?>" value="<?php echo esc_attr($term->slug); ?>"><?php echo esc_html($term->name); ?></option>
+	            <?php } ?>
             </select>
           </div>
         </div>
