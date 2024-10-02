@@ -186,13 +186,17 @@ function ajax_fetch () { ?>
         item.addEventListener('change', fetchPortfolio);
       });
 
+    if (sortSelect) {
       sortSelect.addEventListener('change', fetchPortfolio);
+    }
 
+    if (resetButton) {
       resetButton.addEventListener('click', function () {
         filterItems.forEach(item => item.selectedIndex = 0);
-        sortSelect.selectedIndex = 0;
+        if (sortSelect) sortSelect.selectedIndex = 0;
         fetchPortfolio();
       });
+    }
     });
   </script>
 <?php }

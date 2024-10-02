@@ -6,75 +6,170 @@
 </head>
 <body>
 
-<div class="multi-step-form quote-form">
-  <!-- Sidebar for displaying steps -->
-  <div class="form-sidebar">
-    <ul class="form-steps">
-      <li class="step step-1 active"><div class="step-number">1</div><div class="step-content"><div class="step-label">Step 1</div><div class="step-title">Car Details</div></div></li>
-      <li class="step step-2"><div class="step-number">2</div><div class="step-content"><div class="step-label">Step 2</div><div class="step-title">Services</div></div></li>
-      <li class="step step-3"><div class="step-number">3</div><div class="step-content"><div class="step-label">Step 3</div><div class="step-title">Customer Details</div></div></li>
-    </ul>
+<form action="/staging/get-quote-cf7/#wpcf7-f147957-o1" method="post" class="wpcf7-form init" aria-label="Contact form" novalidate="novalidate" data-status="init">
+  <div style="display: none;">
+    <input type="hidden" name="_wpcf7" value="147957">
+    <input type="hidden" name="_wpcf7_version" value="5.9.8">
+    <input type="hidden" name="_wpcf7_locale" value="en_GB">
+    <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f147957-o1">
+    <input type="hidden" name="_wpcf7_container_post" value="0">
+    <input type="hidden" name="_wpcf7_posted_data_hash" value="">
+    <input type="hidden" name="_wpcf7cf_hidden_group_fields" value="[&quot;brake_paint&quot;,null,&quot;color_palette&quot;,&quot;color_palette&quot;,&quot;color_palette&quot;,&quot;custom_color&quot;]">
+    <input type="hidden" name="_wpcf7cf_hidden_groups" value="[&quot;group-brake_paint&quot;,&quot;group-color_palette&quot;]">
+    <input type="hidden" name="_wpcf7cf_visible_groups" value="[]">
+    <input type="hidden" name="_wpcf7cf_repeaters" value="[]">
+    <input type="hidden" name="_wpcf7cf_steps" value="{}">
+    <input type="hidden" name="_wpcf7cf_options" value="{&quot;form_id&quot;:147957,&quot;conditions&quot;:[{&quot;then_field&quot;:&quot;group-brake_paint&quot;,&quot;and_rules&quot;:[{&quot;if_field&quot;:&quot;brake_service&quot;,&quot;operator&quot;:&quot;equals&quot;,&quot;if_value&quot;:&quot;Functional Refurbishment&quot;}]},{&quot;then_field&quot;:&quot;group-color_palette&quot;,&quot;and_rules&quot;:[{&quot;if_field&quot;:&quot;brake_service&quot;,&quot;operator&quot;:&quot;equals&quot;,&quot;if_value&quot;:&quot;Painting Service&quot;}]}],&quot;settings&quot;:{&quot;animation&quot;:&quot;yes&quot;,&quot;animation_intime&quot;:200,&quot;animation_outtime&quot;:200,&quot;conditions_ui&quot;:&quot;normal&quot;,&quot;notice_dismissed&quot;:false}}">
   </div>
+  <div class="multi-step-form quote-form">
+    <!-- Sidebar for displaying steps -->
+    <div class="form-sidebar">
+      <ul class="form-steps">
+        <li class="step step-1 active">
+          <div class="step-number">
+            <p>1
+            </p>
+          </div>
+          <div class="step-content">
+            <div class="step-label">
+              <p>Step 1
+              </p>
+            </div>
+            <div class="step-title">
+              <p>Car Details
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="step step-2">
+          <div class="step-number">
+            <p>2
+            </p>
+          </div>
+          <div class="step-content">
+            <div class="step-label">
+              <p>Step 2
+              </p>
+            </div>
+            <div class="step-title">
+              <p>Services
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="step step-3">
+          <div class="step-number">
+            <p>3
+            </p>
+          </div>
+          <div class="step-content">
+            <div class="step-label">
+              <p>Step 3
+              </p>
+            </div>
+            <div class="step-title">
+              <p>Customer Details
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="form-content">
+      <div class="form-row form-step form-step-1" data-step="1" style="">
+        <h3 class="h3">Select your vehicle to get personalized services
+        </h3>
+        <!-- Make Dropdown -->
+        <div class="custom-select custom-select--half">
+          <p><span class="wpcf7-form-control-wrap" data-name="make"><div class="SumoSelect sumo_make" tabindex="0" role="button" aria-expanded="false" selected-count="1" is-selected="true"><select class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required data-make SumoUnder" aria-required="true" aria-invalid="false" name="make" tabindex="-1"><option value="">Select</option><option data-make="153265" value="audi">Audi</option><option data-make="153266" value="bmw">BMW</option></select><p class="CaptionCont SelectBox wpcf7-form-control wpcf7-select wpcf7-validates-as-required data-make search" title=" Select"><span> Select</span><label><i></i></label><input type="search" class="search-txt" value="" autocomplete="off" placeholder="Enter here..."></p><div class="optWrapper"><ul class="options"><li class="opt selected"><label>Select</label></li><li class="opt"><label>Audi</label></li><li class="opt"><label>BMW</label></li></ul><p class="no-match"></p></div></div></span>
+          </p>
+        </div>
 
-  <div class="form-content">
-    <div class="form-row form-step form-step-1" data-step="1">
-      <h3 class="h3">Select your vehicle to get personalized services</h3>
-      <!-- Make Dropdown -->
-      <div class="custom-select custom-select--half">
-        [select* make class:data-make "Select Make"]
-      </div>
-      <br>
-      <!-- Model Dropdown (Initially disabled) -->
-      <div class="custom-select custom-select--half">
-        [select* model class:data-model "Select Model"]
-      </div>
-      <br>
-      <!-- Trim Dropdown (Initially disabled) -->
-      <div class="custom-select custom-select--full">
-        [select* trim class:data-trim "Select Trim"]
-      </div>
-      <div class="w100"><label for="other_vehicle_info">Other vehicle info</label>[text other_vehicle_info]
-<!--        <div class="form-item-detail">Please write down additional vehicle details</div>-->
-      </div>
-      <br>
-      <div class="btn-wrapper">
-        <button type="button" class="next-btn" data-next-step="2" disabled>Next Step</button>
-      </div>
-    </div>
-    <!-- Step 2: Services -->
-    <div class="form-row form-step form-step-2" data-step="2">
-      <div class="w100">
-        <h3 class="h3">What would you like doing with your brakes? *</h3>[radio brake_service use_label_element "Functional Refurbishment Only" "Painting Service Only" "Both"]
-      </div>
-      [group group-brake_paint class:w100 clear_on_hide]
-      <h3 class="h3">Which brakes need painting? *</h3>
-      <div class="custom-select custom-select--half brake-paint-field">[select* brake_paint include_blank "Front Pair" "Rear Pair" "All 4" "Single Front" "Single Rear"]</div>
-      [/group]
-      [group group-color_palette class:w100 clear_on_hide]
-      <h3 class="h3">Which color palette do you need? *</h3>
-      <div class="color-palette-field">[radio color_palette use_label_element default:1 "BCS Stock Colours" "Premium Colours" "Candy Colours" "Restore to original"]</div>
-      <div class="form-item form-item--half custom-color-field"><label for="custom_color">Which color do you prefer?</label>[text custom_color]</div>
-      [/group]
-      <div class="btn-wrapper">
-        <button type="button" class="prev-btn" data-prev-step="1">Previous Step</button>
-        <button type="button" class="next-btn" data-next-step="3" disabled>Next Step</button>
-      </div>
-    </div>
 
-    <!-- Step 3: Customer Details -->
-    <div class="form-row form-step form-step-3" data-step="3">
-      <h3 class="h3">Leave your contact information in this form and we'll contact you to help you.</h3>
-      <div class="form-item form-item--half form-item--label"><label for="first-name">First Name *</label>[text* first-name]</div>
-      <div class="form-item form-item--half form-item--label"><label for="last-name">Last Name *</label>[text* last-name]</div>
-      <div class="form-item form-item--half form-item--label"><label for="email">Email Address *</label>[email* email]</div>
-      <div class="form-item form-item--half form-item--label"><label for="phone">Mobile Phone *</label>[tel* phone]</div>
-      <div class="btn-wrapper">
-        <button type="button" class="prev-btn" data-prev-step="2">Previous Step</button>
-        [submit "Complete Quote Request"]
+        <!-- Model Dropdown (Initially disabled) -->
+        <div class="custom-select custom-select--half">
+          <p><span class="wpcf7-form-control-wrap" data-name="model"><div class="SumoSelect disabled sumo_model" role="button" aria-expanded="false" selected-count="0" is-selected="false"><select class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required data-model SumoUnder" aria-required="true" aria-invalid="false" name="model" tabindex="-1" disabled=""><option value="">Select Model</option></select><p class="CaptionCont SelectBox wpcf7-form-control wpcf7-select wpcf7-validates-as-required data-model search" title="Select Here"><span class="placeholder">Select Here</span><label><i></i></label><input type="search" class="search-txt" value="" autocomplete="off" placeholder="Enter here..."></p><div class="optWrapper"><ul class="options"><li class="opt"><label>Select Model</label></li></ul><p class="no-match"></p></div></div></span>
+          </p>
+        </div>
+
+
+        <!-- Trim Dropdown (Initially disabled) -->
+        <div class="custom-select custom-select--full">
+          <p><span class="wpcf7-form-control-wrap" data-name="trim"><div class="SumoSelect disabled sumo_trim" role="button" aria-expanded="false" selected-count="0" is-selected="false"><select class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required data-trim SumoUnder" aria-required="true" aria-invalid="false" name="trim" tabindex="-1" disabled=""><option value="">Select Trim</option></select><p class="CaptionCont SelectBox wpcf7-form-control wpcf7-select wpcf7-validates-as-required data-trim search" title="Select Here"><span class="placeholder">Select Here</span><label><i></i></label><input type="search" class="search-txt" value="" autocomplete="off" placeholder="Enter here..."></p><div class="optWrapper"><ul class="options"><li class="opt"><label>Select Trim</label></li></ul><p class="no-match"></p></div></div></span>
+          </p>
+        </div>
+        <div class="w100">
+          <p><label for="other_vehicle_info">Other vehicle info</label><span class="wpcf7-form-control-wrap" data-name="other_vehicle_info"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text" aria-invalid="false" value="" type="text" name="other_vehicle_info"></span><br>
+            <!--        <div class="form-item-detail">Please write down additional vehicle details</div>-->
+          </p>
+        </div>
+        <div class="btn-wrapper">
+          <p><button type="button" class="next-btn disabled" data-next-step="2">Next Step</button>
+          </p>
+        </div>
+      </div>
+      <!-- Step 2: Services -->
+      <div class="form-row form-step form-step-2" data-step="2" style="display: none;">
+        <div class="w100">
+          <h3 class="h3">What would you like doing with your brakes? *
+          </h3>
+          <p><span class="wpcf7-form-control-wrap" data-name="brake_service"><span class="wpcf7-form-control wpcf7-checkbox wpcf7-validates-as-required"><span class="wpcf7-list-item first"><label><input type="checkbox" name="brake_service[]" value="Functional Refurbishment"><span class="wpcf7-list-item-label">Functional Refurbishment</span></label></span><span class="wpcf7-list-item last"><label><input type="checkbox" name="brake_service[]" value="Painting Service"><span class="wpcf7-list-item-label">Painting Service</span></label></span></span></span>
+          </p>
+        </div>
+        <div data-id="group-brake_paint" data-orig_data_id="group-brake_paint" class="w100 wpcf7cf-hidden" data-clear_on_hide="" data-class="wpcf7cf_group" style="height: auto;">
+          <h3 class="h3">Which brakes need a functional refurb? *
+          </h3>
+          <div class="custom-select custom-select--half brake-paint-field">
+            <p><span class="wpcf7-form-control-wrap" data-name="brake_paint"><div class="SumoSelect sumo_brake_paint" tabindex="0" role="button" aria-expanded="false" selected-count="1" is-selected="true"><select class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required SumoUnder" aria-required="true" aria-invalid="false" name="brake_paint" tabindex="-1"><option value="">—Please choose an option—</option><option value="Front Pair">Front Pair</option><option value="Rear Pair">Rear Pair</option><option value="All 4">All 4</option><option value="Single Front">Single Front</option><option value="Single Rear">Single Rear</option></select><p class="CaptionCont SelectBox wpcf7-form-control wpcf7-select wpcf7-validates-as-required search" title=" —Please choose an option—"><span> —Please choose an option—</span><label><i></i></label><input type="search" class="search-txt" value="" autocomplete="off" placeholder="Enter here..."></p><div class="optWrapper"><ul class="options"><li class="opt selected"><label>—Please choose an option—</label></li><li class="opt"><label>Front Pair</label></li><li class="opt"><label>Rear Pair</label></li><li class="opt"><label>All 4</label></li><li class="opt"><label>Single Front</label></li><li class="opt"><label>Single Rear</label></li></ul><p class="no-match"></p></div></div></span>
+            </p>
+          </div>
+        </div>
+        <div data-id="group-color_palette" data-orig_data_id="group-color_palette" class="w100 wpcf7cf-hidden" data-clear_on_hide="" data-class="wpcf7cf_group" style="height: auto;">
+          <h3 class="h3">Which color palette do you need? *
+          </h3>
+          <div class="color-palette-field">
+            <p><span class="wpcf7-form-control-wrap" data-name="color_palette"><span class="wpcf7-form-control wpcf7-radio"><span class="wpcf7-list-item first"><label><input type="radio" name="color_palette" value="BCS Stock Colours" checked="checked"><span class="wpcf7-list-item-label">BCS Stock Colours</span></label></span><span class="wpcf7-list-item"><label><input type="radio" name="color_palette" value="Premium Colours"><span class="wpcf7-list-item-label">Premium Colours</span></label></span><span class="wpcf7-list-item last"><label><input type="radio" name="color_palette" value="Restore to original"><span class="wpcf7-list-item-label">Restore to original</span></label></span></span></span>
+            </p>
+          </div>
+          <div class="form-item form-item--half custom-color-field">
+            <p><label for="custom_color">Which color do you prefer?</label><span class="wpcf7-form-control-wrap" data-name="custom_color"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" value="" type="text" name="custom_color"></span>
+            </p>
+          </div>
+        </div>
+        <div class="btn-wrapper">
+          <p><button type="button" class="prev-btn" data-prev-step="1">Previous Step</button><button type="button" class="next-btn disabled" data-next-step="3">Next Step</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 3: Customer Details -->
+      <div class="form-row form-step form-step-3" data-step="3" style="display: none;">
+        <h3 class="h3">Leave your contact information in this form and we'll contact you to help you.
+        </h3>
+        <div class="form-item form-item--half form-item--label">
+          <p><label for="first-name">First Name *</label><span class="wpcf7-form-control-wrap" data-name="first-name"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" value="" type="text" name="first-name"></span>
+          </p>
+        </div>
+        <div class="form-item form-item--half form-item--label">
+          <p><label for="last-name">Last Name *</label><span class="wpcf7-form-control-wrap" data-name="last-name"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" value="" type="text" name="last-name"></span>
+          </p>
+        </div>
+        <div class="form-item form-item--half form-item--label">
+          <p><label for="email">Email Address *</label><span class="wpcf7-form-control-wrap" data-name="email"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email" aria-required="true" aria-invalid="false" value="" type="email" name="email"></span>
+          </p>
+        </div>
+        <div class="form-item form-item--half form-item--label">
+          <p><label for="phone">Mobile Phone *</label><span class="wpcf7-form-control-wrap" data-name="phone"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel" aria-required="true" aria-invalid="false" value="" type="tel" name="phone"></span>
+          </p>
+        </div>
+        <div class="btn-wrapper">
+          <p><button type="button" class="prev-btn" data-prev-step="2">Previous Step</button><input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="Complete Quote Request"><span class="wpcf7-spinner"></span>
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div><div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
 
 
 

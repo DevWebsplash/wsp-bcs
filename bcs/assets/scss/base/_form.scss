@@ -419,8 +419,8 @@ select::-ms-expand {
       cursor: pointer;
       margin-right: 10px;
 
-
-      &[disabled] {
+      &[disabled],
+      &.disabled {
         background-color: $light-gray;
         color: $text-color;
         &:hover {
@@ -501,6 +501,10 @@ select::-ms-expand {
 
     & > .w100 > .h3 {
       margin-bottom: 30px;
+    }
+
+    .color-palette-field {
+      margin-bottom: 15px;
     }
 
 
