@@ -20,7 +20,7 @@
             <nav class="footer__nav">
 	            <?php
 	            wp_nav_menu( array(
-		            'theme_location' => 'footer_first',
+		            'theme_location' => 'wfooter_first',
 		            'container'			=> false,
 	            ) ); ?>
 		            <?php

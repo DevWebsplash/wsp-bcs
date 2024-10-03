@@ -52,7 +52,6 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
                 <div class="inner-content">
 									<?php $image_repeater = get_sub_field( 'left_side_image_preview_image' ); ?>
                     <div class="inner-content__img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
-
                                                          alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
                     <div class="empty"></div>
                     <div class="inner-content__text">
@@ -117,7 +116,7 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
               </svg>
             </span>
                         </a>
-																						<?php endif; ?>
+						<?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -179,7 +178,6 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 												$link_title  = $link['title'];
 												$link_target = $link['target'] ? $link['target'] : '_self';
 												?>
-
                         <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-2"
                            target="<?php echo esc_attr( $link_target ); ?>">
                             <span><?php echo esc_html( $link_title ); ?></span>
@@ -398,7 +396,6 @@ if ( have_rows( 'flixble_content_vehicle' ) ):
 	                                    <?php
 	                                    $terms = wp_get_object_terms($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC') );
 	                                    if ( !empty( $terms ) ) :
-
 		                                    foreach ( $terms as $term ) { ?>
                                             <div class="tag"><?php echo$term->name;?></div>
 		                                    <?php } ?>
