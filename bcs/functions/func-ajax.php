@@ -22,6 +22,8 @@ function render_vehicle_search_form ()
 {
   ?>
   <div class="vehicles-search">
+    <div class="loader" style="display: none;">Loading...</div>
+
     <div class="form-row">
       <div class="custom-select">
         <select class="data-make">
@@ -29,17 +31,17 @@ function render_vehicle_search_form ()
         </select>
       </div>
       <div class="custom-select">
-        <select class="data-model">
+        <select class="data-model" disabled>
           <option value="">Select Model</option>
         </select>
       </div>
       <div class="custom-select">
-        <select class="data-trim">
+        <select class="data-trim" disabled>
           <option value="">Select Trim</option>
         </select>
       </div>
       <div class="btn-group">
-        <a href="/vehicle/" class="btn btn-1">Search</a>
+        <a href="<?php echo get_bloginfo ('url'); ?>/vehicle/" class="btn btn-1 vehicles-search__btn">Search</a>
       </div>
     </div>
   </div>
@@ -55,7 +57,6 @@ function get_vehicle_makes ()
       'parent' => 0, // Get only top-level "Make" terms
   ));
 
-
   $result = array_map (function ($makes) {
     return [
         'slug' => $makes->slug,
@@ -63,7 +64,6 @@ function get_vehicle_makes ()
         'label' => $makes->name,
     ];
   }, $makes);
-//    wp_send_json_success($result);
   echo json_encode ($result);
   wp_die ();
 }
@@ -75,12 +75,13 @@ function model_fetch ()
 {
   $make_id = intval ($_POST[ 'make' ]);
   if (!$make_id) {
-    wp_send_json_error ('Invalid make ID');
+    echo json_encode (['error' => 'Invalid make ID ' . $make_id]);
+    wp_die ();
   }
 
   $models = get_terms ('make', array('child_of' => $make_id));
   if (is_wp_error ($models)) {
-    wp_send_json_error ('Error fetching models');
+    wp_send_json_error ('Error fetching models ' . $make_id);
   }
 
   $result = array_map (function ($model) {
@@ -103,7 +104,8 @@ function trim_fetch ()
 {
   $model_id = intval ($_POST[ 'model' ]);
   if (!$model_id) {
-    wp_send_json_error ('Invalid model ID');
+    echo json_encode (['error' => 'Invalid model ID']);
+    wp_die ();
   }
 
   $args = array(
@@ -115,6 +117,7 @@ function trim_fetch ()
               'taxonomy' => 'make',
               'field' => 'term_id',
               'terms' => $model_id,
+
           ),
       ),
   );
@@ -128,12 +131,15 @@ function trim_fetch ()
           'id' => get_the_ID (),
           'label' => get_the_title (),
           'link' => get_the_permalink (),
+          'slug' => get_post_field ('post_name'),
       ];
     }
     wp_reset_postdata ();
   }
 
-//  wp_send_json_success($result);
+  // Debug log
+  error_log ('Trim fetch result: ' . print_r ($result, true));
+
   echo json_encode ($result);
   wp_die ();
 }
@@ -141,8 +147,8 @@ function trim_fetch ()
 add_action ('wp_ajax_trim_fetch', 'trim_fetch');
 add_action ('wp_ajax_nopriv_trim_fetch', 'trim_fetch');
 
-
-function ajax_fetch () { ?>
+function ajax_fetch ()
+{ ?>
   <script type="text/javascript" id="jax-fetch">
     document.addEventListener('DOMContentLoaded', function () {
       const filterItems = document.querySelectorAll('.portfolio-cat-filter select');
@@ -186,17 +192,17 @@ function ajax_fetch () { ?>
         item.addEventListener('change', fetchPortfolio);
       });
 
-    if (sortSelect) {
-      sortSelect.addEventListener('change', fetchPortfolio);
-    }
+      if (sortSelect) {
+        sortSelect.addEventListener('change', fetchPortfolio);
+      }
 
-    if (resetButton) {
-      resetButton.addEventListener('click', function () {
-        filterItems.forEach(item => item.selectedIndex = 0);
-        if (sortSelect) sortSelect.selectedIndex = 0;
-        fetchPortfolio();
-      });
-    }
+      if (resetButton) {
+        resetButton.addEventListener('click', function () {
+          filterItems.forEach(item => item.selectedIndex = 0);
+          if (sortSelect) sortSelect.selectedIndex = 0;
+          fetchPortfolio();
+        });
+      }
     });
   </script>
 <?php }
@@ -206,81 +212,81 @@ add_action ('wp_footer', 'ajax_fetch');
 // Function to handle AJAX request for fetching "Trim" posts based on selected "Make" and "Model" terms
 function get_portfolio ()
 {
-	$make = $_POST['make'] ? $_POST['make'] : '';
-	$product_used = $_POST['product_used'] ? $_POST['product_used'] : '';
-	$city_state = $_POST['city-state'] ? $_POST['city-state'] : '';
-	$paged = $_POST['paged'] ? $_POST['paged'] : 1;
-	$category = $_POST['category'] ? $_POST['category'] : '';
-	$sort_by = $_POST['sort_by'] ? $_POST['sort_by'] : 'newest';
+  $make = $_POST[ 'make' ] ? $_POST[ 'make' ] : '';
+  $product_used = $_POST[ 'product_used' ] ? $_POST[ 'product_used' ] : '';
+  $city_state = $_POST[ 'city-state' ] ? $_POST[ 'city-state' ] : '';
+  $paged = $_POST[ 'paged' ] ? $_POST[ 'paged' ] : 1;
+  $category = $_POST[ 'category' ] ? $_POST[ 'category' ] : '';
+  $sort_by = $_POST[ 'sort_by' ] ? $_POST[ 'sort_by' ] : 'newest';
 
-	switch ($sort_by) {
-		case 'newest':
-			$orderby = 'date';
-			$order = 'DESC';
-			break;
-		case 'increase':
-			$orderby = 'title';
-			$order = 'ASC';
-			break;
-		case 'reduction':
-			$orderby = 'title';
-			$order = 'DESC';
-			break;
-        case 'oldest':
-			$orderby = 'date';
-			$order = 'ASC';
-			break;
-		default:
-			$orderby = 'date';
-			$order = 'DESC';
-			break;
-	}
+  switch ($sort_by) {
+    case 'newest':
+      $orderby = 'date';
+      $order = 'DESC';
+      break;
+    case 'increase':
+      $orderby = 'title';
+      $order = 'ASC';
+      break;
+    case 'reduction':
+      $orderby = 'title';
+      $order = 'DESC';
+      break;
+    case 'oldest':
+      $orderby = 'date';
+      $order = 'ASC';
+      break;
+    default:
+      $orderby = 'date';
+      $order = 'DESC';
+      break;
+  }
 
-	$args = array(
-		'post_type' => 'portfolio',
-		'posts_per_page' => 9,
-		'post_status' => 'publish',
-		'paged' => $paged,
-		'meta_query' => array(
-			'relation' => 'AND',
-		),
-		'tax_query' => array(
-			'relation' => 'OR',
-		),
-		'orderby' => $orderby,
-		'order' => $order,
-	);
+  $args = array(
+      'post_type' => 'portfolio',
+      'posts_per_page' => 9,
+      'post_status' => 'publish',
+      'paged' => $paged,
+      'meta_query' => array(
+          'relation' => 'AND',
+      ),
+      'tax_query' => array(
+          'relation' => 'OR',
+      ),
+      'orderby' => $orderby,
+      'order' => $order,
+  );
 
-	if (!empty($make)) {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'make',
-			'terms' => $make
-		);
-	}
+  if (!empty($make)) {
+    $args[ 'tax_query' ][] = array(
+        'taxonomy' => 'make',
+        'terms' => $make
+    );
+  }
 
-	if (!empty($category)) {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'portfolio_category',
-			'terms' => $category
-		);
-	}
+  if (!empty($category)) {
+    $args[ 'tax_query' ][] = array(
+        'taxonomy' => 'portfolio_category',
+        'terms' => $category
+    );
+  }
 
-	if (!empty($product_used)) {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'product_used',
-			'terms' => $product_used
-		);
-	}
+  if (!empty($product_used)) {
+    $args[ 'tax_query' ][] = array(
+        'taxonomy' => 'product_used',
+        'terms' => $product_used
+    );
+  }
 
-	if (!empty($city_state)) {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'state',
-			'terms' => $city_state
-		);
-	}
+  if (!empty($city_state)) {
+    $args[ 'tax_query' ][] = array(
+        'taxonomy' => 'state',
+        'terms' => $city_state
+    );
+  }
 
 
-	$return_html = '';
+  $return_html = '';
   $return_pagination = '';
 
   $portfolio = new WP_Query($args);

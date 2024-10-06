@@ -1,210 +1,401 @@
-jQuery(function ($) {
-  'use strict';
+jQuery(document).ready(async function ($) {
+  // Early exit if the page does not contain required elements
+  const isQuotePage = document.querySelector('.quote-form');
+  const isRelevantPage = document.querySelector('.vehicles-search') || isQuotePage;
+  if (!isRelevantPage) return;
 
   const isVehiclePage = window.location.pathname.includes('/vehicle/');
-  document.addEventListener('DOMContentLoaded', function () {
-    if (!document.querySelector('.vehicles-search') || !document.querySelector('.quote-form')) {
-      return false;
-    }
-
-    window.addEventListener('popstate', function (event) {
-      if (isVehiclePage) {
-        window.location.reload();
-      }
-    });
-  });
-
   const baseUrl = `${window.location.origin}/staging/vehicle/`;
 
-  const makeSelect = $('select.data-make');
-  const modelSelect = $('select.data-model').prop('disabled', true);
-  const trimSelect = $('select.data-trim').prop('disabled', true);
-  const searchButton = $('.vehicles-search .btn-group .btn.btn-1');
+  // Cache jQuery selectors
+  const $makeSelect = $('.data-make');
+  const $modelSelect = $('.data-model');
+  const $trimSelect = $('.data-trim');
+  const $searchButton = $('.vehicles-search .btn-group .vehicles-search__btn');
+  const $loader = $('.loader');
 
-
-
-  const debounce = (func, wait = 100) => {
-    let timeout;
-    return function (...args) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-  };
-
-  const getUrlSegments = () => {
-    const path = window.location.pathname;
-    const segments = path.split('/').filter(segment => segment);
-    return {
-      make: segments[2] || null,
-      model: segments[3] || null
-    };
-  };
-
-  const setModelFromUrl = () => {
-    const urlSegments = getUrlSegments();
-    if (urlSegments && urlSegments.model) {
-      modelSelect.val(urlSegments.model).trigger('change');
-    }
-  };
-
-  const updateSelectStates = () => {
-    const isMakeSelected = makeSelect.find('option:selected').data('make') !== undefined;
-    const isModelSelected = modelSelect.find('option:selected').data('model') !== undefined;
-
-    modelSelect.prop('disabled', !isMakeSelected);
-    trimSelect.prop('disabled', !isMakeSelected || !isModelSelected);
-  };
-
-  const updateSelects = (select, options, dataName) => {
-    if (!Array.isArray(options)) {
-      console.error('Expected an array but got:', options);
-      return;
+  // Class to manage vehicle state
+  class VehicleState {
+    constructor() {
+      this.make = null;
+      this.model = null;
+      this.trim = null;
     }
 
-    const optionsHtml = options.map(option =>
-        `<option data-${dataName}="${option[dataName === 'link' ? 'link' : 'id']}" value="${option.slug}">${option.label}</option>`
-    ).join('');
-
-    requestAnimationFrame(() => {
-      select.empty().append('<option value="">Select</option>').append(optionsHtml).prop('disabled', false);
-      select[0].sumo.reload();
-    });
-  };
-
-  const fetchMakes = async () => {
-    const response = await $.post(window.wp_data.ajax_url, {action: 'get_vehicle_makes'});
-    return JSON.parse(response);
-  };
-
-  const handleMakeChange = async function () {
-    const makeId = $(this).find(':selected').data('make');
-    const makeSlug = $(this).val();
-
-    if (!makeId) {
-      const makes = await fetchMakes();
-      updateSelects(makeSelect, makes, 'make');
-      modelSelect.prop('disabled', true).empty().append('<option value="">Select Model</option>');
-      trimSelect.prop('disabled', true).empty().append('<option value="">Select Trim</option>');
-      searchButton.attr('href', baseUrl);
-
-      return;
+    loadFromCache(cache) {
+      this.make = JSON.parse(cache.get('selectedMake')) || {id: '', slug: ''};
+      this.model = JSON.parse(cache.get('selectedModel')) || {id: '', slug: ''};
+      this.trim = JSON.parse(cache.get('selectedTrim')) || {id: '', slug: '', link: ''};
+      console.debug('Loaded state from cache:', this);
     }
 
-    modelSelect.prop('disabled', false).empty().append('<option value="">Select</option>');
-    modelSelect[0].sumo.reload();
-    trimSelect.prop('disabled', true).empty().append('<option value="">Select Trim</option>');
-    trimSelect[0].sumo.reload();
+    saveToCache(cache) {
+      cache.set('selectedMake', JSON.stringify(this.make));
+      cache.set('selectedModel', JSON.stringify(this.model));
 
-
-    searchButton.attr('href', `${baseUrl}${makeSlug}/`);
-    if (isVehiclePage) {
-      window.history.pushState({}, '', `${baseUrl}${makeSlug}/`);
-    }
-
-    try {
-      const response = await $.post(window.wp_data.ajax_url, {action: 'model_fetch', make: makeId});
-      const models = Object.values(JSON.parse(response)); // Convert object to array
-      if (!Array.isArray(models)) {
-        console.error('Response is not an array:', models);
-        throw new Error('Expected an array but got: ' + JSON.stringify(models));
+      // Only save trim if it has a valid ID
+      if (this.trim && this.trim.id) {
+        cache.set('selectedTrim', JSON.stringify(this.trim));
       }
-      updateSelects(modelSelect, models, 'model');
-      modelSelect.prop('disabled', false);
-      updateSelectStates();
-    } catch (error) {
-      console.error('Error fetching models:', error);
     }
-
-    // Save to localStorage
-    localStorage.setItem('makeSelect', makeSlug);
-  };
-
-  const handleModelChange = async function () {
-    const modelId = $(this).find(':selected').data('model');
-    const modelSlug = $(this).val();
-    const makeSlug = makeSelect.val();
-
-    if (!modelId) {
-      trimSelect.prop('disabled', true).empty().append('<option value="">Select Trim</option>');
-      searchButton.attr('href', `${baseUrl}${makeSlug}/`);
-      updateSelectStates();
-      return;
-    }
-
-    searchButton.attr('href', `${baseUrl}${makeSlug}/${modelSlug}/`);
-    if (isVehiclePage) {
-      window.history.pushState({}, '', `${baseUrl}${makeSlug}/${modelSlug}/`);
-    }
-
-    try {
-      const response = await $.post(window.wp_data.ajax_url, {action: 'trim_fetch', model: modelId});
-      const trims = JSON.parse(response);
-      updateSelects(trimSelect, trims, 'link');
-      trimSelect.prop('disabled', false);
-      updateSelectStates();
-    } catch (error) {
-      console.error('Error fetching trims:', error);
-    }
-
-    // Save to localStorage
-    localStorage.setItem('modelSelect', modelSlug);
-  };
-
-  const handleTrimChange = function () {
-    const trimLink = $(this).find(':selected').data('link');
-    const makeSlug = makeSelect.val();
-    const modelSlug = modelSelect.val();
-
-    searchButton.attr('href', trimLink || `${baseUrl}${makeSlug}/${modelSlug}/`);
-    if (isVehiclePage) {
-      window.history.pushState({}, '', trimLink || `${baseUrl}${makeSlug}/${modelSlug}/`);
-    }
-    updateSelectStates();
-
-    // Save to localStorage
-    localStorage.setItem('trimSelect', trimLink);
-  };
-
-  const loadFromLocalStorage = () => {
-    const makeSlug = localStorage.getItem('makeSelect');
-    const modelSlug = localStorage.getItem('modelSelect');
-    const trimLink = localStorage.getItem('trimSelect');
-    console.log('Loading from localStorage:', makeSlug, modelSlug, trimLink);
-
-    if (makeSlug) {
-      makeSelect.val(makeSlug);
-      makeSelect[0].sumo.reload();
-      handleMakeChange.call(makeSelect[0]);
-    }
-    if (modelSlug) {
-      modelSelect.val(modelSlug);
-      modelSelect[0].sumo.reload();
-      handleModelChange.call(modelSelect[0]);
-    }
-    if (trimLink) {
-      trimSelect.val(trimLink);
-      trimSelect[0].sumo.reload();
-      handleTrimChange.call(trimSelect[0]);
-    }
-  };
-
-  if (localStorage.getItem('makeSelect') || localStorage.getItem('modelSelect') || localStorage.getItem('trimSelect')) {
-    loadFromLocalStorage();
-  } else {
-    setTimeout(() => {
-      handleMakeChange.call(makeSelect[0]);
-    }, 50);
   }
 
-  makeSelect.on('change', debounce(handleMakeChange, 100));
-  modelSelect.on('change', debounce(handleModelChange, 100));
-  trimSelect.on('change', debounce(handleTrimChange, 100));
+  // Class to manage cache
+  class Cache {
+    get(key) {
+      const value = localStorage.getItem(key);
+      console.debug(`Cache get ${key}:`, value);
+      return value;
+    }
 
-  setModelFromUrl();
-  updateSelectStates();
-  // loadFromLocalStorage();
+    set(key, value) {
+      if (value && value !== '{}') {
+        localStorage.setItem(key, value);
+        console.debug(`Cache set ${key}:`, value);
+      } else {
+        localStorage.removeItem(key);
+        console.debug(`Cache remove ${key}`);
+      }
+    }
+  }
 
-  makeSelect.SumoSelect();
-  modelSelect.SumoSelect();
-  trimSelect.SumoSelect();
+  const vehicleState = new VehicleState();
+  const cache = new Cache();
+
+  // Loading state
+  const loadingState = {isMakeLoaded: false, isModelLoaded: false, isTrimLoaded: false};
+
+  // Cache data
+  let makesCache = JSON.parse(localStorage.getItem('makesCache')) || [];
+  let modelsCache = JSON.parse(localStorage.getItem('modelsCache')) || [];
+
+  // Helper functions
+
+  /**
+   * Show or hide the loader
+   * @param {boolean} show
+   */
+  const showLoader = (show) => {
+    if ($loader.length) $loader.css('display', show ? 'block' : 'none');
+  };
+
+  /**
+   * Get URL segments for make and model
+   */
+  const getUrlSegments = () => {
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    // console.debug('Extracted URL Segments:', segments);
+    return {make: segments[2] || null, model: segments[3] || null};
+  };
+
+  /**
+   * Update the browser URL segments based on the selected values
+   */
+  const updateUrlSegments = () => {
+    if (!isVehiclePage) return;
+    const makeSlug = vehicleState.make?.slug || '';
+    const modelSlug = vehicleState.model?.slug || '';
+    let newUrl = baseUrl;
+
+    if (makeSlug) newUrl += `${makeSlug}/`;
+    if (modelSlug) newUrl += `${modelSlug}/`;
+
+    if (newUrl !== window.location.href) {
+      window.history.pushState({}, '', newUrl);
+      // console.debug('Updated URL:', newUrl);
+    }
+  };
+
+  /**
+   * Initialize SumoSelect or reload it if already initialized
+   * @param {jQuery} $select
+   */
+  const initializeSumoSelect = ($select) => {
+    if ($select[0]?.sumo) $select[0].sumo.reload();
+    else $select.SumoSelect({csvDispCount: 3});
+  };
+
+  /**
+   * Fetch data from server
+   * @param {string} action
+   * @param {object} params
+   * @returns {Promise<Array>}
+   */
+  const fetchData = async (action, params) => {
+    try {
+      showLoader(true);
+      // console.debug(`Fetching ${action} with params:`, params);
+      const response = await fetch(window.wp_data.ajax_url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+        body: new URLSearchParams({action, ...params}),
+      });
+      const data = await response.json();
+      if (data.error) throw new Error(data.error);
+
+      // Log the data received for trims
+      if (action === 'trim_fetch') {
+        console.debug('Received trims data:', data);
+      }
+
+      return data;
+    } catch (error) {
+      console.error(`Error fetching ${action}:`, error);
+      return [];
+    } finally {
+      showLoader(false);
+    }
+  };
+
+  /**
+   * Populate a select dropdown with given options
+   * @param {jQuery} $select
+   * @param {Array} options
+   * @param {string} dataName
+   */
+  const populateDropdown = async ($select, options, dataName) => {
+    try {
+      if (!Array.isArray(options)) {
+        throw new Error(`Expected options to be an array but got: ${typeof options}`);
+      }
+
+      // console.debug(`Populating ${dataName} select with options:`, options);
+
+      const capitalizedDataName = dataName.charAt(0).toUpperCase() + dataName.slice(1);
+      const optionsHtml = options
+          .map((option) => {
+            // console.debug(`Option ID for ${dataName}:`, option.id);
+            return `<option data-${dataName}="${option.id}" ${
+                dataName === 'trim' ? `data-link="${option.link}"` : ''
+            } value="${option.slug}">${option.label}</option>`;
+          })
+          .join('');
+
+      $select.html(`<option value="">Select ${capitalizedDataName}</option>${optionsHtml}`);
+      $select.prop('disabled', false);
+      initializeSumoSelect($select);
+      loadingState[`is${capitalizedDataName}Loaded`] = true;
+      // console.debug(`Dropdown ${dataName} populated and enabled.`);
+
+      // After populating, check if vehicleState[dataName] has a slug and re-select it
+      if (vehicleState[dataName]?.slug) {
+        const matchingOption = $select.find(`option[value="${vehicleState[dataName].slug}"]`);
+        if (matchingOption.length) {
+          $select.val(vehicleState[dataName].slug);
+          initializeSumoSelect($select);
+
+          // Update vehicleState[dataName] with the correct id and link
+          vehicleState[dataName] = {
+            id: matchingOption.data(dataName) || '',
+            slug: matchingOption.val() || '',
+            link: matchingOption.data('link') || '',
+          };
+          vehicleState.saveToCache(cache);
+
+          if (dataName === 'trim') {
+            updateSearchButton();
+          }
+
+          // If it's the model dropdown, we need to update the state and fetch trims
+          if (dataName === 'model') {
+            await updateStateAndDropdown('model', vehicleState.model.id, vehicleState.model.slug);
+          }
+        } else {
+          // If the selection is not valid, reset it
+          vehicleState[dataName] = {id: '', slug: '', link: ''};
+          cache.set(`selected${capitalizedDataName}`, JSON.stringify(vehicleState[dataName]));
+        }
+      }
+    } catch (error) {
+      // console.error(`Error populating select ${dataName}:`, error);
+    }
+  };
+
+  /**
+   * Reset a dropdown and optionally reset its state
+   * @param {jQuery} $select
+   * @param {string} dataName
+   * @param {object} options
+   */
+  const resetDropdown = ($select, dataName, options = {}) => {
+    const {resetState = true} = options;
+    const capitalizedDataName = dataName.charAt(0).toUpperCase() + dataName.slice(1);
+
+    $select.html(`<option value="">Select ${capitalizedDataName}</option>`);
+    $select.prop('disabled', true);
+    initializeSumoSelect($select);
+
+    if (resetState) {
+      vehicleState[dataName] = {id: '', slug: '', link: ''};
+      cache.set(`selected${capitalizedDataName}`, JSON.stringify(vehicleState[dataName]));
+    }
+  };
+
+  /**
+   * Update the search button based on the selected values
+   */
+  const updateSearchButton = () => {
+    const makeSlug = vehicleState.make?.slug || '';
+    const modelSlug = vehicleState.model?.slug || '';
+    const trimLink = vehicleState.trim?.link || '';
+    let url;
+
+    if (vehicleState.trim?.id && trimLink) {
+      url = trimLink;
+    } else if (makeSlug && modelSlug) {
+      url = `${baseUrl}${makeSlug}/${modelSlug}/`;
+    } else if (makeSlug) {
+      url = `${baseUrl}${makeSlug}/`;
+    } else {
+      url = baseUrl;
+    }
+
+    $searchButton.attr('href', url);
+    // console.debug(`Updated search button href to: ${url}`);
+  };
+
+  /**
+   * Update vehicle state and corresponding dropdowns
+   * @param {string} key
+   * @param {string} id
+   * @param {string} slug
+   */
+  const updateStateAndDropdown = async (key, id, slug) => {
+    vehicleState[key] = {id, slug, link: vehicleState[key]?.link || ''};
+    // Only save make and model here to avoid overwriting trim
+    if (key === 'make' || key === 'model') {
+      cache.set(`selected${key.charAt(0).toUpperCase() + key.slice(1)}`, JSON.stringify(vehicleState[key]));
+    }
+
+    // console.debug(`Updated vehicleState:`, vehicleState);
+
+    const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
+
+    if (key === 'make') {
+      resetDropdown($modelSelect, 'model', {resetState: false}); // Do not reset vehicleState.model here
+      resetDropdown($trimSelect, 'trim', {resetState: false}); // Do not reset vehicleState.trim here
+      // Fetch models
+      const models = await fetchData('model_fetch', {make: id});
+      modelsCache = models;
+      localStorage.setItem('modelsCache', JSON.stringify(modelsCache));
+      await populateDropdown($modelSelect, modelsCache, 'model');
+    } else if (key === 'model') {
+      resetDropdown($trimSelect, 'trim', {resetState: false}); // Do not reset vehicleState.trim here
+      // Fetch trims
+      const trims = await fetchData('trim_fetch', {model: id});
+      await populateDropdown($trimSelect, trims, 'trim');
+    }
+
+    updateSearchButton();
+    updateUrlSegments();
+  };
+
+  /**
+   * Initialize the selects on page load
+   */
+  const initialize = async () => {
+    // console.debug('Initializing page with cached and URL data...');
+    vehicleState.loadFromCache(cache);
+    const urlData = getUrlSegments();
+
+    // Update vehicleState based on URL data
+    if (urlData.make) {
+      vehicleState.make = makesCache.find((make) => make.slug === urlData.make) || vehicleState.make;
+    }
+    if (urlData.model) {
+      vehicleState.model =
+          modelsCache.find((model) => model.slug === urlData.model) || vehicleState.model;
+    }
+
+    // console.debug(`Initializing with vehicleState:`, vehicleState);
+
+    // Fetch makes if not cached
+    if (makesCache.length === 0) {
+      makesCache = await fetchData('get_vehicle_makes');
+      localStorage.setItem('makesCache', JSON.stringify(makesCache));
+    }
+    await populateDropdown($makeSelect, makesCache, 'make');
+
+    // Update make selection
+    if (vehicleState.make.id) {
+      await updateStateAndDropdown('make', vehicleState.make.id, vehicleState.make.slug);
+    }
+
+    // Update model selection
+    if (vehicleState.model.id) {
+      await updateStateAndDropdown('model', vehicleState.model.id, vehicleState.model.slug);
+    }
+
+    initializeSumoSelect($makeSelect);
+    initializeSumoSelect($modelSelect);
+    initializeSumoSelect($trimSelect);
+
+    // After initializing, ensure trim is selected if it exists
+    if (vehicleState.trim && vehicleState.trim.id) {
+      const matchingOption = $trimSelect.find(`option[value="${vehicleState.trim.slug}"]`);
+      if (matchingOption.length) {
+        $trimSelect.val(vehicleState.trim.slug);
+        initializeSumoSelect($trimSelect);
+        updateSearchButton();
+      }
+    }
+
+    updateSearchButton();
+    updateUrlSegments();
+  };
+
+  // Event listeners
+
+  // Clean up existing event listeners
+  $makeSelect.off('change');
+  $modelSelect.off('change');
+  $trimSelect.off('change');
+
+  $makeSelect.on('change', async () => {
+    const selectedOption = $makeSelect.find(':selected');
+    const selectedMakeId = selectedOption.data('make');
+    const selectedMakeSlug = selectedOption.val();
+    await updateStateAndDropdown('make', selectedMakeId, selectedMakeSlug);
+    if(isQuotePage) {
+      // Update the make select field in the quote form
+      $('input[name="make"]').val(selectedMakeSlug);
+    }
+
+  });
+
+  $modelSelect.on('change', async () => {
+    const selectedOption = $modelSelect.find(':selected');
+    const selectedModelId = selectedOption.data('model');
+    const selectedModelSlug = selectedOption.val();
+    await updateStateAndDropdown('model', selectedModelId, selectedModelSlug);
+    if(isQuotePage) {
+      // Update the make select field in the quote form
+      $('input[name="model"]').val(selectedModelSlug);
+    }
+  });
+
+  $trimSelect.on('change', () => {
+    const selectedOption = $trimSelect.find(':selected');
+    vehicleState.trim = {
+      id: selectedOption.data('trim') || '',
+      slug: selectedOption.val() || '',
+      link: selectedOption.data('link') || '',
+    };
+    // Save trim only when it has a valid ID
+    if (vehicleState.trim.id) {
+      cache.set('selectedTrim', JSON.stringify(vehicleState.trim));
+    }
+    if(isQuotePage) {
+      // Update the make select field in the quote form
+      $('input[name="trim"]').val(selectedOption.val());
+    }
+    // console.debug(
+    //     `Trim selected - ID: ${vehicleState.trim.id}, Slug: ${vehicleState.trim.slug}, Link: ${vehicleState.trim.link}`
+    // );
+    updateSearchButton();
+    updateUrlSegments();
+  });
+
+  // Initialize selects on page load
+  await initialize();
 });

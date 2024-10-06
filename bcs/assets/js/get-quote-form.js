@@ -25,22 +25,20 @@ jQuery(function ($) {
       const $currentStep = $(`.form-step-${step}`);
       const invalidFields = [];
 
-      $currentStep.find('[aria-required="true"]').each(function () {
-        const $group = $(this).closest('[data-class="wpcf7cf_group"]');
-        if ($group.length === 0 || $group.is(':visible')) {
-          console.log(`Validating field: ${$(this).attr('name')}, value: ${$(this).val()}`);
-          if (!$(this).val()) {
+      // Include hidden inputs in validation
+      $currentStep.find('input[aria-required="true"], input[type="hidden"][name="make"], input[type="hidden"][name="model"], input[type="hidden"][name="trim"]').each(function () {
+        const $field = $(this);
+
+        let fieldValue = $field.val();
+
+          if (!fieldValue) {
             isValid = false;
-            $(this).addClass('wpcf7-not-valid');
-            $(this).closest('.wpcf7-form-control-wrap').find('.wpcf7-not-valid-tip').remove();
-            $(this).closest('.wpcf7-form-control-wrap').append('<span class="wpcf7-not-valid-tip">This field is required.</span>');
-            $(this).next('.error-message').text('This field is required.').show();
-            invalidFields.push($(this).attr('name') || $(this).attr('placeholder'));
+            $field.addClass('wpcf7-not-valid');
+          // Since hidden fields don't have a wrapping element, you might need to display an error differently
+          // For example, highlight the related dropdown or display a general error message
+            invalidFields.push($field.attr('name') || $field.attr('placeholder'));
           } else {
-            $(this).removeClass('wpcf7-not-valid');
-            $(this).closest('.wpcf7-form-control-wrap').find('.wpcf7-not-valid-tip').remove();
-            $(this).next('.error-message').hide();
-          }
+            $field.removeClass('wpcf7-not-valid');
         }
       });
 
@@ -76,18 +74,31 @@ jQuery(function ($) {
       return {isValid, invalidFields};
     };
 
-    const getInvalidFields = (step) => {
-      const {invalidFields} = validateStep(step);
-      return invalidFields;
-    };
+    // Event listeners for updating hidden fields
+    const $makeSelect = $('.data-make');
+    const $modelSelect = $('.data-model');
+    const $trimSelect = $('.data-trim');
 
+    const $hiddenMake = $('input[name="make"]');
+    const $hiddenModel = $('input[name="model"]');
+    const $hiddenTrim = $('input[name="trim"]');
 
-    $(document).on('input change', '[aria-required="true"], [data-name="brake_service"] input[type="checkbox"]', function () {
-      const $currentStep = $(this).closest('.form-step');
-      const step = $currentStep.data('step');
-      console.log(`Field changed in step ${step}`);
-      console.log(`Field val ` + $(this).val());
-      validateStep(step);
+    $makeSelect.on('change', function () {
+      const selectedValue = $(this).val();
+      $hiddenMake.val(selectedValue);
+      validateStep(1); // Re-validate step 1
+    });
+
+    $modelSelect.on('change', function () {
+      const selectedValue = $(this).val();
+      $hiddenModel.val(selectedValue);
+      validateStep(1); // Re-validate step 1
+    });
+
+    $trimSelect.on('change', function () {
+      const selectedValue = $(this).val();
+      $hiddenTrim.val(selectedValue);
+      validateStep(1); // Re-validate step 1
     });
 
     // Next button click event
@@ -95,9 +106,7 @@ jQuery(function ($) {
 
       const nextStep = $(this).data('next-step');
       const currentStep = nextStep - 1;
-      console.log(`Next button clicked, current step: ${currentStep}, next step: ${nextStep}`);
       if ($(this).hasClass('disabled') || $(this).prop('disabled')) {
-        // Prevent default action and trigger validation to show error messages
         event.preventDefault();
         validateStep(currentStep);
         return false;
@@ -116,16 +125,15 @@ jQuery(function ($) {
     const form = $('.wpcf7-form');
 
     form.on('submit', function (event) {
-      event.preventDefault(); // Prevent the default form submission
-
       const {isValid, invalidFields} = validateStep(currentStep);
 
       if (!isValid) {
+        event.preventDefault();
         const errorMessage = `Step ${currentStep} has invalid fields: ${invalidFields.join(', ')}`;
         $('.wpcf7-response-output').text(errorMessage).show();
       } else {
         $('.wpcf7-response-output').hide();
-        this.submit(); // Submit the form if valid
+        // Allow the form to submit
       }
     });
 
