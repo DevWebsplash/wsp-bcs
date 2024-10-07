@@ -63,21 +63,21 @@
 
 		<div class="b-popularity ms-section">
 			<div class="item">
-							<?php $image_repeater = get_sub_field( 'trustpilot_image' ); ?>
+							<?php $image_repeater = get_field( 'trustpilot_image', 'option' ); ?>
 				<div class="img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
                                       loading="lazy"
                                       alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
 				<div class="text"><span><?php echo get_field('trustpilot__rate', 'option');?></span> <?php echo get_field('trustpilot_number', 'option');?></div>
 			</div>
 			<div class="item">
-							<?php $image_repeater = get_sub_field( 'google_image_' ); ?>
+							<?php $image_repeater = get_field( 'google_image_', 'option' ); ?>
 				<div class="img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
                                       loading="lazy"
                                       alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
 				<div class="text"><span><?php echo get_field('google_rate', 'option');?></span> <?php echo get_field('google_number', 'option');?></div>
 			</div>
 			<div class="item">
-							<?php $image_repeater = get_sub_field( 'facebook_image' ); ?>
+							<?php $image_repeater = get_field( 'facebook_image', 'option' ); ?>
 				<div class="img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
                                       loading="lazy"
                                       alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>

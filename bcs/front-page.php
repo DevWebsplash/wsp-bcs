@@ -379,9 +379,7 @@ if (have_rows ('home_content')):
         </div>
       </section>
     <?php elseif (get_row_layout () == 'reviews'): ?>
-	    <?php if ( ! get_field( 'home_articles_hide' ) ) { ?>
 		    <?php echo get_template_part( 'includes/content', 'reviews' ); ?>
-	    <?php } ?>
     <?php elseif (get_row_layout () == 'faq'): ?>
       <!--KNOWLEDGE variant 3-->
       <section class="s-knowledge s-knowledge--variant-3 ms-section">
