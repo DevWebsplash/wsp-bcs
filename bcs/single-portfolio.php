@@ -58,6 +58,332 @@ get_header();
             </div>
         </div>
     </section>
+    <!--Techologies variant 1-->
+    <section class="s-knowledge s-knowledge--variant-1 ms-section">
+        <div class="cn">
+            <div class="acc">
+                <div class="acc-item">
+                    <div class="acc-head">Slow Starting</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-head">Loud Tapping and Dark Smoke</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-head">Complete Electrical Malfunction</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-head">Bumping Sound From Rear</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-head">Knocking noise from wheels</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-head">Central locking not unlocking rear doors</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Customer variant 1-->
+    <section class="s-knowledge s-knowledge--variant-1 ms-section">
+        <div class="cn">
+            <div class="acc">
+                <div class="acc-item">
+                    <div class="acc-head">Slow Starting</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-head">Loud Tapping and Dark Smoke</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-head">Complete Electrical Malfunction</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-head">Bumping Sound From Rear</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-head">Knocking noise from wheels</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-head">Central locking not unlocking rear doors</div>
+                    <div class="acc-body">
+                        <div class="inner">
+                            <div class="text">
+                                <ul>
+                                    <li><span>Engine type - Number of cylinders :</span><span>Inline 4</span></li>
+                                    <li><span>Fuel Type :</span><span>Diesel</span></li>
+                                    <li><span>Fuel System :</span><span>Direct Injection</span></li>
+                                    <li><span>Engine Alignment :</span><span>Transverse</span></li>
+                                    <li><span>Engine Position :</span><span>Front</span></li>
+                                    <li><span>Engine displacement :</span><span>1248 cm3 / 76.2 cu-in</span></li>
+                                    <li><span>Aspiration :</span><span>Turbo (TGV) + Intercooler</span></li>
+                                    <li><span>Bore x Stroke :</span><span>69.6 x 82.0 mm 2.74 x 3.23 inches</span></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Compression Ratio :</span><span>16.8</span></li>
+                                    <li><span>Horsepower :</span><span>90 PS / 89 HP / 66 kW @ 4000 rpm</span></li>
+                                    <li><span>Maximum torque :</span><span>200 Nm / 147 lb-ft @ 1500 rpm</span></li>
+                                    <li><span>Drive wheels - Traction - Drivetrain :</span>FWD<span></span></li>
+                                    <li><span>Transmission Gearbox :</span><span>5 speed Manual</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 <?php
 // Check value exists.
 if ( have_rows( 'flixble_content_portfolio' ) ):
@@ -499,10 +825,10 @@ endif; wp_reset_postdata();?>
                     <div class="section-bg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-02.png" loading="lazy" alt=""></div>
                     <div class="cn">
                         <div class="section-heading">
-                            <h2 class="title h1">Brake Caliper Refurbishment Services</h2>
-                            <div class="subtitle">With years of experience, our company specializes in refurbishing brake calipers for cars. We have a team of skilled professionals dedicated to providing high-quality services to customers worldwide.</div>
+                            <h2 class="title h1"><?php echo get_field( 'title' );?></h2>
+                            <div class="subtitle"><?php echo get_field( 'subtitle' );?></div>
                             <div class="decorated-title decorated-title--row-left">
-                                <div class="small-title small-title--white">Our services</div>
+                                <div class="small-title small-title--white"><?php echo get_field( 'small_title' );?></div>
                                 <div class="line-decor line-decor--white"></div>
                             </div>
                         </div>
@@ -510,45 +836,36 @@ endif; wp_reset_postdata();?>
                 </div>
                 <div class="cn">
                     <div class="services-list">
-                        <div class="service-item">
-                            <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
-                            <h3 class="title">Brake Caliper Refurbishment Un-Seize & Repair Service</h3>
-                            <div class="desc">Our team specializes in refurbishing brake calipers to restore their performance and appearance. If you don’t think you need a complete refurbishment.</div>
-                            <a href="#" class="btn btn-2">
-                                <span>Read more</span>
-                                <span class="icon">
+	                    <?php
+	                    $featured_posts = get_sub_field ('services');
+	                    if ($featured_posts): ?>
+		                    <?php foreach ($featured_posts as $post):
+
+			                    // Setup this post for WP functions (variable must be named $post).
+			                    setup_postdata ($post); ?>
+                              <div class="service-item">
+						                    <?php $image_repeater = get_field ('services_preview_image'); ?>
+                                  <div class="img"><img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
+                                                        loading="lazy"
+                                                        alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+                                  </div>
+                                  <h3 class="title"><?php the_title (); ?></h3>
+                                  <div class="desc"><?php the_field ('services_preview_description'); ?></div>
+                                  <a href="<?php the_permalink (); ?>" class="btn btn-2">
+                                      <span>Read more</span>
+                                      <span class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
                   <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
                 </svg>
             </span>
-                            </a>
-                        </div>
-                        <div class="service-item">
-                            <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
-                            <h3 class="title">Engineering & ReManufacture and Coatings</h3>
-                            <div class="desc">We have incredible engineering capabilities at BCS. Aside from our on-site engineer with almost 40 years experience in manual turning, milling,</div>
-                            <a href="#" class="btn btn-2">
-                                <span>Read more</span>
-                                <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-            </span>
-                            </a>
-                        </div>
-                        <div class="service-item">
-                            <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
-                            <h3 class="title">High-End Brake Caliper Painting</h3>
-                            <div class="desc">With our High-End caliper painting service, we can provide all OEM colours for Brembo brake calipers. We can also replace logos.</div>
-                            <a href="#" class="btn btn-2">
-                                <span>Read more</span>
-                                <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-            </span>
-                            </a>
-                        </div>
+                                  </a>
+                              </div>
+		                    <?php endforeach; ?>
+
+		                    <?php
+		                    // Reset the global post object so that the rest of the page works correctly.
+		                    wp_reset_postdata (); ?>
+	                    <?php endif; ?>
                     </div>
                 </div>
             </section>
