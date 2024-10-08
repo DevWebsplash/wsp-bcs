@@ -21,7 +21,14 @@ get_header();
                 <div class="inner-content__text">
                     <div class="section-heading">
                         <?php    $featured_post = get_field('trim'); ?>
-                        <h1 class="title h1">{Primary Service} for <?php echo get_field( 'first_name' ); ?> in <?php echo get_field( 'town' ); ?> for their <?php
+                        <h1 class="title h1"><?php
+	                        $term_list = wp_get_post_terms($post->ID, 'portfolio_category', ['fields' => 'all']);
+	                        foreach($term_list as $term_primary) {
+		                        if( get_post_meta($post->ID, '_yoast_wpseo_primary_portfolio_category',true) == $term_primary->term_id ) {
+					                       echo $term_primary->name;
+		                        }
+	                        }
+	                        ?> for <?php echo get_field( 'first_name' ); ?> in <?php echo get_field( 'town' ); ?> for their <?php
 	                        $terms = wp_get_object_terms ( $featured_post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC'));
 	                        if (!empty($terms)) :
 		                        $project = array();
@@ -47,38 +54,58 @@ get_header();
                             <div class="icon"><img src="<?php echo get_template_directory_uri();?>/assets/images/icons/icon-08.svg" loading="lazy" alt=""></div>
                             <div>
                                 <div class="title">Location</div>
-                                <div><?php echo get_field( 'overview_location' ); ?></div>
+                                <div><?php
+	                                $terms = wp_get_object_terms ( $featured_post->ID, 'state', array('orderby' => 'term_id', 'order' => 'ASC'));
+	                                if (!empty($terms)) :
+		                                $project = array();
+		                                foreach ($terms as $term) {
+			                                $project[] = $term->name;
+		                                } ?>
+		                                <?php echo $project[ 0 ]; ?>
+	                                <?php endif;?></div>
                             </div>
                         </div>
                     </div>
                     <div class="info-2">
-                        <div class="block-title"><?php if( get_field( 'overview_project_status' ) =='completed') {?>
-                                Scroll below to see the before and after images and further information about the {primary service} on these <?php $terms = wp_get_object_terms ( $featured_post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC'));
+                        <div class="block-title"><?php if( get_field( 'overview_project_status' ) == 'Completed') { ?>
+                                Scroll below to see the before and after images and further information about the
+		                        <?php
+		                        $term_list = wp_get_post_terms($post->ID, 'portfolio_category', ['fields' => 'all']);
+		                        foreach($term_list as $term) {
+			                        if( get_post_meta($post->ID, '_yoast_wpseo_primary_portfolio_category',true) == $term->term_id ) {
+				                        // this is a primary category
+			                        }
+		                        }
+		                        ?> on these <?php $terms = wp_get_object_terms ( $featured_post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC'));
                                 if (!empty($terms)) :
                                 $project = array();
                                 foreach ($terms as $term) {
                                 $project[] = $term->name;
                                 } ?>
 		                        <?php echo $project[ 0 ]; ?>
-		                        <?php echo $project[ 1 ]; ?>
 		                        <?php endif;?> brake calipers.
                           <?php } else { ?>
                                 We have not completed this job yet (or we just haven't uploaded the completion data yet), but scroll down to see what the job looked like and keep your eyes on this page if you'd like to see what these brakes look like once we're done.
                           <?php } ?></div>
                         <div class="block-title">Services offered:</div>
-	                    <?php if ( have_rows( 'services_offered' ) ): ?>
-		                    <?php while ( have_rows( 'services_offered' ) ) : the_row(); ?>
+	                 <?php $terms = wp_get_object_terms ( $post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
+	                    if (!empty($terms)) :
+	                    $project = array();
+	                    foreach ($terms as $term) {
+		                    $project_name = $term->name;
+		                    $project_id = $term->term_id;
+	                     ?>
                                 <div class="item">
-	                                <?php $image_repeater = get_sub_field( 'icon' ); ?>
+	                                <?php $image_repeater = get_field( 'service_used_image', $term);
+                                    if($image_repeater) {?>
                                     <div class="icon"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
                                                            loading="lazy"
                                                            alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>"></div>
-                                    <div><?php echo get_sub_field( 'text' ); ?></div>
+                                        <?php }?>
+                                    <div><?php echo $project_name; ?></div>
                                 </div>
-		                    <?php endwhile; ?>
-	                    <?php endif; ?>
-
-
+                          <?php }?>
+		                    <?php endif;?>
                     </div>
                 </div>
             </div>
@@ -166,7 +193,88 @@ get_header();
             </div>
         </div>
     </section>
+<?php if ( has_term( 153308, 'portfolio_category', get_the_ID() ) ) {?>
+    <!--Engineering Services-->
+    <section class="s-services ms-section">
+        <div class="cn">
 
+            <div class="s-services__list">
+
+                      <div class="service-item">
+												<?php $image_repeater = get_field( 'engineering_services_image' );
+                                                if($image_repeater) {?>
+                          <div class="service-item__img"><img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                                                              loading="lazy"
+                                                              alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>">
+                          </div>
+                                                    <?php }?>
+                          <div class="service-item__content">
+                              <h3 class="block-title h2"><?php echo get_field( 'engineering_services_title' ); ?></h3>
+                              <div class="desc"><?php echo get_field( 'engineering_services_description' ); ?></div>
+                              <ul class="info-list">
+																<?php  if ( have_rows( 'engineering_services_list' ) ): ?>
+																	<?php while ( have_rows( 'engineering_services_list' ) ) : the_row(); ?>
+                                        <li>
+                                            <div class="title"><?php echo get_sub_field( 'list_title' ); ?></div>
+                                            <div><?php echo get_sub_field( 'list_description' ); ?></div>
+                                        </li>
+																	<?php endwhile; ?>
+																<?php endif; ?>
+                              </ul>
+														<?php
+														$link = get_field( 'engineering_services_button' );
+														if ( $link ):
+															$link_url    = $link['url'];
+															$link_title  = $link['title'];
+															$link_target = $link['target'] ? $link['target'] : '_self';
+															?>
+                                <a href="<?php echo esc_url( $link_url ); ?>" class="btn btn-1"
+                                   target="<?php echo esc_attr( $link_target ); ?>">
+																	<?php echo esc_html( $link_title ); ?>
+                                </a>
+														<?php endif; ?>
+                          </div>
+                      </div>
+            </div>
+        </div>
+    </section>
+<?php } ?>
+
+<?php if ( has_term( 153309, 'portfolio_category', get_the_ID() ) ) {?>
+    <!--Brake Caliper Parts Used-->
+
+			<?php
+			$featured_posts = get_field( 'parts_used_products_copy' );
+			if ( $featured_posts ): ?>
+
+      <section class="s-products ms-section">
+          <div class="cn">
+              <div class="section-heading section-heading--simple">
+                  <h2 class="title h1"><?php echo get_field( 'parts_used_title' ); ?></h2>
+                  <div class="subtitle"><?php echo get_field( 'parts_used_subtitle' ); ?></div>
+              </div>
+              <div class="products-list">
+							<?php foreach ( $featured_posts as $post ):
+
+								// Setup this post for WP functions (variable must be named $post).
+								setup_postdata( $post ); ?>
+                    <div class="product-card">
+                        <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
+                        <div class="product-card__content">
+                            <h3 class="title"><?php echo get_the_title();?></h3>
+                            <div class="subtitle">2004-2011</div>
+                            <div class="btn-group">
+                                <a href="<?php the_permalink();?>" class="btn btn-2">From $6.95</a>
+                                <a href="#" class="btn btn-2">From $6.95</a>
+                            </div>
+                        </div>
+                    </div>
+					<?php endforeach; ?>
+              </div>
+          </div>
+      </section>
+	<?php endif; wp_reset_postdata();?>
+<?php } ?>
 <?php
 // Check value exists.
 if ( have_rows( 'flixble_content_portfolio' ) ):
@@ -608,10 +716,10 @@ endif; wp_reset_postdata();?>
                     <div class="section-bg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-02.png" loading="lazy" alt=""></div>
                     <div class="cn">
                         <div class="section-heading">
-                            <h2 class="title h1"><?php echo get_field( 'title' );?></h2>
-                            <div class="subtitle"><?php echo get_field( 'subtitle' );?></div>
+                            <h2 class="title h1"><?php echo get_sub_field( 'title' );?></h2>
+                            <div class="subtitle"><?php echo get_sub_field( 'subtitle' );?></div>
                             <div class="decorated-title decorated-title--row-left">
-                                <div class="small-title small-title--white"><?php echo get_field( 'small_title' );?></div>
+                                <div class="small-title small-title--white"><?php echo get_sub_field( 'small_title' );?></div>
                                 <div class="line-decor line-decor--white"></div>
                             </div>
                         </div>
