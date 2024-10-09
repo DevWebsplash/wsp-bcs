@@ -13,13 +13,13 @@
 <!--VEHICLES-->
 <section class="s-vehicles-simple ms-section">
   <div class="section-bg">
-    <img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-08.jpg" loading="lazy" alt=""></div>
+    <img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-08.jpg" alt="hero screen"></div>
   <div class="cn">
     <div class="section-heading">
       <h1 class="title h1"><?php echo get_field ('home_hero_title'); ?></h1>
       <div class="subtitle"><?php echo get_field ('home_hero_subtitle'); ?></div>
     </div>
-    <?php echo render_vehicle_search_form(); ?>
+    <?php echo render_vehicle_search_form (); ?>
   </div>
 </section>
 <?php
@@ -36,9 +36,8 @@ if (have_rows ('home_content')):
         <div class="cn">
           <div class="s-why__inner">
             <?php $image_repeater = get_sub_field ('text_with_image'); ?>
-            <div class="s-why__img"><img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
-                                         loading="lazy"
-                                         alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+            <div class="s-why__img">
+              <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
             </div>
             <div class="s-why__content">
               <div class="section-heading">
@@ -91,19 +90,18 @@ if (have_rows ('home_content')):
                 setup_postdata ($post); ?>
                 <div class="service-item">
                   <?php $image_repeater = get_field ('services_preview_image'); ?>
-                  <div class="img"><img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
-                                        loading="lazy"
-                                        alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+                  <div class="img">
+                    <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
                   </div>
                   <h3 class="title"><?php the_title (); ?></h3>
                   <div class="desc"><?php the_field ('services_preview_description'); ?></div>
                   <a href="<?php the_permalink (); ?>" class="btn btn-2">
                     <span>Read more</span>
                     <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-            </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                          <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                        </svg>
+                    </span>
                   </a>
                 </div>
               <?php endforeach; ?>
@@ -379,7 +377,7 @@ if (have_rows ('home_content')):
         </div>
       </section>
     <?php elseif (get_row_layout () == 'reviews'): ?>
-		    <?php echo get_template_part( 'includes/content', 'reviews' ); ?>
+      <?php echo get_template_part ('includes/content', 'reviews'); ?>
     <?php elseif (get_row_layout () == 'faq'): ?>
       <!--KNOWLEDGE variant 3-->
       <section class="s-knowledge s-knowledge--variant-3 ms-section">

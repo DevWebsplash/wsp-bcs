@@ -1,6 +1,7 @@
 jQuery(document).ready(async function ($) {
   // Early exit if the page does not contain required elements
   const isQuotePage = document.querySelector('.quote-form');
+  const isPortfolioPage = document.querySelector('.s-portfolio');
   const isRelevantPage = document.querySelector('.vehicles-search') || isQuotePage;
   if (!isRelevantPage) return;
 
@@ -76,7 +77,14 @@ jQuery(document).ready(async function ($) {
    * @param {boolean} show
    */
   const showLoader = (show) => {
-    if ($loader.length) $loader.css('display', show ? 'block' : 'none');
+    if ($loader.length) {
+      $loader.css('display', show ? 'flex' : 'none');
+      if (show) {
+        $loader.addClass('visible');
+      } else {
+        $loader.removeClass('visible');
+      }
+    }
   };
 
   /**
@@ -320,18 +328,22 @@ jQuery(document).ready(async function ($) {
     if (vehicleState.make.id) {
       await updateStateAndDropdown('make', vehicleState.make.id, vehicleState.make.slug);
       if(isQuotePage) {
-        // Update the make select field in the quote form
         $('#make').val(vehicleState.make.slug);
       }
+      // if(isPortfolioPage) {
+      //   $('.selected_vehicle__make-value').html(vehicleState.make.slug);
+      // }
     }
 
     // Update model selection
     if (vehicleState.model.id) {
       await updateStateAndDropdown('model', vehicleState.model.id, vehicleState.model.slug);
       if(isQuotePage) {
-        // Update the make select field in the quote form
         $('#model').val(vehicleState.model.slug);
       }
+      // if (isPortfolioPage) {
+      //   $('.selected_vehicle__model-value').html(vehicleState.model.slug);
+      // }
     }
 
     initializeSumoSelect($makeSelect);
@@ -346,10 +358,11 @@ jQuery(document).ready(async function ($) {
         initializeSumoSelect($trimSelect);
         updateSearchButton();
         if(isQuotePage) {
-          // Update the make select field in the quote form
           $('#trim').val(vehicleState.trim.slug);
-          // $('.form-step-1 .next-btn').addClass('clicked').prop('disabled', false).removeClass('disabled');
         }
+        // if(isPortfolioPage) {
+        //   $('.selected_vehicle__trim-value').html(vehicleState.trim.slug);
+        // }
       }
     }
 

@@ -150,59 +150,58 @@ add_action ('wp_ajax_nopriv_trim_fetch', 'trim_fetch');
 function ajax_fetch ()
 { ?>
   <script type="text/javascript" id="jax-fetch">
-    document.addEventListener('DOMContentLoaded', function () {
-      const filterItems = document.querySelectorAll('.portfolio-cat-filter select');
-      const sortSelect = document.querySelector('.sort-select select');
-      const resetButton = document.querySelector('.js-reset-filtering');
+    jQuery(document).ready(function ($) {
+
+      const filterItems = $('.portfolio-cat-filter select');
+      const sortSelect = $('.sort-select select');
+      const resetButton = $('.js-reset-filtering');
 
       function fetchPortfolio() {
-        const selectedCategory = document.querySelector('.portfolio-cat-filter select[name="portfolio-cat"]').options[document.querySelector('.portfolio-cat-filter select[name="portfolio-cat"]').selectedIndex].getAttribute('data-category') || '';
-        const selectedProductUsed = document.querySelector('.portfolio-cat-filter select[name="product-used"]').options[document.querySelector('.portfolio-cat-filter select[name="product-used"]').selectedIndex].getAttribute('data-used') || '';
-        const selectedCityState = document.querySelector('.portfolio-cat-filter select[name="city-state"]').options[document.querySelector('.portfolio-cat-filter select[name="city-state"]').selectedIndex].getAttribute('data-city-state') || '';
-        const sortBy = sortSelect.value;
+        const selectedCategory = $('select[name="portfolio-cat"]').find('option:selected').data('category') || '';
+        const selectedProductUsed = $('select[name="product-used"]').find('option:selected').data('used') || '';
+        const selectedCityState = $('select[name="city-state"]').find('option:selected').data('city-state') || '';
+        const sortBy = sortSelect.val();
 
         const ajaxUrl = window.wp_data.ajax_url;
 
-        fetch(ajaxUrl, {
+        $.ajax({
+          url: ajaxUrl,
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-          },
-          body: new URLSearchParams({
+          data: {
             action: 'get_portfolio',
             category: selectedCategory,
             product_used: selectedProductUsed,
             city_state: selectedCityState,
             sort_by: sortBy,
             paged: 1
-          })
-        })
-            .then(response => response.json())
-            .then(data => {
-              if (data.success) {
-                document.querySelector('.portfolio__list').innerHTML = data.data.html;
-              } else {
-                console.error('Error:', data.data);
-              }
-            })
-            .catch(error => console.error('Error:', error));
+          },
+          success: function (data) {
+            if (data.success) {
+              $('.portfolio__list').html(data.data.html);
+            } else {
+              console.error('Error:', data.data);
+            }
+          },
+          error: function (error) {
+            console.error('Error:', error);
+          }
+        });
       }
 
-      filterItems.forEach(item => {
-        item.addEventListener('change', fetchPortfolio);
-      });
+      filterItems.on('change', fetchPortfolio);
 
-      if (sortSelect) {
-        sortSelect.addEventListener('change', fetchPortfolio);
+      if (sortSelect.length) {
+        sortSelect.on('change', fetchPortfolio);
       }
 
-      if (resetButton) {
-        resetButton.addEventListener('click', function () {
-          filterItems.forEach(item => item.selectedIndex = 0);
-          if (sortSelect) sortSelect.selectedIndex = 0;
+      if (resetButton.length) {
+        resetButton.on('click', function () {
+          filterItems.prop('selectedIndex', 0);
+          if (sortSelect.length) sortSelect.prop('selectedIndex', 0);
           fetchPortfolio();
         });
       }
+
     });
   </script>
 <?php }
@@ -374,14 +373,14 @@ function return_post_html ($portfolio)
     $return_html .= '<a href="' . $permalink . '" class="portfolio__image">';
     $return_html .= '<img src="' . $image_url . '" loading="lazy" alt="' . esc_attr ($image_repeater[ 'alt' ] ?? 'Placeholder Image') . '">';
     $return_html .= '</a>';
-    $return_html .= '<div class="portfolio__content">';
+    $return_html .= '<div class="portfolio__content"><div class="portfolio__tags">';
     $terms = wp_get_object_terms ($post_id, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
     if (!empty($terms)) {
       foreach ($terms as $term) {
         $return_html .= ' <div class="tag">' . $term->name . '</div>';
       }
     }
-    $return_html .= '<div class="model">' . $title . '</div>';
+    $return_html .= '</div><div class="model">' . $title . '</div>';
     $return_html .= '<div class="info">' . $preview_description . '</div>';
     $return_html .= '<a href="' . $permalink . '" class="btn btn-2">View</a>';
     $return_html .= '</div></div>';

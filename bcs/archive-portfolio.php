@@ -27,11 +27,28 @@ get_header ();
   <!--SPLIT-->
   <section class="s-split s-portfolio ms-section">
     <div class="cn">
+      <div class="section-heading">
+        <div class="decorated-title decorated-title--column-center">
+          <div class="small-title small-title--gray">DISCOVER</div>
+          <div class="line-decor line-decor--red"></div>
+        </div>
+        <h2 class="title h1">Portfolio</h2>
+        <div class="subtitle">Explore our latest projects and see how we can help you.</div>
+      </div>
       <div class="portfolio-filter">
+<!--        <div class="selected_vehicle">-->
+<!--            <div class="selected_vehicle__title">Selected Vehicle:</div>-->
+<!--            <div class="selected_vehicle__info">-->
+<!--                <div class="selected_vehicle__make">Make: <span class="selected_vehicle__make-value">All</span></div>-->
+<!--                <div class="selected_vehicle__model">Model: <span class="selected_vehicle__model-value">All</span></div>-->
+<!--                <div class="selected_vehicle__trim">Trim: <span class="selected_vehicle__trim-value">All</span></div>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="portfolio-cat-filter">
           <div class="custom-select">
-            <select name="portfolio-cat" id="" class="portfolio-cat__select" placeholder="Project Type">
-              <option data-category="all" value="portfolio_category">Project Type</option>
+            <select name="portfolio-cat" id="" class="portfolio-cat__select">
+              <option data-category="" value="portfolio_category">Project Type</option>
+              <option data-category="" value="portfolio_category">Project Type</option>
               <?php
               // Get the parent terms of the 'make' taxonomy
               $terms = get_terms('portfolio_category');
@@ -43,7 +60,8 @@ get_header ();
           </div>
           <div class="custom-select">
             <select name="product-used" id="" class="portfolio-cat__select">
-              <option data-used="all" value="product_used">Products Used</option>
+              <option data-used="" value="product_used">Products Used</option>
+              <option data-used="" value="product_used">Products Used</option>
 	            <?php
 	            // Get the parent terms of the 'product_used' taxonomy
 	            $terms = get_terms('product_used');
@@ -55,7 +73,8 @@ get_header ();
           </div>
           <div class="custom-select">
             <select name="city-state" id="" class="portfolio-cat__select">
-              <option data-city-state="all" value="city_state">City & State</option>
+              <option data-city-state="" value="city_state">City & State</option>
+              <option data-city-state="" value="city_state">City & State</option>
 	            <?php
 	            // Get the parent terms of the 'state' taxonomy
 	            $terms = get_terms('state');
@@ -107,6 +126,7 @@ get_header ();
                 <?php } ?>
               </a>
               <div class="portfolio__content">
+                <div class="portfolio__tags">
                 <?php
                 $terms = wp_get_object_terms ($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
                 if (!empty($terms)) :
@@ -115,6 +135,7 @@ get_header ();
                   <?php } ?>
                 <?php endif;
                 ?>
+                </div>
                 <div class="model"><?php echo get_the_title (); ?></div>
                 <div class="info"><?php echo get_field ('preview_description'); ?></div>
                 <a href="<?php the_permalink (); ?>" class="btn btn-2">View</a>

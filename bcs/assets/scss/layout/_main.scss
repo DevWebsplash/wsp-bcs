@@ -139,12 +139,32 @@
 }
 
 .vehicles-search {
+  position: relative;
   @media (min-width: $lg) {
     max-width: 980px;
     border-radius: 8px;
     background-color: $white;
     margin: 0 auto;
     padding: 15px 23px;
+  }
+
+  .loader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba($white, .8);
+
+
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    justify-content: center;
+    @media (min-width: $lg) {
+      border-radius: 8px;
+    }
   }
   .form-row {
     display: grid;
