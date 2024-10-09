@@ -173,7 +173,67 @@
 
 
 
+<div class="multi-step-form quote-form">
+  <!-- Sidebar for displaying steps -->
+  <div class="form-sidebar">
+    <ul class="form-steps">
+      <li class="step step-1 active"><div class="step-number">1</div><div class="step-content"><div class="step-label">Step 1</div><div class="step-title">Car Details</div></div></li>
+      <li class="step step-2"><div class="step-number">2</div><div class="step-content"><div class="step-label">Step 2</div><div class="step-title">Services</div></div></li>
+      <li class="step step-3"><div class="step-number">3</div><div class="step-content"><div class="step-label">Step 3</div><div class="step-title">Customer Details</div></div></li>
+    </ul>
+  </div>
 
+  <div class="form-content">
+    <div class="form-row form-step form-step-1" data-step="1"><div class="error-summary" style="display: none;"></div>
+      <h3 class="h3">Select your vehicle to get personalized services</h3>
+      <!-- Make Dropdown -->
+      <div class="custom-select custom-select--half"><div class="custom-select"><select class="data-make"><option value="">Select Make</option></select></div>[hidden make id:make]
+      </div>
+      <!-- Model Dropdown (Initially disabled) -->
+      <div class="custom-select custom-select--half make-select-wrap">
+        <select class="data-model" disabled><option value="">Select Model</option></select>[hidden model id:model]
+      </div>
+      <!-- Trim Dropdown (Initially disabled) -->
+      <div class="custom-select custom-select--full make-select-wrap"><select class="data-trim" disabled><option value="">Select Trim</option></select>[hidden trim id:trim]
+      </div>
+      <div class="w100"><label for="other_vehicle_info make-select-wrap">Other vehicle info</label>[text other_vehicle_info]
+      </div>
+      <br>
+      <div class="btn-wrapper">
+        <button type="button" class="next-btn disabled" data-next-step="2">Next Step</button>
+      </div>
+    </div>
+    <!-- Step 2: Services -->
+    <div class="form-row form-step form-step-2" data-step="2"><div class="error-summary" style="display: none;"></div>
+      <div class="w100">
+        <h3 class="h3">What would you like doing with your brakes? *</h3>[checkbox* brake_service use_label_element "Functional Refurbishment" "Painting Service"]
+      </div>
+      <div class="form-group" id="group-brake_paint" style="display: none;">
+        <h3 class="h3">Which brakes need a functional refurb? *</h3>
+        <div class="custom-select custom-select--half brake-paint-field">[select* brake_paint include_blank "Front Pair" "Rear Pair" "All 4" "Single Front" "Single Rear"]</div>
+      </div>
+      <div class="form-group" id="group-color_palette" style="display: none;">
+        <h3 class="h3">Which color palette do you need? *</h3>
+        <div class="color-palette-field">[radio color_palette use_label_element default:1 "BCS Stock Colours" "Premium Colours" "Restore to original"]</div>
+        <br>
+        <div class="form-item form-item--half custom-color-field"><label for="custom_color">Which color do you prefer?</label>[text* custom_color]</div>
+      </div>
+      <br>
+      <div class="btn-wrapper"><button type="button" class="prev-btn" data-prev-step="1">Previous Step</button><button type="button" class="next-btn disabled" data-next-step="3">Next Step</button></div>
+    </div>
+
+    <!-- Step 3: Customer Details -->
+    <div class="form-row form-step form-step-3" data-step="3">><div class="error-summary" style="display: none;"></div>
+      <h3 class="h3">Leave your contact information in this form and we'll contact you to help you.</h3>
+      <div class="form-item form-item--half form-item--label"><label for="first-name">First Name *</label>[text* first-name]</div>
+      <div class="form-item form-item--half form-item--label"><label for="last-name">Last Name *</label>[text* last-name]</div>
+      <div class="form-item form-item--half form-item--label"><label for="email">Email Address *</label>[email* email]</div>
+      <div class="form-item form-item--half form-item--label"><label for="phone">Mobile Phone *</label>[tel* phone]</div>
+      <br>
+      <div class="btn-wrapper"><button type="button" class="prev-btn" data-prev-step="2">Previous Step</button>[submit "Complete Quote Request"]</div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

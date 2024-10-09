@@ -319,11 +319,19 @@ jQuery(document).ready(async function ($) {
     // Update make selection
     if (vehicleState.make.id) {
       await updateStateAndDropdown('make', vehicleState.make.id, vehicleState.make.slug);
+      if(isQuotePage) {
+        // Update the make select field in the quote form
+        $('#make').val(vehicleState.make.slug);
+      }
     }
 
     // Update model selection
     if (vehicleState.model.id) {
       await updateStateAndDropdown('model', vehicleState.model.id, vehicleState.model.slug);
+      if(isQuotePage) {
+        // Update the make select field in the quote form
+        $('#model').val(vehicleState.model.slug);
+      }
     }
 
     initializeSumoSelect($makeSelect);
@@ -337,6 +345,11 @@ jQuery(document).ready(async function ($) {
         $trimSelect.val(vehicleState.trim.slug);
         initializeSumoSelect($trimSelect);
         updateSearchButton();
+        if(isQuotePage) {
+          // Update the make select field in the quote form
+          $('#trim').val(vehicleState.trim.slug);
+          // $('.form-step-1 .next-btn').addClass('clicked').prop('disabled', false).removeClass('disabled');
+        }
       }
     }
 
@@ -356,11 +369,6 @@ jQuery(document).ready(async function ($) {
     const selectedMakeId = selectedOption.data('make');
     const selectedMakeSlug = selectedOption.val();
     await updateStateAndDropdown('make', selectedMakeId, selectedMakeSlug);
-    if(isQuotePage) {
-      // Update the make select field in the quote form
-      $('input[name="make"]').val(selectedMakeSlug);
-    }
-
   });
 
   $modelSelect.on('change', async () => {
@@ -368,10 +376,7 @@ jQuery(document).ready(async function ($) {
     const selectedModelId = selectedOption.data('model');
     const selectedModelSlug = selectedOption.val();
     await updateStateAndDropdown('model', selectedModelId, selectedModelSlug);
-    if(isQuotePage) {
-      // Update the make select field in the quote form
-      $('input[name="model"]').val(selectedModelSlug);
-    }
+
   });
 
   $trimSelect.on('change', () => {
@@ -385,10 +390,9 @@ jQuery(document).ready(async function ($) {
     if (vehicleState.trim.id) {
       cache.set('selectedTrim', JSON.stringify(vehicleState.trim));
     }
-    if(isQuotePage) {
-      // Update the make select field in the quote form
-      $('input[name="trim"]').val(selectedOption.val());
-    }
+
+    console.log('Trim selected');
+    console.log('isQuotePage', isQuotePage);
     // console.debug(
     //     `Trim selected - ID: ${vehicleState.trim.id}, Slug: ${vehicleState.trim.slug}, Link: ${vehicleState.trim.link}`
     // );

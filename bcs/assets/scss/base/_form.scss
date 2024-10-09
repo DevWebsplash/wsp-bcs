@@ -292,9 +292,12 @@ select::-ms-expand {
 .quote-form {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
-  padding-bottom: 100px;
-
+  padding-bottom: 30px;
+  @include media-breakpoint-up(lg) {
+    padding-bottom: 100px;
+  }
   &:before {
     content: '';
     position: absolute;
@@ -312,23 +315,53 @@ select::-ms-expand {
   }
 
 
+
+  .error-summary {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 14px;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+  }
+
+
   .form-sidebar {
     position: relative;
-    width: 25%;
-    padding: 20px;
+    width: 100%;
     //background-color: #f8f8f8;
-    border-right: 1px solid $light-gray;
-
+    border-bottom: 1px solid $light-gray;
+    @include media-breakpoint-up(md) {
+      padding: 20px;
+    }
+    @include media-breakpoint-up(lg) {
+      border-right: 1px solid $light-gray;
+      border-bottom: none;
+      width: 25%;
+    }
     &:before {
       content: '';
       position: absolute;
       right: 0;
-      top: 0;
+      top: 50%;
+      width: 100vw;
       z-index: -1;
       display: block;
-      width: 50vw;
-      height: calc(100% + 50px);
       background: #f8f8f8;
+      transform: translate(0, -50%);
+      @include media-breakpoint-up(lg) {
+        right: 0;
+        top: 0;
+        width: 50vw;
+        height: calc(100% + 50px);
+      }
     }
   }
 
@@ -336,38 +369,83 @@ select::-ms-expand {
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 100%;
+    display: flex;
+    @include media-breakpoint-up(lg) {
+     display: block;
+    }
 
     .step {
       position: relative;
-      margin-bottom: 50px;
+      margin-bottom: 20px;
+      margin-top: 20px;
       font-size: 18px;
       color: rgba(68, 68, 68, 0.60);
+      width: calc(100%/3);
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
+
+      @include media-breakpoint-up(lg) {
+        align-items: center;
+        width: auto;
+        flex-direction: row;
+        margin-bottom: 50px;
+      }
 
       .step-number {
         display: inline-block;
-        width: 30px;
-        height: 30px;
-        background-color: #ccc;
-        color: #fff;
-        text-align: center;
-        border-radius: 50%;
-        margin-right: 10px;
+        margin-bottom: 10px;
         line-height: 30px;
         position: relative;
         z-index: 1;
+        @media (max-width: 991px) {
+          width: 100%;
+          overflow: hidden;
+          p {
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            flex: 0 0 30px;
+            color: #fff;
+            background-color: #ccc;
+            border-radius: 50%;
+          }
+        }
+        @include media-breakpoint-up(lg) {
+          margin-right: 10px;
+          margin-bottom: 0;
+
+          width: 30px;
+          height: 30px;
+          flex: 0 0 30px;
+          background-color: #ccc;
+          color: #fff;
+          text-align: center;
+          border-radius: 50%;
+          line-height: 30px;
+        }
+        
 
         &::after {
           content: '';
           position: absolute;
-          width: 2px;
-          height: calc(100% + 50px);
+          width: calc(100% + 50px);
+          height: 2px;
           background-color: #ccc;
-          top: 30px;
+          top: 15px;
           left: 50%;
+
           transform: translateX(-50%);
           z-index: -1;
+          @include media-breakpoint-up(lg) {
+            width: 2px;
+            height: calc(100% + 50px);
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+          }
         }
       }
 
@@ -376,20 +454,36 @@ select::-ms-expand {
         flex-direction: column;
 
         .step-label {
+          font-size: 14px;
           font-weight: 400;
+          @include media-breakpoint-up(md) {
+            font-size: 16px;
+          }
         }
 
         .step-title {
-          font-size: 20px;
+          font-size: 14px;
           font-weight: 700;
+          @include media-breakpoint-up(sm) {
+            font-size: 16px;
+          }
+          @include media-breakpoint-up(md) {
+            font-size: 20px;
+          }
         }
       }
 
       &.active {
         color: $dark-blue-2;
-
         .step-number {
-          background-color: #b30b00;
+          @media (max-width: 991px) {
+            p {
+              background-color: #b30b00;
+            }
+          }
+          @include media-breakpoint-up(lg) {
+            background-color: #b30b00;
+          }
         }
       }
 
@@ -399,9 +493,27 @@ select::-ms-expand {
     }
   }
 
+  .form-step {
+    .btn-wrapper > p {
+      .wpcf7-spinner {
+        display: none;
+      }
+      @media (max-width: 767px) {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+    }
+  }
+
   .form-content {
-    width: 75%;
-    padding: 20px;
+    width: 100%;
+    padding-top: 20px;
+    @include media-breakpoint-up(md) {
+      padding: 20px;
+    }
+    @include media-breakpoint-up(lg) {
+      width: 75%;
+    }
   }
 
 
@@ -449,6 +561,11 @@ select::-ms-expand {
     }
   }
 
+  .form-group {
+    & > h3 {
+      margin-bottom: 30px;
+    }
+  }
 
   .form-row {
     display: flex;
@@ -461,7 +578,10 @@ select::-ms-expand {
 
     .custom-select {
       &--half {
-        width: calc(50% - 15px);
+        width: 100%;
+        @include media-breakpoint-up(md) {
+          width: calc(50% - 15px);
+        }
       }
 
       &--full {
@@ -471,7 +591,10 @@ select::-ms-expand {
 
     .form-item {
       &--half {
-        width: calc(50% - 15px);
+        width: 100%;
+        @include media-breakpoint-up(md) {
+          width: calc(50% - 15px);
+        }
       }
 
       &--full {
@@ -488,7 +611,8 @@ select::-ms-expand {
           transition: all 200ms ease-in-out;
         }
 
-        &.hover {
+        &.hover,
+        &.filled {
           label {
             top: -25px;
             left: 0;
@@ -504,7 +628,7 @@ select::-ms-expand {
     }
 
     .color-palette-field {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
 
