@@ -1259,6 +1259,10 @@
               color: $dark-blue-2;
               font-size: 16px;
               font-weight: 600;
+              & + div {
+                //color: $gray;
+                font-weight: 800;
+              }
             }
           }
         }
@@ -1499,6 +1503,59 @@
         }
         .text {
           margin-bottom: 40px;
+        }
+      }
+    }
+  }
+  &--variant-6 {
+    .inner-content {
+      &__text {
+        .block-title {
+          margin-bottom: 30px;
+
+        }
+        .desc {
+          margin-bottom: 30px;
+        }
+      }
+    }
+    .text {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px 0;
+      @media (min-width: $lg) {
+        gap: 24px 0;
+      }
+      @media (min-width: $xl) {
+        grid-template-columns: 1fr 1fr;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+          color: $gray;
+          font-size: 18px;
+          margin-bottom: 15px;
+          @media (min-width: $lg) {
+            font-size: 20px;
+            margin-bottom: 24px;
+          }
+          @media (min-width: $xl) {
+            padding-right: 60px;
+            margin-bottom: 34px;
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+          span:last-child {
+            color: $black;
+            padding-left: .3em;
+          }
+          p {
+            font-size: 14px;
+            color: $gray;
+          }
         }
       }
     }
@@ -2111,6 +2168,9 @@
           transform: rotate(180deg);
         }
       }
+      .acc-body {
+          display: block;
+      }
     }
   }
   .acc-head {
@@ -2127,6 +2187,7 @@
     border-radius: 8px;
     padding: 12px 80px 12px 15px;
     cursor: pointer;
+    user-select: none;
     @media (min-width: $lg) {
       min-height: 66px;
       font-size: 24px;
@@ -2162,7 +2223,12 @@
       }
     }
     .text {
-
+      li {
+        p {
+          font-size: 14px;
+          color: $gray;
+        }
+      }
     }
   }
   .b-cta {

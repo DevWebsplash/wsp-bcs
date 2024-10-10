@@ -13,7 +13,15 @@ jQuery(function($) {
 
     //accordeon
     $('.acc-head').on('click', function () {
-        $(this).closest('.acc-item').toggleClass('active').find('.acc-body').slideToggle(300);
+        let $accItem = $(this).closest('.acc-item');
+        if (!$accItem.hasClass('active')) {
+            console.log('not active');
+            $('.acc-item.active .acc-body').slideUp(300).closest('.acc-item').removeClass('active');
+            $accItem.addClass('active').find('.acc-body').slideDown(300);
+        } else {
+            console.log('active');
+            $accItem.removeClass('active').find('.acc-body').slideUp(300);
+        }
     });
 
     // Toggles 'hover' class on '.form-item--label' when input is focused or has a value.
@@ -126,6 +134,24 @@ jQuery(function($) {
             el: '.swiper-pagination',
             clickable: true,
         },
+    });
+
+    $('.popup-gallery').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        tLoading: 'Loading image #%curr%...',
+        mainClass: 'mfp-img-mobile',
+        gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+        },
+        image: {
+            tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+            titleSrc: function(item) {
+                return item.el.attr('title') + ' by Marsel Van Oosten';
+            }
+        }
     });
 
     /*

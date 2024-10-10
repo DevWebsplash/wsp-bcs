@@ -127,17 +127,20 @@ get_header ();
               </a>
               <div class="portfolio__content">
                 <div class="portfolio__tags">
-                <?php
-                $terms = wp_get_object_terms ($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
-                if (!empty($terms)) :
-                  foreach ($terms as $term) { ?>
-                    <div class="tag"><?php echo $term->name; ?></div>
-                  <?php } ?>
-                <?php endif;
-                ?>
+                  <?php
+                  $terms = wp_get_object_terms ($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
+                  if (!empty($terms)) :
+                    foreach ($terms as $term) { ?>
+                      <div class="tag"><?php echo $term->name; ?></div>
+                    <?php } ?>
+                  <?php endif;
+                  ?>
                 </div>
                 <div class="model"><?php echo get_the_title (); ?></div>
                 <div class="info"><?php echo get_field ('preview_description'); ?></div>
+<!--                <a href="--><?php //the_permalink (); ?><!--" class="btn btn-2">View</a>-->
+              </div>
+              <div class="btn-wrapper">
                 <a href="<?php the_permalink (); ?>" class="btn btn-2">View</a>
               </div>
             </div>
