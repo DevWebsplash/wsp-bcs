@@ -79,7 +79,7 @@ get_header ();
                 <div class="title">Location</div>
                 <div>
                   <?php
-                  $terms = wp_get_object_terms ($featured_post->ID, 'state', array('orderby' => 'term_id', 'order' => 'ASC'));
+                  $terms = wp_get_object_terms ($post->ID, 'state', array('orderby' => 'term_id', 'order' => 'ASC'));
                   if (!empty($terms)) :
                     $project = array();
                     foreach ($terms as $term) {
@@ -299,7 +299,7 @@ get_header ();
 
             <!--Brake Caliper Parts Used-->
             <?php
-            $featured_posts = get_field ('parts_used_products_copy');
+            $featured_posts = get_field ('parts_used_products');
             if ($featured_posts): ?>
               <div class="text">
                 <?php echo get_field ('parts_used_subtitle'); ?>
