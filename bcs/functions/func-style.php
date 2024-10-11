@@ -19,7 +19,7 @@ function wp_theme_styles() {
 	$theme_handle_prefix = 'bcs';
 
 	wp_enqueue_style( $theme_handle_prefix . '-styles', get_template_directory_uri() .
-      '/assets/css/' . $theme_handle_prefix .'.min.css', array(), '1.1.89', 'all' );
+      '/assets/css/' . $theme_handle_prefix .'.min.css', array(), '1.1.97', 'all' );
 //      '/assets/css/' . $theme_handle_prefix .'.min.css', array(), '1.0.46', 'all' );
 	wp_enqueue_style( 'woocommerce-custom', get_template_directory_uri() .
       '/assets/css/woocommerce-custom.min.css', array(), '1.0.22', 'all' );

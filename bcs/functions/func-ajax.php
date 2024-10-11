@@ -156,7 +156,7 @@ function ajax_fetch ()
       const sortSelect = $('.sort-select select');
       const resetButton = $('.js-reset-filtering');
 
-      function fetchPortfolio() {
+      function fetchPortfolio(page = 1) {
         const selectedCategory = $('select[name="portfolio-cat"]').find('option:selected').data('category') || '';
         const selectedProductUsed = $('select[name="product-used"]').find('option:selected').data('used') || '';
         const selectedCityState = $('select[name="city-state"]').find('option:selected').data('city-state') || '';
@@ -173,11 +173,14 @@ function ajax_fetch ()
             product_used: selectedProductUsed,
             city_state: selectedCityState,
             sort_by: sortBy,
-            paged: 1
+            paged: page
           },
           success: function (data) {
+            const container = $('.portfolio__list');
             if (data.success) {
-              $('.portfolio__list').html(data.data.html);
+
+              container.html(data.data.html);
+              container.append(data.data.pagination);
             } else {
               console.error('Error:', data.data);
             }
@@ -188,10 +191,14 @@ function ajax_fetch ()
         });
       }
 
-      filterItems.on('change', fetchPortfolio);
+      filterItems.on('change', function () {
+        fetchPortfolio();
+      });
 
       if (sortSelect.length) {
-        sortSelect.on('change', fetchPortfolio);
+        sortSelect.on('change', function () {
+          fetchPortfolio();
+        });
       }
 
       if (resetButton.length) {
@@ -202,21 +209,33 @@ function ajax_fetch ()
         });
       }
 
+      $(document).on('click', '.pagination .pagination__item', function (e) {
+        e.preventDefault();
+        const page = $(this).data('target-page');
+        fetchPortfolio(page);
+
+        $('.pagination .pagination__item').removeClass('active');
+        $(this).addClass('active');
+      });
     });
   </script>
 <?php }
 
 add_action ('wp_footer', 'ajax_fetch');
 
-// Function to handle AJAX request for fetching "Trim" posts based on selected "Make" and "Model" terms
-function get_portfolio ()
-{
-  $make = $_POST[ 'make' ] ? $_POST[ 'make' ] : '';
-  $product_used = $_POST[ 'product_used' ] ? $_POST[ 'product_used' ] : '';
-  $city_state = $_POST[ 'city-state' ] ? $_POST[ 'city-state' ] : '';
-  $paged = $_POST[ 'paged' ] ? $_POST[ 'paged' ] : 1;
-  $category = $_POST[ 'category' ] ? $_POST[ 'category' ] : '';
-  $sort_by = $_POST[ 'sort_by' ] ? $_POST[ 'sort_by' ] : 'newest';
+require_once get_template_directory() . '/includes/partials/pagination.php';
+
+/**
+ * Обробляє AJAX-запит для отримання портфоліо.
+ */
+function get_portfolio() {
+    // Getting data from POST and sanitizing
+    $make = isset($_POST['make']) ? sanitize_text_field($_POST['make']) : '';
+    $product_used = isset($_POST['product_used']) ? sanitize_text_field($_POST['product_used']) : '';
+    $city_state = isset($_POST['city-state']) ? sanitize_text_field($_POST['city-state']) : '';
+    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+    $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+    $sort_by = isset($_POST['sort_by']) ? sanitize_text_field($_POST['sort_by']) : 'newest';
 
   switch ($sort_by) {
     case 'newest':
@@ -243,7 +262,7 @@ function get_portfolio ()
 
   $args = array(
       'post_type' => 'portfolio',
-      'posts_per_page' => 9,
+      'posts_per_page' => get_option('posts_per_page'),
       'post_status' => 'publish',
       'paged' => $paged,
       'meta_query' => array(
@@ -259,103 +278,60 @@ function get_portfolio ()
   if (!empty($make)) {
     $args[ 'tax_query' ][] = array(
         'taxonomy' => 'make',
-        'terms' => $make
+        'terms' => $make,
     );
   }
 
   if (!empty($category)) {
     $args[ 'tax_query' ][] = array(
         'taxonomy' => 'portfolio_category',
-        'terms' => $category
+        'terms' => $category,
     );
   }
 
   if (!empty($product_used)) {
     $args[ 'tax_query' ][] = array(
         'taxonomy' => 'product_used',
-        'terms' => $product_used
+        'terms' => $product_used,
     );
   }
 
   if (!empty($city_state)) {
     $args[ 'tax_query' ][] = array(
         'taxonomy' => 'state',
-        'terms' => $city_state
+        'terms' => $city_state,
     );
   }
 
+  $portfolio = new WP_Query($args);
 
   $return_html = '';
-  $return_pagination = '';
-
-  $portfolio = new WP_Query($args);
 
   if ($portfolio->have_posts ()) {
     $return_html = return_post_html ($portfolio);
 
-
-    // Pagination
-    $count = 0;
-    $p = $portfolio->max_num_pages;
-    $p_count = $portfolio->found_posts;
-    $next_page = $paged + 1;
-    $prev_page = $paged - 1;
-
-    $next_content = 'Next <i class="arrow_pag"></i>';
-    $prev_content = '<i class="arrow_pag"></i> Previous ';
-    if ($p != 1) {
-      while ($p > $count) {
-        $count++;
-        if ($count == 1 & $paged != 1) {
-          if ($paged < 4) {
-            if ($paged == 2) {
-              $return_pagination .= '<li class="pagination__item prev" data-target-page="' . $prev_page . '"><div class="pagination__link">' . $prev_content . '</div></li>';
-            } else {
-              $return_pagination .= '<li class="pagination__item prev" data-target-page="' . $prev_page . '"><div class="pagination__link">' . $prev_content . '</div></li><li class="pagination__item " data-target-page="1"><div class="pagination__link">1</div></li>';
-            }
-          } else {
-            $return_pagination .= '<li class="pagination__item prev" data-target-page="' . $prev_page . '"><div class="pagination__link">' . $prev_content . '</div></li><li class="pagination__item " data-target-page="1"><div class="pagination__link">1</div></li><li><span>...</span></li>';
-          }
-        }
-        if ($count == $paged) {
-          $return_pagination .= '<li class="pagination__item active" data-target-page="' . $count . '"><div class="pagination__link">' . $count . '</div></li>';
-        } elseif ($count == $paged + 1) {
-          $return_pagination .= '<li class="pagination__item " data-target-page="' . $count . '"><div class="pagination__link">' . $count . '</div></li>';
-          if ($paged + 1 == $p) {
-            $return_pagination .= '<li class="pagination__item next" data-target-page="' . $next_page . '"><div class="pagination__link">' . $next_content . '</div></li>';
-          }
-        } elseif ($count == $paged + 2) {
-          $return_pagination .= '<li class="pagination__item " data-target-page="' . $count . '"><div class="pagination__link">' . $count . '</div></li> ';
-          if ($paged + 2 != $p) {
-            $return_pagination .= '<li><span>...</span></li>';
-          } else {
-            $return_pagination .= '<li class="pagination__item next" data-target-page="' . $next_page . '"><div class="pagination__link">' . $next_content . '</li>';
-          }
-        } elseif ($count == $paged - 1) {
-          $return_pagination .= '<li class="pagination__item " data-target-page="' . $count . '"><div class="pagination__link">' . $count . '</div></li>';
-        } elseif ($count == $p) {
-          $return_pagination .= '<li class="pagination__item " data-target-page="' . $count . '"><div class="pagination__link">' . $count . '</div></li>';
-          $return_pagination .= '<li class="pagination__item next" data-target-page="' . $next_page . '"><div class="pagination__link">' . $next_content . '</div></li>';
-        }
-      }
-    }
-
-    $return_html .= '<div class="btn-wrap"><div class="pagination" data-page="' . $paged . '"><ul>' . $return_pagination . '</ul></div></div><div class="count__posts visually-hidden" data-post-count="' . $p_count . '"></div></div>';
+    ob_start();
+    render_pagination($portfolio, $paged);
+    $return_pagination = ob_get_clean();
 
   } else {
-    // If no content, include the "No posts found" template.
-    $return_html .= '<h6 class="no-results">No results were found for your request</h6><div class="count__posts visually-hidden" data-post-count="0"></div></div>';
+    $return_html .= '<h6 class="no-results">No results were found for your request</h6>';
   }
 
   wp_reset_postdata ();
 
   // Return the HTML and pagination as JSON
-  wp_send_json_success (array('html' => $return_html));
+  wp_send_json_success(array('html' => $return_html, 'pagination' => $return_pagination));
 }
 
 add_action ('wp_ajax_get_portfolio', 'get_portfolio');
 add_action ('wp_ajax_nopriv_get_portfolio', 'get_portfolio');
 
+
+
+
+
+// Function to return the HTML for each post
 function return_post_html ($portfolio)
 {
   $return_html = '';
@@ -380,10 +356,9 @@ function return_post_html ($portfolio)
         $return_html .= ' <div class="tag">' . $term->name . '</div>';
       }
     }
-    $return_html .= '</div><div class="model">' . $title . '</div>';
+    $return_html .= '</div><div class="model" title="' . $title . '">' . $title . '</div>';
     $return_html .= '<div class="info">' . $preview_description . '</div>';
-    $return_html .= '<a href="' . $permalink . '" class="btn btn-2">View</a>';
-    $return_html .= '</div></div>';
+    $return_html .= '</div><div class="btn-wrapper"><a href="' . $permalink . '" class="btn btn-2">View</a></div></div>';
   }
   return $return_html;
 }

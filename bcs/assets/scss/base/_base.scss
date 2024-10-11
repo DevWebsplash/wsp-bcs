@@ -96,3 +96,43 @@ img {
   }
 }
 
+//
+.pagination {
+  &-wrapper {
+   width: 100%;
+  }
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  &__item {
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  &__link {
+    display: block;
+    padding: 10px 15px;
+    border: 1px solid $gray;
+    border-radius: 4px;
+    text-decoration: none;
+    color: $text-color;
+    transition: background-color 0.3s, color 0.3s;
+  }
+}
+
+
+.pagination__item.active .pagination__link,
+.pagination__link:hover {
+  background-color: $red;
+  color: $white;
+  border-color: $red;
+}
+
+.pagination__item.next .pagination__link,
+.pagination__item.prev .pagination__link {
+  font-weight: bold;
+}
