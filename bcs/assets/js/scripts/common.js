@@ -32,6 +32,38 @@ jQuery(function($) {
             $(this).closest('.form-item--label').removeClass('hover');
         }
     });
+    const updateFieldStyles = () => {
+        if (!document.querySelector('.quote-form')) {
+            return;
+        }
+        $('form.wpcf7-form').find('input, select, textarea').each(function () {
+            const $field = $(this);
+            if ($field.val()) {
+                $field.closest('.form-item').addClass('filled');
+            } else {
+                $field.closest('.form-item').removeClass('filled');
+            }
+        });
+    };
+    updateFieldStyles();
+
+    document.addEventListener('wpcf7mailsent', function(event) {
+        const form = event.target;
+        if (form.closest('.sticky-callback')) {
+            const formBody = $(form).closest('.form__body');
+            const formThanks = formBody.next('.form__thanks');
+            formBody.hide();
+            formThanks.show();
+        }
+        if (form.closest('.s-contact__form') || form.closest('.form--relative')) {
+            const formBody = form.closest('.wpcf7');
+            console.log('form--relative', formBody);
+            const formThanks = formBody.next('.form__thanks');
+            formBody.hide();
+            formThanks.addClass('visible').show();
+        }
+    }, false);
+
 
     //select
     $('.custom-select select').SumoSelect({

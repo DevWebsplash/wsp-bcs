@@ -45,17 +45,17 @@ jQuery(document).ready(async function ($) {
   class Cache {
     get(key) {
       const value = localStorage.getItem(key);
-      console.debug(`Cache get ${key}:`, value);
+      // console.debug(`Cache get ${key}:`, value);
       return value;
     }
 
     set(key, value) {
       if (value && value !== '{}') {
         localStorage.setItem(key, value);
-        console.debug(`Cache set ${key}:`, value);
+        // console.debug(`Cache set ${key}:`, value);
       } else {
         localStorage.removeItem(key);
-        console.debug(`Cache remove ${key}`);
+        // console.debug(`Cache remove ${key}`);
       }
     }
   }

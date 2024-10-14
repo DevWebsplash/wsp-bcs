@@ -228,6 +228,11 @@ select::-ms-expand {
 }
 
 /* Base styling for Contact Form 7 */
+.form {
+  &--relative {
+    position: relative;
+  }
+}
 .wpcf7-form,
 .wpcf7 {
   position: relative;
@@ -244,12 +249,6 @@ select::-ms-expand {
     box-sizing: border-box;
   }
 
-  //input[type="text"],
-  //input[type="email"],
-  //input[type="tel"] {
-  //  display: inline-block;
-  //  width: 48%;
-  //}
 
   .wpcf7-submit,
   .wpcf7-prev {
@@ -260,6 +259,48 @@ select::-ms-expand {
     border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
+  }
+
+  button {
+    transition: all 200ms ease-in-out;
+    /* Styling for the Next button */
+    &.next-btn {
+      background-color: $red;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+
+      &[disabled],
+      &.disabled {
+        background-color: $light-gray;
+        color: $text-color;
+        &:hover {
+          background-color: darken($light-gray, 10%);
+        }
+      }
+
+      &:hover {
+        background-color: #900900;
+      }
+    }
+
+    /* Styling for the Previous button */
+    &.prev-btn {
+      background-color: $light-gray;
+      color: $text-color;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+
+      &:hover {
+        background-color: #bbb;
+      }
+    }
   }
 
   .wpcf7-submit:hover,
@@ -276,7 +317,6 @@ select::-ms-expand {
   //}
 
   .wpcf7-response-output {
-
     margin-top: 15px;
     padding: 10px;
     border: 1px solid $light-gray;
@@ -286,6 +326,213 @@ select::-ms-expand {
     font-size: 1rem;
     line-height: 1.5;
   }
+
+  .form-group {
+    & > h3 {
+      margin-bottom: 30px;
+    }
+  }
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+
+    h2, h3, h4, h5, h6 {
+      width: 100%;
+    }
+
+    .custom-select {
+      &--half {
+        width: 100%;
+        @include media-breakpoint-up(md) {
+          width: calc(50% - 15px);
+        }
+      }
+
+      &--full {
+        width: 100%;
+      }
+    }
+
+    .form-item {
+      &--half {
+        width: 100%;
+        @include media-breakpoint-up(md) {
+          width: calc(50% - 15px);
+        }
+      }
+
+      &--full {
+        width: 100%;
+      }
+
+      &--label {
+        position: relative;
+
+        label {
+          position: absolute;
+          left: 10px;
+          top: 10px;
+          transition: all 200ms ease-in-out;
+        }
+
+        &.hover,
+        &.filled {
+          label {
+            top: -25px;
+            left: 0;
+            opacity: 0.9;
+            font-size: small;
+          }
+        }
+      }
+    }
+
+    & > .w100 > .h3 {
+      margin-bottom: 30px;
+    }
+
+    .color-palette-field {
+      margin-bottom: 20px;
+    }
+
+
+    .wpcf7-list-item {
+      display: block;
+    }
+  }
+
+  .wpcf7 form.sent .wpcf7-response-output {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url(../images/check.png) center 200px no-repeat rgba(240, 240, 240, 0.9);
+    color: #65B32D;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 32px;
+    text-align: center;
+    margin: 0 !important;
+    padding: 300px 0 0 !important;
+    border: none !important;
+  }
+
+  .wpcf7-form-control-wrap {
+    /* Style the outer wrapper for checkboxes */
+    input[type="checkbox"],
+    input[type="radio"] {
+      display: none; /* Hide the default checkbox */
+      /* When the checkbox is checked, fill the checkbox */
+      &:checked {
+        & + .wpcf7-list-item-label:before {
+          background-color: #b30b00; /* Red fill for checked state */
+          border-color: #b30b00;
+        }
+
+        /* Add a checkmark when checked */
+        & + .wpcf7-list-item-label:after {
+          content: '\2713'; /* Unicode checkmark */
+          position: absolute;
+          left: 4px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: white;
+          font-size: 16px;
+        }
+      }
+    }
+
+    /* Style the custom checkbox design */
+    .wpcf7-list-item-label {
+      position: relative;
+      padding-left: 30px;
+      cursor: pointer;
+      font-size: 18px;
+      color: #333; /* Darker text color */
+      display: inline-block;
+
+      /* Create custom checkbox */
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        border: 2px solid #b30b00; /* Border color */
+        background-color: #fff;
+        border-radius: 4px; /* Rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      /* Change the label text color on hover */
+      &:hover {
+        color: #b30b00; /* Hover color for the text */
+      }
+    }
+
+    /* Add some margin to the checkboxes for better spacing */
+    .wpcf7-list-item {
+      margin-bottom: 10px;
+    }
+  }
+
+  span.wpcf7-not-valid-tip {
+    color: #b30b00;
+    font-size: .8em;
+    padding-left: 10px;
+  }
+
+  .wpcf7 form.invalid {
+    .wpcf7-response-output {
+      border: none !important;
+      color: #b30b00;
+      position: relative;
+    }
+
+    .wpcf7-response-output:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      content: '';
+      display: block;
+      width: 2px;
+      background: #b30b00;
+    }
+  }
+
+  & + .form__thanks {
+    display: none;
+    background: #fafafa;
+    padding: 40px 30px 30px;
+    text-align: center;
+    opacity: 0;
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    &.visible {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 40vh;
+      opacity: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 
 
@@ -294,9 +541,9 @@ select::-ms-expand {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding-bottom: 30px;
+  //padding-bottom: 30px;
   @include media-breakpoint-up(lg) {
-    padding-bottom: 100px;
+    //padding-bottom: 100px;
   }
   &:before {
     content: '';
@@ -314,8 +561,6 @@ select::-ms-expand {
 
   }
 
-
-
   .error-summary {
     background: #f8d7da;
     color: #721c24;
@@ -331,7 +576,6 @@ select::-ms-expand {
         margin: 0;
     }
   }
-
 
   .form-sidebar {
     position: relative;
@@ -361,6 +605,7 @@ select::-ms-expand {
         top: 0;
         width: 50vw;
         height: calc(100% + 50px);
+        transform: translate(0, 0);
       }
     }
   }
@@ -513,127 +758,7 @@ select::-ms-expand {
     }
     @include media-breakpoint-up(lg) {
       width: 75%;
-    }
-  }
-
-
-
-
-  button {
-    transition: all 200ms ease-in-out;
-    /* Styling for the Next button */
-    &.next-btn {
-      background-color: $red;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-right: 10px;
-
-      &[disabled],
-      &.disabled {
-        background-color: $light-gray;
-        color: $text-color;
-        &:hover {
-          background-color: darken($light-gray, 10%);
-        }
-      }
-
-      &:hover {
-        background-color: #900900;
-      }
-    }
-
-    /* Styling for the Previous button */
-    &.prev-btn {
-      background-color: $light-gray;
-      color: $text-color;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-right: 10px;
-
-      &:hover {
-        background-color: #bbb;
-      }
-    }
-  }
-
-  .form-group {
-    & > h3 {
-      margin-bottom: 30px;
-    }
-  }
-
-  .form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-
-    h2, h3, h4, h5, h6 {
-      width: 100%;
-    }
-
-    .custom-select {
-      &--half {
-        width: 100%;
-        @include media-breakpoint-up(md) {
-          width: calc(50% - 15px);
-        }
-      }
-
-      &--full {
-        width: 100%;
-      }
-    }
-
-    .form-item {
-      &--half {
-        width: 100%;
-        @include media-breakpoint-up(md) {
-          width: calc(50% - 15px);
-        }
-      }
-
-      &--full {
-        width: 100%;
-      }
-
-      &--label {
-        position: relative;
-
-        label {
-          position: absolute;
-          left: 10px;
-          top: 10px;
-          transition: all 200ms ease-in-out;
-        }
-
-        &.hover,
-        &.filled {
-          label {
-            top: -25px;
-            left: 0;
-            opacity: 0.9;
-            font-size: small;
-          }
-        }
-      }
-    }
-
-    & > .w100 > .h3 {
-      margin-bottom: 30px;
-    }
-
-    .color-palette-field {
-      margin-bottom: 20px;
-    }
-
-
-    .wpcf7-list-item {
-      display: block;
+      padding-bottom: 60px;
     }
   }
 
@@ -649,96 +774,6 @@ select::-ms-expand {
     }
   }
 
-
-
-  .wpcf7-form-control-wrap {
-    /* Style the outer wrapper for checkboxes */
-    input[type="checkbox"],
-    input[type="radio"] {
-      display: none; /* Hide the default checkbox */
-      /* When the checkbox is checked, fill the checkbox */
-      &:checked {
-        & + .wpcf7-list-item-label:before {
-          background-color: #b30b00; /* Red fill for checked state */
-          border-color: #b30b00;
-        }
-
-        /* Add a checkmark when checked */
-        & + .wpcf7-list-item-label:after {
-          content: '\2713'; /* Unicode checkmark */
-          position: absolute;
-          left: 4px;
-          top: 50%;
-          transform: translateY(-50%);
-          color: white;
-          font-size: 16px;
-        }
-      }
-    }
-
-    /* Style the custom checkbox design */
-    .wpcf7-list-item-label {
-      position: relative;
-      padding-left: 30px;
-      cursor: pointer;
-      font-size: 18px;
-      color: #333; /* Darker text color */
-      display: inline-block;
-
-      /* Create custom checkbox */
-      &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 20px;
-        height: 20px;
-        border: 2px solid #b30b00; /* Border color */
-        background-color: #fff;
-        border-radius: 4px; /* Rounded corners */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-      }
-
-      /* Change the label text color on hover */
-      &:hover {
-        color: #b30b00; /* Hover color for the text */
-      }
-    }
-
-    /* Add some margin to the checkboxes for better spacing */
-    .wpcf7-list-item {
-      margin-bottom: 10px;
-    }
-  }
-
-
-  span.wpcf7-not-valid-tip {
-    color: #b30b00;
-    font-size: .8em;
-    padding-left: 10px;
-  }
-
-  .wpcf7 form.invalid {
-    .wpcf7-response-output {
-      border: none !important;
-      color: #b30b00;
-      position: relative;
-    }
-
-    .wpcf7-response-output:before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      content: '';
-      display: block;
-      width: 2px;
-      background: #b30b00;
-    }
-  }
-
   .modal-main:has(form.sent) .mfp-close {
     color: #333 !important;
   }
@@ -746,23 +781,5 @@ select::-ms-expand {
   .form-block.style02 .form-block__right,
   .form-block.style01 .form-block__right {
     position: relative;
-  }
-
-  .wpcf7 form.sent .wpcf7-response-output {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url(../images/check.png) center 200px no-repeat rgba(240, 240, 240, 0.9);
-    color: #65B32D;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 25px;
-    line-height: 32px;
-    text-align: center;
-    margin: 0 !important;
-    padding: 300px 0 0 !important;
-    border: none !important;
   }
 }
