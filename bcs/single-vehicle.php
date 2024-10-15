@@ -15,7 +15,7 @@ if (have_rows ('flixble_content_vehicle')):
   while (have_rows ('flixble_content_vehicle')) : the_row ();
     $i++;
     // Case: Paragraph layout.
-    if (get_row_layout () == 'technical_data'):?>
+    if (get_row_layout () == 'technical_data'): ?>
       <!--HERO variant 1-->
       <section class="s-hero s-hero--variant-1 ms-section">
         <div class="cn cn--big">
@@ -46,6 +46,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'left_side_image_preview'): ?>
       <!--HERO variant 2-->
       <section class="s-hero s-hero--variant-2 ms-section">
@@ -67,7 +68,6 @@ if (have_rows ('flixble_content_vehicle')):
         </div>
       </section>
 
-
     <?php elseif (get_row_layout () == 'right_side_image_preview'): ?>
       <!--HERO variant 3-->
       <section class="s-hero s-hero--variant-3 ms-section">
@@ -87,6 +87,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'overview_without_image'): ?>
       <!--OVERVIEW variant 1-->
       <section class="s-overview s-overview--variant-1 ms-section">
@@ -116,6 +117,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'overview_left_side_image'): ?>
       <!--OVERVIEW variant 2-->
       <section class="s-overview s-overview--variant-2 ms-section">
@@ -150,6 +152,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'overview_right_side_image'): ?>
       <!--OVERVIEW variant 3-->
       <section class="s-overview s-overview--variant-3 ms-section">
@@ -221,6 +224,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'video_right_side'): ?>
       <!--VIDEO variant 1-->
       <section class="s-video s-video--variant-1 ms-section">
@@ -245,6 +249,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'video_left_side'): ?>
       <!--VIDEO variant 2-->
       <section class="s-video s-video--variant-2 ms-section">
@@ -268,6 +273,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'video_full_width'): ?>
       <!--VIDEO variant 3-->
       <section class="s-video s-video--variant-3 ms-section">
@@ -291,6 +297,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'portfolio'): ?>
       <!--SPLIT-->
       <section class="s-split ms-section">
@@ -409,6 +416,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'services_with_Image'): ?>
       <!--THREE COLUMN variant 1-->
       <section class="s-three-column s-three-column--variant-1 ms-section">
@@ -470,6 +478,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'services_without_image'): ?>
       <!--THREE COLUMN variant 2-->
       <section class="s-three-column s-three-column--variant-2 ms-section">
@@ -523,6 +532,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'products'): ?>
       <!--PRODUCTS-->
       <section class="s-products ms-section">
@@ -573,7 +583,9 @@ if (have_rows ('flixble_content_vehicle')):
         </div>
       </section>
     <?php elseif (get_row_layout () == 'reviews'): ?>
+
       <?php echo get_template_part ('includes/content', 'reviews'); ?>
+    
     <?php elseif (get_row_layout () == 'trim_specifications'): ?>
       <!--KNOWLEDGE variant 1-->
       <section class="s-knowledge s-knowledge--variant-1 ms-section">
@@ -613,6 +625,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
     <?php elseif (get_row_layout () == 'faq'): ?>
       <!--KNOWLEDGE variant 3-->
       <section class="s-knowledge s-knowledge--variant-3 ms-section">
