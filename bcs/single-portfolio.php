@@ -22,13 +22,10 @@ get_header ();
             <?php
             // Отримуємо об'єкт посту з полем 'trim'
             $featured_post = get_field ('trim');
-
             // Початок заголовка
             echo '<h1 class="title h1">';
-
             // Отримуємо терміни таксономії 'portfolio_category'
             $term_list = wp_get_post_terms ($post->ID, 'portfolio_category', ['fields' => 'all']);
-
             // Виводимо назву первинної категорії
             foreach ($term_list as $term_primary) {
               $primary_category = get_post_meta ($post->ID, '_yoast_wpseo_primary_portfolio_category', true);
