@@ -58,13 +58,13 @@ jQuery(function ($) {
       if (!$errorContainer.length) {
         $errorContainer = $field.parent();
       }
-  console.log('Error container for field', $field.attr('name'), ':', $errorContainer);
+
       $errorContainer.find(`.${WPCF7_NOT_VALID_TIP_CLASS}`).remove();
-  if ($errorContainer.length) {
-      $errorContainer.append(`<span class="${WPCF7_NOT_VALID_TIP_CLASS}">${message}</span>`);
-  } else {
-    $field.after(`<span class="${WPCF7_NOT_VALID_TIP_CLASS}">${message}</span>`);
-  }
+      if ($errorContainer.length) {
+        $errorContainer.append(`<span class="${WPCF7_NOT_VALID_TIP_CLASS}">${message}</span>`);
+      } else {
+        $field.after(`<span class="${WPCF7_NOT_VALID_TIP_CLASS}">${message}</span>`);
+      }
     };
 
     // Function to remove field error message
@@ -87,7 +87,6 @@ jQuery(function ($) {
       }
 
       const errorDescription = getErrorDescription(fieldName);
-      console.log('Validating field:', fieldName, 'Error description:', errorDescription);
 
       if ($field.is(':radio')) {
         if (!$(`[name="${fieldName}"]:checked`).length) {
@@ -101,7 +100,6 @@ jQuery(function ($) {
         if (!$field.val()) {
           isValid = false;
           $field.addClass(WPCF7_NOT_VALID_CLASS);
-          console.log('Displaying error for field:', fieldName);
           displayFieldError($field, errorDescription);
           invalidFields.push(fieldName);
         } else {
@@ -134,7 +132,6 @@ jQuery(function ($) {
     // Function to display error summary
     const displayErrorSummary = ($errorSummary, invalidFields) => {
       const uniqueErrorFields = [...new Set(invalidFields)]; // Remove duplicates
-      console.log('uniqueErrorFields: ', uniqueErrorFields);
       const errorList = uniqueErrorFields.map((field) => {
         const errorDescription = getErrorDescription(field);
         return `<li>${errorDescription}</li>`;
@@ -337,7 +334,6 @@ jQuery(function ($) {
     $(document).on('change', BRAKE_SERVICE_SELECTOR, function () {
       updateServiceGroupsVisibility();
       validateStep(2);
-      console.log('Brake service changed');
     });
 
     // Use event delegation for validation events

@@ -93,8 +93,7 @@ get_header ();
           </div>
           <div class="info-2">
             <div class="text">
-              <p>
-                <?php if (get_field ('overview_project_status') == 'Completed') { ?>
+              <p><?php if (get_field ('overview_project_status') == 'Completed') { ?>
                   Scroll below to see the before and after images and further information about the
                   <?php
                   $term_list = wp_get_post_terms ($post->ID, 'portfolio_category', ['fields' => 'all']);
@@ -128,8 +127,9 @@ get_header ();
                 <div class="item">
                   <?php $image_repeater = get_field ('service_used_image', $term);
                   if ($image_repeater) { ?>
-                    <div class="icon"><img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy"
-                                           alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>"></div>
+                    <div class="icon">
+                      <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+                    </div>
                   <?php } ?>
                   <div><?php echo $project_name; ?></div>
                 </div>
@@ -297,43 +297,37 @@ get_header ();
             <div class="acc-body">
             <div class="inner">
 
-            <!--Brake Caliper Parts Used-->
-            <?php
-            $featured_posts = get_field ('parts_used_products');
-            if ($featured_posts): ?>
+              <!--Brake Caliper Parts Used-->
+              <?php
+              $featured_posts = get_field ('parts_used_products');
+              if ($featured_posts): ?>
               <div class="text">
                 <?php echo get_field ('parts_used_subtitle'); ?>
               </div>
-              <section class="s-products ms-section">
-                <!--              <div class="section-heading section-heading--simple">-->
-                <!--                <h2 class="title h1">--><?php //echo get_field ('parts_used_title'); ?><!--</h2>-->
-                <!--                <div class="subtitle"></div>-->
-                <!--              </div>-->
-                <div class="products-list">
 
-                  <?php foreach ($featured_posts as $post):
-
-                    // Setup this post for WP functions (variable must be named $post).
-                    setup_postdata ($post); ?>
-                    <div class="product-card">
-                      <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
-                      <div class="product-card__content">
-                        <h3 class="title"><?php echo get_the_title (); ?></h3>
-                        <div class="subtitle">2004-2011</div>
-                        <div class="btn-group">
-                          <a href="<?php the_permalink (); ?>" class="btn btn-2">From $6.95</a>
-                          <a href="#" class="btn btn-2">From $6.95</a>
-                        </div>
+              <div class="s-products ms-section">
+              <div class="products-list">
+                <?php foreach ($featured_posts as $post):
+                  // Setup this post for WP functions (variable must be named $post).
+                  setup_postdata ($post); ?>
+                  <div class="product-card">
+                    <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
+                    <div class="product-card__content">
+                      <h3 class="title"><?php echo get_the_title (); ?></h3>
+                      <div class="subtitle">2004-2011</div>
+                      <div class="btn-group">
+                        <a href="<?php the_permalink (); ?>" class="btn btn-2">From $6.95</a>
+                        <a href="#" class="btn btn-2">From $6.95</a>
                       </div>
                     </div>
-                  <?php endforeach; ?>
-                </div>
-              </section>
-
+                  </div>
+                <?php endforeach; ?>
               </div>
-              </div>
-              </div>
-            <?php endif;
+            </div>
+            </div>
+            </div>
+            </div>
+          <?php endif;
             wp_reset_postdata (); ?>
           <?php } ?>
         </div>
@@ -451,21 +445,20 @@ if (have_rows ('flixble_content_portfolio')):
                       <div class="text"><?php echo get_sub_field ('text'); ?></div>
                     </div>
                     <button class="btn btn-2">
-                <span class="text-cn">
-                  <span class="more-text">Show more</span>
-                  <span class="less-text">Show less</span>
-                </span>
+                      <span class="text-cn">
+                        <span class="more-text">Show more</span>
+                        <span class="less-text">Show less</span>
+                      </span>
                       <span class="icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
-                    <path d="M2.1433 0.331642L6.54205 4.72081L10.9408 0.331642L12.2921 1.68289L6.54205 7.43289L0.792053 1.68289L2.1433 0.331642Z"/>
-                  </svg>
-                </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                          <path d="M2.1433 0.331642L6.54205 4.72081L10.9408 0.331642L12.2921 1.68289L6.54205 7.43289L0.792053 1.68289L2.1433 0.331642Z"/>
+                        </svg>
+                      </span>
                     </button>
                   </div>
                 </div>
               <?php endwhile; ?>
             <?php endif; ?>
-
           </div>
         </div>
       </section>
@@ -493,18 +486,19 @@ if (have_rows ('flixble_content_portfolio')):
             <div class="col">
               <div class="title h2">Before</div>
               <?php $image_repeater = get_sub_field ('comparison_before'); ?>
-              <div class="img"><img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
-                                    loading="lazy"
-                                    alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>"></div>
+              <div class="img">
+                <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>"></div>
             </div>
             <div class="col">
               <div class="title h2">After</div>
               <?php $image_repeater = get_sub_field ('comparison_after'); ?>
-              <div class="img"><img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
-                                    loading="lazy"
-                                    alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>"></div>
+              <div class="img">
+                <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
+                     loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+              </div>
             </div>
-          </div> <?php
+          </div>
+          <?php
           $link = get_sub_field ('comparison_button');
           if ($link):
             $link_url = $link[ 'url' ];
@@ -512,8 +506,7 @@ if (have_rows ('flixble_content_portfolio')):
             $link_target = $link[ 'target' ] ? $link[ 'target' ] : '_self';
             ?>
             <div class="section-btn">
-              <a href="<?php echo esc_url ($link_url); ?>" class="btn btn-8"
-                 target="<?php echo esc_attr ($link_target); ?>"><?php echo esc_html ($link_title); ?></a>
+              <a href="<?php echo esc_url ($link_url); ?>" class="btn btn-8" target="<?php echo esc_attr ($link_target); ?>"><?php echo esc_html ($link_title); ?></a>
             </div>
           <?php endif; ?>
         </div>
@@ -528,9 +521,10 @@ if (have_rows ('flixble_content_portfolio')):
             </div>
             <div class="t-item">
               <?php $image_repeater = get_sub_field ('testimonial_image'); ?>
-              <div class="img"><img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
-                                    loading="lazy"
-                                    alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>"></div>
+              <div class="img">
+                <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
+                     loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+              </div>
               <div class="name"><?php echo get_sub_field ('testimonial_name'); ?></div>
               <div class="title"><?php echo get_sub_field ('testimonial_title'); ?></div>
               <div class="text"><?php echo get_sub_field ('testimonial_text'); ?></div>
@@ -557,14 +551,7 @@ if (have_rows ('flixble_content_portfolio')):
               <div class="form">
                 <h3 class="title h2"><?php echo get_sub_field ('banner_title'); ?></h3>
                 <div class="subtitle"><?php echo get_sub_field ('banner_description'); ?></div>
-                <form>
-                  <div class="form-group">
-                    <input type="email" class="input" placeholder="Email">
-                  </div>
-                  <div class="form-group btn-group">
-                    <button type="submit" class="btn btn-8">Submit</button>
-                  </div>
-                </form>
+                <?php echo do_shortcode('[contact-form-7 id="79c53f2" title="Email"]') ?>
               </div>
             </div>
           </div>
@@ -584,20 +571,20 @@ if (have_rows ('flixble_content_portfolio')):
           <div class="swiper articles-slider">
             <div class="swiper-arrows">
               <div class="swiper-button-prev btn btn-4">
-            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M7.37598 10.2383L2.98681 5.83951L7.37598 1.44076L6.02473 0.0895081L0.274727 5.83951L6.02473 11.5895L7.37598 10.2383Z"/>
-              </svg>
-            </span>
+                <span class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                    <path d="M7.37598 10.2383L2.98681 5.83951L7.37598 1.44076L6.02473 0.0895081L0.274727 5.83951L6.02473 11.5895L7.37598 10.2383Z"/>
+                  </svg>
+                </span>
                 <span>Previous</span>
               </div>
               <div class="swiper-button-next btn btn-4">
                 <span>Next</span>
                 <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                    <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                  </svg>
+                </span>
               </div>
             </div>
             <div class="swiper-wrapper">
@@ -625,7 +612,7 @@ if (have_rows ('flixble_content_portfolio')):
                   }
                 }
                 if ($portfolio_posts) {
-// Second query, specific posts query
+                  // Second query, specific posts query
                   $args_2 = get_posts (array(
                       'post_type' => 'portfolio',
                       'post_count' => -1,
@@ -669,9 +656,7 @@ if (have_rows ('flixble_content_portfolio')):
               ));
 
               if ($query->have_posts ()) :
-
                 while ($query->have_posts ()) :
-
                   $query->the_post (); ?>
 
                   <div class="swiper-slide">
@@ -679,43 +664,36 @@ if (have_rows ('flixble_content_portfolio')):
                       <div class="article-card__img">
                         <?php $image_repeater = get_field ('overview_image'); ?>
                         <?php if ($image_repeater) { ?>
-                          <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
-                               loading="lazy"
-                               alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+                          <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
                         <?php } ?>
                       </div>
                       <div class="article-card__content">
                         <div class="tags">
-                          <?php
-                          $terms = wp_get_object_terms ($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
-                          if (!empty($terms)) :
-
-                            foreach ($terms as $term) { ?>
-                              <div class="tag"><?php echo $term->name; ?></div>
-                            <?php } ?>
-                          <?php endif;
-                          ?>
+                        <?php
+                        $terms = wp_get_object_terms ($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
+                        if (!empty($terms)) :
+                          foreach ($terms as $term) { ?>
+                            <div class="tag"><?php echo $term->name; ?></div>
+                        <?php } ?>
+                        <?php endif; ?>
                         </div>
                         <h3 class="title"><?php echo get_the_title (); ?></h3>
                         <div class="desc"><?php echo get_field ('preview_description'); ?></div>
                         <a href="<?php the_permalink (); ?>" class="btn btn-3">
                           <span>Read more</span>
                           <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                              <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                            </svg>
+                          </span>
                         </a>
                       </div>
                     </div>
                   </div>
 
                 <?php endwhile;
-
               endif;
               wp_reset_postdata (); ?>
-
-
             </div>
             <div class="swiper-pagination"></div>
           </div>
@@ -746,7 +724,7 @@ if (have_rows ('flixble_content_portfolio')):
           }
         }
         if ($portfolio_posts) {
-// Second query, specific posts query
+        // Second query, specific posts query
           $args_2 = get_posts (array(
               'post_type' => 'product',
               'post_count' => -1,
@@ -757,7 +735,6 @@ if (have_rows ('flixble_content_portfolio')):
           }
         }
       } else {
-
         $terms = wp_get_object_terms ($post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC'));
         if (!empty($terms)) :
           $project = array();
@@ -797,12 +774,8 @@ if (have_rows ('flixble_content_portfolio')):
               <div class="subtitle"><?php echo get_sub_field ('products_subtitle'); ?></div>
             </div>
             <div class="products-list">
-
-
               <?php while ($query->have_posts ()) :
-
                 $query->the_post (); ?>
-
                 <div class="product-card">
                   <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
                   <div class="product-card__content">
@@ -815,19 +788,21 @@ if (have_rows ('flixble_content_portfolio')):
                   </div>
                 </div>
               <?php endwhile; ?>
-
             </div>
             <div class="section-btn"><a href="#" class="btn btn-1">Show more</a></div>
           </div>
         </section>
       <?php endif;
       wp_reset_postdata (); ?>
+
     <?php elseif (get_row_layout () == 'services'): ?>
       <!--SERVICES-->
       <section class="s-services-main ms-section">
         <div class="s-services-main__head">
-          <div class="section-bg"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-02.png"
-                                       loading="lazy" alt=""></div>
+          <div class="section-bg">
+            <img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-02.png"
+                 loading="lazy" alt="">
+          </div>
           <div class="cn">
             <div class="section-heading">
               <h2 class="title h1"><?php echo get_sub_field ('title'); ?></h2>
@@ -850,19 +825,19 @@ if (have_rows ('flixble_content_portfolio')):
                 setup_postdata ($post); ?>
                 <div class="service-item">
                   <?php $image_repeater = get_field ('services_preview_image'); ?>
-                  <div class="img"><img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
-                                        loading="lazy"
-                                        alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+                  <div class="img">
+                    <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
+                         loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
                   </div>
                   <h3 class="title"><?php the_title (); ?></h3>
                   <div class="desc"><?php the_field ('services_preview_description'); ?></div>
                   <a href="<?php the_permalink (); ?>" class="btn btn-2">
                     <span>Read more</span>
                     <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-            </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                          <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                        </svg>
+                    </span>
                   </a>
                 </div>
               <?php endforeach; ?>
@@ -881,38 +856,6 @@ if (have_rows ('flixble_content_portfolio')):
 else :
   // Do something...
 endif; ?>
-  <!--STICKY CALLBACK-->
-  <div class="sticky-callback">
-    <div class="btn-callback">
-      <img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/icon-11.svg" loading="lazy" alt="">
-      <img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/close-01.svg" loading="lazy" alt="">
-    </div>
 
-    <div class="tooltip">Need A quick response? We’re here to help</div>
-
-    <div class="form">
-      <div class="form__head">
-        <div class="icon"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/icon-11.svg"
-                               loading="lazy" alt=""></div>
-        <div>Get a callback</div>
-      </div>
-      <div class="form__body">
-        <div class="text">Leave your contact information at this form and we’ll contact you to help you as soon
-          as possible
-        </div>
-        <form>
-          <div class="form-group">
-            <input type="email" class="input" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <input type="tel" class="input" placeholder="Mobile Phone">
-          </div>
-          <div class="form-group btn-group">
-            <button type="submit" class="btn btn-8">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 <?php
 get_footer ();

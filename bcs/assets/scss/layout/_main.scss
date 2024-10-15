@@ -2672,6 +2672,17 @@
         text-align: center;
       }
     }
+    &__thanks {
+      background: $white;
+      padding: 40px 30px 30px;
+      text-align: center;
+      .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+    }
   }
 }
 

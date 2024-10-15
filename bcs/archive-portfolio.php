@@ -2,11 +2,6 @@
 /**
  * The template for displaying archive pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package WordPress
- * @subpackage Twenty_Nineteen
- * @since Twenty Nineteen 1.0
  */
 
 get_header ();
@@ -15,8 +10,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
 
   <!--VEHICLES-->
   <section class="s-vehicles-simple ms-section">
-    <div class="section-bg"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-05.jpg"
-                                 loading="lazy" alt=""></div>
+    <div class="section-bg"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-05.jpg" loading="lazy" alt=""></div>
     <div class="cn">
       <div class="section-heading">
         <h1 class="title h1">Find Your Vehicle</h1>
@@ -56,8 +50,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
               $terms = get_terms ('portfolio_category');
               // Loop through parent terms and set active class if it matches current or parent
               foreach ($terms as $term) { ?>
-                <option data-category="<?php echo esc_attr ($term->term_id); ?>"
-                        value="<?php echo esc_attr ($term->slug); ?>"><?php echo esc_html ($term->name); ?></option>
+                <option data-category="<?php echo esc_attr ($term->term_id); ?>" value="<?php echo esc_attr ($term->slug); ?>"><?php echo esc_html ($term->name); ?></option>
               <?php } ?>
             </select>
           </div>
@@ -70,8 +63,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
               $terms = get_terms ('product_used');
               // Loop through parent terms and set active class if it matches current or parent
               foreach ($terms as $term) { ?>
-                <option data-used="<?php echo esc_attr ($term->term_id); ?>"
-                        value="<?php echo esc_attr ($term->slug); ?>"><?php echo esc_html ($term->name); ?></option>
+                <option data-used="<?php echo esc_attr ($term->term_id); ?>" value="<?php echo esc_attr ($term->slug); ?>"><?php echo esc_html ($term->name); ?></option>
               <?php } ?>
             </select>
           </div>
@@ -120,13 +112,9 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
               <a href="<?php the_permalink (); ?>" class="portfolio__image">
                 <?php $image_repeater = get_field ('overview_image'); ?>
                 <?php if ($image_repeater) { ?>
-                  <img src="<?php echo $image_repeater[ 'url' ]; ?>"
-                       loading="lazy"
-                       alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+                  <img src="<?php echo $image_repeater[ 'url' ]; ?>" loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
                 <?php } else { ?>
-                  <img src="<?php echo get_template_directory_uri (); ?>/assets/images/Portfolio_Placeholder.webp"
-                       loading="lazy"
-                       alt="Portfolio Placeholder">
+                  <img src="<?php echo get_template_directory_uri (); ?>/assets/images/Portfolio_Placeholder.webp" loading="lazy" alt="Portfolio Placeholder">
                 <?php } ?>
               </a>
               <div class="portfolio__content">
@@ -137,8 +125,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
                     foreach ($terms as $term) { ?>
                       <div class="tag"><?php echo $term->name; ?></div>
                     <?php } ?>
-                  <?php endif;
-                  ?>
+                  <?php endif; ?>
                 </div>
                 <div class="model"><?php echo get_the_title (); ?></div>
                 <div class="info"><?php echo get_field ('preview_description'); ?></div>
@@ -156,10 +143,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
         <!--   Pagination   -->
         <?php render_pagination($query, 1); ?>
 
-
         <?php wp_reset_postdata (); ?>
-
-
       </div>
     </div>
   </section>
@@ -167,8 +151,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
   <!--BANNER-->
   <section class="s-banner-1 ms-section">
     <div class="s-banner-1__img">
-      <div class="img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy"
-                            alt=""></div>
+      <div class="img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
     </div>
     <div class="cn">
       <div class="s-banner-1__content">

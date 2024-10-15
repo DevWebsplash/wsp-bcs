@@ -213,21 +213,21 @@ jQuery(function ($) {
 
 const setModelFromUrl = () => {
   const {make, model} = getUrlSegments();
-  console.log('URL Segments:', {make, model}); // Debug log
+  // console.log('URL Segments:', {make, model}); // Debug log
   if (make) {
     makeSelect.val(make);
-    console.log('Make changed to:', {make}); // Debug log
+    // console.log('Make changed to:', {make}); // Debug log
     makeSelect.trigger('change');
   } else {
     console.error('Make is not defined in URL segments');
   }
   if (model) {
     modelSelect.val(model);
-    console.log('Model changed to:', {model}); // Debug log
+    // console.log('Model changed to:', {model}); // Debug log
     modelSelect.trigger('change');
   } else {
     console.error('Model is not defined in URL segments');
   }
-  console.log('Selected Make:', makeSelect.val()); // Debug log
-  console.log('Selected Model:', modelSelect.val()); // Debug log
+  // console.log('Selected Make:', makeSelect.val()); // Debug log
+  // console.log('Selected Model:', modelSelect.val()); // Debug log
 };

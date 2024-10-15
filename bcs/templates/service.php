@@ -122,14 +122,7 @@ if (have_rows ('services_flexible_content')):
               <div class="form">
                 <h3 class="title h2"><?php echo get_sub_field ('list_description'); ?></h3>
                 <div class="subtitle"><?php echo get_sub_field ('list_description'); ?></div>
-                <form>
-                  <div class="form-group">
-                    <input type="email" class="input" placeholder="Email">
-                  </div>
-                  <div class="form-group btn-group">
-                    <button type="submit" class="btn btn-8">Submit</button>
-                  </div>
-                </form>
+                <?php echo do_shortcode('[contact-form-7 id="79c53f2" title="Email"]') ?>
               </div>
             </div>
           </div>
