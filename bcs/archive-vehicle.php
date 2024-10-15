@@ -29,8 +29,9 @@
         while ($the_query->have_posts ()) {
           $the_query->the_post (); ?>
           <div class="vehicle-card">
-            <a href="<?php the_permalink (); ?>" class="img"><img
-                      src="<?php echo get_template_directory_uri (); ?>/assets/images/img-01.png" loading="lazy" alt=""></a>
+            <a href="<?php the_permalink (); ?>" class="img">
+              <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-01.png" loading="lazy" alt="">
+            </a>
             <?php
             $terms = wp_get_object_terms ($post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC'));
             if (!empty($terms)) :
@@ -55,8 +56,9 @@
 
 <!--SPECIALIST REVIEWS-->
 <section class="s-specialists-reviews ms-section">
-  <div class="section-bg"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-01.png" loading="lazy"
-                               alt=""></div>
+  <div class="section-bg">
+    <img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-01.png" loading="lazy" alt="">
+  </div>
   <div class="cn cn--big">
     <div class="section-heading">
       <div class="decorated-title decorated-title--column-center">
@@ -70,8 +72,9 @@
     <div class="s-specialists-reviews__list">
 
       <div class="sr-item">
-        <div class="sr-item__img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg"
-                                       loading="lazy" alt=""></div>
+        <div class="sr-item__img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy" alt="">
+        </div>
         <div class="sr-item__content">
           <h3 class="title h2">Fiat Doblo 2016 brake caliper painting in Leeds</h3>
           <div class="tags">
@@ -86,10 +89,36 @@
           <a href="#" class="btn btn-3">
             <span>Read more</span>
             <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="sr-item">
+        <div class="sr-item__img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy" alt="">
+        </div>
+        <div class="sr-item__content">
+          <h3 class="title h2">Fiat Doblo 2016 brake caliper painting in Leeds</h3>
+          <div class="tags">
+            <div class="tag">Engineering services</div>
+            <div class="tag">Painting</div>
+            <div class="tag">2 piston</div>
+          </div>
+          <div class="desc">If you are looking for experienced and highly professional brake caliper painting and
+            refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car
+            detailing and care to make sure your vehicle is looking its best.
+          </div>
+          <a href="#" class="btn btn-3">
+            <span>Read more</span>
+            <span class="icon">
+               <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+              </svg>
+            </span>
           </a>
         </div>
       </div>
@@ -111,35 +140,10 @@
           <a href="#" class="btn btn-3">
             <span>Read more</span>
             <span class="icon">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-              </span>
-          </a>
-        </div>
-      </div>
-
-      <div class="sr-item">
-        <div class="sr-item__img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg"
-                                       loading="lazy" alt=""></div>
-        <div class="sr-item__content">
-          <h3 class="title h2">Fiat Doblo 2016 brake caliper painting in Leeds</h3>
-          <div class="tags">
-            <div class="tag">Engineering services</div>
-            <div class="tag">Painting</div>
-            <div class="tag">2 piston</div>
-          </div>
-          <div class="desc">If you are looking for experienced and highly professional brake caliper painting and
-            refurbishment then look no further than Bespoke Detailing Solutions. We specialise in all aspect of car
-            detailing and care to make sure your vehicle is looking its best.
-          </div>
-          <a href="#" class="btn btn-3">
-            <span>Read more</span>
-            <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+              </svg>
+            </span>
           </a>
         </div>
       </div>
@@ -151,8 +155,9 @@
 <!--SERVICES-->
 <section class="s-services-main ms-section">
   <div class="s-services-main__head">
-    <div class="section-bg"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-02.png"
-                                 loading="lazy" alt=""></div>
+    <div class="section-bg">
+      <img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-02.png" loading="lazy" alt="">
+    </div>
     <div class="cn">
       <div class="section-heading">
         <h2 class="title h1">Brake Caliper Refurbishment Services</h2>
@@ -169,8 +174,9 @@
   <div class="cn">
     <div class="services-list">
       <div class="service-item">
-        <div class="img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy"
-                              alt=""></div>
+        <div class="img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy" alt="">
+        </div>
         <h3 class="title">Brake Caliper Refurbishment Un-Seize & Repair Service</h3>
         <div class="desc">Our team specializes in refurbishing brake calipers to restore their performance and
           appearance. If you don’t think you need a complete refurbishment.
@@ -178,15 +184,16 @@
         <a href="#" class="btn btn-2">
           <span>Read more</span>
           <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+              <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+            </svg>
+          </span>
         </a>
       </div>
       <div class="service-item">
-        <div class="img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy"
-                              alt=""></div>
+        <div class="img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy" alt="">
+        </div>
         <h3 class="title">Engineering & ReManufacture and Coatings</h3>
         <div class="desc">We have incredible engineering capabilities at BCS. Aside from our on-site engineer with
           almost 40 years experience in manual turning, milling,
@@ -194,15 +201,16 @@
         <a href="#" class="btn btn-2">
           <span>Read more</span>
           <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+              <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+            </svg>
+          </span>
         </a>
       </div>
       <div class="service-item">
-        <div class="img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy"
-                              alt=""></div>
+        <div class="img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy" alt="">
+        </div>
         <h3 class="title">High-End Brake Caliper Painting</h3>
         <div class="desc">With our High-End caliper painting service, we can provide all OEM colours for Brembo brake
           calipers. We can also replace logos.
@@ -210,10 +218,10 @@
         <a href="#" class="btn btn-2">
           <span>Read more</span>
           <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+              <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+            </svg>
+          </span>
         </a>
       </div>
     </div>
@@ -223,8 +231,9 @@
 <!--BANNER-->
 <section class="s-banner-1 ms-section">
   <div class="s-banner-1__img">
-    <div class="img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy"
-                          alt=""></div>
+    <div class="img">
+      <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy" alt="">
+    </div>
   </div>
   <div class="cn">
     <div class="s-banner-1__content">
@@ -238,10 +247,10 @@
       <a href="#" class="btn btn-3">
         <span>Submit</span>
         <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-              <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-            </svg>
-          </span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+            <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+          </svg>
+        </span>
       </a>
     </div>
   </div>
@@ -260,8 +269,9 @@
     </div>
     <div class="products-list">
       <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg"
-                                            loading="lazy" alt=""></div>
+        <div class="product-card__img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg" loading="lazy" alt="">
+        </div>
         <div class="product-card__content">
           <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
           <div class="subtitle">2004-2011</div>
@@ -271,8 +281,9 @@
         </div>
       </div>
       <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg"
-                                            loading="lazy" alt=""></div>
+        <div class="product-card__img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg" loading="lazy" alt="">
+        </div>
         <div class="product-card__content">
           <h3 class="title">Alcon Prodrive 4 Pot Caliper Seal Kit</h3>
           <div class="subtitle">2004-2011</div>
@@ -282,8 +293,9 @@
         </div>
       </div>
       <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg"
-                                            loading="lazy" alt=""></div>
+        <div class="product-card__img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg" loading="lazy" alt="">
+        </div>
         <div class="product-card__content">
           <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
           <div class="subtitle">2004-2011</div>
@@ -293,8 +305,9 @@
         </div>
       </div>
       <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg"
-                                            loading="lazy" alt=""></div>
+        <div class="product-card__img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg" loading="lazy" alt="">
+        </div>
         <div class="product-card__content">
           <h3 class="title">Alcon Prodrive 4 Pot Caliper Seal Kit</h3>
           <div class="subtitle">2004-2011</div>
@@ -304,8 +317,9 @@
         </div>
       </div>
       <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg"
-                                            loading="lazy" alt=""></div>
+        <div class="product-card__img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg" loading="lazy" alt="">
+        </div>
         <div class="product-card__content">
           <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
           <div class="subtitle">2004-2011</div>
@@ -315,8 +329,9 @@
         </div>
       </div>
       <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg"
-                                            loading="lazy" alt=""></div>
+        <div class="product-card__img">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg" loading="lazy" alt="">
+        </div>
         <div class="product-card__content">
           <h3 class="title">Alcon Prodrive 4 Pot Caliper Seal Kit</h3>
           <div class="subtitle">2004-2011</div>
@@ -349,16 +364,18 @@
         <div class="numbers">
           <div class="item">
             <div class="title">
-              <div class="icon"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/award.svg"
-                                     loading="lazy" alt=""></div>
+              <div class="icon">
+                <img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/award.svg" loading="lazy" alt="">
+              </div>
               <div>10</div>
             </div>
             <div class="desc">Years in Business</div>
           </div>
           <div class="item">
             <div class="title">
-              <div class="icon"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/thumb-up.svg"
-                                     loading="lazy" alt=""></div>
+              <div class="icon">
+                <img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/thumb-up.svg" loading="lazy" alt="">
+              </div>
               <div>500+</div>
             </div>
             <div class="desc">Reviews from clients</div>
@@ -370,10 +387,10 @@
         <a href="#" class="btn btn-5">
           <span>Submit</span>
           <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+              <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+            </svg>
+          </span>
         </a>
       </div>
     </div>

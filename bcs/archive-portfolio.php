@@ -50,8 +50,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
               $terms = get_terms ('portfolio_category');
               // Loop through parent terms and set active class if it matches current or parent
               foreach ($terms as $term) { ?>
-                <option data-category="<?php echo esc_attr ($term->term_id); ?>"
-                        value="<?php echo esc_attr ($term->slug); ?>"><?php echo esc_html ($term->name); ?></option>
+                <option data-category="<?php echo esc_attr ($term->term_id); ?>" value="<?php echo esc_attr ($term->slug); ?>"><?php echo esc_html ($term->name); ?></option>
               <?php } ?>
             </select>
           </div>
@@ -64,8 +63,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
               $terms = get_terms ('product_used');
               // Loop through parent terms and set active class if it matches current or parent
               foreach ($terms as $term) { ?>
-                <option data-used="<?php echo esc_attr ($term->term_id); ?>"
-                        value="<?php echo esc_attr ($term->slug); ?>"><?php echo esc_html ($term->name); ?></option>
+                <option data-used="<?php echo esc_attr ($term->term_id); ?>" value="<?php echo esc_attr ($term->slug); ?>"><?php echo esc_html ($term->name); ?></option>
               <?php } ?>
             </select>
           </div>
@@ -127,8 +125,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
                     foreach ($terms as $term) { ?>
                       <div class="tag"><?php echo $term->name; ?></div>
                     <?php } ?>
-                  <?php endif;
-                  ?>
+                  <?php endif; ?>
                 </div>
                 <div class="model"><?php echo get_the_title (); ?></div>
                 <div class="info"><?php echo get_field ('preview_description'); ?></div>
@@ -146,10 +143,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
         <!--   Pagination   -->
         <?php render_pagination($query, 1); ?>
 
-
         <?php wp_reset_postdata (); ?>
-
-
       </div>
     </div>
   </section>

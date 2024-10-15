@@ -557,14 +557,7 @@ if (have_rows ('flixble_content_portfolio')):
               <div class="form">
                 <h3 class="title h2"><?php echo get_sub_field ('banner_title'); ?></h3>
                 <div class="subtitle"><?php echo get_sub_field ('banner_description'); ?></div>
-                <form>
-                  <div class="form-group">
-                    <input type="email" class="input" placeholder="Email">
-                  </div>
-                  <div class="form-group btn-group">
-                    <button type="submit" class="btn btn-8">Submit</button>
-                  </div>
-                </form>
+                <?php echo do_shortcode('[contact-form-7 id="79c53f2" title="Email"]') ?>
               </div>
             </div>
           </div>
