@@ -816,7 +816,6 @@ if (have_rows ('flixble_content_portfolio')):
                 </div>
               <?php endwhile; ?>
 
-
             </div>
             <div class="section-btn"><a href="#" class="btn btn-1">Show more</a></div>
           </div>
