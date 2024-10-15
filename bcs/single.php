@@ -7,12 +7,12 @@
  * @package  <Package>
  */
 
-get_header();
+get_header ();
 ?>
-	<article class="single-post">
+  <article class="single-post">
     <div class="cn cn--md">
-        <?php the_content(); ?>
+      <?php the_content (); ?>
     </div>
-	</article>
+  </article>
 <?php
-get_footer();
+get_footer ();
