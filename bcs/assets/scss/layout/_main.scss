@@ -416,7 +416,7 @@
   &__inner {
     @media (min-width: $lg) {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.5fr 1fr;
       gap: 50px;
     }
   }
@@ -986,6 +986,7 @@
     border: 1px solid #E7EAEC;
     background: $white;
     padding: 16px 32px;
+    box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.10);
     .top-line {
       display: flex;
       align-items: center;
@@ -1876,7 +1877,7 @@
         }
         .desc {
           color: $black;
-          text-align: left;
+          //text-align: left;
         }
       }
     }
