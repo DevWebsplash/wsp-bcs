@@ -76,11 +76,11 @@
 }
 
 .btn-4 {
-  color: #2C0D0D;
+  color: $red;
   background-color: rgba($white,.5);
   .icon {
     svg {
-      fill: #5D171B;
+      fill: #2C0D0D;
     }
   }
   &:hover {
@@ -156,15 +156,15 @@
 
 .btn-8 {
   color: $white;
-  background-color: #7A1116;
-  border: 2px solid #7A1116;
+  background-color: $red;
+  border: 2px solid $red;
   .icon {
     svg {
       fill: $white;
     }
   }
   &:hover {
-    color: #7A1116;
+    color: $red;
     background-color: transparent;
   }
 }

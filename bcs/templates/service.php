@@ -19,9 +19,9 @@ if (have_rows ('services_flexible_content')):
         <div class="cn cn--big">
           <div class="inner-content">
             <?php $image_repeater = get_sub_field ('overview_image'); ?>
-            <div class="inner-content__img"><img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
-                                                 loading="lazy"
-                                                 alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+            <div class="inner-content__img">
+              <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
+                   loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
             </div>
             <div class="empty"></div>
             <div class="inner-content__text">
@@ -107,8 +107,9 @@ if (have_rows ('services_flexible_content')):
     <?php elseif (get_row_layout () == 'cto'): ?>
       <!--BANNER-->
       <section class="s-banner-2 ms-section">
-        <div class="section-bg"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-06.jpg"
-                                     loading="lazy" alt=""></div>
+        <div class="section-bg">
+          <img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-06.jpg" loading="lazy" alt="">
+        </div>
         <div class="cn">
           <div class="s-banner-2__inner">
             <div class="s-banner-2__left">
@@ -120,8 +121,8 @@ if (have_rows ('services_flexible_content')):
             </div>
             <div class="s-banner-2__right">
               <div class="form">
-                <h3 class="title h2"><?php echo get_sub_field ('list_description'); ?></h3>
-                <div class="subtitle"><?php echo get_sub_field ('list_description'); ?></div>
+                <h3 class="title h2"><?php echo get_sub_field('cto_title'); ?></h3>
+                <div class="subtitle"><?php echo get_sub_field('cto_subtitle'); ?></div>
                 <?php echo do_shortcode('[contact-form-7 id="79c53f2" title="Email"]') ?>
               </div>
             </div>
