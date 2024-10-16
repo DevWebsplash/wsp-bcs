@@ -4,9 +4,47 @@ Template Name: Products
 
 */
 get_header ();
+// Отримання значень із GET-запиту
+$selected_posts = !empty($_GET['custom_filter']) ? $_GET['custom_filter'] : array();
+
+// Побудова WP_Query з meta_query для фільтрації постів
+$args = array(
+	'post_type' => 'post',  // або твій кастомний тип постів
+	'meta_query' => array(
+		array(
+			'key' => 'your_custom_field',  // змінити на ключ кастомного поля
+			'value' => $selected_posts,    // передані значення з GET-запиту
+			'compare' => 'IN',             // для фільтрації за кількома значеннями
+		),
+	),
+);
+
+$query = new WP_Query($args);
+
+if ($query->have_posts()) :
+	while ($query->have_posts()) : $query->the_post();
+		// Виведення постів
+		the_title();
+	endwhile;
+	wp_reset_postdata();
+else :
+	echo 'Пости не знайдені';
+endif;
 
 ?>
-
+<form method="GET" action="">
+    <label for="custom_filter">Фільтрувати за постами:</label>
+    <select name="custom_filter[]" multiple>
+			<?php
+			// Отримання всіх постів, які можна вибрати
+			$all_posts = get_posts(array('post_type' => 'post', 'numberposts' => -1));
+			foreach ($all_posts as $post) {
+				echo '<option value="' . $post->ID . '">' . $post->post_title . '</option>';
+			}
+			?>
+    </select>
+    <button type="submit">Фільтрувати</button>
+</form>
 <!--VEHICLES-->
 <section class="s-vehicles-simple ms-section">
 	<div class="section-bg"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-05.jpg" loading="lazy" alt=""></div>
