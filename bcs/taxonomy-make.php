@@ -233,7 +233,6 @@ if($identifiers){
 	                        <?php
 	                        $terms = wp_get_object_terms($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC') );
 	                        if ( !empty( $terms ) ) :
-
 		                        foreach ( $terms as $term ) { ?>
                                 <div class="tag"><?php echo$term->name;?></div>
 		                        <?php } ?>
