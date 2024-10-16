@@ -6,6 +6,144 @@
   //margin: 0 auto;
   //padding: $container-padding;
 
+  .woocommerce-product-details__short-description {
+    ul {
+      margin: 1.5rem 0 1.5rem 1.5rem;
+
+      li {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .variations_form.cart {
+    .single_variation_wrap {
+      margin-top: 15px;
+      padding: 10px;
+      padding-bottom: 20px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      .woocommerce-variation-add-to-cart {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+
+        .single_add_to_cart_button {
+          color: #fff;
+          background-color: #9c0003;
+          border: 2px solid #9c0003;
+          padding: 0 15px;
+          border-radius: 8px;
+          cursor: pointer;
+          //text-transform: uppercase;
+          display: inline-block;
+          height: 44px;
+          font-size: 18px;
+          font-weight: 600;
+          letter-spacing: .36px;
+        }
+      }
+    }
+    /* Основні стилі форми */
+    .variations_form {
+      margin: 20px 0;
+      border: 1px solid #e0e0e0;
+      padding: 15px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    /* Заголовок (label) */
+    .variations th.label {
+      text-align: left;
+      font-weight: bold;
+      font-size: 16px;
+      color: #333;
+    }
+
+    /* Випадаючі списки (select) */
+    .variations select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      font-size: 14px;
+      color: #333;
+      margin-left: 15px;
+    }
+
+    .variations select:focus {
+      border-color: $red;
+      outline: none;
+    }
+
+    /* Кнопка очищення вибору */
+    .reset_variations {
+      margin-left: 10px;
+      color: $red;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .reset_variations:hover {
+      text-decoration: underline;
+    }
+
+
+    /* Стиль ціни */
+    .woocommerce-variation-price .price {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Обгортка кнопок кількості */
+    .qib-button-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 10px 0;
+    }
+
+    /* Кнопки збільшення/зменшення кількості */
+    .qib-button {
+      background-color: $red;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .qib-button:hover {
+      background-color: $red;
+    }
+
+    /* Поле введення кількості */
+    .quantity input {
+      width: 60px;
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    /* Кнопка додавання в кошик */
+    .single_add_to_cart_button {
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
+
+
   .product {
     display: flex;
     flex-wrap: wrap;
@@ -40,7 +178,6 @@
       }
 
 
-
       .woocommerce-product-details__short-description {
         font-size: 1rem;
         margin-bottom: 1.5rem;
@@ -53,6 +190,7 @@
       .qib-button-wrapper {
         margin-right: 15px;
       }
+
       .woocommerce-variation-add-to-cart,
       .single_add_to_cart_button {
         color: $white;
@@ -77,6 +215,8 @@
 
 
       .product_meta {
+        display: flex;
+        flex-direction: column;
         font-size: 0.9rem;
         color: $text-color;
         margin-top: 1.5rem;
@@ -91,6 +231,175 @@
     .woocommerce-tabs {
       width: 100%;
       margin-top: 2rem;
+      /* Загальні стилі для вкладок */
+      .woocommerce-tabs {
+        margin-top: 40px;
+      }
+
+      .tabs {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        border-bottom: 1px solid #eaeaea;
+        li {
+          margin-right: 20px;
+          a {
+            display: block;
+            padding: 10px 15px;
+            color: #555!important;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s, border-bottom 0.3s;
+          }
+
+          &.active a,
+          a:hover {
+            color: white!important;
+            border-bottom: 2px solid #000;
+          }
+        }
+      }
+
+
+      .wc-tab {
+        display: none;
+        padding: 20px 0;
+        &.active {
+          display: block;
+        }
+      }
+
+      /* Стилі для заголовків у вкладках */
+      .woocommerce-Tabs-panel {
+        h2, h3, h4, h5, h6 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        h2 {
+          font-size: 24px;
+        }
+        ul {
+          margin: 10px 0 10px 20px;
+          li {
+            margin-bottom: 10px;
+          }
+        }
+        p, li  {
+          color: #333;
+        }
+      }
+
+      /* Стилі для таблиці "Additional Information" */
+      .woocommerce-Tabs-panel table.shop_attributes {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      .woocommerce-Tabs-panel table.shop_attributes th,
+      .woocommerce-Tabs-panel table.shop_attributes td {
+        padding: 10px;
+        border: 1px solid #eaeaea;
+        text-align: left;
+      }
+
+      .woocommerce-Tabs-panel table.shop_attributes th {
+        background-color: #f9f9f9;
+        width: 30%;
+        font-weight: 600;
+      }
+
+      /* Стилі для форми відгуків */
+      #reviews {
+        margin-top: 40px;
+      }
+
+      #reviews h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      #review_form {
+        margin-top: 20px;
+      }
+
+      #review_form p {
+        margin-bottom: 15px;
+      }
+
+      #review_form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      #review_form input[type="text"],
+      #review_form input[type="email"],
+      #review_form textarea,
+      #review_form select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      #review_form .form-submit input[type="submit"] {
+        background-color: #000;
+        color: #fff;
+        padding: 12px 30px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #review_form .form-submit input[type="submit"]:hover {
+        background-color: #333;
+      }
+
+      /* Стилі для рейтингу зірок */
+      .comment-form-rating {
+        margin-bottom: 15px;
+      }
+
+      .comment-form-rating label {
+        margin-bottom: 10px;
+      }
+
+      .comment-form-rating .stars {
+        display: flex;
+      }
+
+      .comment-form-rating .stars a {
+        text-decoration: none;
+        font-size: 24px;
+        color: #ccc;
+        margin-right: 5px;
+        transition: color 0.3s;
+      }
+
+      .comment-form-rating .stars a:hover,
+      .comment-form-rating .stars a.active {
+        color: #f5a623;
+      }
+
+      /* Адаптивність */
+      @media (max-width: 768px) {
+        .woocommerce-tabs .tabs {
+          flex-direction: column;
+        }
+
+        .woocommerce-tabs .tabs li {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+
+        .woocommerce-tabs .tabs li a {
+          padding: 10px;
+        }
+      }
+
 
       ul.wc-tabs {
         list-style: none;
@@ -126,6 +435,7 @@
             color: #fff; // Primary color on hover/active
           }
         }
+
         &:hover {
           background-color: darken($secondary-color, 15%);
         }
