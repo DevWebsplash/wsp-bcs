@@ -451,6 +451,7 @@ if (have_rows ('flixble_content_vehicle')):
                   </a>
               </div>
 		    <?php endforeach; ?>
+		    <?php endif; ?>
           </div>
         </div>
       </section>
