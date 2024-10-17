@@ -426,55 +426,31 @@ if (have_rows ('flixble_content_vehicle')):
             <div class="subtitle"><?php echo get_sub_field ('services_with_Image_subtitle'); ?></div>
           </div>
           <div class="s-three-column__list">
+	    <?php
+	    $featured_posts = get_sub_field ('services');
+	    if ($featured_posts): ?>
+		    <?php foreach ($featured_posts as $post):
 
-            <div class="item">
-              <div class="img">
-                <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy" alt="">
+			    // Setup this post for WP functions (variable must be named $post).
+			    setup_postdata ($post); ?>
+              <div class="item">
+						    <?php $image_repeater = get_field ('services_preview_image'); ?>
+                  <div class="img">
+                      <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy"
+                           alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+                  </div>
+                  <h3 class="title"><?php the_title (); ?></h3>
+                  <div class="desc"><?php the_field ('services_preview_description'); ?></div>
+                  <a href="<?php the_permalink (); ?>" class="btn btn-2">
+                      <span>Read more</span>
+                      <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                      </svg>
+                    </span>
+                  </a>
               </div>
-              <h3 class="title">Brake Caliper Refurbishment Front and Rear Pair</h3>
-              <div class="desc">Our team specializes in refurbishing brake calipers to restore their performance and appearance.</div>
-              <a href="#" class="btn btn-2">
-                <span>Read more</span>
-                <span class="icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                    <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                  </svg>
-                </span>
-              </a>
-            </div>
-
-            <div class="item">
-              <div class="img">
-                <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy" alt="">
-              </div>
-              <h3 class="title">Engineering and ReManufacture</h3>
-              <div class="desc">We have incredible engineering capabilities at BCS. Aside from our on-site engineer with almost 40 years experience in manual turning, milling,</div>
-              <a href="#" class="btn btn-2">
-                <span>Read more</span>
-                <span class="icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                    <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                  </svg>
-                </span>
-              </a>
-            </div>
-
-            <div class="item">
-              <div class="img">
-                <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-02.jpg" loading="lazy" alt="">
-              </div>
-              <h3 class="title">Caliper Painting</h3>
-              <div class="desc">With our High-End caliper painting service, we can provide all OEM colours for Brembo brake calipers.</div>
-              <a href="#" class="btn btn-2">
-                <span>Read more</span>
-                <span class="icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                    <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                  </svg>
-                </span>
-              </a>
-            </div>
-
+		    <?php endforeach; ?>
           </div>
         </div>
       </section>
@@ -488,27 +464,21 @@ if (have_rows ('flixble_content_vehicle')):
             <div class="subtitle"><?php echo get_sub_field ('services_without_image_subtitle'); ?></div>
           </div>
           <div class="s-three-column__list">
-            <div class="item">
-              <div class="img">
-                <img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/icon-01.svg" loading="lazy" alt="">
-              </div>
-              <h3 class="title">Customization</h3>
-              <div class="desc">Our team specializes in refurbishing brake calipers to restore their performance and appearance.</div>
-            </div>
-            <div class="item">
-              <div class="img">
-                <img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/icon-02.svg" loading="lazy" alt="">
-              </div>
-              <h3 class="title">Worldwide Shipping</h3>
-              <div class="desc">We offer convenient worldwide shipping options to ensure your refurbished brake calipers reach you no matter where you are.</div>
-            </div>
-            <div class="item">
-              <div class="img">
-                <img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/icon-03.svg" loading="lazy" alt="">
-              </div>
-              <h3 class="title">Product Customization</h3>
-              <div class="desc">85% of jobs completed by our specializes within 24 hours</div>
-            </div>
+	          <?php if (have_rows ('advandeges_repeater')): ?>
+		          <?php while (have_rows ('advandeges_repeater')) : the_row (); ?>
+				          <?php $image_repeater = get_sub_field ('image'); ?>
+                      <div class="item">
+                          <div class="img">
+                              <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy"
+                                   alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+                          </div>
+                          <h3 class="title"><?php echo get_sub_field ('title'); ?></h3>
+                          <div class="desc"><?php echo get_sub_field ('description'); ?></div>
+                      </div>
+		          <?php endwhile; ?>
+	          <?php endif; ?>
+
+
           </div>
 
           <div class="section-btn">
@@ -543,7 +513,7 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
           <div class="products-list">
             <?php
-            $featured_posts = get_sub_field ('products');
+            $featured_posts = get_field ('preview_products_for_trim');
             if ($featured_posts): ?>
               <?php foreach ($featured_posts as $post):
                 // Setup this post for WP functions (variable must be named $post).
