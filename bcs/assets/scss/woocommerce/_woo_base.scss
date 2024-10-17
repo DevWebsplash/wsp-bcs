@@ -1,4 +1,31 @@
 @import "../base/variables";
+
+body.woocommerce-page {
+  background-color: $white;
+}
+
+.woocommerce-breadcrumb {
+  padding: 20px 0 15px;
+  font-size: 0.9em;
+  a {
+    color: $red;
+    font-weight: 600;
+  }
+}
+
+.woocommerce-products-header {
+  margin-bottom: 3rem;
+  &__title {
+    margin: 1rem 0 1.5rem;
+  }
+
+  .term-description {
+    font-size: 1rem;
+    color: rgba(44, 45, 54, .8);
+    margin-bottom: 2.5rem;
+  }
+}
+
 .woocommerce,
 .woocommerce-cart,
 .woocommerce-checkout {
