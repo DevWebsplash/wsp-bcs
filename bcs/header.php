@@ -21,7 +21,7 @@
 
 <body <?php body_class (); ?> itemscope="itemscope" itemtype="https://schema.org/WebPage">
 <div class="page-wrapper">
-  <?php if (!is_page_template (array('templates/get-quote.php'))) { ?>
+  <?php if (!is_page_template(array('templates/get-quote.php'))) { ?>
     <header class="header">
       <div class="cn">
         <div class="header__inner">

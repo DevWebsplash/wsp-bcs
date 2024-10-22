@@ -28,7 +28,7 @@ function gulp_wp_theme_scripts() {
   wp_enqueue_script('ajax-fetch', get_template_directory_uri() .
       '/assets/js/ajax-fetch.js', array('jquery'), '1.0.65', true);
   wp_enqueue_script('get-quote', get_template_directory_uri() .
-      '/assets/js/get-quote-form.js', array('jquery'), '1.0.84', true);
+      '/assets/js/get-quote-form.js', array('jquery'), '1.0.85', true);
 }
 add_action( 'wp_enqueue_scripts', 'gulp_wp_theme_scripts' );
 

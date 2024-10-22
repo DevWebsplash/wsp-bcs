@@ -9,6 +9,10 @@ get_header();
     <h1 class="title h1"><?php the_title(); ?></h1>
     <div class="subtitle"><p>Browse our selection of high-quality brake calipers.</p></div>
   </header>
-  <?php the_content(); ?>
+  <div class="form--relative">
+    <?php
+    the_content();
+    include get_template_directory() . '/includes/partials/form-thank-you.php'; ?>
+    </div>
 </div>
 <?php get_footer(); ?>
