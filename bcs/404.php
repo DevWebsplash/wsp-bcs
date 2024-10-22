@@ -28,4 +28,4 @@ get_header();
 
 </footer>
 <?php
-get_footer();
+get_footer();?>
