@@ -145,8 +145,8 @@ jQuery(function ($) {
       const invalidFields = [];
 
       // Clear previous error summary
-      const $errorSummary = $currentStep.find(ERROR_SUMMARY_SELECTOR);
-      $errorSummary.html('').hide();
+      // const $errorSummary = $currentStep.find(ERROR_SUMMARY_SELECTOR);
+      // $errorSummary.html('').hide();
 
       if (step === 1) {
         // Validate fields on step 1
@@ -219,7 +219,7 @@ jQuery(function ($) {
 
       // Display error messages in error-summary
       if (!isValid && invalidFields.length > 0) {
-        displayErrorSummary($errorSummary, invalidFields);
+        // displayErrorSummary($errorSummary, invalidFields);
       }
 
       $currentStep.find(NEXT_BTN_SELECTOR).prop('disabled', !isValid).toggleClass('disabled', !isValid);
