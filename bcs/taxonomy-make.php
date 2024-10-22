@@ -272,48 +272,32 @@ if($identifiers){
   </div>
   <div class="cn">
     <div class="services-list">
-      <div class="service-item">
-        <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
-        <h3 class="title">Brake Caliper Refurbishment Un-Seize & Repair Service</h3>
-        <div class="desc">Our team specializes in refurbishing brake calipers to restore their performance and appearance. If you don’t think you need a complete refurbishment.</div>
-        <a href="#" class="btn btn-2">
-          <span>Read more</span>
-          <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-              <span class="cn_flex">
-                  <div class=""></div>
-              </span>
-            </span>
-        </a>
-      </div>
-      <div class="service-item">
-        <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
-        <h3 class="title">Engineering & ReManufacture and Coatings</h3>
-        <div class="desc">We have incredible engineering capabilities at BCS. Aside from our on-site engineer with almost 40 years experience in manual turning, milling,</div>
-        <a href="#" class="btn btn-2">
-          <span>Read more</span>
-          <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-            </span>
-        </a>
-      </div>
-      <div class="service-item">
-        <div class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-02.jpg" loading="lazy" alt=""></div>
-        <h3 class="title">High-End Brake Caliper Painting</h3>
-        <div class="desc">With our High-End caliper painting service, we can provide all OEM colours for Brembo brake calipers. We can also replace logos.</div>
-        <a href="#" class="btn btn-2">
-          <span>Read more</span>
-          <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                </svg>
-            </span>
-        </a>
-      </div>
+
+	    <?php
+	    $featured_posts = get_field ('services',$queried_object);
+	    if ($featured_posts): ?>
+		    <?php foreach ($featured_posts as $post):
+			    setup_postdata ($post); ?>
+              <div class="service-item">
+						    <?php $image_repeater = get_field ('services_preview_image'); ?>
+                  <div class="img">
+                      <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy"
+                           alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+                  </div>
+                  <h3 class="title"><?php the_title (); ?></h3>
+                  <div class="desc"><?php the_field ('services_preview_description'); ?></div>
+                  <a href="<?php the_permalink (); ?>" class="btn btn-2">
+                      <span>Read more</span>
+                      <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                      </svg>
+                    </span>
+                  </a>
+              </div>
+		    <?php endforeach; ?>
+	    <?php endif;
+	    wp_reset_postdata ();?>
     </div>
   </div>
 </section>
@@ -341,83 +325,124 @@ if($identifiers){
     </div>
   </div>
 </section>
+<?php
+$post_ID = $post->ID;
+$make_tax = get_field ('products_category',$queried_object);
+$portfolio_posts = get_field ('products',$queried_object);
+// Push posts IDs to new array
+$identifiers = array();
+if (( $make_tax ) || ( $portfolio_posts )) {
+	if ($make_tax) {
+		$args_1 = get_posts (array(
+			'post_type' => 'product',
+			'post_count' => -1,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'make',
+					'field' => 'term_id',
+					'terms' => $make_tax,
+				)
+			),
+		));
+		foreach ($args_1 as $post) {
+			array_push ($identifiers, $post->ID);
+		}
+	}
+	if ($portfolio_posts) {
+		// Second query, specific posts query
+		$args_2 = get_posts (array(
+			'post_type' => 'product',
+			'post_count' => -1,
+			'include' => $portfolio_posts,
+		));
+		foreach ($args_2 as $post) {
+			array_push ($identifiers, $post->ID);
+		}
+	}
+} else {
+	$terms = wp_get_object_terms ($post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC'));
+	if (!empty($terms)) :
+		$project = array();
+		foreach ($terms as $term) {
+			$project[] = $term->term_id;
+		} endif;
+	$args_3 = get_posts (array(
+		'post_type' => 'product',
+		'post_count' => -1,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'make',
+				'field' => 'term_id',
+				'terms' => $project[ 1 ],
+			)
+		),
+	));
+	foreach ($args_3 as $post) {
+		array_push ($identifiers, $post->ID);
+	}
+}
+// New query
+$query = new WP_Query(array(
+	'post_type' => 'product',
+	'post_status' => 'publish',
+	'post_count' => -1,
+	'post__in' => array_unique ($identifiers),
+	'post__not_in' => $post_ID,
+));
 
-<!--PRODUCTS-->
-<section class="s-products-main ms-section">
-  <div class="cn">
-    <div class="section-heading">
-      <div class="decorated-title decorated-title--column-center">
-        <div class="small-title small-title--gray">DISCOVER</div>
-        <div class="line-decor line-decor--red"></div>
-      </div>
-      <h2 class="title h1"><?php echo get_field('product_title', 'option'); ?></h2>
-      <div class="subtitle"><?php echo get_field('products_subtitle', 'option'); ?></div>
-    </div>
-    <div class="products-list">
-      <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-03.jpg" loading="lazy" alt=""></div>
-        <div class="product-card__content">
-          <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
-          <div class="subtitle">2004-2011</div>
-          <div class="btn-group">
-            <a href="#" class="btn btn-2">From $6.95</a>
-          </div>
+if ($query->have_posts ()) :?>
+    <!--PRODUCTS-->
+    <section class="s-products ms-section">
+        <div class="cn">
+            <div class="section-heading">
+                <h2 class="title h1"><?php echo get_field('product_title', 'option'); ?></h2>
+                <div class="subtitle"><?php echo get_field('products_subtitle', 'option'); ?></div>
+            </div>
+            <div class="products-list">
+							<?php while ($query->have_posts ()) :
+								$query->the_post (); ?>
+                  <div class="product-card">
+                      <div class="product-card__img">
+                          <a href="<?php echo esc_url( $product->get_permalink() ); ?>">
+														<?php if ( $product->get_image_id() ) : ?>
+                                <img src="<?php echo wp_get_attachment_url( $product->get_image_id() ); ?>" loading="lazy" alt="<?php echo esc_attr( $product->get_name() ); ?>">
+														<?php else : ?>
+                                <!-- Fallback static image -->
+                                <img src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" loading="lazy" alt="No image available">
+														<?php endif; ?>
+                          </a>
+                      </div>
+                      <div class="product-card__content">
+                          <h3 class="title"><?php echo esc_html( $product->get_name() ); ?></h3>
+                          <div class="subtitle">
+														<?php
+														// Check if product is variable
+														if ( $product->is_type( 'variable' ) ) {
+															// Get minimum and maximum prices for the variable product
+															echo $product->get_price_html(); // WooCommerce function to display variable product price range
+														} else {
+															// Display regular price for simple products
+															echo wc_price( $product->get_price() );
+														}
+														?>
+                          </div>
+                          <div class="btn-group">
+														<?php
+														// Generate a Buy Now button with WooCommerce's "add_to_cart_url" function
+														$add_to_cart_url = esc_url( $product->add_to_cart_url() );
+														?>
+                              <a href="<?php echo $add_to_cart_url; ?>" class="btn btn-2" data-product_id="<?php echo esc_attr( $product->get_id() ); ?>">
+                                  Buy Now  </a>
+                          </div>
+                      </div>
+                  </div>
+							<?php endwhile; ?>
+            </div>
+            <div class="section-btn"><a href="/products/brake-caliper-paint-kits/" class="btn btn-1">View all</a></div>
         </div>
-      </div>
-      <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-03.jpg" loading="lazy" alt=""></div>
-        <div class="product-card__content">
-          <h3 class="title">Alcon Prodrive 4 Pot Caliper Seal Kit</h3>
-          <div class="subtitle">2004-2011</div>
-          <div class="btn-group">
-            <a href="#" class="btn btn-2">From $6.95</a>
-          </div>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-03.jpg" loading="lazy" alt=""></div>
-        <div class="product-card__content">
-          <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
-          <div class="subtitle">2004-2011</div>
-          <div class="btn-group">
-            <a href="#" class="btn btn-2">From $6.95</a>
-          </div>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-03.jpg" loading="lazy" alt=""></div>
-        <div class="product-card__content">
-          <h3 class="title">Alcon Prodrive 4 Pot Caliper Seal Kit</h3>
-          <div class="subtitle">2004-2011</div>
-          <div class="btn-group">
-            <a href="#" class="btn btn-2">From $6.95</a>
-          </div>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-03.jpg" loading="lazy" alt=""></div>
-        <div class="product-card__content">
-          <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
-          <div class="subtitle">2004-2011</div>
-          <div class="btn-group">
-            <a href="#" class="btn btn-2">From $6.95</a>
-          </div>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-card__img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-03.jpg" loading="lazy" alt=""></div>
-        <div class="product-card__content">
-          <h3 class="title">Alcon Prodrive 4 Pot Caliper Seal Kit</h3>
-          <div class="subtitle">2004-2011</div>
-          <div class="btn-group">
-            <a href="#" class="btn btn-2">From $6.95</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section-btn"><a href="#" class="btn btn-1">View all</a></div>
-  </div>
-</section>
+    </section>
+<?php endif;
+wp_reset_postdata (); ?>
 
 <?php echo get_template_part( 'includes/content', 'reviews' ); ?>
 

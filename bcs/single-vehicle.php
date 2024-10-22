@@ -430,8 +430,6 @@ if (have_rows ('flixble_content_vehicle')):
 	    $featured_posts = get_sub_field ('services');
 	    if ($featured_posts): ?>
 		    <?php foreach ($featured_posts as $post):
-
-			    // Setup this post for WP functions (variable must be named $post).
 			    setup_postdata ($post); ?>
               <div class="item">
 						    <?php $image_repeater = get_field ('services_preview_image'); ?>
