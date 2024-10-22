@@ -306,18 +306,43 @@ get_header ();
               <div class="products-list">
                 <?php foreach ($featured_posts as $post):
                   // Setup this post for WP functions (variable must be named $post).
-                  setup_postdata ($post); ?>
-                  <div class="product-card">
-                    <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
-                    <div class="product-card__content">
-                      <h3 class="title"><?php echo get_the_title (); ?></h3>
-                      <div class="subtitle">2004-2011</div>
-                      <div class="btn-group">
-                        <a href="<?php the_permalink (); ?>" class="btn btn-2">From $6.95</a>
-                        <a href="#" class="btn btn-2">From $6.95</a>
-                      </div>
+                  setup_postdata ($post);
+	                $product = wc_get_product( $post->ID );?>
+                    <div class="product-card">
+                        <div class="product-card__img">
+                            <a href="<?php echo esc_url( $product->get_permalink() ); ?>">
+                               <?php if ( $product->get_image_id() ) : ?>
+                                <img src="<?php echo wp_get_attachment_url( $product->get_image_id() ); ?>" loading="lazy" alt="<?php echo esc_attr( $product->get_name() ); ?>">
+                                <?php else : ?>
+                                <!-- Fallback static image -->
+                                <img src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" loading="lazy" alt="No image available">
+                                <?php endif; ?>
+                            </a>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="title"><?php echo esc_html( $product->get_name() ); ?></h3>
+                            <div class="subtitle">
+	                            <?php
+	                            // Check if product is variable
+	                            if ( $product->is_type( 'variable' ) ) {
+		                            // Get minimum and maximum prices for the variable product
+		                            echo $product->get_price_html(); // WooCommerce function to display variable product price range
+	                            } else {
+		                            // Display regular price for simple products
+		                            echo wc_price( $product->get_price() );
+	                            }
+	                            ?>
+                            </div>
+                            <div class="btn-group">
+							                <?php
+							                // Generate a Buy Now button with WooCommerce's "add_to_cart_url" function
+							                $add_to_cart_url = esc_url( $product->add_to_cart_url() );
+							                ?>
+                                <a href="<?php echo $add_to_cart_url; ?>" class="btn btn-2" data-product_id="<?php echo esc_attr( $product->get_id() ); ?>">
+                                    Buy Now  </a>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 <?php endforeach; ?>
               </div>
             </div>
@@ -773,17 +798,41 @@ if (have_rows ('flixble_content_portfolio')):
             <div class="products-list">
               <?php while ($query->have_posts ()) :
                 $query->the_post (); ?>
-                <div class="product-card">
-                  <div class="product-card__img"><img src="images/img-03.jpg" loading="lazy" alt=""></div>
-                  <div class="product-card__content">
-                    <h3 class="title"><?php echo get_the_title (); ?></h3>
-                    <div class="subtitle">2004-2011</div>
-                    <div class="btn-group">
-                      <a href="<?php the_permalink (); ?>" class="btn btn-2">From $6.95</a>
-                      <a href="#" class="btn btn-2">From $6.95</a>
-                    </div>
+                  <div class="product-card">
+                      <div class="product-card__img">
+                          <a href="<?php echo esc_url( $product->get_permalink() ); ?>">
+							              <?php if ( $product->get_image_id() ) : ?>
+                                <img src="<?php echo wp_get_attachment_url( $product->get_image_id() ); ?>" loading="lazy" alt="<?php echo esc_attr( $product->get_name() ); ?>">
+							              <?php else : ?>
+                                <!-- Fallback static image -->
+                                <img src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" loading="lazy" alt="No image available">
+							              <?php endif; ?>
+                          </a>
+                      </div>
+                      <div class="product-card__content">
+                          <h3 class="title"><?php echo esc_html( $product->get_name() ); ?></h3>
+                          <div class="subtitle">
+							              <?php
+							              // Check if product is variable
+							              if ( $product->is_type( 'variable' ) ) {
+								              // Get minimum and maximum prices for the variable product
+								              echo $product->get_price_html(); // WooCommerce function to display variable product price range
+							              } else {
+								              // Display regular price for simple products
+								              echo wc_price( $product->get_price() );
+							              }
+							              ?>
+                          </div>
+                          <div class="btn-group">
+							              <?php
+							              // Generate a Buy Now button with WooCommerce's "add_to_cart_url" function
+							              $add_to_cart_url = esc_url( $product->add_to_cart_url() );
+							              ?>
+                              <a href="<?php echo $add_to_cart_url; ?>" class="btn btn-2" data-product_id="<?php echo esc_attr( $product->get_id() ); ?>">
+                                  Buy Now  </a>
+                          </div>
+                      </div>
                   </div>
-                </div>
               <?php endwhile; ?>
             </div>
             <div class="section-btn"><a href="#" class="btn btn-1">Show more</a></div>

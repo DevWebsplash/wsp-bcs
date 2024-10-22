@@ -451,59 +451,61 @@ if (have_rows ('flixble_content_vehicle')):
                   </a>
               </div>
 		    <?php endforeach; ?>
-		    <?php endif; ?>
+		    <?php endif;
+		    wp_reset_postdata ();?>
           </div>
         </div>
       </section>
 
     <?php elseif (get_row_layout () == 'services_without_image'): ?>
-      <!--THREE COLUMN variant 2-->
-      <section class="s-three-column s-three-column--variant-2 ms-section">
-        <div class="cn">
-          <div class="section-heading section-heading--simple">
-            <h2 class="title h1"><?php echo get_sub_field ('services_without_image_title'); ?></h2>
-            <div class="subtitle"><?php echo get_sub_field ('services_without_image_subtitle'); ?></div>
-          </div>
-          <div class="s-three-column__list">
-	          <?php if (have_rows ('advandeges_repeater')): ?>
-		          <?php while (have_rows ('advandeges_repeater')) : the_row (); ?>
-				          <?php $image_repeater = get_sub_field ('image'); ?>
-                      <div class="item">
-                          <div class="img">
-                              <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy"
-                                   alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+        <!--THREE COLUMN variant 2-->
+        <section class="s-three-column s-three-column--variant-2 ms-section">
+            <div class="cn">
+                <div class="section-heading section-heading--simple">
+                    <h2 class="title h1"><?php echo esc_html(get_sub_field('services_without_image_title')); ?></h2>
+                    <div class="subtitle"><?php echo esc_html(get_sub_field('services_without_image_subtitle')); ?></div>
+                </div>
+                <div class="s-three-column__list">
+							    <?php if (have_rows('advandeges_repeater')): ?>
+								    <?php while (have_rows('advandeges_repeater')) : the_row(); ?>
+									    <?php
+									    // Get the image
+									    $image_repeater = get_sub_field('image');
+									    // Check if the image exists, otherwise provide a fallback
+									    $image_url = !empty($image_repeater['url']) ? esc_url($image_repeater['url']) : get_template_directory_uri() . '/assets/images/fallback-image.jpg';
+									    $image_alt = !empty($image_repeater['alt']) ? esc_attr($image_repeater['alt']) : 'Default Alt Text';
+									    ?>
+                          <div class="item">
+                              <div class="img">
+                                  <img src="<?php echo $image_url; ?>" loading="lazy" alt="<?php echo $image_alt; ?>">
+                              </div>
+                              <h3 class="title"><?php echo esc_html(get_sub_field('title')); ?></h3>
+                              <div class="desc"><?php echo esc_html(get_sub_field('description')); ?></div>
                           </div>
-                          <h3 class="title"><?php echo get_sub_field ('title'); ?></h3>
-                          <div class="desc"><?php echo get_sub_field ('description'); ?></div>
-                      </div>
-		          <?php endwhile; ?>
-	          <?php endif; ?>
+								    <?php endwhile; ?>
+							    <?php endif; ?>
+                </div>
 
-
-          </div>
-
-          <div class="section-btn">
-            <?php
-            $link = get_sub_field ('services_without_image_button');
-            if ($link):
-              $link_url = $link[ 'url' ];
-              $link_title = $link[ 'title' ];
-              $link_target = $link[ 'target' ] ? $link[ 'target' ] : '_self';
-              ?>
-
-            <a href="<?php echo esc_url ($link_url); ?>" class="btn btn-6" target="<?php echo esc_attr ($link_target); ?>">
-              <span class="icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M22 17.002C21.9996 18.3696 21.5321 19.696 20.675 20.7616C19.8179 21.8273 18.6226 22.5683 17.287 22.862L16.649 20.948C17.2332 20.8518 17.7888 20.6271 18.2758 20.2903C18.7627 19.9534 19.1689 19.5128 19.465 19H17C16.4696 19 15.9609 18.7893 15.5858 18.4142C15.2107 18.0391 15 17.5304 15 17V13C15 12.4696 15.2107 11.9609 15.5858 11.5858C15.9609 11.2107 16.4696 11 17 11H19.938C19.694 9.0669 18.7529 7.28927 17.2914 6.00068C15.8299 4.71208 13.9484 4.00108 12 4.00108C10.0516 4.00108 8.17007 4.71208 6.70857 6.00068C5.24708 7.28927 4.30603 9.0669 4.062 11H7C7.53043 11 8.03914 11.2107 8.41421 11.5858C8.78929 11.9609 9 12.4696 9 13V17C9 17.5304 8.78929 18.0391 8.41421 18.4142C8.03914 18.7893 7.53043 19 7 19H4C3.46957 19 2.96086 18.7893 2.58579 18.4142C2.21071 18.0391 2 17.5304 2 17V12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12V17.002Z"/>
-                </svg>
-              </span>
-              <span><?php echo esc_html ($link_title); ?></span>
-            </a>
-            <?php endif; ?>
-          </div>
-        </div>
-      </section>
-
+                <div class="section-btn">
+							    <?php
+							    $link = get_sub_field('services_without_image_button');
+							    if ($link):
+								    $link_url = esc_url($link['url']);
+								    $link_title = esc_html($link['title']);
+								    $link_target = $link['target'] ? esc_attr($link['target']) : '_self';
+								    ?>
+                      <a href="<?php echo $link_url; ?>" class="btn btn-6" target="<?php echo $link_target; ?>">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 17.002C21.9996 18.3696 21.5321 19.696 20.675 20.7616C19.8179 21.8273 18.6226 22.5683 17.287 22.862L16.649 20.948C17.2332 20.8518 17.7888 20.6271 18.2758 20.2903C18.7627 19.9534 19.1689 19.5128 19.465 19H17C16.4696 19 15.9609 18.7893 15.5858 18.4142C15.2107 18.0391 15 17.5304 15 17V13C15 12.4696 15.2107 11.9609 15.5858 11.5858C15.9609 11.2107 16.4696 11 17 11H19.938C19.694 9.0669 18.7529 7.28927 17.2914 6.00068C15.8299 4.71208 13.9484 4.00108 12 4.00108C10.0516 4.00108 8.17007 4.71208 6.70857 6.00068C5.24708 7.28927 4.30603 9.0669 4.062 11H7C7.53043 11 8.03914 11.2107 8.41421 11.5858C8.78929 11.9609 9 12.4696 9 13V17C9 17.5304 8.78929 18.0391 8.41421 18.4142C8.03914 18.7893 7.53043 19 7 19H4C3.46957 19 2.96086 18.7893 2.58579 18.4142C2.21071 18.0391 2 17.5304 2 17V12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12V17.002Z"/>
+                            </svg>
+                        </span>
+                          <span><?php echo $link_title; ?></span>
+                      </a>
+							    <?php endif; ?>
+                </div>
+            </div>
+        </section>
     <?php elseif (get_row_layout () == 'products'): ?>
       <!--PRODUCTS-->
       <section class="s-products ms-section">
@@ -518,20 +520,43 @@ if (have_rows ('flixble_content_vehicle')):
             if ($featured_posts): ?>
               <?php foreach ($featured_posts as $post):
                 // Setup this post for WP functions (variable must be named $post).
-                setup_postdata ($post); ?>
-                <div class="product-card">
-                  <div class="product-card__img">
-                    <img src="<?php echo get_template_directory_uri (); ?>/assets/images/img-03.jpg" loading="lazy" alt="">
-                  </div>
-                  <div class="product-card__content">
-                    <h3 class="title">Porsche 993 911 front brake caliper repair kit for Brembo</h3>
-                    <div class="subtitle">2004-2011</div>
-                    <div class="btn-group">
-                      <a href="#" class="btn btn-2">From $6.95</a>
-                      <a href="#" class="btn btn-2">From $6.95</a>
+                setup_postdata ($post);
+		            $product = wc_get_product( $post->ID );?>
+                    <div class="product-card">
+                        <div class="product-card__img">
+                            <a href="<?php echo esc_url( $product->get_permalink() ); ?>">
+									            <?php if ( $product->get_image_id() ) : ?>
+                                  <img src="<?php echo wp_get_attachment_url( $product->get_image_id() ); ?>" loading="lazy" alt="<?php echo esc_attr( $product->get_name() ); ?>">
+									            <?php else : ?>
+                                  <!-- Fallback static image -->
+                                  <img src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" loading="lazy" alt="No image available">
+									            <?php endif; ?>
+                            </a>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="title"><?php echo esc_html( $product->get_name() ); ?></h3>
+                            <div class="subtitle">
+									            <?php
+									            // Check if product is variable
+									            if ( $product->is_type( 'variable' ) ) {
+										            // Get minimum and maximum prices for the variable product
+										            echo $product->get_price_html(); // WooCommerce function to display variable product price range
+									            } else {
+										            // Display regular price for simple products
+										            echo wc_price( $product->get_price() );
+									            }
+									            ?>
+                            </div>
+                            <div class="btn-group">
+									            <?php
+									            // Generate a Buy Now button with WooCommerce's "add_to_cart_url" function
+									            $add_to_cart_url = esc_url( $product->add_to_cart_url() );
+									            ?>
+                                <a href="<?php echo $add_to_cart_url; ?>" class="btn btn-2" data-product_id="<?php echo esc_attr( $product->get_id() ); ?>">
+                                    Buy Now  </a>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
               <?php endforeach; ?>
 
               <?php
