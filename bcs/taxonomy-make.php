@@ -438,7 +438,7 @@ if ($query->have_posts ()) :?>
                   </div>
 							<?php endwhile; ?>
             </div>
-            <div class="section-btn"><a href="/products/brake-caliper-paint-kits/" class="btn btn-1">View all</a></div>
+            <div class="section-btn"><a href="/staging/products/brake-caliper-paint-kits/" class="btn btn-1">View all</a></div>
         </div>
     </section>
 <?php endif;
@@ -448,45 +448,38 @@ wp_reset_postdata (); ?>
 
 <!--BANNER-->
 <section class="s-banner-2 ms-section">
-  <div class="section-bg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/bg-03.png" loading="lazy" alt=""></div>
-  <div class="cn">
-    <div class="s-banner-2__inner">
-      <div class="s-banner-2__left">
-        <div class="decorated-title decorated-title--column-left">
-          <div class="small-title small-title--white">EXPERIENCED</div>
-          <div class="line-decor line-decor--white"></div>
-        </div>
-        <h2 class="title h1">Refurbishing Brake Calipers for Cars Worldwide</h2>
-      </div>
-      <div class="s-banner-2__right">
-        <div class="numbers">
-          <div class="item">
-            <div class="title">
-              <div class="icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/award.svg" loading="lazy" alt=""></div>
-              <div>10</div>
+    <div class="section-bg"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-03.png" loading="lazy"
+                                 alt=""></div>
+    <div class="cn">
+        <div class="s-banner-2__inner">
+            <div class="s-banner-2__left">
+                <div class="decorated-title decorated-title--column-left">
+                    <div class="small-title small-title--white"><?php echo get_field('cto_category_small_title', 'option');?></div>
+                    <div class="line-decor line-decor--white"></div>
+                </div>
+                <h2 class="title h1"><?php echo get_field('cto_category_title', 'option');?></h2>
             </div>
-            <div class="desc">Years in Business</div>
-          </div>
-          <div class="item">
-            <div class="title">
-              <div class="icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/thumb-up.svg" loading="lazy" alt=""></div>
-              <div>500+</div>
+            <div class="s-banner-2__right">
+                <div class="numbers">
+									<?php  if ( have_rows( 'cto_category_items', 'option' ) ): ?>
+										<?php while ( have_rows( 'cto_category_items', 'option' ) ) : the_row(); ?>
+											<?php $image_repeater = get_sub_field( 'icon' ); ?>
+                          <div class="item">
+                              <div class="title">
+                                  <div class="icon">
+                                      <img src="<?php echo esc_url( $image_repeater['url'] ); ?>" loading="lazy" alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>">
+                                  </div>
+                                  <div><?php echo get_sub_field( 'title' ); ?></div>
+                              </div>
+                              <div class="desc"><?php echo get_sub_field( 'description' ); ?></div>
+                          </div>
+										<?php endwhile;?>
+									<?php endif; ?>
+                </div>
+                <div class="text"><?php echo get_field('cto_category_text', 'option');?></div>
             </div>
-            <div class="desc">Reviews from clients </div>
-          </div>
         </div>
-        <div class="text">With years of experience, our company specializes in refurbishing brake calipers for cars. We have a team of skilled professionals dedicated to providing high-quality services to customers worldwide.</div>
-        <a href="#" class="btn btn-5">
-          <span>Submit</span>
-          <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-              </svg>
-            </span>
-        </a>
-      </div>
     </div>
-  </div>
 </section>
 
 

@@ -6,6 +6,7 @@
 /**
  * Register Custom Post Type vehicle
  */
+
 function register_vehicle_cpt() {
 	$labels = array(
 		'name' => 'Vehicles',
