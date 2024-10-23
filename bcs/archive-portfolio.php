@@ -87,6 +87,7 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
           <div class="sort-select custom-select">
             <select placeholder="Sort By">
               <option value="newest">Newest</option>
+              <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
               <option value="increase">By name A-Z</option>
               <option value="reduction">By name Z-A</option>
