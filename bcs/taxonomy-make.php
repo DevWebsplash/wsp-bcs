@@ -117,7 +117,12 @@ $queried_object = get_queried_object () ;
 		    while ( $the_query->have_posts() ) {
 			    $the_query->the_post();?>
                 <div class="vehicle-card">
-                    <a href="<?php the_permalink();?>" class="img"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/img-01.png" loading="lazy" alt=""></a>
+	                <?php $image_repeater = get_field( 'preview_image' ); ?>
+                    <a href="<?php the_permalink();?>" class="img"><?php if($image_repeater){?>
+                            <img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
+                                 loading="lazy"
+                                 alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>">
+	                    <?php }?></a>
 	                <?php
 	                $terms = wp_get_object_terms($post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC') );
 	                if ( !empty( $terms ) ) :
