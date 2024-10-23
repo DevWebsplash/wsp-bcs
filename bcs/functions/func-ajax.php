@@ -298,7 +298,7 @@ function get_portfolio() {
 
   if (!empty($city_state)) {
     $args[ 'tax_query' ][] = array(
-        'taxonomy' => 'state',
+        'taxonomy' => 'location',
         'terms' => $city_state,
     );
   }

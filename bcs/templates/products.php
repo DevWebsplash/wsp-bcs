@@ -110,7 +110,7 @@ endif;
 						<option data-city-state="" value="city_state">City & State</option>
 						<?php
 						// Get the parent terms of the 'state' taxonomy
-						$terms = get_terms ('state');
+						$terms = get_terms ('location');
 						// Loop through parent terms and set active class if it matches current or parent
 						foreach ($terms as $term) { ?>
 							<option data-city-state="<?php echo esc_attr ($term->term_id); ?>"

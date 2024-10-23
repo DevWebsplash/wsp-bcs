@@ -76,7 +76,7 @@ get_header ();
                 <div class="title">Location</div>
                 <div>
                   <?php
-                  $terms = wp_get_object_terms ($post->ID, 'state', array('orderby' => 'term_id', 'order' => 'ASC'));
+                  $terms = wp_get_object_terms ($post->ID, 'location', array('orderby' => 'term_id', 'order' => 'ASC'));
                   if (!empty($terms)) :
                     $project = array();
                     foreach ($terms as $term) {
