@@ -20,10 +20,31 @@ get_header ();
         <div class="inner-content__text">
           <div class="section-heading">
             <?php
+            echo '<h1 class="title h1">';
             // Отримуємо об'єкт посту з полем 'trim'
             $featured_post = get_field ('trim');
+            // Отримуємо терміни таксономії 'make' для посту з полем 'trim'
+            $terms = wp_get_object_terms ($featured_post->ID, 'make', [
+	            'orderby' => 'term_id',
+	            'order' => 'ASC'
+            ]);
+
+            if (!empty($terms)) {
+	            $project = [];
+	            foreach ($terms as $term) {
+		            $project[] = esc_html ($term->name);
+	            }
+	            // Виводимо перші два елементи масиву
+	            if (isset($project[ 0 ])) echo $project[ 0 ] . ' ';
+	            if (isset($project[ 1 ])) echo $project[ 1 ] . ' ';
+            }
+
+            // Виводимо заголовок посту 'trim'
+            if ($featured_post) {
+	            echo esc_html ($featured_post->post_title);
+            }
             // Початок заголовка
-            echo '<h1 class="title h1">';
+            echo    '  ';
             // Отримуємо терміни таксономії 'portfolio_category'
             $term_list = wp_get_post_terms ($post->ID, 'portfolio_category', ['fields' => 'all']);
             // Виводимо назву первинної категорії
@@ -34,31 +55,21 @@ get_header ();
                 break; // Припиняємо цикл після знаходження первинної категорії
               }
             }
+            echo ' for ' . esc_html (get_field ('first_name')) . ' in ';
+            $terms = wp_get_object_terms ($post->ID, 'location', array('orderby' => 'term_id', 'order' => 'ASC'));
+            if (!empty($terms)) :
+	            $project = array();
+	            foreach ($terms as $term) {
+		            $project[] = $term->name;
+	            } ?>
+	            <?php echo $project[ 0 ]; ?>
+            <?php endif;
+             echo    ', ';
 
-            echo ' for ' . esc_html (get_field ('first_name')) . ' in ' . esc_html (get_field ('town')) . ' for their ';
+            echo get_the_date( 'F Y' ); // This will return and print the date in "Month Year" format
 
-            // Отримуємо терміни таксономії 'make' для посту з полем 'trim'
-            $terms = wp_get_object_terms ($featured_post->ID, 'make', [
-                'orderby' => 'term_id',
-                'order' => 'ASC'
-            ]);
 
-            if (!empty($terms)) {
-              $project = [];
-              foreach ($terms as $term) {
-                $project[] = esc_html ($term->name);
-              }
-              // Виводимо перші два елементи масиву
-              if (isset($project[ 0 ])) echo $project[ 0 ] . ' ';
-              if (isset($project[ 1 ])) echo $project[ 1 ] . ' ';
-            }
-
-            // Виводимо заголовок посту 'trim'
-            if ($featured_post) {
-              echo esc_html ($featured_post->post_title);
-            }
-
-            echo ' brake calipers that arrived in ' . esc_html (get_field ('arrival_condition')) . ' condition.</h1>';
+            echo '</h1>';
             ?>
 
           </div>
@@ -87,6 +98,13 @@ get_header ();
                 </div>
               </div>
             </div>
+              <div class="item">
+                  <div class="icon"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/icon-07.svg" loading="lazy" alt=""></div>
+                  <div>
+                      <div class="title">Customer information</div>
+                      <div><?php echo get_field ('is_business_or_private'); ?></div>
+                  </div>
+              </div>
           </div>
           <div class="info-2">
             <div class="text">
@@ -113,7 +131,7 @@ get_header ();
               </p>
             </div>
 
-            <div class="block-title">Services offered:</div>
+            <div class="block-title">Services used:</div>
             <?php $terms = wp_get_object_terms ($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
             if (!empty($terms)) :
               $project = array();
@@ -142,12 +160,51 @@ get_header ();
   <section class="s-overview s-overview--variant-1 s-overview--variant-6 ms-section">
     <div class="cn">
       <div class="section-heading">
-        <h2 class="title h1">Overview</h2>
+        <h2 class="title h1">Job information</h2>
       </div>
       <div class="inner-content">
         <div class="inner-content__text">
-          <h3 class="block-title h3">Caliper Information</h3>
-          <div class="desc">Brake Caliper Specialists Ltd successfully completed a project involving the complete refurbishment and painting of brake calipers for a BMW M5 4.4 (2016 model). The brake calipers arrived in good condition, allowing us to perform the work with high efficiency and quality.</div>
+          <div class="desc">We recently completed a <?php
+	          $term_list = wp_get_post_terms ($post->ID, 'portfolio_category', ['fields' => 'all']);
+	          foreach ($term_list as $term_primary) {
+		          $primary_category = get_post_meta ($post->ID, '_yoast_wpseo_primary_portfolio_category', true);
+		          if ($primary_category == $term_primary->term_id) {
+			          echo esc_html ($term_primary->name);
+			          break;
+		          }
+	          }?> project for <?php echo  esc_html (get_field ('first_name'));?>’s <?php  $featured_post = get_field ('trim');
+	          // Отримуємо терміни таксономії 'make' для посту з полем 'trim'
+	          $terms = wp_get_object_terms ($featured_post->ID, 'make', [
+		          'orderby' => 'term_id',
+		          'order' => 'ASC'
+	          ]);
+
+	          if (!empty($terms)) {
+		          $project = [];
+		          foreach ($terms as $term) {
+			          $project[] = esc_html ($term->name);
+		          }
+		          // Виводимо перші два елементи масиву
+		          if (isset($project[ 0 ])) echo $project[ 0 ] . ' ';
+		          if (isset($project[ 1 ])) echo $project[ 1 ] . ' ';
+	          }
+
+	          // Виводимо заголовок посту 'trim'
+	          if ($featured_post) {
+		          echo esc_html ($featured_post->post_title);
+	          }?> in <?php     $terms = wp_get_object_terms ($post->ID, 'location', array('orderby' => 'term_id', 'order' => 'ASC'));
+	          if (!empty($terms)) :
+		          $project = array();
+		          foreach ($terms as $term) {
+			          $project[] = $term->name;
+		          } ?>
+		          <?php echo $project[ 0 ]; ?>
+	          <?php endif;?>.
+              The brake caliper arrived in <?php if (get_field ('color_applied') == 'None') { ?><?php echo get_field ('color_of_work');
+	          } else {
+		          echo get_field ('color_applied');
+	          } ?> color and <?php echo get_field ('arrival_condition'); ?> condition, enabling us to efficiently perform the brake caliper repair while maintaining our high standards of quality.
+              We ensure that all our brake caliper refurbishment services are backed by a Lifetime Warranty, giving our customers confidence in the durability and long-term performance of the work.</div>
           <div class="text">
             <ul>
               <?php if (get_field ('is_business_or_private')) { ?>
@@ -221,7 +278,7 @@ get_header ();
     <div class="s-knowledge s-knowledge--variant-1">
       <div class="cn">
         <div class="acc">
-
+<?php if ( is_user_logged_in ()) { ?>
           <div class="acc-item">
             <div class="acc-head">Customer Information</div>
             <div class="acc-body">
@@ -246,13 +303,13 @@ get_header ();
                         <span><?php echo get_field ('last_name'); ?></span>
                       </li>
                     <?php } ?>
-                    <?php if (get_field ('1st_line_address_title') && is_user_logged_in ()) { ?>
+                    <?php if (get_field ('1st_line_address_title')) { ?>
                       <li>
                         <span><?php echo get_field ('1st_line_address_title'); ?> :</span>
                         <span><?php echo get_field ('1st_line_address'); ?></span>
                       </li>
                     <?php } ?>
-                    <?php if (get_field ('2nd_line_addressshouldnt') && is_user_logged_in ()) { ?>
+                    <?php if (get_field ('2nd_line_addressshouldnt')) { ?>
                       <li>
                         <span><?php echo get_field ('2nd_line_addresss_title'); ?> :</span>
                         <span><?php echo get_field ('2nd_line_addressshouldnt'); ?></span>
@@ -276,7 +333,7 @@ get_header ();
                       <li><span><?php echo get_field ('city_title'); ?> :</span> <?php echo get_field ('city'); ?>
                         <span></span></li>
                     <?php } ?>
-                    <?php if (get_field ('postal_code') && is_user_logged_in ()) { ?>
+                    <?php if (get_field ('postal_code') ) { ?>
                       <li>
                         <span><?php echo get_field ('postal_code_title'); ?> :</span>
                         <span><?php echo get_field ('postal_code'); ?></span>
@@ -287,7 +344,7 @@ get_header ();
               </div>
             </div>
           </div>
-
+    <?php }?>
           <?php if (has_term (153309, 'portfolio_category', get_the_ID ())) { ?>
             <div class="acc-item">
             <div class="acc-head"><?php echo get_field ('parts_used_title'); ?></div>
@@ -449,7 +506,7 @@ if (have_rows ('flixble_content_portfolio')):
                 $i++; ?>
                 <div class="s-steps__box">
                   <div class="block-title">
-                    <h3 class="title h2">Step <?php echo $i; ?></h3>
+                    <h3 class="title h2"><?php echo get_sub_field ('title'); ?></h3>
                     <div class="date"><?php echo get_sub_field ('data'); ?></div>
                   </div>
                   <?php if (have_rows ('images')): ?>
@@ -541,16 +598,20 @@ if (have_rows ('flixble_content_portfolio')):
             <div class="section-heading">
               <h2 class="title h1"><?php echo get_sub_field ('testimonial_section_title'); ?></h2>
             </div>
-            <div class="t-item">
+              <!-- todo styling image and block after adding (a)-->
+            <a href="<?php echo get_sub_field ('testimonial_link'); ?>" class="t-item">
               <?php $image_repeater = get_sub_field ('testimonial_image'); ?>
               <div class="img">
                 <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
                      loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
+
+                <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
+                                   loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
               </div>
               <div class="name"><?php echo get_sub_field ('testimonial_name'); ?></div>
               <div class="title"><?php echo get_sub_field ('testimonial_title'); ?></div>
               <div class="text"><?php echo get_sub_field ('testimonial_text'); ?></div>
-            </div>
+            </a>
           </div>
         </div>
       </section>

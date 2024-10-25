@@ -20,53 +20,34 @@ get_header ();
     </div>
   </div>
   <div class="cn">
-      <h2 class="title h1">Our works</h2>
-      <div class="subtitle"><?php echo term_description();?></div>
+      <h2 class="title h1">All Locations</h2>
+      <div class="subtitle"><?php echo get_field('location_description'); ?></div>
     <div class="s-vehicles__list">
-        <?php $args = array (
-        'post_type' => 'portfolio',
-        'tax_query' => array (
-        array (
-        'taxonomy' => $queried_object->taxonomy,
-        'field' => 'slug',
-        'terms' => $queried_object->slug,
-        ),
-        ),
-        ) ;
-        $query = new WP_Query ($args) ;?>
-	    <?php
-	    // The Query.
-	    $the_query = new WP_Query( $args );
+      <?php
+// Get all terms from the custom taxonomy "location"
+$terms = get_terms( array(
+    'taxonomy' => 'location',
+    'hide_empty' => false, // Set to true if you only want to show terms with posts
+) );
 
-	    // The Loop.
-	    if ( $the_query->have_posts() ) {
+if ( !empty( $terms ) && !is_wp_error( $terms ) ) :
+    echo '<h3></h3>'; // Title for the list
 
-		    while ( $the_query->have_posts() ) {
-			    $the_query->the_post();?>
-					    <?php $image_repeater = get_field( 'overview_image' ); ?>
-                <div class="vehicle-card">
-                    <a href="<?php the_permalink();?>" class="img"> <?php if($image_repeater){?>
-                            <img src="<?php echo esc_url( $image_repeater['url'] ); ?>"
-                                 loading="lazy"
-                                 alt="<?php echo esc_attr( $image_repeater['alt'] ); ?>">
-	                    <?php }?></a>
-	                <?php
-	                $terms = wp_get_object_terms($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC') );
-	                if ( !empty( $terms ) ) :
-		                $project = array();
-		                foreach ( $terms as $term ) {
-			                $project[] = $term->name;
-		                } ?>
-                        <div class="tag"><?php echo$term->name;?></div>
-	                <?php endif;
-	                ?>
-                    <div class="info"><?php echo get_the_title();?></div>
-                    <a href="<?php the_permalink();?>" class="btn btn-2">View</a>
-                </div>
-		    <?php }
-	    }
-	    wp_reset_postdata();
-	    ?>
+    // Loop through each term and display the title and link
+    foreach ( $terms as $term ) :?>
+	    <div class="vehicle-card">
+		    <div class="info"><?php echo esc_html( $term->name );?></div>
+            <div class="subtitle"><?php echo esc_html( $term->description );?></div>
+		    <a href="<?php echo esc_url( get_term_link( $term ) );?>" class="btn btn-2">View</a>
+	    </div>
+    <?php endforeach;
+
+else :
+    echo 'No locations found.';
+endif;
+?>
+
+
     </div>
   </div>
 </section>
