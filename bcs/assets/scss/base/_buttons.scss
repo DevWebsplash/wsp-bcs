@@ -41,6 +41,8 @@
   }
 }
 
+
+
 .btn-2 {
   color: $red;
   font-weight: 700;
@@ -59,6 +61,7 @@
       }
     }
   }
+
 }
 
 .btn-3 {
@@ -166,5 +169,16 @@
   &:hover {
     color: $red;
     background-color: transparent;
+  }
+}
+
+.btn-quote {
+  height: auto;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  small {
+    display: block;
+    width: 100%;
+    font-size: 12px;
   }
 }
