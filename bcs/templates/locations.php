@@ -1,5 +1,10 @@
-<?php get_header();
-$queried_object = get_queried_object () ;
+<?php
+/*
+Template Name: Locations
+
+*/
+get_header ();
+
 ?>
 
 <!-- HTML Content here  -->
@@ -15,7 +20,7 @@ $queried_object = get_queried_object () ;
     </div>
   </div>
   <div class="cn">
-      <h2 class="title h1">Our work in <?php echo $queried_object->name;?></h2>
+      <h2 class="title h1">Our works</h2>
       <div class="subtitle"><?php echo term_description();?></div>
     <div class="s-vehicles__list">
         <?php $args = array (

@@ -119,3 +119,41 @@ function flush_vehicle_rewrite_rules() {
 	flush_rewrite_rules(); // Ensure that WordPress updates the rewrite rules
 }
 add_action('init', 'flush_vehicle_rewrite_rules', 20);
+
+
+function register_location_taxonomy() {
+	$labels = array(
+		'name' => 'Locations',
+		'singular_name' => 'Location',
+		'search_items' => 'Search Locations',
+		'all_items' => 'All Locations',
+		'parent_item' => 'Parent Location',
+		'parent_item_colon' => 'Parent Location:',
+		'edit_item' => 'Edit Location',
+		'update_item' => 'Update Location',
+		'add_new_item' => 'Add New Location',
+		'new_item_name' => 'New Location Name',
+		'menu_name' => 'Locations',
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'hierarchical' => true,
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'show_in_nav_menus' => true,
+		'show_tagcloud' => true,
+		'show_in_quick_edit' => true,
+		'show_admin_column' => true,
+		'rewrite' => array(
+			'slug' => 'location',
+			'with_front' => false,
+		),
+		'has_archive' => true, // Enable archive for the taxonomy
+	);
+
+	// Register the taxonomy for the 'portfolio' post type
+	register_taxonomy('location', array('portfolio'), $args);
+}
+add_action('init', 'register_location_taxonomy');
