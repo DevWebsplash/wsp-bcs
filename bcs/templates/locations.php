@@ -31,8 +31,6 @@ $terms = get_terms( array(
 ) );
 
 if ( !empty( $terms ) && !is_wp_error( $terms ) ) :
-    echo '<h3></h3>'; // Title for the list
-
     // Loop through each term and display the title and link
     foreach ( $terms as $term ) :?>
 	    <div class="vehicle-card">
