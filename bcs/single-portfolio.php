@@ -98,10 +98,11 @@ get_header ();
                 </div>
               </div>
             </div>
+              <?php // todo іконка чоловічка ?>
               <div class="item">
                   <div class="icon"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/icons/icon-07.svg" loading="lazy" alt=""></div>
                   <div>
-                      <div class="title">Customer information</div>
+                      <div class="title">Client</div>
                       <div><?php echo get_field ('is_business_or_private'); ?></div>
                   </div>
               </div>
@@ -598,13 +599,14 @@ if (have_rows ('flixble_content_portfolio')):
             <div class="section-heading">
               <h2 class="title h1"><?php echo get_sub_field ('testimonial_section_title'); ?></h2>
             </div>
-              <!-- todo styling image and block after adding (a)-->
+              <!-- todo styling image (change 2 image for google) and block after adding (a)-->
             <a href="<?php echo get_sub_field ('testimonial_link'); ?>" class="t-item">
               <?php $image_repeater = get_sub_field ('testimonial_image'); ?>
               <div class="img">
                 <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
                      loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
-
+              </div>
+                <div class="img">
                 <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
                                    loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
               </div>
