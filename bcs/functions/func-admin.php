@@ -46,24 +46,6 @@ if( function_exists('acf_add_options_page') ) {
     acf_add_options_page();
 }
 
-
-function woocommerce_support() {
-  add_theme_support( 'woocommerce' );
-}
-
-function custom_sidebars() {
-  register_sidebar( array(
-      'name'          => __( 'Shop Sidebar', 'textdomain' ),
-      'id'            => 'shop-sidebar', // This ID should match what you're checking with `is_active_sidebar()`
-      'description'   => __( 'Widgets in this area will be shown on the shop pages.', 'textdomain' ),
-      'before_widget' => '<div id="%1$s" class="widget %2$s">',
-      'after_widget'  => '</div>',
-      'before_title'  => '<h2 class="widget-title">',
-      'after_title'   => '</h2>',
-  ) );
-}
-add_action( 'widgets_init', 'custom_sidebars' );
-
 function add_white_background_body_class($classes) {
   if (is_page_template('templates/white-background.php')) {
     $classes[] = 'white-background';
