@@ -223,7 +223,7 @@ jQuery(function ($) {
       }
 
       $currentStep.find(NEXT_BTN_SELECTOR).prop('disabled', !isValid).toggleClass('disabled', !isValid);
-
+      console.log(invalidFields);
       return {isValid, invalidFields};
     };
 
@@ -231,6 +231,7 @@ jQuery(function ($) {
     const updateServiceGroupsVisibility = () => {
       const $functionalRefurbishment = $('[data-name="brake_service"] input[value="Functional Refurbishment"]');
       const $paintingService = $('[data-name="brake_service"] input[value="Painting Service"]');
+      const selectedColorPalette = $('[name="color_palette"]:checked');
 
       if ($functionalRefurbishment.is(':checked')) {
         $('#group-brake_paint').show();
@@ -262,8 +263,28 @@ jQuery(function ($) {
         $('#group-color_palette')
             .find(`.${WPCF7_NOT_VALID_TIP_CLASS}`)
             .remove();
+
+        hideCustomColorField();
+      }
+
+      if ($(selectedColorPalette).val() === "Choose a color") {
+        $('#group-custom-color-field').show();
+        $('#group-custom-color-field').find('[name="custom_color"]').attr('aria-required', 'true');
+      } else {
+        hideCustomColorField();
       }
     };
+
+    const hideCustomColorField = () => {
+      $('#group-custom-color-field').hide();
+      $('#group-custom-color-field').find('[name="custom_color"]')
+          .removeAttr('aria-required')
+          .val('')
+          .removeClass(WPCF7_NOT_VALID_CLASS);
+      $('#group-custom-color-field')
+          .find(`.${WPCF7_NOT_VALID_TIP_CLASS}`)
+          .remove();
+      }
 
     // Function to update field styles on step 3
     const updateFieldStyles = () => {
@@ -340,8 +361,15 @@ jQuery(function ($) {
     $('.form-content').on('input change', REQUIRED_FIELD_SELECTOR + ', [name="color_palette"]', function () {
       const $currentStep = $(this).closest('.form-step');
       const step = $currentStep.data('step');
+      updateServiceGroupsVisibility();
       validateStep(step);
     });
+
+    document.addEventListener( 'wpcf7mailsent', function( event ) {
+      const thankYouLocation = `${window.location.origin}/staging/thank-you/`;
+      // window.open(thankYouLocation, "MsgWindow");
+      window.location.href = thankYouLocation;
+    }, false );
 
     // Initialize to step 1
     showStep(1);

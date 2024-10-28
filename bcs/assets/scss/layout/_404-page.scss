@@ -22,7 +22,7 @@
     background-color: rgba($dark-blue-2, 1);
     text-align: center;
     //border-bottom: 1px solid transparent;
-    box-shadow: 0 0 60px 20px rgba(lighten($dark-blue, 10%), 0.95);
+    box-shadow: 0 0 30px 0px rgba(lighten($dark-blue, 10%), 0.95);
     .heading__title {
       color: $light-gray;
 
@@ -44,6 +44,7 @@
   .container404 {
     position: relative;
     height: 600px;
+    min-height: 55vh;
     flex: 0 0 600px;
 
     .cont_principal {
@@ -108,7 +109,7 @@
       top: 25px;
       right: -340px;
       background-color: lighten($red, 10%);
-      box-shadow: 0 0 40px 20px rgba(lighten($red, 25%), 0.4);
+      box-shadow: 0 0 10px 0px rgba(lighten($red, 25%), 0.4);
       //filter: blur(10px);
       opacity: 1;
       -webkit-transition: all 0.5s;
@@ -124,14 +125,17 @@
       width: 100%;
       height: 400px;
       right: -20%;
-      bottom: -301px;
+      bottom: -340px;
       background-color: lighten($dark-blue, 10%);
-      box-shadow: 0 0 40px 10px rgba(lighten($dark-blue, 15%), 0.5), 0 0 20px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px 0px rgba(lighten($dark-blue, 15%), 0.5), 0 0 20px 0 rgba(0, 0, 0, 0.2);
       z-index: 5;
       //filter: blur(10px);
       opacity: 1;
       transition: all 0.5s;
       -webkit-transition: all 0.5s;
+      @media (min-width: $sm) {
+        bottom: -301px;
+      }
 
     }
 

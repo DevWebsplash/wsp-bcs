@@ -43,8 +43,8 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
         <div class="portfolio-cat-filter">
           <div class="custom-select">
             <select name="portfolio-cat" id="" class="portfolio-cat__select">
-              <option data-category="" value="portfolio_category">Project Type</option>
-              <option data-category="" value="portfolio_category">Project Type</option>
+              <option data-category="" value="portfolio_category">Services Type</option>
+              <option data-category="" value="portfolio_category">Services Type</option>
               <?php
               // Get the parent terms of the 'make' taxonomy
               $terms = get_terms ('portfolio_category');
@@ -54,19 +54,19 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
               <?php } ?>
             </select>
           </div>
-          <div class="custom-select">
-            <select name="product-used" id="" class="portfolio-cat__select">
-              <option data-used="" value="product_used">Products Used</option>
-              <option data-used="" value="product_used">Products Used</option>
-              <?php
-              // Get the parent terms of the 'product_used' taxonomy
-              $terms = get_terms ('product_used');
-              // Loop through parent terms and set active class if it matches current or parent
-              foreach ($terms as $term) { ?>
-                <option data-used="<?php echo esc_attr ($term->term_id); ?>" value="<?php echo esc_attr ($term->slug); ?>"><?php echo esc_html ($term->name); ?></option>
-              <?php } ?>
-            </select>
-          </div>
+<!--          <div class="custom-select">-->
+<!--            <select name="product-used" id="" class="portfolio-cat__select">-->
+<!--              <option data-used="" value="product_used">Products Used</option>-->
+<!--              <option data-used="" value="product_used">Products Used</option>-->
+<!--              --><?php
+//              // Get the parent terms of the 'product_used' taxonomy
+//              $terms = get_terms ('product_used');
+//              // Loop through parent terms and set active class if it matches current or parent
+//              foreach ($terms as $term) { ?>
+<!--                <option data-used="--><?php //echo esc_attr ($term->term_id); ?><!--" value="--><?php //echo esc_attr ($term->slug); ?><!--">--><?php //echo esc_html ($term->name); ?><!--</option>-->
+<!--              --><?php //} ?>
+<!--            </select>-->
+<!--          </div>-->
           <div class="custom-select">
             <select name="city-state" id="" class="portfolio-cat__select">
               <option data-city-state="" value="city_state">City & State</option>
