@@ -120,13 +120,16 @@ require_once get_template_directory() . '/includes/partials/pagination.php';
               </a>
               <div class="portfolio__content">
                 <div class="portfolio__tags">
-                  <?php
-                  $terms = wp_get_object_terms ($post->ID, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
-                  if (!empty($terms)) :
-                    foreach ($terms as $term) { ?>
-                      <div class="tag"><?php echo $term->name; ?></div>
-                    <?php } ?>
-                  <?php endif; ?>
+	                <?php
+	                $term_list = wp_get_post_terms ($post->ID, 'portfolio_category', ['fields' => 'all']);
+	                // Виводимо назву первинної категорії
+	                foreach ($term_list as $term_primary) {
+		                $primary_category = get_post_meta ($post->ID, '_yoast_wpseo_primary_portfolio_category', true);
+		                if ($primary_category == $term_primary->term_id) {
+			                echo '<div class="tag">' .esc_html ($term_primary->name). '</div>';
+			                break; // Припиняємо цикл після знаходження первинної категорії
+		                }
+	                }?>
                 </div>
                 <div class="model"><?php echo get_the_title (); ?></div>
                 <div class="info"><?php echo get_field ('preview_description'); ?></div>

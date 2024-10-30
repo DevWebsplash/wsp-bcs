@@ -350,12 +350,15 @@ function return_post_html ($portfolio)
     $return_html .= '<img src="' . $image_url . '" loading="lazy" alt="' . esc_attr ($image_repeater[ 'alt' ] ?? 'Placeholder Image') . '">';
     $return_html .= '</a>';
     $return_html .= '<div class="portfolio__content"><div class="portfolio__tags">';
-    $terms = wp_get_object_terms ($post_id, 'portfolio_category', array('orderby' => 'term_id', 'order' => 'ASC'));
-    if (!empty($terms)) {
-      foreach ($terms as $term) {
-        $return_html .= ' <div class="tag">' . $term->name . '</div>';
-      }
-    }
+                        $term_list = wp_get_post_terms ($post->ID, 'portfolio_category', ['fields' => 'all']);
+                        // Виводимо назву первинної категорії
+                        foreach ($term_list as $term_primary) {
+	                        $primary_category = get_post_meta ($post->ID, '_yoast_wpseo_primary_portfolio_category', true);
+	                        if ($primary_category == $term_primary->term_id) {
+			                        $return_html .= '<div class="tag">' .esc_html ($term_primary->name). '</div>';
+		                        break; // Припиняємо цикл після знаходження первинної категорії
+	                        }
+                        }
     $return_html .= '</div><div class="model" title="' . $title . '">' . $title . '</div>';
     $return_html .= '<div class="info">' . $preview_description . '</div>';
     $return_html .= '</div><div class="btn-wrapper"><a href="' . $permalink . '" class="btn btn-2">View</a></div></div>';
