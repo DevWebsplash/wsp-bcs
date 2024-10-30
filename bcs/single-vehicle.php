@@ -379,7 +379,7 @@ if (have_rows ('flixble_content_vehicle')):
               while ($query->have_posts ()) :
 
                 $query->the_post (); ?>
-                <div class="split-item">
+                <a href="<?php the_permalink (); ?>" class="split-item">
                   <div class="split-item__img">
                     <?php $image_repeater = get_field ('overview_image'); ?>
                     <?php if ($image_repeater) { ?>
@@ -411,7 +411,7 @@ if (have_rows ('flixble_content_vehicle')):
                       </span>
                     </a>
                   </div>
-                </div>
+                </a>
               <?php endwhile;
             endif;
             wp_reset_postdata (); ?>
