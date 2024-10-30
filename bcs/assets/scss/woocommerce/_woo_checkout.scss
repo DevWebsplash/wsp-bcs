@@ -89,6 +89,18 @@
       }
     }
   }
+
+  &.woocommerce-order-received {
+    .woocommerce-table__product-name.product-name {
+      a {
+        color: $red;
+      }
+    }
+    .wc-item-meta {
+      list-style-type: none;
+
+    }
+  }
 }
 
 body.checkout-wc {

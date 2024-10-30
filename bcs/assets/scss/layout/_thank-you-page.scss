@@ -1,0 +1,14 @@
+.s-thank_you {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 62vh;
+  text-align: center;
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+  }
+}

@@ -641,6 +641,12 @@ select::-ms-expand {
     }
   }
 
+  .form-step-2 {
+    .form-group {
+      min-width: 51%;
+    }
+  }
+
   .form-content {
     width: 100%;
     padding-top: 20px;

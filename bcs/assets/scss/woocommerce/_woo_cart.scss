@@ -2,6 +2,13 @@
 
 // Cart page
 body.woocommerce-cart {
+  .return-to-shop {
+    margin-top: 15px;
+    a {
+      color: $red;
+      text-decoration: none;
+    }
+  }
   .block-woocommerce {
     max-width: 100%;
     margin: 40px auto;

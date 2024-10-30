@@ -1,7 +1,6 @@
 <?php
 /*
 Template Name: Locations
-
 */
 get_header ();
 
@@ -19,33 +18,40 @@ get_header ();
       <?php echo render_vehicle_search_form(); ?>
     </div>
   </div>
+</section>
+
+<section class="s-split s-location ms-section">
   <div class="cn">
-      <h2 class="title h1">All Locations</h2>
+    <div class="section-heading">
+<!--      <div class="decorated-title decorated-title--column-center">-->
+<!--        <div class="small-title small-title--gray">DISCOVER</div>-->
+<!--        <div class="line-decor line-decor--red"></div>-->
+<!--      </div>-->
+      <h2 class="title h1">Locations</h2>
       <div class="subtitle"><?php echo get_field('location_description'); ?></div>
-    <div class="s-vehicles__list">
+    </div>
+    <div class="location__list">
       <?php
-// Get all terms from the custom taxonomy "location"
-$terms = get_terms( array(
-    'taxonomy' => 'location',
-    'hide_empty' => false, // Set to true if you only want to show terms with posts
-) );
+      // Get all terms from the custom taxonomy "location"
+      $terms = get_terms( array(
+          'taxonomy' => 'location',
+          'hide_empty' => false, // Set to true if you only want to show terms with posts
+      ) );
 
-if ( !empty( $terms ) && !is_wp_error( $terms ) ) :
-    // Loop through each term and display the title and link
-    foreach ( $terms as $term ) :?>
-	    <div class="vehicle-card">
-		    <div class="info"><?php echo esc_html( $term->name );?></div>
+      if ( !empty( $terms ) && !is_wp_error( $terms ) ) :
+        // Loop through each term and display the title and link
+        foreach ( $terms as $term ) :?>
+        <div class="location__card">
+          <div class="location__content">
+            <div class="info"><?php echo esc_html( $term->name );?></div>
             <div class="subtitle"><?php echo esc_html( $term->description );?></div>
-		    <a href="<?php echo esc_url( get_term_link( $term ) );?>" class="btn btn-2">View</a>
-	    </div>
-    <?php endforeach;
-
-else :
-    echo 'No locations found.';
-endif;
-?>
-
-
+          </div>
+          <a href="<?php echo esc_url( get_term_link( $term ) );?>" class="btn btn-2">View</a>
+        </div>
+      <?php endforeach;
+      else :
+        echo 'No locations found.';
+      endif; ?>
     </div>
   </div>
 </section>
