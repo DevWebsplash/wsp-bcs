@@ -224,6 +224,35 @@ get_header ();
                   <p><?php echo get_field ('calipers_refurbished_description'); ?></p>
                 </li>
               <?php } ?>
+              <?php if (get_field ('drop_off_date')) { ?>
+	              <?php
+	              $field = get_field_object('drop_off_date');
+	              ?>
+                <li>
+                  <span><?php echo $field['label']; ?> :</span>
+                  <span><?php echo $field['value']; ?></span>
+
+                </li>
+              <?php } ?>
+              <?php if (get_field ('total_days_turnaround_time')) { ?>
+	              <?php
+	              $field = get_field_object('total_days_turnaround_time');
+	              ?>
+                <li>
+                    <span> <?php echo $field['label']; ?> :</span>
+                    <span><?php echo $field['value']; ?></span>
+                </li>
+              <?php } ?>
+              <?php if (get_field ('turnaround_times_description')) { ?>
+                <li>
+	                <?php
+	                $field = get_field_object('turnaround_times_description');
+	                ?>
+                    <span><?php echo $field['label']; ?> :</span>
+                    <span><?php echo $field['value']; ?></span>
+                  <p><?php echo get_field ('arrival_condition_description'); ?></p>
+                </li>
+              <?php } ?>
               <?php if (get_field ('arrival_condition')) { ?>
                 <li>
                   <span><?php echo get_field ('arrival_condition_title'); ?> :</span>
