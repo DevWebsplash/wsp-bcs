@@ -300,14 +300,14 @@ if (have_rows ('flixble_content_vehicle')):
 
     <?php elseif (get_row_layout () == 'portfolio'): ?>
       <!--SPLIT-->
-      <section class="s-split ms-section">
+      <section class="s-split s-portfolio ms-section">
         <div class="cn">
           <div class="section-heading section-heading--simple">
             <h2 class="title h1"><?php echo get_sub_field ('portfolio_title'); ?></h2>
             <div class="subtitle"><?php echo get_sub_field ('portfolio_subtitle'); ?></div>
           </div>
 
-          <div class="s-split__list">
+          <div class="portfolio__list">
             <?php
             $post_ID = $post->ID;
             $make_tax = get_sub_field ('portfolio_category');
@@ -379,37 +379,39 @@ if (have_rows ('flixble_content_vehicle')):
               while ($query->have_posts ()) :
 
                 $query->the_post (); ?>
-                <a href="<?php the_permalink (); ?>" class="split-item">
-                  <div class="split-item__img">
+                <a href="<?php the_permalink (); ?>" class="portfolio__item" style="text-decoration: none;">
+                  <div class="portfolio__image">
                     <?php $image_repeater = get_field ('overview_image'); ?>
                     <?php if ($image_repeater) { ?>
                       <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
                            loading="lazy" alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
                     <?php } ?>
                   </div>
-                  <div class="split-item__content">
-                    <h3 class="title h2"><?php the_title (); ?></h3>
-                    <div class="tags">
-	                    <?php
-	                    $term_list = wp_get_post_terms ($post->ID, 'portfolio_category', ['fields' => 'all']);
-	                    // Виводимо назву первинної категорії
-	                    foreach ($term_list as $term_primary) {
-		                    $primary_category = get_post_meta ($post->ID, '_yoast_wpseo_primary_portfolio_category', true);
-		                    if ($primary_category == $term_primary->term_id) {
-			                    echo '<div class="tag">' .esc_html ($term_primary->name). '</div>';
-			                    break; // Припиняємо цикл після знаходження первинної категорії
-		                    }
-	                    }?>
-                    </div>
-                    <div class="desc"><?php echo get_field ('preview_description'); ?></div>
-                    <a href="<?php the_permalink (); ?>" class="btn btn-2">
-                      <span>Read more</span>
-                      <span class="icon">
+                  <div class="portfolio__content">
+                    <h3 class="title h3 model"><?php the_title (); ?></h3>
+<!--                    <div class="tags">-->
+<!--	                    --><?php
+//	                    $term_list = wp_get_post_terms ($post->ID, 'portfolio_category', ['fields' => 'all']);
+//	                    // Виводимо назву первинної категорії
+//	                    foreach ($term_list as $term_primary) {
+//		                    $primary_category = get_post_meta ($post->ID, '_yoast_wpseo_primary_portfolio_category', true);
+//		                    if ($primary_category == $term_primary->term_id) {
+//			                    echo '<div class="tag">' .esc_html ($term_primary->name). '</div>';
+//			                    break; // Припиняємо цикл після знаходження первинної категорії
+//		                    }
+//	                    }?>
+<!--                    </div>-->
+                    <div class="info"><?php echo get_field ('preview_description'); ?></div>
+<!--                    <div class="btn-wrapper">-->
+                      <div class="btn btn-2">
+                        <span>Read more</span>
+                        <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
                           <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
                         </svg>
                       </span>
-                    </a>
+                      </div>
+<!--                    </div>-->
                   </div>
                 </a>
               <?php endwhile;

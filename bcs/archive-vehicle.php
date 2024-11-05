@@ -83,8 +83,9 @@ $query = new WP_Query($args);
 if ($query->have_posts ()) : ?>
   <!-- SPECIALIST REVIEWS -->
   <section class="s-specialists-reviews ms-section">
-    <div class="section-bg"><img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-01.png"
-                                 loading="lazy" alt=""></div>
+    <div class="section-bg">
+      <img src="<?php echo get_template_directory_uri (); ?>/assets/images/bg-01.png" loading="lazy" alt="">
+    </div>
     <div class="cn cn--big">
       <div class="section-heading">
         <div class="decorated-title decorated-title--column-center">
