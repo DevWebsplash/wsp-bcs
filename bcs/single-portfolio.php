@@ -241,23 +241,17 @@ get_header ();
                 <li>
                     <span> <?php echo $field['label']; ?> :</span>
                     <span><?php echo $field['value']; ?></span>
+                    <p><?php echo get_field ('turnaround_times_description'); ?></p>
                 </li>
               <?php } ?>
-              <?php if (get_field ('turnaround_times_description')) { ?>
+              <?php if (get_field ('ship_back_or_collection_date')) { ?>
                 <li>
 	                <?php
-	                $field = get_field_object('turnaround_times_description');
+	                $field = get_field_object('ship_back_or_collection_date');
 	                ?>
                     <span><?php echo $field['label']; ?> :</span>
                     <span><?php echo $field['value']; ?></span>
-                  <p><?php echo get_field ('arrival_condition_description'); ?></p>
-                </li>
-              <?php } ?>
-              <?php if (get_field ('arrival_condition')) { ?>
-                <li>
-                  <span><?php echo get_field ('arrival_condition_title'); ?> :</span>
-                  <span><?php echo get_field ('arrival_condition'); ?></span>
-                  <p><?php echo get_field ('arrival_condition_description'); ?></p>
+
                 </li>
               <?php } ?>
               <?php if (get_field ('color_applied')) { ?>
@@ -272,18 +266,59 @@ get_header ();
               <?php } ?>
             </ul>
             <ul>
-              <?php if (get_field ('caliper_information')) { ?>
+	            <?php if (get_field ('arrival_condition')) { ?>
+                  <li>
+                      <span><?php echo get_field ('arrival_condition_title'); ?> :</span>
+                      <span><?php echo get_field ('arrival_condition'); ?></span>
+                      <p><?php echo get_field ('arrival_condition_description'); ?></p>
+                  </li>
+	            <?php } ?>
+              <?php if (get_field ('does_rear_caliper_have_handbrake_mechanism')) { ?>
                 <li>
-                  <span><?php echo get_field ('caliper_information_title'); ?> :</span>
-                  <span><?php echo get_field ('caliper_information'); ?></span>
-                  <p><?php echo get_field ('caliper_information_description'); ?></p>
+	                <?php
+	                $field = get_field_object('does_rear_caliper_have_handbrake_mechanism');
+	                ?>
+                    <span><?php echo $field['label']; ?> :</span>
+                    <span><?php echo $field['value']; ?></span>
                 </li>
               <?php } ?>
-              <?php if (get_field ('turnaround_times')) { ?>
+              <?php if (get_field ('front_caliper_make')) { ?>
                 <li>
-                  <span><?php echo get_field ('turnaround_times_title'); ?> :</span>
-                  <span><?php echo get_field ('turnaround_times'); ?></span>
-                  <p><?php echo get_field ('turnaround_times_description'); ?></p>
+	                <?php
+	                $field = get_field_object('front_caliper_make');
+	                ?>
+                    <span><?php echo $field['label']; ?> :</span>
+                    <span><?php echo $field['value']; ?></span>
+                </li>
+              <?php } ?>
+
+              <?php if (get_field ('front_piston_count')) { ?>
+                <li>
+	                <?php
+	                $field = get_field_object('front_piston_count');
+	                ?>
+                    <span><?php echo $field['label']; ?> :</span>
+                    <span><?php echo $field['value']; ?></span>
+                </li>
+              <?php } ?>
+
+              <?php if (get_field ('rear_caliper_make')) { ?>
+                <li>
+	                <?php
+	                $field = get_field_object('rear_caliper_make');
+	                ?>
+                    <span><?php echo $field['label']; ?> :</span>
+                    <span><?php echo $field['value']; ?></span>
+                </li>
+              <?php } ?>
+
+              <?php if (get_field ('rear_piston_count')) { ?>
+                <li>
+	                <?php
+	                $field = get_field_object('rear_piston_count');
+	                ?>
+                    <span><?php echo $field['label']; ?> :</span>
+                    <span><?php echo $field['value']; ?></span>
                 </li>
               <?php } ?>
 
@@ -453,51 +488,6 @@ get_header ();
     </div>
   </section>
 
-<?php //if (has_term (153308, 'portfolio_category', get_the_ID ())) { ?>
-  <!--Engineering Services-->
-  <!--  <section class="s-services ms-section">-->
-  <!--    <div class="cn">-->
-  <!---->
-  <!--      <div class="s-services__list">-->
-  <!---->
-  <!--        <div class="service-item">-->
-  <!--          --><?php //$image_repeater = get_field ('engineering_services_image');
-//          if ($image_repeater) { ?>
-  <!--            <div class="service-item__img"><img src="--><?php //echo esc_url ($image_repeater[ 'url' ]); ?><!--" loading="lazy"-->
-  <!--                                                alt="--><?php //echo esc_attr ($image_repeater[ 'alt' ]); ?><!--">-->
-  <!--            </div>-->
-  <!--          --><?php //} ?>
-  <!--          <div class="service-item__content">-->
-  <!--            <h3 class="block-title h2">--><?php //echo get_field ('engineering_services_title'); ?><!--</h3>-->
-  <!--            <div class="desc">--><?php //echo get_field ('engineering_services_description'); ?><!--</div>-->
-  <!--            <ul class="info-list">-->
-  <!--              --><?php //if (have_rows ('engineering_services_list')): ?>
-  <!--                --><?php //while (have_rows ('engineering_services_list')) : the_row (); ?>
-  <!--                  <li>-->
-  <!--                    <div class="title">--><?php //echo get_sub_field ('list_title'); ?><!--</div>-->
-  <!--                    <div>--><?php //echo get_sub_field ('list_description'); ?><!--</div>-->
-  <!--                  </li>-->
-  <!--                --><?php //endwhile; ?>
-  <!--              --><?php //endif; ?>
-  <!--            </ul>-->
-  <!--            --><?php
-//            $link = get_field ('engineering_services_button');
-//            if ($link):
-//              $link_url = $link[ 'url' ];
-//              $link_title = $link[ 'title' ];
-//              $link_target = $link[ 'target' ] ? $link[ 'target' ] : '_self';
-//              ?>
-  <!--              <a href="--><?php //echo esc_url ($link_url); ?><!--" class="btn btn-1"-->
-  <!--                 target="--><?php //echo esc_attr ($link_target); ?><!--">-->
-  <!--                --><?php //echo esc_html ($link_title); ?>
-  <!--              </a>-->
-  <!--            --><?php //endif; ?>
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </section>-->
-<?php //} ?>
 
 
 <?php
