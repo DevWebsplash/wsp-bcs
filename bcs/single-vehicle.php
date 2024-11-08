@@ -8,6 +8,21 @@ Template Post Type: vehicle
 get_header ();
 ?>
 <?php
+
+function display_table_of_content() {
+  ?>
+  <div class="table-of-content">
+    <div class="cn cn--big">
+      <ul class="table-of-content__list">
+        <li><a href="#portfolio" rel="noopener">Portfolio</a></li>
+        <li><a href="#services" rel="noopener">Services</a></li>
+        <li><a href="#products" rel="noopener">Products</a></li>
+      </ul>
+    </div>
+  </div>
+  <?php
+}
+
 // Check value exists.
 if (have_rows ('flixble_content_vehicle')):
   $i = 0;
@@ -47,6 +62,8 @@ if (have_rows ('flixble_content_vehicle')):
         </div>
       </section>
 
+      <?php display_table_of_content(); ?>
+
     <?php elseif (get_row_layout () == 'left_side_image_preview'): ?>
       <!--HERO variant 2-->
       <section class="s-hero s-hero--variant-2 ms-section">
@@ -68,6 +85,8 @@ if (have_rows ('flixble_content_vehicle')):
         </div>
       </section>
 
+      <?php display_table_of_content(); ?>
+
     <?php elseif (get_row_layout () == 'right_side_image_preview'): ?>
       <!--HERO variant 3-->
       <section class="s-hero s-hero--variant-3 ms-section">
@@ -87,6 +106,8 @@ if (have_rows ('flixble_content_vehicle')):
           </div>
         </div>
       </section>
+
+      <?php display_table_of_content(); ?>
 
     <?php elseif (get_row_layout () == 'overview_without_image'): ?>
       <!--OVERVIEW variant 1-->
@@ -300,7 +321,7 @@ if (have_rows ('flixble_content_vehicle')):
 
     <?php elseif (get_row_layout () == 'portfolio'): ?>
       <!--SPLIT-->
-      <section class="s-split s-portfolio ms-section">
+      <section id="portfolio" class="s-split s-portfolio ms-section">
         <div class="cn">
           <div class="section-heading section-heading--simple">
             <h2 class="title h1"><?php echo get_sub_field ('portfolio_title'); ?></h2>
@@ -423,7 +444,7 @@ if (have_rows ('flixble_content_vehicle')):
 
     <?php elseif (get_row_layout () == 'services_with_Image'): ?>
       <!--THREE COLUMN variant 1-->
-      <section class="s-three-column s-three-column--variant-1 ms-section">
+      <section id="services" class="s-three-column s-three-column--variant-1 ms-section">
         <div class="cn">
           <div class="section-heading section-heading--simple">
             <h2 class="title h1"><?php echo get_sub_field ('services_with_Image_title'); ?></h2>
@@ -461,7 +482,7 @@ if (have_rows ('flixble_content_vehicle')):
 
     <?php elseif (get_row_layout () == 'services_without_image'): ?>
         <!--THREE COLUMN variant 2-->
-        <section class="s-three-column s-three-column--variant-2 ms-section">
+        <section id="services" class="s-three-column s-three-column--variant-2 ms-section">
             <div class="cn">
                 <div class="section-heading section-heading--simple">
                     <h2 class="title h1"><?php echo esc_html(get_sub_field('services_without_image_title')); ?></h2>
@@ -510,7 +531,7 @@ if (have_rows ('flixble_content_vehicle')):
         </section>
     <?php elseif (get_row_layout () == 'products'): ?>
       <!--PRODUCTS-->
-      <section class="s-products ms-section">
+      <section id="products" class="s-products ms-section">
         <div class="cn">
           <div class="section-heading section-heading--simple">
             <h2 class="title h1"><?php echo get_sub_field ('products_title'); ?></h2>

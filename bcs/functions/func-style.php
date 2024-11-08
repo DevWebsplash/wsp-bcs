@@ -19,7 +19,7 @@ function wp_theme_styles() {
 	$theme_handle_prefix = 'bcs';
 
 	wp_enqueue_style( $theme_handle_prefix . '-styles', get_template_directory_uri() .
-      '/assets/css/' . $theme_handle_prefix .'.min.css', array(), '1.2.57', 'all' );
+      '/assets/css/' . $theme_handle_prefix .'.min.css', array(), '1.2.64', 'all' );
 //      '/assets/css/' . $theme_handle_prefix .'.min.css', array(), '1.0.46', 'all' );
 	wp_enqueue_style( 'woocommerce-custom', get_template_directory_uri() .
       '/assets/css/woocommerce-custom.min.css', array(), '1.0.94', 'all' );
@@ -60,7 +60,6 @@ function my_custom_acf() {
       background: #2d2d2d;
       color: #fff;
     }
-  </style>
-  ';
+  </style>';
 };
 add_action('admin_head', 'my_custom_acf');
