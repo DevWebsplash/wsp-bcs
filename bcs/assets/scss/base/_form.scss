@@ -320,7 +320,6 @@ select::-ms-expand {
           background-color: #b30b00; /* Red fill for checked state */
           border-color: #b30b00;
         }
-
         /* Add a checkmark when checked */
         & + .wpcf7-list-item-label:after {
           content: '\2713'; /* Unicode checkmark */
@@ -333,6 +332,8 @@ select::-ms-expand {
         }
       }
     }
+
+
 
     /* Style the custom checkbox design */
     .wpcf7-list-item-label {
@@ -368,6 +369,28 @@ select::-ms-expand {
     /* Add some margin to the checkboxes for better spacing */
     .wpcf7-list-item {
       margin-bottom: 10px;
+    }
+
+    .input-gdpr {
+      .wpcf7-list-item {
+        margin-left: 0;
+      }
+      .wpcf7-list-item-label {
+        padding-left: 0;
+        font-size: 16px;
+        user-select: none;
+        &:before {
+          position: static;
+          transform: translateY(0);
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 15px;
+          margin-bottom: 5px;
+        }
+        &:after {
+          top: 10px!important;
+        }
+      }
     }
   }
 
