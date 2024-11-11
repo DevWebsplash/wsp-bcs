@@ -29,6 +29,10 @@
     <?php include get_template_directory() . '/includes/partials/form-thank-you.php'; ?>
   </div>
 </div>
+
+<a href="#top" class="to-top">
+  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/chevron-down-3.svg" alt="To top button">
+</a>
 </main>
 
 <?php if (!is_page_template (array('templates/get-quote.php'))) { ?>

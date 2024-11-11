@@ -1,6 +1,24 @@
 jQuery(function ($) {
   'use strict';
 
+  //anchors scroll
+  let anchorOffset = $(window).width() > 992 ? 80 : 40;
+  $(function () {
+    $('a[href*="#"]:not([href="#"]):not(.open-popup)').on('click', function () {
+      if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
+        let target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+
+        if (target.length) {
+          $('html, body').animate({
+            scrollTop: target.offset().top - anchorOffset
+          }, 1000);
+          return false;
+        }
+      }
+    });
+  });
+
   // Toggle menu
   $('.toggle-menu').on('click', function () {
     $(this).toggleClass('active');
@@ -65,6 +83,28 @@ jQuery(function ($) {
     forceCustomRendering: true
   });
 
+  // To top button
+  const toTop = $('.to-top');
+  if(toTop.length) {
+    let lastScrollTop = 0;
+    $(window).on('scroll', function () {
+      let scrollTop = $(this).scrollTop();
+      if (scrollTop > lastScrollTop || !(scrollTop > 100)) {
+        toTop.removeClass('show').fadeOut('normal');
+      } else {
+        toTop.addClass('show').fadeIn('normal');cd
+      }
+      lastScrollTop = scrollTop;
+    });
+
+    toTop.on('click', function () {
+      $('html, body').animate({scrollTop: 0}, 800);
+      return false;
+    });
+  }
+
+
+  // Sticky callback
   const btnCallback = $('.btn-callback');
   const stickyCallback = () => {
     const topOffset = $(window).height() / 2;
