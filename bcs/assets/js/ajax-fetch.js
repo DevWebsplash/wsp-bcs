@@ -82,7 +82,7 @@ jQuery(document).ready(async function ($) {
     const capitalizedDataName = dataName.charAt(0).toUpperCase() + dataName.slice(1);
 
     $select.html(`<option value="">Select ${capitalizedDataName}</option>`);
-    $select.prop('disabled', true);
+    if(dataName !== 'make') $select.prop('disabled', true);
     initializeSumoSelect($select);
 
     if (resetState) {
@@ -478,7 +478,7 @@ jQuery(document).ready(async function ($) {
 
 
     $('.btn--reset').on('click', () => {
-      resetDropdown($makeSelect, 'make', {resetState: false});
+      $makeSelect.prop('selectedIndex', 0).trigger('change');
       resetDropdown($modelSelect, 'model', {resetState: false});
       resetDropdown($trimSelect, 'trim', {resetState: false});
 
