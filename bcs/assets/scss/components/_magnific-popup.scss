@@ -473,3 +473,24 @@ img.mfp-img {
   right: 0;
   padding-top: 0;
 }
+
+
+.popup-dialog {
+  .content {
+    padding: 50px;
+
+    .heading {
+      margin-bottom: 30px;
+    }
+  }
+  .content-inner {
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 30px;
+      gap: 20px;
+    }
+  }
+}

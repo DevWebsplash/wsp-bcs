@@ -89,10 +89,10 @@ jQuery(function ($) {
     let lastScrollTop = 0;
     $(window).on('scroll', function () {
       let scrollTop = $(this).scrollTop();
-      if (scrollTop > lastScrollTop || !(scrollTop > 100)) {
+      if (scrollTop > lastScrollTop || scrollTop <= 100) {
         toTop.removeClass('show').fadeOut('normal');
       } else {
-        toTop.addClass('show').fadeIn('normal');cd
+        toTop.addClass('show').fadeIn('normal');
       }
       lastScrollTop = scrollTop;
     });
@@ -208,10 +208,30 @@ jQuery(function ($) {
     }
   });
 
+  $('.popup-modal').magnificPopup({
+    type: 'inline',
+    // preloader: false,
+    // modal: true,
+    overflowY: 'auto',
+    closeBtnInside: true,
+    mainClass: 'mfp-fade'
+  });
+  $(document).on('click', '.popup-modal-dismiss', function (e) {
+    e.preventDefault();
+    $.magnificPopup.close();
+  });
+
   // 404 animation
   if (document.body.classList.contains('error404')) {
     window.onload = function () {
       document.querySelector('.cont_principal').className = "cont_principal cont_error_active";
     };
   }
+
+// Disable right-click on images
+  document.addEventListener('contextmenu', function (e) {
+    if (e.target.tagName === 'IMG') {
+      e.preventDefault();
+    }
+  }, false);
 });
