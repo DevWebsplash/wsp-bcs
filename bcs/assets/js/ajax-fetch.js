@@ -463,13 +463,13 @@ jQuery(document).ready(async function ($) {
     const selectedTrim = JSON.parse(localStorage.getItem('selectedTrim'));
 
     if (selectedMake) {
-      $('.js-get__make').html('<b>Make:</b> ' + selectedMake.slug);
+      $('.js-get__make').html('<b>Make:</b> <span class="first-letter-uppercase">' + selectedMake.slug + '</span>');
     }
     if (selectedModel) {
-      $('.js-get__model').html('<b>Model:</b> ' + selectedModel.slug);
+      $('.js-get__model').html('<b>Model:</b>  <span class="first-letter-uppercase">' + selectedModel.slug + '</span>');
     }
     if (selectedTrim) {
-      $('.js-get__trim').html('<b>Trim:</b> ' + selectedTrim.slug);
+      $('.js-get__trim').html('<b>Trim:</b>  <span class="first-letter-uppercase">' + selectedTrim.slug + '</span>');
     }
 
     setTimeout(() => {
