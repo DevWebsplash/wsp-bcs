@@ -18,6 +18,7 @@
   background: none;
   padding: 0 24px;
   cursor: pointer;
+  user-select: none;
   .icon {
     svg {
       display: block;
@@ -181,4 +182,15 @@
     width: 100%;
     font-size: 12px;
   }
+}
+
+
+.reset-vehicle {
+  position: fixed;
+  right: 50%;
+  bottom: 0;
+  z-index: 2;
+  transform: translateX(50%);
+
+  display: inline-flex;
 }

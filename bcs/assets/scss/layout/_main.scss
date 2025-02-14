@@ -2947,7 +2947,7 @@
 .table-of-content {
   padding: 30px 0;
   @media (min-width: $lg) {
-      padding: 60px 0;
+      padding: 45px 0;
   }
 
   &__list {
@@ -2965,5 +2965,125 @@
         color: $red;
       }
     }
+  }
+}
+
+
+.process-line {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0;
+  @media (min-width: $md) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+  @media (min-width: $lg) {
+    gap: 15px;
+  }
+  @media (min-width: $xl) {
+    gap: 30px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    @media (min-width: $md) {
+      flex-direction: column;
+      width: 23%;
+      text-align: center;
+    }
+    @media (min-width: $xl) {
+      width: 20%;
+    }
+    &.active {
+      .process-line__icon {
+        background-color: $dark-blue-2;
+        color: $white;
+        box-shadow: 0 4px 25px 4px rgba($dark-blue, .25);
+        svg {
+          path {
+            fill: $white;
+          }
+        }
+      }
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    padding: 7px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: $white;
+    box-shadow: 0 4px 4px 0 rgba($dark-blue, 0.25);
+    border: 2px solid $dark-blue-2;
+    @media (min-width: $md) {
+      padding: 15px;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+    }
+    @media (min-width: $xl) {
+    }
+    svg {
+      max-width: 100%;
+      path {
+        fill: $dark-blue;
+      }
+    }
+  }
+
+  &__text {
+    font-weight: 600;
+    color: $dark-blue;
+    margin-left: 20px;
+    @media (min-width: $md) {
+      margin-left: 0;
+    }
+  }
+
+  &__spacer {
+    position: relative;
+    display: inline-flex;
+    width: 50px;
+    height: 30px;
+    //align-self: center;
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath id='Vector' d='M13.1722 12.0002L8.22217 7.05023L9.63617 5.63623L16.0002 12.0002L9.63617 18.3642L8.22217 16.9502L13.1722 12.0002Z' fill='%231E2749'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transform: rotate(90deg);
+    @media (min-width: $md) {
+      height: 50px;
+      margin-top: 25px;
+      transform: rotate(0);
+    }
+
+    @media (min-width: $xl) {
+      transform: translate(25px, 0);
+      &:before {
+        content: '';
+        position: absolute;
+        top: 47%;
+        right: 70%;
+        //transform: translate(-50%, -50%);
+        width: 50px;
+        border-bottom: 4px dashed $dark-blue-2;
+        //background-color: $dark-blue-2;
+      }
+    }
+  }
+}
+.page__get-quote {
+  .section-heading {
+    text-align: center;
   }
 }

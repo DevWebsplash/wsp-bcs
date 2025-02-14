@@ -6,10 +6,36 @@ Template Post Type: vehicle
 */
 
 get_header ();
-?>
-<?php
 
-function display_table_of_content() {
+
+$trimID = $post->ID;
+$trimSlug = $post->post_name;
+$trimName = get_post_field('post_name', $trimID);
+
+// Отримуємо терміни таксономії 'make' для посту з полем 'trim'
+$terms = wp_get_object_terms ($trimID, 'make', [
+    'orderby' => 'term_id',
+    'order' => 'ASC'
+]);
+
+if (!empty($terms)) {
+  $vehicle = [];
+  foreach ($terms as $term) {
+    $vehicle[] = esc_html ($term->name);
+    $vehicle_slug[] = esc_html ($term->slug);
+    $vehicle_id[] = esc_html ($term->term_id);
+  }
+  // Виводимо перші два елементи масиву
+  if (isset($vehicle[ 0 ])) echo '<p class="js-get__make hidden" data-make-slug="' . $vehicle_slug[ 0 ] . '" data-make-id="' . $vehicle_id[ 0 ] . '"><b>Make:</b> ' . $vehicle[ 0 ] . '</p>';
+  if (isset($vehicle[ 1 ])) echo  '<p class="js-get__model hidden" data-model-slug="' . $vehicle_slug[ 1 ] . '" data-model-id="' . $vehicle_id[ 1 ] . '"><b>Model:</b> ' . $vehicle[ 1 ] . '</p>';
+}
+echo '<p class="js-get__trim hidden" data-trim-slug="' . $trimSlug . '" data-trim-id="' . $trimID . '" data-trim-link="'. get_permalink() .'"><b>Trim:</b> ' . $trimName . '</p>';
+
+?>
+
+
+<?php
+function display_table_of_content () {
   ?>
   <div class="table-of-content">
     <div class="cn cn--big">

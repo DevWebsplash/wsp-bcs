@@ -92,6 +92,9 @@
 <?php } ?>
 </div>
 
+<!--<div class="reset-vehicle">-->
+<!--  <div class="reset-vehicle-btn btn btn-4">Reset cache</div>-->
+<!--</div>-->
 
 <?php wp_footer (); ?>
 

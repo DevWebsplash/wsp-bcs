@@ -15,8 +15,9 @@
   <title><?php wp_title ('&ndash;', true, 'right'); ?></title>
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
   <link rel="pingback" href="<?php bloginfo ('pingback_url'); ?>">
-
+  <style>.first-letter-uppercase::first-letter{text-transform: uppercase}</style>
   <?php wp_head (); ?>
+
 </head>
 
 <body <?php body_class (); ?> itemscope="itemscope" itemtype="https://schema.org/WebPage">
