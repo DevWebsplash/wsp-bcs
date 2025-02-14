@@ -85,6 +85,7 @@ if (have_rows ('flixble_content_vehicle')):
         </div>
       </section>
 
+
       <?php display_table_of_content(); ?>
 
     <?php elseif (get_row_layout () == 'right_side_image_preview'): ?>

@@ -80,12 +80,12 @@
                 $link_title = $link[ 'title' ];
                 $link_target = $link[ 'target' ] ? $link[ 'target' ] : '_self';
                 ?>
-                <a href="<?php echo esc_url ($link_url); ?>" <?php echo esc_attr ($link_target); ?>><?php echo esc_html ($link_title); ?></a>
+                <a href="<?php echo esc_url ($link_url); ?>"<?php echo esc_attr ($link_target); ?>><?php echo esc_html ($link_title); ?></a>
               <?php endif; ?>
             <?php endwhile; ?>
           <?php endif; ?>
         </div>
-        <div class="copyright"> <?php echo get_field ('copyright', 'option'); ?></div>
+        <div class="copyright"><?php echo get_field ('copyright', 'option'); ?></div>
       </div>
     </div>
   </footer>
