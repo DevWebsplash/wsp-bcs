@@ -16,6 +16,9 @@ require_once 'functions/func-ajax.php';
 
 require_once 'functions/func-taxonomies.php';
 require_once 'functions/func-woo.php';
+
+require_once 'functions/func-airtable.php';
+
 add_action( 'after_setup_theme', 'woocommerce_support' );
 
 
