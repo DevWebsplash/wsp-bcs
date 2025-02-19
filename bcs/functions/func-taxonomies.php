@@ -42,7 +42,7 @@ function register_portfolio_cpt() {
 	);
 
 	register_post_type('portfolio', $args);
-}
+    }
 add_action('init', 'register_portfolio_cpt');
 
 // Register Custom Taxonomy Make and associate with multiple post types
@@ -60,7 +60,7 @@ function register_make_taxonomy() {
 
 	// Register 'make' taxonomy for 'vehicle', 'portfolio', and 'product' post types
 	register_taxonomy('make', array('vehicle', 'portfolio', 'product'), $args);
-}
+    }
 add_action('init', 'register_make_taxonomy');
 
 // Custom rewrite rules for vehicle
@@ -78,7 +78,7 @@ function custom_vehicle_rewrite_rules() {
 		'index.php?make=$matches[2]',
 		'top'
 	);
-}
+      }
 add_action('init', 'custom_vehicle_rewrite_rules');
 
 // Adjust the vehicle post type permalinks
@@ -95,8 +95,8 @@ function vehicle_permalink_structure($post_link, $post) {
 					$parent_term = $term;
 				} else {
 					$child_term = $term;
-				}
-			}
+        }
+      }
 
 			$make = $parent_term ? $parent_term->slug : 'no-make';
 			$child = $child_term ? $child_term->slug : 'no-model';
@@ -106,10 +106,10 @@ function vehicle_permalink_structure($post_link, $post) {
 		} else {
 			$post_link = str_replace('%make%', 'no-make', $post_link);
 		}
-	}
+    }
 
 	return $post_link;
-}
+  }
 add_filter('post_type_link', 'vehicle_permalink_structure', 10, 2);
 
 // Flush rewrite rules after registration
