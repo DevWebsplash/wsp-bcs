@@ -4,40 +4,27 @@
  *
  * Syncs only the title from Airtable to WordPress.
  */
-
-require_once 'airtable/air-conections.php';
-require_once 'airtable/air-admin.php';
-
-
-
-// Process the form submission
-add_action('admin_init', 'bcs_plugin_handle_test_button');
-function bcs_plugin_handle_test_button() {
-  global $pat, $baseId, $tableName;
-
-  if (isset($_POST['airtable_test_nonce_field']) && wp_verify_nonce($_POST['airtable_test_nonce_field'], 'airtable_test_nonce')) {
-    // Replace with your actual endpoint and header
-    $endpoint = "https://api.airtable.com/v0/{$baseId}/{$tableName}";
-    $headers = array(
-        'Authorization' => 'Bearer ' . $pat,
-        'Content-Type'  => 'application/json'
-    );
-    $response = wp_remote_get($endpoint, array('headers' => $headers));
-
-    // Log the raw response object
-    // log_airtable_error('Raw response: ' . print_r($response, true));
-
-    if (is_wp_error($response)) {
-      log_airtable_error('Error: ' . $response->get_error_message());
-    } else {
-      $body = wp_remote_retrieve_body($response);
-      log_airtable_notice('Test response: ' . print_r($body, true));
-    }
-    // Redirect back to logs page
-    wp_redirect(admin_url('admin.php?page=bcs_airtable_logs'));
-    exit;
-  }
+if (!defined('ABSPATH')) {
+  exit;
 }
+
+require_once __DIR__ . '/includes/air-connections.php';
+require_once __DIR__ . '/includes/air-admin.php';
+require_once __DIR__ . '/includes/air-import.php';
+require_once __DIR__ . '/includes/air-export.php';
+
+
+add_action('init', function() {
+//  new GS_Export_Admin();
+
+//  new Airtable_Connections();
+//  new Airtable_Admin();
+//  new Airtable_Import();
+//  new Airtable_Export();
+});
+
+
+
 
 
 
