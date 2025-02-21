@@ -25,7 +25,7 @@ $pat       = AIRTABLE_PAT; // Airtable Personal Access Token
 $baseId    = AIRTABLE_BASE_ID; // Airtable Base ID
 $tableName = AIRTABLE_TABLE_NAME; // Airtable Table Name
 
-$tableModels_Meta = AIRTABLE_TABLE_NAME; // Airtable Table MODELS Meta
+$tableModelsMeta = AIRTABLE_TABLE_NAME; // Airtable Table MODELS Meta
 //$tableName = urlencode('Vehicle List Incl. Variant');
 
 $postType  = 'vehicle'; // WordPress Post Type
