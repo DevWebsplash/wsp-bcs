@@ -121,17 +121,7 @@ function bcs_plugin_logs_page() {
 }
 
 
-function bcs_plugin_display_airtable_data_page() {
-  echo '<h2>Airtable Data</h2>';
-  echo '<form method="post" action="">';
-  wp_nonce_field('airtable_data_nonce', 'airtable_data_nonce_field');
-  submit_button('Fetch Airtable Data');
-  echo '</form>';
 
-  if (isset($_POST['airtable_data_nonce_field']) && wp_verify_nonce($_POST['airtable_data_nonce_field'], 'airtable_data_nonce')) {
-    echo bcs_plugin_get_airtable_data();
-  }
-}
 
 
 function bcs_plugin_handle_clear_logs() {
