@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
 
 add_action('admin_menu', 'bcs_plugin_create_menu');
 add_action('admin_menu', 'bcs_plugin_create_submenu');
+add_action('admin_menu', 'bcs_plugin_create_submenu_models_meta');
 
 // Process the form submission
 add_action('admin_init', 'bcs_plugin_handle_test_button');
@@ -21,11 +22,11 @@ add_action('admin_init', 'bcs_plugin_handle_clear_logs');
 //require_once __DIR__ . '/includes/air-import.php';
 
 function bcs_plugin_handle_test_button() {
-  global $pat, $baseId, $tableName;
+  global $pat, $baseId, $tableName, $tableModelsMeta;
 
   if (isset($_POST['airtable_test_nonce_field']) && wp_verify_nonce($_POST['airtable_test_nonce_field'], 'airtable_test_nonce')) {
     // Replace with your actual endpoint and header
-    $endpoint = "https://api.airtable.com/v0/{$baseId}/{$tableName}";
+    $endpoint = "https://api.airtable.com/v0/{$baseId}/{$tableModelsMeta}";
     $headers = array(
         'Authorization' => 'Bearer ' . $pat,
         'Content-Type'  => 'application/json'
@@ -47,8 +48,6 @@ function bcs_plugin_handle_test_button() {
     exit;
   }
 }
-
-
 
 
 
@@ -76,6 +75,16 @@ function bcs_plugin_create_submenu() {
       'manage_options', // Capability
       'bcs_airtable_data', // Menu slug
       'bcs_plugin_display_airtable_data_page' // Callback function
+  );
+}
+function bcs_plugin_create_submenu_models_meta() {
+  add_submenu_page(
+      'bcs_airtable_logs', // Parent slug
+      'Airtable Data MODELS Meta', // Page title
+      'Airtable Data MODELS Meta', // Menu title
+      'manage_options', // Capability
+      'bcs_airtable_models_meta_data', // Menu slug
+      'bcs_display_airtable_models_meta_data_page' // Callback function
   );
 }
 
@@ -119,7 +128,6 @@ function bcs_plugin_logs_page() {
     echo '<p>No error history.</p>';
   }
 }
-
 
 
 

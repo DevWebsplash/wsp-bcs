@@ -12,6 +12,7 @@ require_once __DIR__ . '/includes/air-connections.php';
 require_once __DIR__ . '/includes/air-admin.php';
 require_once __DIR__ . '/includes/air-import.php';
 require_once __DIR__ . '/includes/air-export.php';
+require_once __DIR__ . '/includes/air-models.php';
 
 
 add_action('init', function() {
