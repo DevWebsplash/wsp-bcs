@@ -116,11 +116,20 @@ add_action('wp_ajax_fetch_airtable_data', function() {
 function bcs_plugin_display_airtable_data_page() {
 	?>
 	<h2>Airtable Data Import</h2>
-	<button id="fetchAirtableData">Fetch from Airtable</button>
-	<table id="airtableTable">
-		<tr><th>Make</th><th>Model</th><th>Trim</th><th>Status</th></tr>
+<button id="fetchAirtableData" class="button button-primary">Fetch from Airtable</button>
+<div id="responseMessage" style="margin: 10px 0;"></div>
+<table id="airtableTable" class="widefat" cellspacing="0">
+  <thead>
+  <tr>
+    <th>Make</th>
+    <th>Model</th>
+    <th>Trim</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody></tbody>
 	</table>
-	<button id="loadMoreVehicles" style="display:none;">Load More Vehicles</button>
+<button id="loadMoreVehicles" class="button" style="display:none; margin-top: 10px;">Load More Vehicles</button>
 
 	<script>
       document.getElementById("fetchAirtableData").addEventListener("click", function() {

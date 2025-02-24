@@ -12,6 +12,7 @@ if (!defined('ABSPATH')) {
 
 add_action('admin_menu', 'bcs_plugin_create_menu');
 add_action('admin_menu', 'bcs_plugin_create_submenu');
+add_action('admin_menu', 'bcs_plugin_create_submenu_logs');
 add_action('admin_menu', 'bcs_plugin_create_submenu_models_meta');
 
 // Process the form submission
@@ -19,22 +20,20 @@ add_action('admin_init', 'bcs_plugin_handle_test_button');
 // Handle the "Clear Logs" button submission
 add_action('admin_init', 'bcs_plugin_handle_clear_logs');
 
-//require_once __DIR__ . '/includes/air-import.php';
+
 
 function bcs_plugin_handle_test_button() {
   global $pat, $baseId, $tableName, $tableModelsMeta;
 
   if (isset($_POST['airtable_test_nonce_field']) && wp_verify_nonce($_POST['airtable_test_nonce_field'], 'airtable_test_nonce')) {
     // Replace with your actual endpoint and header
-    $endpoint = "https://api.airtable.com/v0/{$baseId}/{$tableModelsMeta}";
+    $endpoint = "https://api.airtable.com/v0/{$baseId}/{$tableName}";
     $headers = array(
         'Authorization' => 'Bearer ' . $pat,
         'Content-Type'  => 'application/json'
     );
     $response = wp_remote_get($endpoint, array('headers' => $headers));
 
-    // Log the raw response object
-    // log_airtable_error('Raw response: ' . print_r($response, true));
 
     if (is_wp_error($response)) {
       log_airtable_error('Error: ' . $response->get_error_message());
@@ -54,18 +53,16 @@ function bcs_plugin_handle_test_button() {
 
 
 function bcs_plugin_create_menu() {
-  $pageTitle = 'Airtable Error Logs';
-  $menuTitle = 'Airtable Logs';
-  $menuSlug  = 'bcs_airtable_logs';
   add_menu_page(
-		$pageTitle,
-		$menuTitle,
+    'Airtable Sync',
+    'Airtable Sync',
 		'manage_options',
-		$menuSlug,
-		'bcs_plugin_logs_page'
+    'bcs_airtable_logs',
+      'bcs_admin_page_callback',
+    'dashicons-cloud',
+    6
 	);
 }
-
 
 function bcs_plugin_create_submenu() {
   add_submenu_page(
@@ -75,6 +72,17 @@ function bcs_plugin_create_submenu() {
       'manage_options', // Capability
       'bcs_airtable_data', // Menu slug
       'bcs_plugin_display_airtable_data_page' // Callback function
+  );
+}
+
+function bcs_plugin_create_submenu_logs() {
+  add_submenu_page(
+      'bcs_airtable_logs', // Parent slug
+      'Airtable Error Logs', // Page title
+      'Airtable Logs', // Menu title
+      'manage_options', // Capability
+      'bcs-airtable-logs', // Menu slug
+      'bcs_plugin_logs_page' // Callback function
   );
 }
 function bcs_plugin_create_submenu_models_meta() {
@@ -88,6 +96,12 @@ function bcs_plugin_create_submenu_models_meta() {
   );
 }
 
+/**
+ * Callback для головної сторінки адмін-панелі модуля.
+ */
+function bcs_admin_page_callback() {
+  include BCS_AIRTABLE_PATH . 'templates/admin-page.php';
+}
 
 function bcs_plugin_logs_page() {
   global $logOption, $logHistoryOption, $logNoticeOption;
@@ -162,5 +176,15 @@ function log_airtable_notice($message) {
 }
 
 
-
-
+/**
+ * Допоміжна функція для запису подій у логи.
+ * Записує повідомлення у файл логів (logs.txt), розташований у модулі.
+ *
+ * @param string $message Повідомлення для запису.
+ */
+function bcs_log_event( $message ) {
+  $log_file = BCS_AIRTABLE_PATH . 'logs.txt';
+  $date     = date( 'Y-m-d H:i:s' );
+  $log_msg  = "[{$date}] {$message}" . PHP_EOL;
+  file_put_contents( $log_file, $log_msg, FILE_APPEND );
+}
