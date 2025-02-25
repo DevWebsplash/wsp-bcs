@@ -14,6 +14,7 @@ define('AIRTABLE_BASE_ID', 'appu3QXHr7ai2NLwi');
 define('AIRTABLE_TABLE_NAME', 'tblXbISQ9nRhz0YfJ');
 
 define('AIRTABLE_TABLE_MODELS_Meta', 'tblk2WqLZS5wdPPqp');
+define('AIRTABLE_TABLE_WordpressTrims', 'tbl5STCzJiTPtxewH');
 // Recommended: Store sensitive data in environment variables or constants
 // Define constants in `wp-config.php`
 // define('AIRTABLE_PAT', 'your_airtable_pat');
@@ -34,6 +35,7 @@ $baseId    = 'appu3QXHr7ai2NLwi';
 $tableName = 'tblXbISQ9nRhz0YfJ';
 
 $tableModelsMeta = 'tblk2WqLZS5wdPPqp';
+$tableWordpressTrims = AIRTABLE_TABLE_WordpressTrims;
 
 //$tableName = urlencode('Vehicle List Incl. Variant');
 

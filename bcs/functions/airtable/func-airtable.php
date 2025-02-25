@@ -23,6 +23,7 @@ require_once __DIR__ . '/includes/air-import.php';
 require_once __DIR__ . '/includes/air-export.php';
 require_once __DIR__ . '/includes/air-models.php';
 require_once __DIR__ . '/functions/handle_test_connection.php';
+require_once __DIR__ . '/functions/admin-functions.php';
 
 
 add_action('init', function() {

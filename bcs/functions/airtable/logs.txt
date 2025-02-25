@@ -1,0 +1,42 @@
+[2025-02-24 20:39:14] Airtable connection successful.
+[2025-02-24 20:39:35] Airtable connection successful.
+[2025-02-25 06:56:32] Airtable connection successful.
+[2025-02-25 06:56:44] Airtable connection successful.
+[2025-02-25 09:05:28] Airtable connection successful.
+[2025-02-25 09:05:28] Airtable connection successful.
+[2025-02-25 10:02:10] Airtable connection successful.
+[2025-02-25 10:05:33] Airtable connection successful.
+[2025-02-25 10:51:14] Airtable connection successful.
+[2025-02-25 11:05:15] Airtable connection successful.
+[2025-02-25 11:07:45] Airtable connection successful.
+[2025-02-25 11:08:00] Airtable connection successful.
+[2025-02-25 11:14:05] Airtable connection successful.
+[2025-02-25 11:14:14] Airtable connection successful.
+[2025-02-25 11:17:41] Airtable connection successful.
+[2025-02-25 11:25:57] [Table: tbl5STCzJiTPtxewH] Airtable connection successful.
+[2025-02-25 11:27:40] Airtable connection successful.
+[2025-02-25 11:27:52] Airtable connection successful.
+[2025-02-25 11:30:29] Airtable connection successful.
+[2025-02-25 11:32:32] Airtable connection successful.
+[2025-02-25 11:33:05] [Table: tbl5STCzJiTPtxewH] Airtable connection successful.
+[2025-02-25 11:40:58] [Table: tblXbISQ9nRhz0YfJ] Airtable connection successful.
+[2025-02-25 11:56:20] [Table: WordPress Trims] Starting export for post ID: 
+[2025-02-25 11:56:20] [Table: WordPress Trims] Failed to export vehicle (ID: ). Check error logs for details.
+[2025-02-25 11:58:28] [Table: WordPress Trims] Starting export for post ID: 
+[2025-02-25 11:58:28] [Table: WordPress Trims] Failed to export vehicle (ID: ). Check error logs for details.
+[2025-02-25 11:59:54] [Table: WordPress Trims] Starting export for post ID: 
+[2025-02-25 11:59:54] [Table: WordPress Trims] Failed to export vehicle (ID: ). Check error logs for details.
+[2025-02-25 12:02:29] [Table: WordPress Trims] Starting manual export for vehicle ID: 148855
+[2025-02-25 12:02:29] [Table: WordPress Trims] Failed to export vehicle (ID: 148855)
+[2025-02-25 12:02:40] [Table: WordPress Trims] Starting manual export for vehicle ID: 148856
+[2025-02-25 12:02:40] [Table: WordPress Trims] Failed to export vehicle (ID: 148856)
+[2025-02-25 12:08:20] [Table: WordPress Trims] Starting manual export for vehicle ID: 148855
+[2025-02-25 12:08:26] [Table: WordPress Trims] Failed to export vehicle (ID: 148855)
+[2025-02-25 12:12:13] [Table: WordPress Trims] Starting manual export for vehicle ID: 148855
+[2025-02-25 12:12:13] [Table: WordPress Trims] Failed to export vehicle (ID: 148855)
+[2025-02-25 12:22:03] [Table: WordPress Trims] Starting manual export for vehicle ID: 148856
+[2025-02-25 12:22:08] [Table: WordPress Trims] Failed to export vehicle (ID: 148856)
+[2025-02-25 12:26:19] [Table: WordPress Trims] Starting manual export for vehicle ID: 148857
+[2025-02-25 12:26:20] [Table: WordPress Trims] Failed to export vehicle (ID: 148857)
+[2025-02-25 12:27:52] [Table: WordPress Trims] Starting manual export for vehicle ID: 148855
+[2025-02-25 12:27:56] [Table: WordPress Trims] Failed to export vehicle (ID: 148855)

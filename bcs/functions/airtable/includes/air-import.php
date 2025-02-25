@@ -169,7 +169,7 @@ function bcs_plugin_display_airtable_data_page() {
 	<?php
 }
 
-// 🔹 Додаємо сторінку в адмінку
-add_action('admin_menu', function() {
-	add_submenu_page('tools.php', 'Airtable Data Import', 'Airtable Data Import', 'manage_options', 'airtable-data-import', 'bcs_plugin_display_airtable_data_page');
-});
+//// 🔹 Додаємо сторінку в адмінку
+//add_action('admin_menu', function() {
+//	add_submenu_page('tools.php', 'Airtable Data Import', 'Airtable Data Import', 'manage_options', 'airtable-data-import', 'bcs_plugin_display_airtable_data_page');
+//});

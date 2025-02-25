@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
-
+add_action('admin_enqueue_scripts', 'bcs_enqueue_admin_styles');
 add_action('admin_menu', 'bcs_plugin_create_menu');
 add_action('admin_menu', 'bcs_plugin_create_submenu');
 add_action('admin_menu', 'bcs_plugin_create_submenu_logs');
@@ -48,6 +48,20 @@ function bcs_plugin_handle_test_button() {
   }
 }
 
+function bcs_enqueue_admin_styles($hook) {
+  // Check if we're on our plugin's page
+  if (strpos($hook, 'bcs-airtable') === false) {
+    return;
+  }
+
+  wp_enqueue_style(
+      'bcs-airtable-admin-styles',
+      BCS_AIRTABLE_URL . 'assets/css/admin-style.css',
+      [],
+      filemtime(BCS_AIRTABLE_PATH . 'assets/css/admin-style.css')
+  );
+}
+add_action('admin_enqueue_scripts', 'bcs_enqueue_admin_styles');
 
 
 
@@ -57,8 +71,9 @@ function bcs_plugin_create_menu() {
     'Airtable Sync',
     'Airtable Sync',
 		'manage_options',
-    'bcs_airtable_logs',
-      'bcs_admin_page_callback',
+//    'bcs_airtable_logs',
+    'bcs-airtable-sync',
+    'bcs_admin_page_callback',
     'dashicons-cloud',
     6
 	);
@@ -66,7 +81,7 @@ function bcs_plugin_create_menu() {
 
 function bcs_plugin_create_submenu() {
   add_submenu_page(
-      'bcs_airtable_logs', // Parent slug
+      'bcs-airtable-sync', // Parent slug
       'Airtable Data', // Page title
       'Airtable Data', // Menu title
       'manage_options', // Capability
@@ -77,7 +92,7 @@ function bcs_plugin_create_submenu() {
 
 function bcs_plugin_create_submenu_logs() {
   add_submenu_page(
-      'bcs_airtable_logs', // Parent slug
+      'bcs-airtable-sync', // Parent slug
       'Airtable Error Logs', // Page title
       'Airtable Logs', // Menu title
       'manage_options', // Capability
@@ -87,7 +102,7 @@ function bcs_plugin_create_submenu_logs() {
 }
 function bcs_plugin_create_submenu_models_meta() {
   add_submenu_page(
-      'bcs_airtable_logs', // Parent slug
+      'bcs-airtable-sync', // Parent slug
       'Airtable Data MODELS Meta', // Page title
       'Airtable Data MODELS Meta', // Menu title
       'manage_options', // Capability
@@ -147,11 +162,13 @@ function bcs_plugin_logs_page() {
 
 
 function bcs_plugin_handle_clear_logs() {
-	global $logOption;
+    global $logOption, $logNoticeOption, $logHistoryOption;
 	if (isset($_POST['clear_log_nonce_field']) &&
-	    wp_verify_nonce($_POST['clear_log_nonce_field'], 'clear_log_nonce_key')) {
+    wp_verify_nonce($_POST['clear_log_nonce_field'], 'clear_log_nonce_key')) {
 		update_option($logOption, array());
-		wp_redirect(admin_url('admin.php?page=bcs_airtable_logs'));
+    update_option($logNoticeOption, array());
+    update_option($logHistoryOption, array());
+    wp_redirect(admin_url('admin.php?page=bcs-airtable-logs'));
 		exit;
 	}
 }
@@ -176,15 +193,29 @@ function log_airtable_notice($message) {
 }
 
 
-/**
- * Допоміжна функція для запису подій у логи.
- * Записує повідомлення у файл логів (logs.txt), розташований у модулі.
- *
- * @param string $message Повідомлення для запису.
- */
-function bcs_log_event( $message ) {
+function bcs_log_event( $message, $table_name = '' ) {
   $log_file = BCS_AIRTABLE_PATH . 'logs.txt';
   $date     = date( 'Y-m-d H:i:s' );
-  $log_msg  = "[{$date}] {$message}" . PHP_EOL;
+  $table_info = $table_name ? $table_name : 'General';
+  $log_msg = sprintf('[%s] [Table: %s] %s%s', $date, $table_info, $message, PHP_EOL);
   file_put_contents( $log_file, $log_msg, FILE_APPEND );
+}
+
+function bcs_display_logs() {
+  $log_file = BCS_AIRTABLE_PATH . 'logs.txt';
+
+  if (!file_exists($log_file)) {
+      echo '<p>No logs available.</p>';
+      return;
+  }
+
+  $logs = file_get_contents( $log_file );
+  if (empty($logs)) {
+      echo '<p>Logs are empty.</p>';
+      return;
+  }
+
+  $log_lines = explode("\n", $logs);
+  $formatted_logs = array_map('esc_html', $log_lines);
+  echo '<div class="logs-field"><pre>' . implode("\n", $formatted_logs) . '</pre></div>';
 }
