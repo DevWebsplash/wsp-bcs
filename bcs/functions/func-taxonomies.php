@@ -16,7 +16,7 @@ function register_vehicle_cpt() {
 	$args = array(
 		'label' => 'Vehicle',
 		'public' => true,
-		'rewrite' => array('slug' => 'vehicle/%make%', 'with_front' => false),  // Custom permalink structure
+		'rewrite' => array('slug' => '/%make%', 'with_front' => false),  // Custom permalink structure
 
 		'has_archive' => 'vehicle',
 		'supports' => array('title', 'editor', 'custom-fields'),
@@ -54,7 +54,7 @@ function register_make_taxonomy() {
 
 	$args = array(
 		'label' => 'Make',
-		'rewrite' => array('slug' => 'vehicle', 'hierarchical' => true),  // Make archive URL will be under /vehicle/
+		'rewrite' => array('slug' => '', 'hierarchical' => true),  // Make archive URL will be under /vehicle/
 		'hierarchical' => true,
 	);
 
@@ -67,14 +67,14 @@ add_action('init', 'register_make_taxonomy');
 function custom_vehicle_rewrite_rules() {
 	// Add rewrite rule for single vehicle posts
 	add_rewrite_rule(
-		'^vehicle/([^/]+)/([^/]+)/([^/]+)/?$',
+		'^([^/]+)/([^/]+)/([^/]+)/?$',
 		'index.php?post_type=vehicle&make=$matches[1]&vehicle=$matches[3]',
 		'top'
 	);
 
 	// Add rewrite rule for make taxonomy archives
 	add_rewrite_rule(
-		'^vehicle/([^/]+)/([^/]+)/?$',
+		'^([^/]+)/([^/]+)/?$',
 		'index.php?make=$matches[2]',
 		'top'
 	);
