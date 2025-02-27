@@ -17,7 +17,6 @@ function register_vehicle_cpt() {
 		'label' => 'Vehicle',
 		'public' => true,
 		'rewrite' => array('slug' => '/%make%', 'with_front' => false),  // Custom permalink structure
-
 		'has_archive' => 'vehicle',
 		'supports' => array('title', 'editor', 'custom-fields'),
 	);
@@ -42,7 +41,7 @@ function register_portfolio_cpt() {
 	);
 
 	register_post_type('portfolio', $args);
-    }
+}
 add_action('init', 'register_portfolio_cpt');
 
 // Register Custom Taxonomy Make and associate with multiple post types
@@ -54,14 +53,35 @@ function register_make_taxonomy() {
 
 	$args = array(
 		'label' => 'Make',
-		'rewrite' => array('slug' => '', 'hierarchical' => true),  // Make archive URL will be under /vehicle/
+		'rewrite' => array('slug' => '', 'hierarchical' => true), // Remove 'make' from URLs
 		'hierarchical' => true,
 	);
 
 	// Register 'make' taxonomy for 'vehicle', 'portfolio', and 'product' post types
 	register_taxonomy('make', array('vehicle', 'portfolio', 'product'), $args);
-    }
+}
 add_action('init', 'register_make_taxonomy');
+
+// Remove 'make' slug from taxonomy URLs in the admin panel and frontend
+function remove_make_slug_from_term_link($url, $term, $taxonomy) {
+	if ($taxonomy === 'make') {
+		// Remove '/make/' from the URL
+		$url = str_replace('/make/', '/', $url);
+	}
+	return $url;
+}
+add_filter('term_link', 'remove_make_slug_from_term_link', 10, 3);
+
+// Add rewrite rules to recognize URLs without 'make' slug
+function make_rewrite_rules($rules) {
+	$new_rules = array();
+
+	// Handle URLs without 'make' in the structure
+	$new_rules['([^/]+)/?$'] = 'index.php?make=$matches[1]';
+
+	return $new_rules + $rules;
+}
+add_filter('rewrite_rules_array', 'make_rewrite_rules');
 
 // Custom rewrite rules for vehicle
 function custom_vehicle_rewrite_rules() {
@@ -78,7 +98,7 @@ function custom_vehicle_rewrite_rules() {
 		'index.php?make=$matches[2]',
 		'top'
 	);
-      }
+}
 add_action('init', 'custom_vehicle_rewrite_rules');
 
 // Adjust the vehicle post type permalinks
@@ -95,8 +115,8 @@ function vehicle_permalink_structure($post_link, $post) {
 					$parent_term = $term;
 				} else {
 					$child_term = $term;
-        }
-      }
+				}
+			}
 
 			$make = $parent_term ? $parent_term->slug : 'no-make';
 			$child = $child_term ? $child_term->slug : 'no-model';
@@ -106,11 +126,17 @@ function vehicle_permalink_structure($post_link, $post) {
 		} else {
 			$post_link = str_replace('%make%', 'no-make', $post_link);
 		}
-    }
+	}
 
 	return $post_link;
-  }
+}
 add_filter('post_type_link', 'vehicle_permalink_structure', 10, 2);
+
+// Flush rewrite rules to prevent 404 errors after changing URL structures
+function fix_make_rewrite_rules() {
+	flush_rewrite_rules();
+}
+add_action('init', 'fix_make_rewrite_rules', 20);
 
 // Flush rewrite rules after registration
 function flush_vehicle_rewrite_rules() {
