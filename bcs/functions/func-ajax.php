@@ -41,7 +41,7 @@ function render_vehicle_search_form ()
         </select>
       </div>
       <div class="btn-group">
-        <a href="<?php echo get_bloginfo ('url'); ?>/vehicle/" class="btn btn-1 vehicles-search__btn">Search</a>
+        <a href="<?php echo get_bloginfo ('url'); ?>" class="btn btn-1 vehicles-search__btn">Search</a>
       </div>
     </div>
   </div>
