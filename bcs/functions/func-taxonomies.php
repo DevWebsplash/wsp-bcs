@@ -25,7 +25,26 @@ function register_vehicle_cpt() {
 }
 add_action('init', 'register_vehicle_cpt');
 
-// Реєстрація Make таксономії
+// Register Portfolio Custom Post Type
+function register_portfolio_cpt() {
+	$labels = array(
+		'name' => 'Portfolios',
+		'singular_name' => 'Portfolio',
+	);
+
+	$args = array(
+		'label' => 'Portfolio',
+		'public' => true,
+		'rewrite' => array('slug' => 'portfolio', 'with_front' => false),
+		'has_archive' => true,
+		'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+	);
+
+	register_post_type('portfolio', $args);
+    }
+add_action('init', 'register_portfolio_cpt');
+
+// Register Custom Taxonomy Make and associate with multiple post types
 function register_make_taxonomy() {
 	$labels = array(
 		'name' => 'Makes',
