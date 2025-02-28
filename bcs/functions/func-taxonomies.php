@@ -25,6 +25,22 @@ function register_vehicle_cpt() {
 }
 add_action('init', 'register_vehicle_cpt');
 
+function add_vehicle_archive_body_class($classes) {
+  if (is_post_type_archive('vehicle') || is_singular('vehicle') || (is_tax('make') && is_tax('make', array('vehicle')))) {
+    $classes[] = 'vehicle-archive';
+  } elseif (is_tax('make')) {
+    $queried_object = get_queried_object();
+    if ($queried_object && isset($queried_object->taxonomy) && $queried_object->taxonomy === 'make') {
+      $post_types = get_taxonomy('make')->object_type;
+      if (in_array('vehicle', $post_types)) {
+        $classes[] = 'vehicle-archive';
+      }
+    }
+  }
+  return $classes;
+}
+add_filter('body_class', 'add_vehicle_archive_body_class');
+
 // Register Portfolio Custom Post Type
 function register_portfolio_cpt() {
 	$labels = array(
@@ -41,7 +57,7 @@ function register_portfolio_cpt() {
 	);
 
 	register_post_type('portfolio', $args);
-    }
+}
 add_action('init', 'register_portfolio_cpt');
 
 // Register Custom Taxonomy Make and associate with multiple post types

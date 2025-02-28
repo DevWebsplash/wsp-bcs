@@ -277,7 +277,7 @@ add_action ('admin_post_bcs_manual_export', 'bcs_handle_manual_export');
 function bcs_handle_manual_export ()
 {
   if (!isset($_POST[ 'manual_export_nonce' ]) ||
-      !wp_verify_nonce ($_POST[ 'manual_export_nonce' ], 'bcs_manual_export_action')
+    !wp_verify_nonce ($_POST[ 'manual_export_nonce' ], 'bcs_manual_export_action')
   ) {
     wp_die ('Invalid nonce');
   }

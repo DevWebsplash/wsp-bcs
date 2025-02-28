@@ -1,15 +1,12 @@
 jQuery(document).ready(async function ($) {
-  console.log('New Ajax fetch script loaded');
-
   // Early exit if the page does not contain required elements
   const isQuotePage = document.querySelector('.quote-form');
   const isVehicleSingle = document.querySelector('.single-vehicle');
   const isPortfolioPage = document.querySelector('.s-portfolio');
   const isRelevantPage = document.querySelector('.vehicles-search') || isVehicleSingle || isQuotePage;
   if (!isRelevantPage) return;
-  // Replace the current detection with body class-based detection
-  const isVehiclePage = document.body.classList.contains('vehicle-archive');
-  // const isVehiclePage = window.location.pathname.includes('/vehicle/');
+
+  const isVehiclePage = window.location.pathname.includes('/vehicle/');
   const baseUrl = `${window.location.origin}/staging/vehicle/`;
 
   // Cache jQuery selectors
@@ -46,6 +43,7 @@ jQuery(document).ready(async function ($) {
   }
 
 
+
   // Class to manage cache with expiration logic
   class Cache {
     get(key) {
@@ -71,31 +69,8 @@ jQuery(document).ready(async function ($) {
    * Get URL segments for make and model
    */
   const getUrlSegments = () => {
-    const path = window.location.pathname;
-    const segments = path.split('/').filter(Boolean);
-
-    // Remove 'staging' from the segments for analysis
-    const stagingIndex = segments.indexOf('staging');
-    if (stagingIndex !== -1) {
-      segments.splice(stagingIndex, 1);
-    }
-
-    // If we're on the main vehicle archive
-    if (segments[0] === 'vehicle') {
-      return {
-        make: segments[1] || null,
-        model: segments[2] || null,
-        trim: segments[3] || null
-      };
-    }
-    // For child pages (make/model/trim)
-    else {
-      return {
-        make: segments[0] || null,
-        model: segments[1] || null,
-        trim: segments[2] || null
-      };
-    }
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    return {make: segments[2] || null, model: segments[3] || null, trim: segments[4] || null};
   };
 
   /**
@@ -109,7 +84,7 @@ jQuery(document).ready(async function ($) {
     const capitalizedDataName = dataName.charAt(0).toUpperCase() + dataName.slice(1);
 
     $select.html(`<option value="">Select ${capitalizedDataName}</option>`);
-    if (dataName !== 'make') $select.prop('disabled', true);
+    if(dataName !== 'make') $select.prop('disabled', true);
     initializeSumoSelect($select);
 
     if (resetState) {
@@ -129,8 +104,9 @@ jQuery(document).ready(async function ($) {
   };
 
 
+
   // Loading state
-  if (!isVehicleSingle) {
+  if(!isVehicleSingle) {
     const loadingState = {isMakeLoaded: false, isModelLoaded: false, isTrimLoaded: false};
 
     // Cache data
@@ -160,17 +136,10 @@ jQuery(document).ready(async function ($) {
       if (!isVehiclePage) return;
       const makeSlug = vehicleState.make?.slug || '';
       const modelSlug = vehicleState.model?.slug || '';
-      let newUrl;
+      let newUrl = baseUrl;
 
-  // Only use /vehicle/ for the main archive page with no selections
-  if (window.location.pathname.includes('/vehicle/') && !makeSlug) {
-    newUrl = baseUrl; // Keep /staging/vehicle/ for main archive only
-  } else {
-    // For any page with selections, use the new structure
-    newUrl = `${window.location.origin}/staging/`;
-        if (makeSlug) newUrl += `${makeSlug}/`;
-        if (modelSlug) newUrl += `${modelSlug}/`;
-      }
+      if (makeSlug) newUrl += `${makeSlug}/`;
+      if (modelSlug) newUrl += `${modelSlug}/`;
 
       if (newUrl !== window.location.href) {
         window.history.pushState({}, '', newUrl);
@@ -265,9 +234,10 @@ jQuery(document).ready(async function ($) {
           }
         }
       } catch (error) {
-        console.error(`Error populating select ${dataName}:`, error);
+      console.error(`Error populating select ${dataName}:`, error);
       }
     };
+
 
 
     /**
@@ -280,14 +250,13 @@ jQuery(document).ready(async function ($) {
       let url;
 
       if (vehicleState.trim?.id && trimLink) {
-        url = trimLink; // Trim links should already have /staging/ in them
+        url = trimLink;
       } else if (makeSlug && modelSlug) {
-        url = `${window.location.origin}/staging/${makeSlug}/${modelSlug}/`;
+        url = `${baseUrl}${makeSlug}/${modelSlug}/`;
       } else if (makeSlug) {
-        url = `${window.location.origin}/staging/${makeSlug}/`;
+        url = `${baseUrl}${makeSlug}/`;
       } else {
-        // Only use /vehicle/ when no make/model is selected
-        url = baseUrl; // baseUrl includes /staging/vehicle/
+        url = baseUrl;
       }
 
       $searchButton.attr('href', url);
@@ -339,9 +308,9 @@ jQuery(document).ready(async function ($) {
 
     // Check if the cache update has already been done in this session
     if (!sessionStorage.getItem('makesCacheUpdated')) {
-      // Initial fetch and populate
-      await fetchAndUpdateMakesCache();
-      await populateDropdown($makeSelect, makesCache, 'make');
+        // Initial fetch and populate
+        await fetchAndUpdateMakesCache();
+        await populateDropdown($makeSelect, makesCache, 'make');
 
       // Set the flag in sessionStorage
       sessionStorage.setItem('makesCacheUpdated', 'true');
@@ -373,7 +342,7 @@ jQuery(document).ready(async function ($) {
 
       if (vehicleState.make.id) {
         await updateStateAndDropdown('make', vehicleState.make.id, vehicleState.make.slug);
-        if (isQuotePage) {
+        if(isQuotePage) {
           $('#make').val(vehicleState.make.slug);
         }
       }
@@ -381,7 +350,7 @@ jQuery(document).ready(async function ($) {
       // Update model selection
       if (vehicleState.model.id) {
         await updateStateAndDropdown('model', vehicleState.model.id, vehicleState.model.slug);
-        if (isQuotePage) {
+        if(isQuotePage) {
           $('#model').val(vehicleState.model.slug);
         }
       }
@@ -397,7 +366,7 @@ jQuery(document).ready(async function ($) {
           $trimSelect.val(vehicleState.trim.slug);
           initializeSumoSelect($trimSelect);
           updateSearchButton();
-          if (isQuotePage) {
+          if(isQuotePage) {
             $('#trim').val(vehicleState.trim.slug);
           }
         }
@@ -451,7 +420,7 @@ jQuery(document).ready(async function ($) {
   }
 
 
-  if (isVehicleSingle) {
+  if(isVehicleSingle) {
     // Function to check if the current page is an internal page and gather data
     const checkInternalPageAndGatherData = () => {
       const urlSegments = getUrlSegments();
@@ -483,6 +452,7 @@ jQuery(document).ready(async function ($) {
 
     checkInternalPageAndGatherData();
   }
+
 
 
   // Open modal after 2 seconds if on an internal page
