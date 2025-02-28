@@ -6,7 +6,7 @@
 /**
  * Register Custom Post Type vehicle
  */
-
+// Реєстрація Vehicle CPT
 function register_vehicle_cpt() {
 	$labels = array(
 		'name' => 'Vehicles',
@@ -16,8 +16,8 @@ function register_vehicle_cpt() {
 	$args = array(
 		'label' => 'Vehicle',
 		'public' => true,
-		'rewrite' => array('slug' => '/%make%', 'with_front' => false),  // Custom permalink structure
-		'has_archive' => 'vehicle',
+		'has_archive' => true,
+		'rewrite' => array('slug' => 'vehicle', 'with_front' => false),
 		'supports' => array('title', 'editor', 'custom-fields'),
 	);
 
@@ -25,26 +25,7 @@ function register_vehicle_cpt() {
 }
 add_action('init', 'register_vehicle_cpt');
 
-// Register Portfolio Custom Post Type
-function register_portfolio_cpt() {
-	$labels = array(
-		'name' => 'Portfolios',
-		'singular_name' => 'Portfolio',
-	);
-
-	$args = array(
-		'label' => 'Portfolio',
-		'public' => true,
-		'rewrite' => array('slug' => 'portfolio', 'with_front' => false),
-		'has_archive' => true,
-		'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
-	);
-
-	register_post_type('portfolio', $args);
-}
-add_action('init', 'register_portfolio_cpt');
-
-// Register Custom Taxonomy Make and associate with multiple post types
+// Реєстрація Make таксономії
 function register_make_taxonomy() {
 	$labels = array(
 		'name' => 'Makes',
@@ -53,57 +34,40 @@ function register_make_taxonomy() {
 
 	$args = array(
 		'label' => 'Make',
-		'rewrite' => array('slug' => '', 'hierarchical' => true), // Remove 'make' from URLs
+		'rewrite' => array('slug' => '', 'hierarchical' => true),
 		'hierarchical' => true,
 	);
 
-	// Register 'make' taxonomy for 'vehicle', 'portfolio', and 'product' post types
 	register_taxonomy('make', array('vehicle', 'portfolio', 'product'), $args);
 }
 add_action('init', 'register_make_taxonomy');
 
-// Remove 'make' slug from taxonomy URLs in the admin panel and frontend
+// Видалення /make/ зі структури URL
 function remove_make_slug_from_term_link($url, $term, $taxonomy) {
 	if ($taxonomy === 'make') {
-		// Remove '/make/' from the URL
 		$url = str_replace('/make/', '/', $url);
 	}
 	return $url;
 }
 add_filter('term_link', 'remove_make_slug_from_term_link', 10, 3);
 
-// Add rewrite rules to recognize URLs without 'make' slug
-function make_rewrite_rules($rules) {
-	$new_rules = array();
-
-	// Handle URLs without 'make' in the structure
-	$new_rules['([^/]+)/?$'] = 'index.php?make=$matches[1]';
-
-	return $new_rules + $rules;
-}
-add_filter('rewrite_rules_array', 'make_rewrite_rules');
-
-// Custom rewrite rules for vehicle
+// Переписані правила
 function custom_vehicle_rewrite_rules() {
-	// Add rewrite rule for single vehicle posts
-	add_rewrite_rule(
-		'^([^/]+)/([^/]+)/([^/]+)/?$',
-		'index.php?post_type=vehicle&make=$matches[1]&vehicle=$matches[3]',
-		'top'
-	);
+	// Архів vehicle
+	add_rewrite_rule('^vehicle/?$', 'index.php?post_type=vehicle', 'top');
 
-	// Add rewrite rule for make taxonomy archives
-	add_rewrite_rule(
-		'^([^/]+)/([^/]+)/?$',
-		'index.php?make=$matches[2]',
-		'top'
-	);
+	// Таксономія make (без /make/)
+	add_rewrite_rule('^([^/]+)/?$', 'index.php?taxonomy=make&term=$matches[1]', 'top');
+	add_rewrite_rule('^([^/]+)/([^/]+)/?$', 'index.php?taxonomy=make&term=$matches[2]&make_parent=$matches[1]', 'top');
+
+	// Окремі vehicle пости (make/make-child/post-name)
+	add_rewrite_rule('^([^/]+)/([^/]+)/([^/]+)/?$', 'index.php?post_type=vehicle&name=$matches[3]', 'top');
 }
 add_action('init', 'custom_vehicle_rewrite_rules');
 
-// Adjust the vehicle post type permalinks
+// Фільтр на URL
 function vehicle_permalink_structure($post_link, $post) {
-	if ('vehicle' === get_post_type($post)) {
+	if ('vehicle' === get_post_type($post) && !empty($post->ID)) {
 		$terms = get_the_terms($post->ID, 'make');
 
 		if ($terms && !is_wp_error($terms)) {
@@ -121,30 +85,17 @@ function vehicle_permalink_structure($post_link, $post) {
 			$make = $parent_term ? $parent_term->slug : 'no-make';
 			$child = $child_term ? $child_term->slug : 'no-model';
 
-			// Update permalink structure
-			$post_link = str_replace('%make%', "$make/$child", $post_link);
+			return home_url('/' . $make . '/' . $child . '/' . $post->post_name . '/');
 		} else {
-			$post_link = str_replace('%make%', 'no-make', $post_link);
+			return home_url('/no-make/no-model/' . $post->post_name . '/');
 		}
 	}
-
 	return $post_link;
 }
 add_filter('post_type_link', 'vehicle_permalink_structure', 10, 2);
 
-// Flush rewrite rules to prevent 404 errors after changing URL structures
-function fix_make_rewrite_rules() {
-	flush_rewrite_rules();
-}
-add_action('init', 'fix_make_rewrite_rules', 20);
 
-// Flush rewrite rules after registration
-function flush_vehicle_rewrite_rules() {
-	register_vehicle_cpt();
-	register_make_taxonomy();
-	flush_rewrite_rules(); // Ensure that WordPress updates the rewrite rules
-}
-add_action('init', 'flush_vehicle_rewrite_rules', 20);
+
 
 
 function register_location_taxonomy() {
