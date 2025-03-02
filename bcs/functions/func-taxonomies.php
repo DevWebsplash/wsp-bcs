@@ -41,7 +41,7 @@ add_action('init', 'register_portfolio_cpt');
 
 
 function custom_rewrite_rules() {
-  // Portfolio rules stay first (highest priority)
+// Portfolio rules stay first (highest priority)
   add_rewrite_rule('^portfolio/?$', 'index.php?post_type=portfolio', 'top');
   add_rewrite_rule('^portfolio/([^/]+)/?$', 'index.php?post_type=portfolio&name=$matches[1]', 'top');
 
@@ -69,7 +69,7 @@ function register_make_taxonomy() {
 		'rewrite' => array('slug' => '', 'with_front' => false, 'hierarchical' => true),
 		'hierarchical' => true,
 	);
-	register_taxonomy('make', array('vehicle'), $args);
+	register_taxonomy('make', array('vehicle', 'portfolio', 'product'), $args);
 }
 add_action('init', 'register_make_taxonomy');
 
@@ -145,70 +145,70 @@ add_filter('post_type_link', 'vehicle_permalink_structure', 10, 2);
 
 
 
-function check_post_type_settings() {
-  if (current_user_can('administrator') && isset($_GET['check_cpt'])) {
-    $portfolio_settings = get_post_type_object('portfolio');
-    echo '<pre>';
-    print_r($portfolio_settings);
-    echo '</pre>';
-    exit;
-  }
-}
-add_action('init', 'check_post_type_settings', 999);
+//function check_post_type_settings() {
+//  if (current_user_can('administrator') && isset($_GET['check_cpt'])) {
+//    $portfolio_settings = get_post_type_object('portfolio');
+//    echo '<pre>';
+//    print_r($portfolio_settings);
+//    echo '</pre>';
+//    exit;
+//  }
+//}
+//add_action('init', 'check_post_type_settings', 999);
+//
+//function debug_portfolio_query() {
+//  if (is_404() && strpos($_SERVER['REQUEST_URI'], '/portfolio/') !== false) {
+//    global $wp_query, $wp_rewrite;
+//
+//    // Log requested URL and matching patterns
+//    error_log('404 Portfolio URL: ' . $_SERVER['REQUEST_URI']);
+//    error_log('WP Query vars: ' . print_r($wp_query->query_vars, true));
+//    error_log('Post type: ' . get_query_var('post_type'));
+//    error_log('Name: ' . get_query_var('name'));
+//
+//    // Check if post exists with that slug
+//    $slug = basename(rtrim($_SERVER['REQUEST_URI'], '/'));
+//    $post = get_page_by_path($slug, OBJECT, 'portfolio');
+//    error_log('Post exists check: ' . ($post ? 'Yes, ID: '.$post->ID : 'No'));
+//  }
+//}
+//add_action('wp', 'debug_portfolio_query');
+//
+//
+//function print_matched_rewrite_rule() {
+//  global $wp, $wp_rewrite;
+//
+//  if (isset($_GET['debug_matched_rule'])) {
+//    $matched_rule = $wp->matched_rule;
+//    $matched_query = $wp->matched_query;
+//
+//    echo '<pre>';
+//    echo "Requested URL: " . $wp->request . "\n";
+//    echo "Matched Rule: " . $matched_rule . "\n";
+//    echo "Matched Query: " . $matched_query . "\n";
+//    print_r($wp_rewrite->rules);
+//    echo '</pre>';
+//    exit;
+//  }
+//}
+//add_action('wp', 'print_matched_rewrite_rule');
+//
+//function disable_custom_rewrites() {
+//  if (isset($_GET['no_custom_rules'])) {
+//    remove_all_actions('generate_rewrite_rules');
+//  }
+//}
+//add_action('init', 'disable_custom_rewrites', 1);
 
-function debug_portfolio_query() {
-  if (is_404() && strpos($_SERVER['REQUEST_URI'], '/portfolio/') !== false) {
-    global $wp_query, $wp_rewrite;
 
-    // Log requested URL and matching patterns
-    error_log('404 Portfolio URL: ' . $_SERVER['REQUEST_URI']);
-    error_log('WP Query vars: ' . print_r($wp_query->query_vars, true));
-    error_log('Post type: ' . get_query_var('post_type'));
-    error_log('Name: ' . get_query_var('name'));
-
-    // Check if post exists with that slug
-    $slug = basename(rtrim($_SERVER['REQUEST_URI'], '/'));
-    $post = get_page_by_path($slug, OBJECT, 'portfolio');
-    error_log('Post exists check: ' . ($post ? 'Yes, ID: '.$post->ID : 'No'));
-  }
-}
-add_action('wp', 'debug_portfolio_query');
-
-
-function print_matched_rewrite_rule() {
-  global $wp, $wp_rewrite;
-
-  if (isset($_GET['debug_matched_rule'])) {
-    $matched_rule = $wp->matched_rule;
-    $matched_query = $wp->matched_query;
-
-    echo '<pre>';
-    echo "Requested URL: " . $wp->request . "\n";
-    echo "Matched Rule: " . $matched_rule . "\n";
-    echo "Matched Query: " . $matched_query . "\n";
-    print_r($wp_rewrite->rules);
-    echo '</pre>';
-    exit;
-  }
-}
-add_action('wp', 'print_matched_rewrite_rule');
-
-function disable_custom_rewrites() {
-  if (isset($_GET['no_custom_rules'])) {
-    remove_all_actions('generate_rewrite_rules');
-  }
-}
-add_action('init', 'disable_custom_rewrites', 1);
-
-
-function check_portfolio_registration() {
-  add_action('init', function() {
-    error_log('Portfolio post type exists: ' . (post_type_exists('portfolio') ? 'yes' : 'no'));
-    error_log('Portfolio post type settings: ' . print_r(get_post_type_object('portfolio'), true));
-  }, 999);
-}
-check_portfolio_registration();
-
+//function check_portfolio_registration() {
+//  add_action('init', function() {
+//    error_log('Portfolio post type exists: ' . (post_type_exists('portfolio') ? 'yes' : 'no'));
+//    error_log('Portfolio post type settings: ' . print_r(get_post_type_object('portfolio'), true));
+//  }, 999);
+//}
+//check_portfolio_registration();
+//
 
 
 
