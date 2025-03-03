@@ -1,4 +1,6 @@
 <?php get_header ();
+
+$options = get_cached_acf_options();
 ?>
 
 
@@ -15,7 +17,9 @@
 
   <div class="cn">
     <div class="s-vehicles__list">
-      <?php $args = array(
+      <?php
+
+      $args = array(
           'post_type' => 'vehicle',
       );
 
@@ -24,33 +28,61 @@
 
       // The Loop.
       if ($the_query->have_posts ()) {
+        // Pre-fetch all post IDs
+        $post_ids = wp_list_pluck ($the_query->posts, 'ID');
 
+        // Pre-load ACF fields for all posts in one query
+        $all_fields = [];
+        foreach ($post_ids as $post_id) {
+          $all_fields[ $post_id ] = get_fields ($post_id);
+        }
+
+        // Pre-load all taxonomy terms
+        $all_terms = [];
+        $terms_data = wp_get_object_terms ($post_ids, 'make', ['orderby' => 'term_id', 'order' => 'ASC']);
+        foreach ($terms_data as $term) {
+          if (!isset($all_terms[ $term->object_id ])) {
+            $all_terms[ $term->object_id ] = [];
+          }
+          $all_terms[ $term->object_id ][] = $term;
+        }
+
+        // Loop through posts
         while ($the_query->have_posts ()) {
-          $the_query->the_post (); ?>
+          $the_query->the_post ();
+          $post_id = get_the_ID ();
+          $post_fields = $all_fields[ $post_id ] ?? [];
+          $post_terms = $all_terms[ $post_id ] ?? [];
+
+          // Now use the pre-loaded data
+          ?>
           <div class="vehicle-card">
-            <?php $image_repeater = get_field ('preview_image'); ?>
-            <a href="<?php the_permalink (); ?>" class="img"><?php if ($image_repeater) { ?>
-                <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>"
+            <a href="<?php the_permalink (); ?>" class="img">
+              <?php if (!empty($post_fields[ 'preview_image' ])): ?>
+
+                <img src="<?php echo esc_url ($post_fields[ 'preview_image' ][ 'url' ]); ?>"
                      loading="lazy"
-                     alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
-              <?php } ?></a>
-            <?php
-            $terms = wp_get_object_terms ($post->ID, 'make', array('orderby' => 'term_id', 'order' => 'ASC'));
-            if (!empty($terms)) :
-              $project = array();
-              foreach ($terms as $term) {
-                $project[] = $term->name;
-              } ?>
-              <div class="brand"><?php echo $project[ 0 ]; ?></div>
-              <div class="model"><?php echo $project[ 1 ]; ?></div>
-            <?php endif;
-            ?>
+                     alt="<?php echo esc_attr ($post_fields[ 'preview_image' ][ 'alt' ]); ?>">
+
+              <?php endif; ?>
+            </a>
+            <?php if (!empty($post_terms)):
+              $project = array_map (function ($term) {
+                return $term->name;
+              }, $post_terms);
+              ?>
+              <div class="brand"><?php echo $project[ 0 ] ?? ''; ?></div>
+              <div class="model"><?php echo $project[ 1 ] ?? ''; ?></div>
+            <?php endif; ?>
+
             <div class="info"><?php echo get_the_title (); ?></div>
             <a href="<?php the_permalink (); ?>" class="btn btn-2">View</a>
           </div>
         <?php }
       }
       wp_reset_postdata ();
+
+
       ?>
     </div>
   </div>
@@ -92,33 +124,32 @@ if ($query->have_posts ()) : ?>
           <div class="small-title small-title--white">DISCOVER</div>
           <div class="line-decor line-decor--red"></div>
         </div>
-        <h2 class="title h1"><?php echo get_field ('portfolio_title', 'option'); ?></h2>
-        <div class="subtitle"><?php echo get_field ('portfolio_subtitle', 'option'); ?></div>
+        <h2 class="title h1"><?php echo $options['portfolio_title']; ?></h2>
+        <div class="subtitle"><?php echo $options['portfolio_subtitle']; ?></div>
       </div>
 
       <div class="s-specialists-reviews__list">
         <?php while ($query->have_posts ()) : $query->the_post (); ?>
           <div class="sr-item">
             <div class="sr-item__img">
-              <?php $image_repeater = get_field ('overview_image'); ?>
-              <?php if ($image_repeater) { ?>
-                <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy"
-                     alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
-              <?php } ?>
+              <?php $image_id = get_field ('overview_image', false); // false returns just the ID
+              if ($image_id): ?>
+                <?php echo wp_get_attachment_image ($image_id, 'medium', false, ['loading' => 'lazy']); ?>
+              <?php endif; ?>
             </div>
             <div class="sr-item__content">
               <h3 class="title h2"><?php the_title (); ?></h3>
               <div class="tags">
-	              <?php
-	              $term_list = wp_get_post_terms ($post->ID, 'portfolio_category', ['fields' => 'all']);
-	              // Виводимо назву первинної категорії
-	              foreach ($term_list as $term_primary) {
-		              $primary_category = get_post_meta ($post->ID, '_yoast_wpseo_primary_portfolio_category', true);
-		              if ($primary_category == $term_primary->term_id) {
-			              echo '<div class="tag">' .esc_html ($term_primary->name). '</div>';
-			              break; // Припиняємо цикл після знаходження первинної категорії
-		              }
-	              }?>
+                <?php
+                $term_list = wp_get_post_terms ($post->ID, 'portfolio_category', ['fields' => 'all']);
+                // Виводимо назву первинної категорії
+                foreach ($term_list as $term_primary) {
+                  $primary_category = get_post_meta ($post->ID, '_yoast_wpseo_primary_portfolio_category', true);
+                  if ($primary_category == $term_primary->term_id) {
+                    echo '<div class="tag">' . esc_html ($term_primary->name) . '</div>';
+                    break; // Припиняємо цикл після знаходження первинної категорії
+                  }
+                } ?>
               </div>
               <div class="desc"><?php echo get_field ('preview_description'); ?></div>
               <a href="<?php the_permalink (); ?>" class="btn btn-3">
@@ -148,8 +179,8 @@ wp_reset_postdata (); ?>
     </div>
     <div class="cn">
       <div class="section-heading">
-        <h2 class="title h1"><?php echo get_field ('services_title', 'option'); ?></h2>
-        <div class="subtitle"><?php echo get_field ('services_subtitle', 'option'); ?></div>
+        <h2 class="title h1"><?php echo $options['services_title']; ?></h2>
+        <div class="subtitle"><?php echo $options['services_subtitle']; ?></div>
         <div class="decorated-title decorated-title--row-left">
           <div class="small-title small-title--white">Our services</div>
           <div class="line-decor line-decor--white"></div>
@@ -175,20 +206,22 @@ wp_reset_postdata (); ?>
         while ($the_query->have_posts ()) {
           $the_query->the_post (); ?>
           <div class="service-item">
-            <?php $image_repeater = get_field ('services_preview_image'); ?>
-            <div class="img">
-              <img src="<?php echo esc_url ($image_repeater[ 'url' ]); ?>" loading="lazy"
-                   alt="<?php echo esc_attr ($image_repeater[ 'alt' ]); ?>">
-            </div>
+            <?php
+            $image_id = get_field ('services_preview_image', false); // false returns just the ID
+            if ($image_id): ?>
+              <div class="img">
+                <?php echo wp_get_attachment_image ($image_id, 'medium', false, ['loading' => 'lazy']); ?>
+              </div>
+            <?php endif; ?>
             <h3 class="title"><?php the_title (); ?></h3>
             <div class="desc"><?php the_field ('services_preview_description'); ?></div>
             <a href="<?php the_permalink (); ?>" class="btn btn-2">
               <span>Read more</span>
               <span class="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
-                        <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
-                      </svg>
-                    </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                  <path d="M0.274414 10.2383L4.66358 5.83951L0.274414 1.44076L1.62566 0.0895081L7.37566 5.83951L1.62566 11.5895L0.274414 10.2383Z"/>
+                </svg>
+              </span>
             </a>
           </div>
         <?php }
@@ -235,8 +268,8 @@ wp_reset_postdata (); ?>
         <div class="small-title small-title--gray">DISCOVER</div>
         <div class="line-decor line-decor--red"></div>
       </div>
-      <h2 class="title h1"><?php echo get_field ('product_title', 'option'); ?></h2>
-      <div class="subtitle"><?php echo get_field ('products_subtitle', 'option'); ?></div>
+      <h2 class="title h1"><?php echo $options['product_title']; ?></h2>
+      <div class="subtitle"><?php echo $options['products_subtitle']; ?></div>
     </div>
     <div class="products-list">
       <?php $args = array(

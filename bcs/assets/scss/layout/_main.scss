@@ -193,7 +193,7 @@
 .s-specialists-reviews {
   background-color: $dark-blue;
   padding: 70px 0 80px;
-  overflow-x: hidden;
+  overflow: hidden;
   @media (min-width: $lg) {
     padding: 90px 0 105px;
   }

@@ -1,261 +1,265 @@
 <?php
 /**
- * Custom Post Type vehicle functions
+ * BCS Custom Post Types and Taxonomies Manager
+ *
+ * Оптимізована версія на основі рекомендацій для:
+ * - Покращення логування
+ * - Оптимізації продуктивності
+ * - Обробки помилок та структуризації коду
+ *
+ * @package BCS
  */
+
+namespace BCS;
+
+if ( ! defined( 'ABSPATH' ) ) {
+  exit; // Захист від прямого доступу
+}
 
 /**
- * Register Custom Post Type vehicle
+ * Class CPTManager
+ *
+ * Реєструє Custom Post Types.
  */
-function register_vehicle_cpt() {
-	$args = array(
-		'label' => 'Vehicle',
-		'public' => true,
-//		'has_archive' => 'vehicle',
-    'has_archive' => true,
-		'rewrite' => array('slug' => 'vehicle', 'with_front' => false),
-		'supports' => array('title', 'editor', 'custom-fields'),
-    'menu_icon' => 'dashicons-car',
-    'menu_position' => 10,
-	);
-	register_post_type('vehicle', $args);
-}
-add_action('init', 'register_vehicle_cpt');
+class CPTManager {
+  public function __construct() {
+    add_action( 'init', [ $this, 'register_vehicle_cpt' ], 8 );
+    add_action( 'init', [ $this, 'register_portfolio_cpt' ], 8 );
+  }
 
-/**
- * Register Custom Post Type Portfolio
- */
-function register_portfolio_cpt() {
-	$args = array(
-		'label' => 'Portfolio',
-		'public' => true,
-//		'has_archive' => 'portfolio',
-    'has_archive' => true,
-		'rewrite' => array('slug' => 'portfolio', 'with_front' => false),
-		'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
-    'menu_icon' => 'dashicons-portfolio',
-    'menu_position' => 10,
-	);
-	register_post_type('portfolio', $args);
-}
-add_action('init', 'register_portfolio_cpt');
+  public function register_vehicle_cpt() {
+    $args = [
+        'label'         => 'Vehicle',
+        'public'        => true,
+        'has_archive'   => true,
+        'rewrite'       => [ 'slug' => 'vehicle', 'with_front' => false ],
+        'supports'      => [ 'title', 'editor', 'custom-fields' ],
+        'menu_icon'     => 'dashicons-car',
+        'menu_position' => 10,
+    ];
+    register_post_type( 'vehicle', $args );
+  }
 
-
-function custom_rewrite_rules() {
-  // Portfolio rules stay first (highest priority)
-  add_rewrite_rule('^portfolio/?$', 'index.php?post_type=portfolio', 'top');
-  add_rewrite_rule('^portfolio/([^/]+)/?$', 'index.php?post_type=portfolio&name=$matches[1]', 'top');
-
-  add_rewrite_rule('^product/?$', 'index.php?post_type=product', 'top');
-  add_rewrite_rule('^product/([^/]+)/?$', 'index.php?post_type=product&name=$matches[1]', 'top');
-
-  // Make hierarchy
-  add_rewrite_rule('^([^/]+)/?$', 'index.php?taxonomy=make&term=$matches[1]', 'top');
-  add_rewrite_rule('^([^/]+)/([^/]+)/?$', 'index.php?taxonomy=make&term=$matches[2]', 'top');
-
-  // Vehicle post
-  add_rewrite_rule('^([^/]+)/([^/]+)/([^/]+)/?$', 'index.php?post_type=vehicle&name=$matches[3]', 'top');
-
-  add_rewrite_rule('^vehicle/?$', 'index.php?post_type=vehicle', 'top');
-
-  // Location taxonomy rules
-  add_rewrite_rule('^location/([^/]+)/?$', 'index.php?taxonomy=location&term=$matches[1]', 'top');
-}
-add_action('init', 'custom_rewrite_rules');
-
-
-/**
- * Register Make Taxonomy
- */
-function register_make_taxonomy() {
-	$args = array(
-		'label' => 'Make',
-		'rewrite' => array('slug' => '', 'with_front' => false, 'hierarchical' => true),
-		'hierarchical' => true,
-	);
-	register_taxonomy('make', array('vehicle', 'portfolio', 'product'), $args);
-}
-add_action('init', 'register_make_taxonomy');
-
-/**
- * Rewrite URL structure for the taxonomy Make
- */
-function make_term_link($url, $term, $taxonomy) {
-	if ($taxonomy === 'make') {
-		$parent = get_term($term->parent, 'make');
-		if ($parent && !is_wp_error($parent)) {
-			$url = home_url("/" . $parent->slug . "/" . $term->slug . "/");
-		} else {
-			$url = home_url("/" . $term->slug . "/");
-		}
-	}
-	return $url;
-}
-add_filter('term_link', 'make_term_link', 10, 3);
-
-/**
- * Custom rewrite rules for Vehicle and Portfolio
- */
-
-
-function check_and_flush_rewrite_rules() {
-  // Use a transient to avoid flushing on every page load
-  if (get_transient('portfolio_rules_flushed') !== 'yes') {
-    flush_rewrite_rules();
-    set_transient('portfolio_rules_flushed', 'yes', 120);
+  public function register_portfolio_cpt() {
+    $args = [
+        'label'         => 'Portfolio',
+        'public'        => true,
+        'has_archive'   => true,
+        'rewrite'       => [ 'slug' => 'portfolio', 'with_front' => false ],
+        'supports'      => [ 'title', 'editor', 'thumbnail', 'excerpt' ],
+        'menu_icon'     => 'dashicons-portfolio',
+        'menu_position' => 10,
+    ];
+    register_post_type( 'portfolio', $args );
   }
 }
-add_action('init', 'check_and_flush_rewrite_rules', 99);
-
-
 
 /**
- * Custom permalink structure for Vehicle
+ * Class RewriteManager
+ *
+ * Реєструє rewrite-правила та оновлює permalink‑структуру.
  */
-function vehicle_permalink_structure($post_link, $post) {
-	if ('vehicle' === get_post_type($post)) {
-		$terms = get_the_terms($post->ID, 'make');
-		if ($terms && !is_wp_error($terms)) {
-			$hierarchy = array();
-			foreach ($terms as $term) {
-				$hierarchy[$term->term_id] = $term;
-			}
-			usort($hierarchy, function ($a, $b) {
-				return $a->parent - $b->parent;
-			});
-			$make_slug = isset($hierarchy[0]) ? $hierarchy[0]->slug : 'no-make';
-			$make_child_slug = isset($hierarchy[1]) ? $hierarchy[1]->slug : '';
-			return home_url("/{$make_slug}/" . (!empty($make_child_slug) ? "{$make_child_slug}/" : '') . "{$post->post_name}/");
-		}
-	}
-	return $post_link;
+class RewriteManager {
+  public function __construct() {
+    add_action( 'init', [ $this, 'add_custom_rewrite_rules' ], 10 );
+    add_action( 'init', [ $this, 'check_and_flush_rewrite_rules' ], 99 );
+    add_filter( 'post_type_link', [ $this, 'vehicle_permalink_structure' ], 10, 2 );
+    add_action( 'template_redirect', [ $this, 'debug_product_category_404' ], 1 );
+  }
+
+  public function add_custom_rewrite_rules() {
+    // Правила для Portfolio (найвищий пріоритет)
+    add_rewrite_rule( '^portfolio/?$', 'index.php?post_type=portfolio', 'top' );
+    add_rewrite_rule( '^portfolio/([^/]+)/?$', 'index.php?post_type=portfolio&name=$matches[1]', 'top' );
+
+    // Правила для Product
+    add_rewrite_rule( '^product/?$', 'index.php?post_type=product', 'top' );
+    add_rewrite_rule( '^product/([^/]+)/?$', 'index.php?post_type=product&name=$matches[1]', 'top' );
+
+    // Правила для Product Category
+    add_rewrite_rule( '^products/([^/]+)/?$', 'index.php?product_cat=$matches[1]', 'top' );
+    add_rewrite_rule( '^products/([^/]+)/page/([0-9]{1,})/?$', 'index.php?product_cat=$matches[1]&paged=$matches[2]', 'top' );
+
+    // Архів для Vehicle
+    add_rewrite_rule( '^vehicle/?$', 'index.php?post_type=vehicle', 'top' );
+
+    // Правила для Location Taxonomy
+    add_rewrite_rule( '^location/([^/]+)/?$', 'index.php?taxonomy=location&term=$matches[1]', 'top' );
+
+    // Правила для ієрархії Make - мають бути останні, оскільки охоплюють інші випадки
+    add_rewrite_rule( '^([^/]+)/?$', 'index.php?taxonomy=make&term=$matches[1]', 'top' );
+    add_rewrite_rule( '^([^/]+)/([^/]+)/?$', 'index.php?taxonomy=make&term=$matches[2]', 'top' );
+    add_rewrite_rule( '^([^/]+)/([^/]+)/([^/]+)/?$', 'index.php?post_type=vehicle&name=$matches[3]', 'top' );
+  }
+
+  public function check_and_flush_rewrite_rules() {
+    if ( get_transient( 'portfolio_rules_flushed' ) !== 'yes' ) {
+      // Оновлюємо permalink‑структуру для примусової перегенерації правил
+      update_option( 'permalink_structure', get_option( 'permalink_structure' ) );
+      // Кешуємо оновлення на 24 години
+      set_transient( 'portfolio_rules_flushed', 'yes', 86400 );
+    }
+  }
+
+  public function vehicle_permalink_structure( $post_link, $post ) {
+    if ( 'vehicle' === get_post_type( $post ) ) {
+      $terms = get_the_terms( $post->ID, 'make' );
+      if ( $terms && ! is_wp_error( $terms ) ) {
+        $hierarchy = [];
+        foreach ( $terms as $term ) {
+          $hierarchy[ $term->term_id ] = $term;
+        }
+        usort( $hierarchy, function( $a, $b ) {
+          return $a->parent - $b->parent;
+        } );
+        $make_slug       = isset( $hierarchy[0] ) ? $hierarchy[0]->slug : 'no-make';
+        $make_child_slug = isset( $hierarchy[1] ) ? $hierarchy[1]->slug : '';
+        return home_url( "/{$make_slug}/" . ( ! empty( $make_child_slug ) ? "{$make_child_slug}/" : '' ) . "{$post->post_name}/" );
+      }
+    }
+    return $post_link;
+  }
+
+  public function debug_product_category_404() {
+    global $wp, $wp_query, $wp_rewrite;
+
+    if ( is_404() && strpos( $_SERVER['REQUEST_URI'], '/products/' ) !== false ) {
+      $log_time = date( 'd-M-Y H:i:s T' );
+      error_log( "[{$log_time}] Debugging 404 for: " . $_SERVER['REQUEST_URI'] );
+      error_log( "[{$log_time}] WP Query vars: " . print_r( $wp_query->query_vars, true ) );
+
+      $slug = basename( rtrim( $_SERVER['REQUEST_URI'], '/' ) );
+      $term = get_term_by( 'slug', $slug, 'product_cat' );
+      error_log( "[{$log_time}] Product category exists: " . ( $term ? 'yes' : 'no' ) );
+      if ( $term ) {
+        error_log( "[{$log_time}] Category info: " . print_r( $term, true ) );
+      }
+
+      $matched_rules = [];
+      foreach ( $wp_rewrite->rules as $rule => $query ) {
+        if ( strpos( $query, 'product_cat' ) !== false ) {
+          $matched_rules[ $rule ] = $query;
+        }
+      }
+      error_log( "[{$log_time}] Product category rewrite rules: " . print_r( $matched_rules, true ) );
+    }
+  }
 }
-add_filter('post_type_link', 'vehicle_permalink_structure', 10, 2);
-
-
 
 /**
- * Flush rewrite rules on activation
+ * Class TaxonomyManager
+ *
+ * Реєструє таксономії та змінює посилання для таксономії Make.
  */
-//function flush_rewrite_rules_on_activation() {
-//	flush_rewrite_rules();
-//}
-//register_activation_hook(__FILE__, 'flush_rewrite_rules_on_activation');
+class TaxonomyManager {
+  public function __construct() {
+    add_action( 'init', [ $this, 'register_make_taxonomy' ] );
+    add_action( 'init', [ $this, 'register_location_taxonomy' ] );
+    add_filter( 'term_link', [ $this, 'make_term_link' ], 10, 3 );
+  }
 
-//function flush_rules_after_update() {
-//  flush_rewrite_rules();
-//}
-//register_activation_hook(__FILE__, 'flush_rules_after_update');
+  public function register_make_taxonomy() {
+    $args = [
+        'label'        => 'Make',
+        'rewrite'      => [ 'slug' => '', 'with_front' => false, 'hierarchical' => true ],
+        'hierarchical' => true,
+    ];
+    register_taxonomy( 'make', [ 'vehicle', 'portfolio', 'product' ], $args );
+  }
 
+  public function register_location_taxonomy() {
+    $labels = [
+        'name'          => 'Locations',
+        'singular_name' => 'Location',
+        'search_items'  => 'Search Locations',
+        'all_items'     => 'All Locations',
+        'parent_item'   => 'Parent Location',
+        'parent_item_colon' => 'Parent Location:',
+        'edit_item'     => 'Edit Location',
+        'update_item'   => 'Update Location',
+        'add_new_item'  => 'Add New Location',
+        'new_item_name' => 'New Location Name',
+        'menu_name'     => 'Locations',
+    ];
 
+    $args = [
+        'labels'             => $labels,
+        'hierarchical'       => true,
+        'public'             => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'show_in_nav_menus'  => true,
+        'show_tagcloud'      => true,
+        'show_in_quick_edit' => true,
+        'show_admin_column'  => true,
+        'rewrite'            => [ 'slug' => 'location', 'with_front' => false ],
+        'has_archive'        => true,
+    ];
 
-//function check_post_type_settings() {
-//  if (current_user_can('administrator') && isset($_GET['check_cpt'])) {
-//    $portfolio_settings = get_post_type_object('portfolio');
-//    echo '<pre>';
-//    print_r($portfolio_settings);
-//    echo '</pre>';
-//    exit;
-//  }
-//}
-//add_action('init', 'check_post_type_settings', 999);
-//
-//function debug_portfolio_query() {
-//  if (is_404() && strpos($_SERVER['REQUEST_URI'], '/portfolio/') !== false) {
-//    global $wp_query, $wp_rewrite;
-//
-//    // Log requested URL and matching patterns
-//    error_log('404 Portfolio URL: ' . $_SERVER['REQUEST_URI']);
-//    error_log('WP Query vars: ' . print_r($wp_query->query_vars, true));
-//    error_log('Post type: ' . get_query_var('post_type'));
-//    error_log('Name: ' . get_query_var('name'));
-//
-//    // Check if post exists with that slug
-//    $slug = basename(rtrim($_SERVER['REQUEST_URI'], '/'));
-//    $post = get_page_by_path($slug, OBJECT, 'portfolio');
-//    error_log('Post exists check: ' . ($post ? 'Yes, ID: '.$post->ID : 'No'));
-//  }
-//}
-//add_action('wp', 'debug_portfolio_query');
-//
-//
-//function print_matched_rewrite_rule() {
-//  global $wp, $wp_rewrite;
-//
-//  if (isset($_GET['debug_matched_rule'])) {
-//    $matched_rule = $wp->matched_rule;
-//    $matched_query = $wp->matched_query;
-//
-//    echo '<pre>';
-//    echo "Requested URL: " . $wp->request . "\n";
-//    echo "Matched Rule: " . $matched_rule . "\n";
-//    echo "Matched Query: " . $matched_query . "\n";
-//    print_r($wp_rewrite->rules);
-//    echo '</pre>';
-//    exit;
-//  }
-//}
-//add_action('wp', 'print_matched_rewrite_rule');
-//
-//function disable_custom_rewrites() {
-//  if (isset($_GET['no_custom_rules'])) {
-//    remove_all_actions('generate_rewrite_rules');
-//  }
-//}
-//add_action('init', 'disable_custom_rewrites', 1);
+    register_taxonomy( 'location', [ 'portfolio' ], $args );
+  }
 
-
-//function check_portfolio_registration() {
-//  add_action('init', function() {
-//    error_log('Portfolio post type exists: ' . (post_type_exists('portfolio') ? 'yes' : 'no'));
-//    error_log('Portfolio post type settings: ' . print_r(get_post_type_object('portfolio'), true));
-//  }, 999);
-//}
-//check_portfolio_registration();
-//
-
-
-
-
-
-
-
-
-
-
-
-function register_location_taxonomy() {
-	$labels = array(
-		'name' => 'Locations',
-		'singular_name' => 'Location',
-		'search_items' => 'Search Locations',
-		'all_items' => 'All Locations',
-		'parent_item' => 'Parent Location',
-		'parent_item_colon' => 'Parent Location:',
-		'edit_item' => 'Edit Location',
-		'update_item' => 'Update Location',
-		'add_new_item' => 'Add New Location',
-		'new_item_name' => 'New Location Name',
-		'menu_name' => 'Locations',
-	);
-
-	$args = array(
-		'labels' => $labels,
-		'hierarchical' => true,
-		'public' => true,
-		'show_ui' => true,
-		'show_in_menu' => true,
-		'show_in_nav_menus' => true,
-		'show_tagcloud' => true,
-		'show_in_quick_edit' => true,
-		'show_admin_column' => true,
-		'rewrite' => array(
-			'slug' => 'location',
-			'with_front' => false,
-		),
-		'has_archive' => true, // Enable archive for the taxonomy
-	);
-
-	// Register the taxonomy for the 'portfolio' post type
-	register_taxonomy('location', array('portfolio'), $args);
+  public function make_term_link( $url, $term, $taxonomy ) {
+    if ( 'make' === $taxonomy ) {
+      $parent = get_term( $term->parent, 'make' );
+      if ( $parent && ! is_wp_error( $parent ) ) {
+        $url = home_url( "/" . $parent->slug . "/" . $term->slug . "/" );
+      } else {
+        $url = home_url( "/" . $term->slug . "/" );
+      }
+    }
+    return $url;
+  }
 }
-add_action('init', 'register_location_taxonomy');
+
+/**
+ * Class LogManager
+ *
+ * Забезпечує розширене логування для налагодження.
+ */
+class LogManager {
+  /**
+   * Логування результатів операцій trim.
+   *
+   * @param array  $trim_data Дані trim.
+   * @param string $context   Контекст логування.
+   */
+  public static function log_trim_result( $trim_data, $context = '' ) {
+    $log_level = 'DEBUG';
+    $log_time  = date( 'd-M-Y H:i:s T' );
+    error_log( "[{$log_time}] [{$log_level}] [{$context}] Trim fetch: " . ( count( $trim_data ) > 0 ? count( $trim_data ) . " results" : "No results" ) );
+
+    if ( defined( 'WP_DEBUG_TRIM' ) && constant('WP_DEBUG_TRIM') ) {
+      error_log( "[{$log_time}] [{$log_level}] [{$context}] Data: " . json_encode( array_slice( $trim_data, 0, 3 ), JSON_PRETTY_PRINT ) );
+    }
+  }
+
+  /**
+   * Розширене логування із зазначенням контексту, рівня та ідентифікатора запиту.
+   *
+   * @param string $message Повідомлення для логування.
+   * @param array  $data    Додаткові дані.
+   * @param string $level   Рівень логування (наприклад, INFO, DEBUG, ERROR).
+   */
+  public static function enhanced_logging( $message, $data = [], $level = 'INFO' ) {
+    if ( ! defined( 'WP_DEBUG' ) || ! constant('WP_DEBUG') ) {
+      return;
+    }
+
+    $request_id = isset( $_SERVER['HTTP_X_REQUEST_ID'] ) ? $_SERVER['HTTP_X_REQUEST_ID'] : uniqid( 'req-' );
+    $log_time   = date( 'd-M-Y H:i:s T' );
+    $log_entry  = sprintf(
+        "[{$log_time}] [%s] [%s] %s %s",
+        strtoupper( $level ),
+        $request_id,
+        $message,
+        ! empty( $data ) ? json_encode( $data, JSON_PARTIAL_OUTPUT_ON_ERROR ) : ''
+    );
+    error_log( $log_entry );
+  }
+}
+
+// Ініціалізація менеджерів
+new CPTManager();
+new RewriteManager();
+new TaxonomyManager();

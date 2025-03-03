@@ -38,8 +38,45 @@ function gulp_wp_greeting( $wp_admin_bar ) {
 add_action( 'admin_bar_menu', 'gulp_wp_greeting', 11 );
 
 if( function_exists('acf_add_options_page') ) {
-    acf_add_options_page();
+  acf_add_options_page([
+      'page_title' => 'Options',
+      'menu_title' => 'Options',
+      'menu_slug'  => 'acf-options',
+      'autoload'   => true, // Enable autoloading for frequently used options
+  ]);
 }
+
+// Add to functions.php
+function get_cached_acf_options() {
+  $options = get_transient('site_acf_options');
+  if(false === $options) {
+    $options = [
+        'portfolio_title' => get_field('portfolio_title', 'option'),
+        'portfolio_subtitle' => get_field('portfolio_subtitle', 'option'),
+        'services_title' => get_field('services_title', 'option'),
+        'services_subtitle' => get_field('services_subtitle', 'option'),
+        'product_title' => get_field('product_title', 'option'),
+        'products_subtitle' => get_field('products_subtitle', 'option')
+    ];
+    set_transient('site_acf_options', $options, 12 * 86400); // 12 days
+  }
+  return $options;
+}
+// In your template
+//$options = get_cached_acf_options();
+//echo $options['portfolio_title'];
+
+// Add to functions.php
+add_filter('acf/settings/save_json', function() {
+  return get_stylesheet_directory() . '/acf-json';
+});
+
+add_filter('acf/settings/load_json', function($paths) {
+  $paths[] = get_stylesheet_directory() . '/acf-json';
+  return $paths;
+});
+
+
 
 function add_white_background_body_class($classes) {
   if (is_page_template('templates/white-background.php')) {

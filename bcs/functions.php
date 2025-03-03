@@ -19,7 +19,22 @@ require_once 'functions/func-woo.php';
 
 require_once 'functions/airtable/func-airtable.php';
 
-add_action( 'after_setup_theme', 'woocommerce_support' );
+
+add_action('init', 'optimize_litespeed_for_vehicle_data');
+
+
+
+function optimize_litespeed_for_vehicle_data() {
+  if (class_exists('\LiteSpeed\Core')) {
+    // Set longer cache time for taxonomy queries
+    add_filter('litespeed_control_cacheable', function($cacheable, $type) {
+      if (isset($_POST['action']) && in_array($_POST['action'], ['make_fetch', 'model_fetch', 'trim_fetch'])) {
+        return true; // Make these AJAX calls cacheable
+      }
+      return $cacheable;
+    }, 10, 2);
+  }
+}
 
 
 //function update_acf_link_fields_in_flexible_content($post_id) {

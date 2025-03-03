@@ -7,6 +7,8 @@
  * @package  <Package>
  */
 
+add_action( 'after_setup_theme', 'woocommerce_support' );
+
 require_once 'woocommerce/woo-global.php';
 require_once 'woocommerce/woo-cart.php';
 require_once 'woocommerce/woo-checkout.php';
