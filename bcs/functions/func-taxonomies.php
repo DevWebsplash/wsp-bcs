@@ -41,9 +41,12 @@ add_action('init', 'register_portfolio_cpt');
 
 
 function custom_rewrite_rules() {
-// Portfolio rules stay first (highest priority)
+  // Portfolio rules stay first (highest priority)
   add_rewrite_rule('^portfolio/?$', 'index.php?post_type=portfolio', 'top');
   add_rewrite_rule('^portfolio/([^/]+)/?$', 'index.php?post_type=portfolio&name=$matches[1]', 'top');
+
+  add_rewrite_rule('^product/?$', 'index.php?post_type=product', 'top');
+  add_rewrite_rule('^product/([^/]+)/?$', 'index.php?post_type=product&name=$matches[1]', 'top');
 
   // Make hierarchy
   add_rewrite_rule('^([^/]+)/?$', 'index.php?taxonomy=make&term=$matches[1]', 'top');
